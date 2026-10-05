@@ -2,7 +2,10 @@
 
 > Living document, companion to [`REQUIREMENTS.md`](REQUIREMENTS.md): references of the
 > form `R§n` point to sections of the requirements.
-> Status: draft v0.2 (October 2026).
+> Status: v1.0 (October 2026) — describes the system as built through milestone M5.
+> Detailed per-milestone designs, including every deviation decided during implementation,
+> are in [`docs/design/`](docs/design/): `M1.md` … `M5.md`. Where this document and a
+> milestone's Deviations section disagree, the Deviations section is authoritative.
 
 ## 1. Architectural principles
 
@@ -45,7 +48,8 @@
 
 ```
 llmll/
-├── REQUIREMENTS.md  ARCHITECTURE.md
+├── REQUIREMENTS.md  ARCHITECTURE.md  CLAUDE.md
+├── docs/design/M1.md … M5.md   # milestone designs + deviations
 ├── docker-compose.yml          # backend + languagetool (+ frontend as a static build)
 ├── curriculum/de/              # content, versioned in git
 │   ├── lexicon/a1.yaml a2.yaml b1.yaml
@@ -53,10 +57,12 @@ llmll/
 │   └── constructions.yaml
 ├── backend/
 │   ├── pyproject.toml
-│   ├── app/{api,services,domain,llm,nlp,store}/
+│   ├── app/{api,services,domain,llm,nlp,store,curriculum,evals}/
 │   ├── app/llm/prompts/        # versioned templates (e.g. grade_sentence.v3.md)
 │   ├── migrations/             # Alembic
-│   ├── scripts/                # import_curriculum, replay_events, eval_grader
+│   ├── app/cli.py              # import-curriculum, replay, export-openapi, eval-grader,
+│   │                           # export-contests, optimize-fsrs
+│   ├── evals/grader/cases/     # annotated grader evaluation cases
 │   └── tests/
 └── frontend/
     ├── package.json
@@ -144,7 +150,22 @@ and re-applies the pure domain functions. It is used:
 The projection must be **deterministic**: the same events and configuration produce the
 same state. Tests verify this.
 
-### 4.5 LLM log
+### 4.5 Other tables (as built)
+
+| Table | Milestone | Purpose |
+|---|---|---|
+| `learners` | M0/M1 | level, known languages, explanation language, settings JSON |
+| `exercises`, `attempts` | M1/M2 | cards and answers; production exercises have `status` `pending → ready → answered / failed` |
+| `evaluations` | M2/M4 | immutable gradings (also synthetic ones for flashcards); `supersedes` |
+| `remediation_queue` | M2 | items to re-practise after systematic errors |
+| `explanations` | M2 | cached error explanations |
+| `texts` (model `SourceText`), `text_versions`, `reading_sessions`, `glosses` | M3 | reading |
+| `contests`, `placements` | M4 | contests and placement tests |
+
+`learning_events` also carries `presumed_known`, `confidence`, `context` (`placement`) and
+`predicted_retrievability` (M5, for calibration).
+
+### 4.6 LLM log
 
 **`llm_calls`**: task, prompt version, model, input, output, tokens, latency, outcome
 (including `stop_reason`). This is the basis for the grader evaluation dataset (R§8).
@@ -173,6 +194,10 @@ interface allows replacing it later (e.g. Beta with decay) and reprocessing the 
 ### 5.3 Scheduling
 `py-fsrs` is used for scheduling. The retention target is configurable, default 0.85
 (R§10). Implicit reviews go through the same scheduler: FSRS already handles early reviews.
+The scheduler runs **without learning steps** (items are introduced inside exercises, not
+drilled within a session) and **without fuzzing** (projections must be deterministic); card
+ids are derived from `(item_id, facet)`. Fitted FSRS parameters (M5) are part of the
+projection config, so changing them changes `projection_version` and triggers a replay.
 
 ### 5.4 New-item budget (R§7.4)
 `new_item_budget(events_last_7d, backlog, settings) → {lemmas: n, grammar: n}`.
@@ -302,7 +327,10 @@ official `anthropic` Python SDK. A `FakeLLMClient` with recorded responses is us
 ### 7.2 Claude API implementation
 - **Structured output.** Use `client.messages.parse()` with the Pydantic model as the
   schema, instead of parsing free text.
-- **Model.** Configurable **per task**. Default for all tasks: `claude-opus-5-5`.
+- **Model.** Configurable **per task** (`LLMLL_LLM_TASKS`). Default for all tasks: `claude-opus-5-5`.
+- **Refusals.** Server-side fallback is enabled (`fallbacks="default"` via the beta messages
+  namespace, setting `llm_refusal_fallback`); a final refusal raises `LLMRefusal`.
+- **No API key.** The app falls back to `FakeLLMClient` and the UI shows a banner.
   Using cheaper models for simple tasks (gloss, generation) is a decision to make after
   measuring them on the evaluation dataset, not up front.
 - **Effort.** Configurable per task. High for grading (correctness matters), lower for
@@ -321,8 +349,8 @@ official `anthropic` Python SDK. A `FakeLLMClient` with recorded responses is us
 
 | Component | Tool | Notes |
 |---|---|---|
-| Lemmas, POS, proper nouns | spaCy, German model | Reliable but imperfect lemmatization: errors are logged |
-| Compounds | splitting library (candidate: CharSplit) + check of the parts against the lexicon | To be evaluated |
+| Lemmas, POS, proper nouns | spaCy with `de_core_news_md` (pinned in `uv.lock`) | Reliable but imperfect lemmatization; separable-verb particles are not reattached |
+| Compounds | own dynamic-programming splitter over lexicon lemmas with linking elements (`s`, `es`, `n`, `en`, `e`) | Simpler to maintain than a library for this narrow use |
 | Frequencies | `wordfreq` | Rank per lemma |
 | Grammar checking | LanguageTool, server in a container | Called over local HTTP |
 | Article extraction | `trafilatura` | |
@@ -403,8 +431,13 @@ Removed ids become `suspended`; they are not deleted.
 - Backups: periodic copy of the SQLite file. The curriculum is already in git.
 - Local or on a small VPS. Installing the PWA on a phone requires HTTPS (e.g. a reverse
   proxy with automatic certificates).
+- Access control: a single access token (`LLMLL_ACCESS_TOKEN`); see the root README's
+  deployment section. Without it the app is open, which is only acceptable locally.
+- On startup the container runs migrations, then `import-curriculum`, then the server.
 
 ## 13. Milestones
+
+All milestones are implemented; designs and deviations are in `docs/design/M*.md`.
 
 | Milestone | Content | Usable result |
 |---|---|---|
@@ -417,8 +450,11 @@ Removed ids become `suspended`; they are not deleted.
 
 ## 14. Open decisions
 
-- Granularity of implicit events from reading: weight, and how many items per text.
-- Compound-splitting library: to be evaluated on a sample.
-- spaCy model: `md` or `lg`, depending on lemma accuracy on a sample.
+- Granularity of implicit events from reading: weight (currently 0.2) and cap (30 per text).
+- Compound splitter and spaCy `md` model: evaluate recall/accuracy on real articles.
+- Grader quality with the real model: run `eval-grader` (M5) and tune prompts before
+  trusting gradings; the key metric is the false-positive rate on correct answers.
+- Model choice per task (e.g. a cheaper model for gloss and generation) — decide after
+  measuring with `eval-grader`, not up front.
 - Starting values for `α`, `λ`, evidence weights and grading thresholds: to be tuned
   through use (the event log makes it possible to recompute everything).
