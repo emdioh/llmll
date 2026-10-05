@@ -211,11 +211,15 @@ def _build_provider(
     raise LLMConfigError(f"unknown provider {provider!r}")  # pragma: no cover
 
 
-def build_llm_client_with_recorder(settings: Settings, recorder: CallRecorder) -> LLMClient:
+def build_llm_client_with_recorder(
+    settings: Settings, recorder: CallRecorder, *, allow_fake_fallback: bool = True
+) -> LLMClient:
+    """`allow_fake_fallback=False` (used by eval-grader) turns "no key at all" into an error
+    instead of silently simulating the LLM."""
     tasks = resolve_routes(settings)
     _warn_ignored_settings(settings, tasks)
     keys = _keys(settings)
-    if settings.llm_provider != "fake" and not any(keys.values()):
+    if allow_fake_fallback and settings.llm_provider != "fake" and not any(keys.values()):
         logger.warning("no LLM API key configured: using the fake LLM")
         return FakeLLMClient(recorder)
     used = sorted({str(cfg.provider) for cfg in tasks.values()})

@@ -413,3 +413,65 @@ def test_cli_export_contests(
     finally:
         get_settings.cache_clear()
     assert "wrote 0 draft case(s)" in capsys.readouterr().out
+
+
+def test_eval_grader_provider_needs_only_its_own_key(monkeypatch, tmp_path: Path, capsys) -> None:
+    """Regression: with the default provider (anthropic) left unset, `--provider openrouter`
+    must route every task to OpenRouter (no ANTHROPIC_API_KEY needed), and without any key it
+    must fail instead of silently grading with the fake LLM."""
+    from types import SimpleNamespace
+
+    import openai
+
+    from app.llm.types import GradeResult
+
+    for var in (
+        "ANTHROPIC_API_KEY",
+        "OPENAI_API_KEY",
+        "GEMINI_API_KEY",
+        "GOOGLE_API_KEY",
+        "OPENROUTER_API_KEY",
+        "LLMLL_LLM_PROVIDER",
+        "LLMLL_LLM_MODEL",
+        "LLMLL_LLM_TASKS",
+    ):
+        monkeypatch.delenv(var, raising=False)
+    args = [
+        "eval-grader",
+        "--provider",
+        "openrouter",
+        "--model",
+        "~vendor/model-latest",
+        "--cases",
+        str(three_cases(tmp_path)),
+        "--curriculum",
+        str(CURRICULUM),
+        "--no-languagetool",
+        "--max-fp",
+        "1.0",
+    ]
+    get_settings.cache_clear()
+    assert cli_main(args) == 1
+    assert "OPENROUTER_API_KEY" in capsys.readouterr().err
+
+    models: list[str] = []
+
+    def parse(**kwargs):
+        models.append(kwargs["model"])
+        graded = GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
+        message = SimpleNamespace(content="{}", refusal=None, parsed=graded)
+        return SimpleNamespace(
+            choices=[SimpleNamespace(message=message, finish_reason="stop")],
+            usage=SimpleNamespace(prompt_tokens=1, completion_tokens=1, prompt_tokens_details=None),
+        )
+
+    monkeypatch.setattr(
+        openai,
+        "OpenAI",
+        lambda **_: SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(parse=parse))),
+    )
+    monkeypatch.setenv("OPENROUTER_API_KEY", "dummy")
+    get_settings.cache_clear()
+    assert cli_main(args) == 0
+    assert models == ["~vendor/model-latest"] * 3
+    get_settings.cache_clear()

@@ -93,7 +93,13 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
             if args.model:
                 grader["model"] = args.model
             tasks["grade_sentence"] = grader
-        settings = settings.model_copy(update={"llm_tasks": tasks})
+        update: dict[str, object] = {"llm_tasks": tasks}
+        if args.provider:
+            # The eval only grades, but the client is built for every task: route them all to
+            # the requested provider so no other provider's key is needed.
+            update["llm_provider"] = args.provider
+            update["llm_model"] = args.model
+        settings = settings.model_copy(update=update)
         cases = load_cases(Path(args.cases))
         curriculum = load_curriculum(Path(args.curriculum))
     except (CaseFileError, CurriculumError) as exc:
@@ -113,7 +119,7 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         return 1
     recorder = MemoryRecorder()
     try:
-        llm = build_llm_client_with_recorder(settings, recorder)
+        llm = build_llm_client_with_recorder(settings, recorder, allow_fake_fallback=False)
     except LLMConfigError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
