@@ -132,14 +132,34 @@ The app has no user accounts; on a public server a single shared access token pr
    (`docker compose stop app && docker compose cp app:/data/llmll.db ./backup.db`).
 4. Check `GET /api/health`: `"auth": "enabled"` confirms that the token is active.
 
+## Scripts
+
+Common tasks live in [`scripts/`](scripts/) (Bash; they find the repo root and load `.env`):
+
+| Script | What it does |
+|---|---|
+| `scripts/setup.sh` | First-time setup: install dependencies, migrate the database, import the curriculum |
+| `scripts/dev.sh` | Backend (:8000, auto-reload) + frontend dev server (:5173); Ctrl+C stops both |
+| `scripts/check.sh [backend\|frontend]` | The same checks as CI, plus the API-schema sync check |
+| `scripts/gen-api.sh` | Regenerate the OpenAPI schema and TypeScript types after API changes |
+| `scripts/import-curriculum.sh` | Validate and import `curriculum/de` after editing the YAML |
+| `scripts/replay.sh` | Rebuild memory projections from the event log |
+| `scripts/languagetool.sh [stop]` | Start/stop a local LanguageTool on :8010 (Docker) |
+| `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool and a timestamped report in `evals-reports/` (costs API credits) |
+| `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
+| `scripts/up.sh [logs\|down]` | Full app with Docker Compose on :8000 |
+
 ## Development
 
-Run backend and frontend separately; the Vite dev server proxies `/api` to the backend.
-
 ```sh
-cd backend && uv sync && uv run alembic upgrade head && uv run uvicorn --factory app.main:create_app --reload
-cd frontend && npm ci && npm run dev
+scripts/setup.sh   # once
+scripts/dev.sh     # backend + frontend; open http://localhost:5173
+scripts/check.sh   # before committing
 ```
+
+The Vite dev server proxies `/api` to the backend. To run the parts by hand:
+`cd backend && uv run uvicorn --factory app.main:create_app --reload` and
+`cd frontend && npm run dev`.
 
 CI (`.github/workflows/ci.yml`) runs lint, format check, type check and tests for both
 parts, then builds the Docker image.

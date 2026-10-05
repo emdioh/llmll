@@ -123,8 +123,13 @@ def run_eval(
     *,
     languagetool: LanguageToolClient | None = None,
     repeat: int = 1,
+    abort_after: int = 3,
 ) -> dict[str, Any]:
-    """Grade every case `repeat` times and compute the report (a JSON-serializable dict)."""
+    """Grade every case `repeat` times and compute the report (a JSON-serializable dict).
+
+    If the first `abort_after` runs all fail (typically a wrong key, model id or an unsupported
+    feature), the run stops early instead of paying for calls that will fail the same way.
+    """
     live_lt = languagetool is not None and languagetool.check("Test") is not None
     known = set(items)
     case_reports: list[dict[str, Any]] = []
@@ -136,8 +141,13 @@ def run_eval(
     models: set[str] = set()
     reconcile_versions: set[str] = set()
     failures = 0
+    failure_cases: dict[str, list[str]] = defaultdict(list)
+    successes = 0
+    aborted = False
 
     for case in cases:
+        if aborted:
+            break
         request = grade_request(case, items, _lt_matches(case, languagetool, live_lt))
         runs: list[dict[str, Any]] = []
         signatures: list[Signature] = []
@@ -148,8 +158,13 @@ def run_eval(
                 evaluation = reconcile_answer(grade, request, known, known)
             except LLMError as exc:
                 failures += 1
+                failure_cases[str(exc)].append(case.id)
                 runs.append({"error": str(exc)})
+                if not successes and failures >= abort_after:
+                    aborted = True
+                    break
                 continue
+            successes += 1
             record = next(
                 (r for r in reversed(recorder.records[before:]) if r.task == "grade_sentence"),
                 None,
@@ -207,6 +222,11 @@ def run_eval(
     consistencies = [c["consistency"] for c in case_reports if c["consistency"]]
     summary = aggregate(scores).to_dict()
     summary["failed_runs"] = failures
+    summary["aborted"] = aborted
+    summary["failures"] = [
+        {"error": error, "count": len(ids), "cases": ids, "hint": failure_hint(error)}
+        for error, ids in sorted(failure_cases.items(), key=lambda kv: -len(kv[1]))
+    ]
     summary["consistency_overall"] = (
         statistics.fmean(c["overall"] for c in consistencies) if consistencies else None
     )
@@ -241,6 +261,51 @@ def run_eval(
     }
 
 
+_HINTS: tuple[tuple[tuple[str, ...], str], ...] = (
+    (
+        ("401", "403", "authentication", "unauthorized", "invalid api key", "no auth"),
+        "the API key was rejected: check it, and that it belongs to the --provider used",
+    ),
+    (
+        ("402", "insufficient", "credit", "quota", "billing"),
+        "the account has no credit or quota left for this provider",
+    ),
+    (
+        ("404", "not found", "not a valid model", "no endpoints", "model_not_found"),
+        "the model id was not found: copy it exactly from the provider's model list "
+        "(OpenRouter: https://openrouter.ai/models)",
+    ),
+    (
+        ("response_format", "json_schema", "structured output", "no structured output"),
+        "the model may not support schema-constrained output: retry with "
+        """--task-config '{"grade_sentence": {"structured_output": "json"}}'""",
+    ),
+    (
+        ("invalid structured output",),
+        "the model's JSON did not match the schema: try another model, or json mode",
+    ),
+    (("429", "rate limit"), "rate limited: wait, or use a model/plan with higher limits"),
+    (
+        ("timeout", "timed out", "connection"),
+        "network problem reaching the provider: check connectivity and retry",
+    ),
+)
+
+
+def failure_hint(error: str) -> str | None:
+    """A short, actionable hint for common provider errors (None when nothing matches)."""
+    text = error.lower()
+    for needles, hint in _HINTS:
+        if any(n in text for n in needles):
+            return hint
+    return None
+
+
+def _clip(text: str, limit: int = 400) -> str:
+    text = " ".join(text.split())
+    return text if len(text) <= limit else text[: limit - 1] + "…"
+
+
 def _pct(value: float | None) -> str:
     return "n/a" if value is None else f"{value * 100:.1f}%"
 
@@ -249,7 +314,8 @@ def format_summary(report: dict[str, Any]) -> str:
     cfg, s, cost = report["config"], report["summary"], report["cost"]
     lines = [
         f"grader evaluation: {cfg['cases']} cases x {cfg['repeat']} run(s), llm={cfg['llm']} "
-        f"models={','.join(cfg['models']) or '-'} prompts={','.join(cfg['prompt_versions']) or '-'}"
+        f"models={','.join(cfg['models']) or cfg.get('grader') or '-'} "
+        f"prompts={','.join(cfg['prompt_versions']) or '-'}"
         f" languagetool={cfg['languagetool']}",
         "",
         f"  overall accuracy       {_pct(s['overall_accuracy'])}",
@@ -277,4 +343,21 @@ def format_summary(report: dict[str, Any]) -> str:
             f"  {category:<18}{m['n']:>4}{_pct(m['overall_accuracy']):>14}"
             f"{_pct(m['false_positive_rate']):>10}{_pct(m['f1']):>8}"
         )
+    failures = s.get("failures") or []
+    if failures:
+        lines += ["", "failures:"]
+        for f in failures[:5]:
+            shown = ", ".join(f["cases"][:3]) + (" …" if len(f["cases"]) > 3 else "")
+            lines.append(f"  {f['count']} x {_clip(f['error'])}")
+            lines.append(f"      cases: {shown}")
+            if f.get("hint"):
+                lines.append(f"      hint: {f['hint']}")
+        if len(failures) > 5:
+            lines.append(f"  … and {len(failures) - 5} more distinct errors (see --out report)")
+    if s.get("aborted"):
+        lines += [
+            "",
+            f"stopped early: the first {s['failed_runs']} runs all failed, so the remaining "
+            "cases were not attempted (fix the error above and run again)",
+        ]
     return "\n".join(lines)

@@ -475,3 +475,58 @@ def test_eval_grader_provider_needs_only_its_own_key(monkeypatch, tmp_path: Path
     assert cli_main(args) == 0
     assert models == ["~vendor/model-latest"] * 3
     get_settings.cache_clear()
+
+
+# --- failure reporting ----------------------------------------------------------------------
+
+
+class _FailingGrader:
+    name = "openrouter"
+    routes = {"grade_sentence": "openrouter/vendor/missing-model"}
+
+    def __init__(self, error: str) -> None:
+        self.error = error
+        self.calls = 0
+
+    def grade_sentence(self, request):  # type: ignore[no-untyped-def]
+        from app.llm.client import LLMError
+
+        self.calls += 1
+        raise LLMError(self.error)
+
+
+def test_failures_are_grouped_with_hints_and_the_run_stops_early(tmp_path: Path) -> None:
+    from app.evals.cases import load_cases
+    from app.evals.runner import MemoryRecorder, format_summary, run_eval
+
+    curriculum = load_curriculum(CURRICULUM)
+    items = items_of(curriculum)
+    cases = load_cases(three_cases(tmp_path))
+    llm = _FailingGrader(
+        "NotFoundError: Error code: 404 - {'error': {'message': 'No endpoints found for "
+        "vendor/missing-model.', 'code': 404}}"
+    )
+    report = run_eval(cases, llm, MemoryRecorder(), items, abort_after=2)
+
+    assert llm.calls == 2  # stopped after 2 failures, the 3rd case was not attempted
+    summary = report["summary"]
+    assert summary["aborted"] is True and summary["failed_runs"] == 2
+    [failure] = summary["failures"]
+    assert failure["count"] == 2 and len(failure["cases"]) == 2
+    assert "model id was not found" in failure["hint"]
+    text = format_summary(report)
+    assert "No endpoints found for vendor/missing-model" in text
+    assert "hint: the model id was not found" in text
+    assert "stopped early" in text
+    assert "models=openrouter/vendor/missing-model" in text
+
+
+def test_failure_hints() -> None:
+    from app.evals.runner import failure_hint
+
+    assert "API key" in failure_hint("AuthenticationError: Error code: 401 - No auth credentials")
+    assert "structured_output" in failure_hint(
+        "BadRequestError: Error code: 400 - response_format json_schema is not supported"
+    )
+    assert "credit" in failure_hint("Error code: 402 - Insufficient credits")
+    assert failure_hint("something unexpected") is None
