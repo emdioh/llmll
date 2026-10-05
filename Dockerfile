@@ -26,4 +26,4 @@ ENV LLMLL_FRONTEND_DIST=/app/frontend_dist \
     LLMLL_DATABASE_URL=sqlite:////data/llmll.db
 VOLUME /data
 EXPOSE 8000
-CMD ["sh", "-c", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "alembic upgrade head && uvicorn --factory app.main:create_app --host 0.0.0.0 --port 8000"]

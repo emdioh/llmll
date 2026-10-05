@@ -32,7 +32,7 @@ LanguageTool runs as a separate container. Data lives in the `llmll-data` volume
 Run backend and frontend separately; the Vite dev server proxies `/api` to the backend.
 
 ```sh
-cd backend && uv sync && uv run alembic upgrade head && uv run uvicorn app.main:app --reload
+cd backend && uv sync && uv run alembic upgrade head && uv run uvicorn --factory app.main:create_app --reload
 cd frontend && npm ci && npm run dev
 ```
 
