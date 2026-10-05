@@ -49,7 +49,9 @@ LLMLL_LLM_PROVIDER=google
 LLMLL_LLM_MODEL=<gemini model id>
 GEMINI_API_KEY=...                                       # or GOOGLE_API_KEY
 
-# OpenRouter (any model it offers, written as <vendor>/<model>)
+# OpenRouter (any model it offers; copy the id from https://openrouter.ai/models, <vendor>/<model>).
+# No base URL to set: the openrouter provider always uses https://openrouter.ai/api/v1.
+# (LLMLL_OPENAI_BASE_URL is only for the openai provider pointing at another endpoint.)
 LLMLL_LLM_PROVIDER=openrouter
 LLMLL_LLM_MODEL=<vendor>/<model>
 OPENROUTER_API_KEY=sk-or-...
@@ -63,10 +65,11 @@ key of every provider in use must be set; the app refuses to start otherwise, an
 task resolves to a provider without a model. With no key at all it runs on a fake LLM.
 
 ```sh
-LLMLL_LLM_TASKS='{"grade_sentence": {"provider": "anthropic", "effort": "high"},
-                  "gloss": {"provider": "openrouter", "model": "<vendor>/<model>"},
-                  "simplify_text": {"provider": "google", "model": "<gemini model id>"}}'
+LLMLL_LLM_TASKS='{"grade_sentence": {"provider": "anthropic", "effort": "high"}, "gloss": {"provider": "openrouter", "model": "<vendor>/<model>"}, "simplify_text": {"provider": "google", "model": "<gemini model id>"}}'
 ```
+
+Keep the JSON on one line and in single quotes: that works both in `.env` for docker compose
+and when loading `.env` into a shell. `.env.example` has a commented block per provider.
 
 Per-task fields: `provider`, `model`, `max_tokens`, `effort` (Anthropic only, ignored with a
 warning elsewhere), `params` (provider-specific request parameters passed through unchanged, e.g.
