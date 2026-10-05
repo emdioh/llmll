@@ -6,14 +6,20 @@ BACKEND="$ROOT/backend"
 FRONTEND="$ROOT/frontend"
 CURRICULUM="$ROOT/curriculum/de"
 
-# Load .env into the environment (JSON values in .env are single-quoted, so this is safe).
+# Load $ROOT/.env into the environment, so API keys and settings reach the backend (which
+# itself only reads environment variables). Variables already set in the calling shell win
+# over .env (same rule as docker compose): `OPENROUTER_API_KEY=... scripts/x.sh` overrides
+# the file, and an empty `KEY=` line in .env never wipes a key you exported.
 load_env() {
-  if [[ -f "$ROOT/.env" ]]; then
-    set -a
-    # shellcheck disable=SC1091
-    . "$ROOT/.env"
-    set +a
-  fi
+  [[ -f "$ROOT/.env" ]] || return 0
+  local before
+  before="$(export -p)"
+  set -a
+  # shellcheck disable=SC1091
+  . "$ROOT/.env"
+  set +a
+  # Re-apply what was exported before sourcing (export -p prints `declare -x NAME=...`).
+  eval "${before//declare -x /export }"
 }
 
 require() {

@@ -134,7 +134,9 @@ The app has no user accounts; on a public server a single shared access token pr
 
 ## Scripts
 
-Common tasks live in [`scripts/`](scripts/) (Bash; they find the repo root and load `.env`):
+Common tasks live in [`scripts/`](scripts/) (Bash). They find the repo root and load `.env`
+into the environment of the commands they run — that's where API keys and LLM settings come
+from; variables already set in your shell take precedence over `.env`.
 
 | Script | What it does |
 |---|---|
