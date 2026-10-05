@@ -1,0 +1,3102 @@
+# German lexicon, A1. Original content.
+- id: lex:tisch
+  lemma: Tisch
+  pos: noun
+  gender: m
+  plural: Tische
+  level: A1
+  translations:
+    it: tavolo
+    en: table
+  example:
+    de: Der Tisch ist braun.
+    it: Il tavolo è marrone.
+  interference:
+    it_gender: m
+- id: lex:stuhl
+  lemma: Stuhl
+  pos: noun
+  gender: m
+  plural: Stühle
+  level: A1
+  translations:
+    it: sedia
+    en: chair
+  example:
+    de: Hier ist ein Stuhl für dich.
+    it: Ecco una sedia per te.
+  interference:
+    it_gender: f
+- id: lex:haus
+  lemma: Haus
+  pos: noun
+  gender: n
+  plural: Häuser
+  level: A1
+  translations:
+    it: casa
+    en: house
+  example:
+    de: Das Haus ist sehr groß.
+    it: La casa è molto grande.
+  interference:
+    it_gender: f
+- id: lex:wohnung
+  lemma: Wohnung
+  pos: noun
+  gender: f
+  plural: Wohnungen
+  level: A1
+  translations:
+    it: appartamento
+    en: apartment, flat
+  example:
+    de: Meine Wohnung ist klein.
+    it: Il mio appartamento è piccolo.
+  interference:
+    it_gender: m
+    note_it: Wohnung è femminile, ma «appartamento» è maschile.
+- id: lex:zimmer
+  lemma: Zimmer
+  pos: noun
+  gender: n
+  plural: Zimmer
+  level: A1
+  translations:
+    it: stanza, camera
+    en: room
+  example:
+    de: Das Zimmer hat ein Fenster.
+    it: La stanza ha una finestra.
+  interference:
+    it_gender: f
+- id: lex:kueche
+  lemma: Küche
+  pos: noun
+  gender: f
+  plural: Küchen
+  level: A1
+  translations:
+    it: cucina
+    en: kitchen
+  example:
+    de: Die Küche ist neu.
+    it: La cucina è nuova.
+  interference:
+    it_gender: f
+- id: lex:badezimmer
+  lemma: Badezimmer
+  pos: noun
+  gender: n
+  plural: Badezimmer
+  level: A1
+  translations:
+    it: bagno
+    en: bathroom
+  example:
+    de: Das Badezimmer ist links.
+    it: Il bagno è a sinistra.
+  interference:
+    it_gender: m
+- id: lex:fenster
+  lemma: Fenster
+  pos: noun
+  gender: n
+  plural: Fenster
+  level: A1
+  translations:
+    it: finestra
+    en: window
+  example:
+    de: Bitte mach das Fenster auf.
+    it: Per favore, apri la finestra.
+  interference:
+    it_gender: f
+- id: lex:tuer
+  lemma: Tür
+  pos: noun
+  gender: f
+  plural: Türen
+  level: A1
+  translations:
+    it: porta
+    en: door
+  example:
+    de: Die Tür ist zu.
+    it: La porta è chiusa.
+  interference:
+    it_gender: f
+- id: lex:bett
+  lemma: Bett
+  pos: noun
+  gender: n
+  plural: Betten
+  level: A1
+  translations:
+    it: letto
+    en: bed
+  example:
+    de: Das Bett ist sehr bequem.
+    it: Il letto è molto comodo.
+  interference:
+    it_gender: m
+- id: lex:buch
+  lemma: Buch
+  pos: noun
+  gender: n
+  plural: Bücher
+  level: A1
+  translations:
+    it: libro
+    en: book
+  example:
+    de: Ich lese ein Buch.
+    it: Leggo un libro.
+  interference:
+    it_gender: m
+- id: lex:tasche
+  lemma: Tasche
+  pos: noun
+  gender: f
+  plural: Taschen
+  level: A1
+  translations:
+    it: borsa
+    en: bag
+  example:
+    de: Meine Tasche ist schwer.
+    it: La mia borsa è pesante.
+  interference:
+    it_gender: f
+- id: lex:schule
+  lemma: Schule
+  pos: noun
+  gender: f
+  plural: Schulen
+  level: A1
+  translations:
+    it: scuola
+    en: school
+  example:
+    de: Die Schule beginnt um acht Uhr.
+    it: La scuola comincia alle otto.
+  interference:
+    it_gender: f
+- id: lex:lehrer
+  lemma: Lehrer
+  pos: noun
+  gender: m
+  plural: Lehrer
+  level: A1
+  translations:
+    it: insegnante, professore
+    en: teacher
+  example:
+    de: Der Lehrer ist nett.
+    it: Il professore è gentile.
+  interference:
+    it_gender: m
+- id: lex:lehrerin
+  lemma: Lehrerin
+  pos: noun
+  gender: f
+  plural: Lehrerinnen
+  level: A1
+  translations:
+    it: insegnante, professoressa
+    en: teacher (female)
+  example:
+    de: Die Lehrerin kommt aus Wien.
+    it: L'insegnante viene da Vienna.
+  interference:
+    it_gender: f
+- id: lex:freund
+  lemma: Freund
+  pos: noun
+  gender: m
+  plural: Freunde
+  level: A1
+  translations:
+    it: amico, fidanzato
+    en: friend, boyfriend
+  example:
+    de: Er ist mein bester Freund.
+    it: È il mio migliore amico.
+  interference:
+    it_gender: m
+- id: lex:freundin
+  lemma: Freundin
+  pos: noun
+  gender: f
+  plural: Freundinnen
+  level: A1
+  translations:
+    it: amica, fidanzata
+    en: friend (female), girlfriend
+  example:
+    de: Meine Freundin wohnt in Köln.
+    it: La mia amica abita a Colonia.
+  interference:
+    it_gender: f
+- id: lex:mann
+  lemma: Mann
+  pos: noun
+  gender: m
+  plural: Männer
+  level: A1
+  translations:
+    it: uomo, marito
+    en: man, husband
+  example:
+    de: Der Mann liest die Zeitung.
+    it: L'uomo legge il giornale.
+  interference:
+    it_gender: m
+- id: lex:frau
+  lemma: Frau
+  pos: noun
+  gender: f
+  plural: Frauen
+  level: A1
+  translations:
+    it: donna, moglie, signora
+    en: woman, wife, Mrs
+  example:
+    de: Die Frau arbeitet im Krankenhaus.
+    it: La donna lavora in ospedale.
+  interference:
+    it_gender: f
+- id: lex:kind
+  lemma: Kind
+  pos: noun
+  gender: n
+  plural: Kinder
+  level: A1
+  translations:
+    it: bambino, figlio
+    en: child
+  example:
+    de: Das Kind spielt im Garten.
+    it: Il bambino gioca in giardino.
+  interference:
+    it_gender: m
+- id: lex:maedchen
+  lemma: Mädchen
+  pos: noun
+  gender: n
+  plural: Mädchen
+  level: A1
+  translations:
+    it: ragazza, bambina
+    en: girl
+  example:
+    de: Das Mädchen heißt Anna.
+    it: La ragazza si chiama Anna.
+  interference:
+    it_gender: f
+    note_it: 'Mädchen è neutro (das), anche se indica una ragazza: il suffisso -chen rende neutro ogni
+      nome.'
+- id: lex:junge
+  lemma: Junge
+  pos: noun
+  gender: m
+  plural: Jungen
+  level: A1
+  translations:
+    it: ragazzo, bambino
+    en: boy
+  example:
+    de: Der Junge ist zehn Jahre alt.
+    it: Il ragazzo ha dieci anni.
+  interference:
+    it_gender: m
+- id: lex:vater
+  lemma: Vater
+  pos: noun
+  gender: m
+  plural: Väter
+  level: A1
+  translations:
+    it: padre, papà
+    en: father
+  example:
+    de: Mein Vater arbeitet viel.
+    it: Mio padre lavora molto.
+  interference:
+    it_gender: m
+- id: lex:mutter
+  lemma: Mutter
+  pos: noun
+  gender: f
+  plural: Mütter
+  level: A1
+  translations:
+    it: madre, mamma
+    en: mother
+  example:
+    de: Meine Mutter kocht gern.
+    it: A mia madre piace cucinare.
+  interference:
+    it_gender: f
+- id: lex:bruder
+  lemma: Bruder
+  pos: noun
+  gender: m
+  plural: Brüder
+  level: A1
+  translations:
+    it: fratello
+    en: brother
+  example:
+    de: Mein Bruder ist älter als ich.
+    it: Mio fratello è più grande di me.
+  interference:
+    it_gender: m
+- id: lex:schwester
+  lemma: Schwester
+  pos: noun
+  gender: f
+  plural: Schwestern
+  level: A1
+  translations:
+    it: sorella
+    en: sister
+  example:
+    de: Meine Schwester studiert Medizin.
+    it: Mia sorella studia medicina.
+  interference:
+    it_gender: f
+- id: lex:eltern
+  lemma: Eltern
+  pos: noun
+  gender: null
+  plural: null
+  plural_only: true
+  level: A1
+  translations:
+    it: genitori
+    en: parents
+  example:
+    de: Meine Eltern wohnen in Italien.
+    it: I miei genitori abitano in Italia.
+  interference:
+    it_gender: m
+    note_it: 'Solo plurale: die Eltern. Attenzione: «parenti» in tedesco è Verwandte.'
+- id: lex:familie
+  lemma: Familie
+  pos: noun
+  gender: f
+  plural: Familien
+  level: A1
+  translations:
+    it: famiglia
+    en: family
+  example:
+    de: Meine Familie ist groß.
+    it: La mia famiglia è grande.
+  interference:
+    it_gender: f
+- id: lex:name
+  lemma: Name
+  pos: noun
+  gender: m
+  plural: Namen
+  level: A1
+  translations:
+    it: nome
+    en: name
+  example:
+    de: Wie ist Ihr Name?
+    it: Qual è il Suo nome?
+  interference:
+    it_gender: m
+- id: lex:auto
+  lemma: Auto
+  pos: noun
+  gender: n
+  plural: Autos
+  level: A1
+  translations:
+    it: macchina, auto
+    en: car
+  example:
+    de: Das Auto ist rot.
+    it: La macchina è rossa.
+  interference:
+    it_gender: f
+- id: lex:bus
+  lemma: Bus
+  pos: noun
+  gender: m
+  plural: Busse
+  level: A1
+  translations:
+    it: autobus
+    en: bus
+  example:
+    de: Der Bus kommt gleich.
+    it: L'autobus arriva subito.
+  interference:
+    it_gender: m
+- id: lex:zug
+  lemma: Zug
+  pos: noun
+  gender: m
+  plural: Züge
+  level: A1
+  translations:
+    it: treno
+    en: train
+  example:
+    de: Der Zug fährt um zehn Uhr ab.
+    it: Il treno parte alle dieci.
+  interference:
+    it_gender: m
+- id: lex:bahnhof
+  lemma: Bahnhof
+  pos: noun
+  gender: m
+  plural: Bahnhöfe
+  level: A1
+  translations:
+    it: stazione
+    en: railway station
+  example:
+    de: Wo ist der Bahnhof?
+    it: Dov'è la stazione?
+  interference:
+    it_gender: f
+- id: lex:strasse
+  lemma: Straße
+  pos: noun
+  gender: f
+  plural: Straßen
+  level: A1
+  translations:
+    it: strada, via
+    en: street, road
+  example:
+    de: Die Straße ist ruhig.
+    it: La strada è tranquilla.
+  interference:
+    it_gender: f
+- id: lex:stadt
+  lemma: Stadt
+  pos: noun
+  gender: f
+  plural: Städte
+  level: A1
+  translations:
+    it: città
+    en: city, town
+  example:
+    de: Berlin ist eine große Stadt.
+    it: Berlino è una grande città.
+  interference:
+    it_gender: f
+- id: lex:land
+  lemma: Land
+  pos: noun
+  gender: n
+  plural: Länder
+  level: A1
+  translations:
+    it: paese, campagna
+    en: country, countryside
+  example:
+    de: Italien ist ein schönes Land.
+    it: L'Italia è un bel paese.
+  interference:
+    it_gender: m
+- id: lex:wasser
+  lemma: Wasser
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: acqua
+    en: water
+  example:
+    de: Ich trinke Wasser.
+    it: Bevo acqua.
+  interference:
+    it_gender: f
+- id: lex:brot
+  lemma: Brot
+  pos: noun
+  gender: n
+  plural: Brote
+  level: A1
+  translations:
+    it: pane
+    en: bread
+  example:
+    de: Ich esse Brot mit Käse.
+    it: Mangio pane e formaggio.
+  interference:
+    it_gender: m
+- id: lex:kaese
+  lemma: Käse
+  pos: noun
+  gender: m
+  plural: null
+  level: A1
+  translations:
+    it: formaggio
+    en: cheese
+  example:
+    de: Der Käse schmeckt gut.
+    it: Il formaggio è buono.
+  interference:
+    it_gender: m
+- id: lex:milch
+  lemma: Milch
+  pos: noun
+  gender: f
+  plural: null
+  level: A1
+  translations:
+    it: latte
+    en: milk
+  example:
+    de: Ich möchte Milch im Kaffee.
+    it: Vorrei del latte nel caffè.
+  interference:
+    it_gender: m
+    note_it: Milch è femminile, «latte» è maschile.
+- id: lex:kaffee
+  lemma: Kaffee
+  pos: noun
+  gender: m
+  plural: Kaffees
+  level: A1
+  translations:
+    it: caffè
+    en: coffee
+  example:
+    de: Ich trinke einen Kaffee.
+    it: Bevo un caffè.
+  interference:
+    it_gender: m
+    note_it: In tedesco il caffè è più lungo e leggero dell'espresso.
+- id: lex:tee
+  lemma: Tee
+  pos: noun
+  gender: m
+  plural: Tees
+  level: A1
+  translations:
+    it: tè
+    en: tea
+  example:
+    de: Möchten Sie Tee?
+    it: Desidera del tè?
+  interference:
+    it_gender: m
+- id: lex:bier
+  lemma: Bier
+  pos: noun
+  gender: n
+  plural: Biere
+  level: A1
+  translations:
+    it: birra
+    en: beer
+  example:
+    de: Ein Bier, bitte.
+    it: Una birra, per favore.
+  interference:
+    it_gender: f
+- id: lex:wein
+  lemma: Wein
+  pos: noun
+  gender: m
+  plural: Weine
+  level: A1
+  translations:
+    it: vino
+    en: wine
+  example:
+    de: Der Wein ist aus Italien.
+    it: Il vino è italiano.
+  interference:
+    it_gender: m
+- id: lex:apfel
+  lemma: Apfel
+  pos: noun
+  gender: m
+  plural: Äpfel
+  level: A1
+  translations:
+    it: mela
+    en: apple
+  example:
+    de: Der Apfel ist rot.
+    it: La mela è rossa.
+  interference:
+    it_gender: f
+    note_it: Apfel è maschile, «mela» è femminile.
+- id: lex:ei
+  lemma: Ei
+  pos: noun
+  gender: n
+  plural: Eier
+  level: A1
+  translations:
+    it: uovo
+    en: egg
+  example:
+    de: Ich esse ein Ei zum Frühstück.
+    it: A colazione mangio un uovo.
+  interference:
+    it_gender: m
+    note_it: 'Plurale irregolare: die Eier (in italiano «le uova»).'
+- id: lex:fleisch
+  lemma: Fleisch
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: carne
+    en: meat
+  example:
+    de: Ich esse kein Fleisch.
+    it: Non mangio carne.
+  interference:
+    it_gender: f
+- id: lex:gemuese
+  lemma: Gemüse
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: verdura
+    en: vegetables
+  example:
+    de: Das Gemüse ist frisch.
+    it: La verdura è fresca.
+  interference:
+    it_gender: f
+- id: lex:obst
+  lemma: Obst
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: frutta
+    en: fruit
+  example:
+    de: Wir kaufen Obst auf dem Markt.
+    it: Compriamo la frutta al mercato.
+  interference:
+    it_gender: f
+- id: lex:essen#food
+  lemma: Essen
+  pos: noun
+  gender: n
+  plural: Essen
+  level: A1
+  translations:
+    it: cibo, pasto
+    en: food, meal
+  example:
+    de: Das Essen ist fertig.
+    it: Il cibo è pronto.
+  interference:
+    it_gender: m
+- id: lex:fruehstueck
+  lemma: Frühstück
+  pos: noun
+  gender: n
+  plural: Frühstücke
+  level: A1
+  translations:
+    it: colazione
+    en: breakfast
+  example:
+    de: Das Frühstück ist um sieben Uhr.
+    it: La colazione è alle sette.
+  interference:
+    it_gender: f
+- id: lex:geld
+  lemma: Geld
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: soldi, denaro
+    en: money
+  example:
+    de: Ich habe kein Geld.
+    it: Non ho soldi.
+  interference:
+    it_gender: m
+    note_it: Geld è singolare («das Geld»); in italiano «i soldi» è plurale.
+- id: lex:euro
+  lemma: Euro
+  pos: noun
+  gender: m
+  plural: Euro
+  level: A1
+  translations:
+    it: euro
+    en: euro
+  example:
+    de: Das kostet zehn Euro.
+    it: Costa dieci euro.
+  interference:
+    it_gender: m
+- id: lex:tag
+  lemma: Tag
+  pos: noun
+  gender: m
+  plural: Tage
+  level: A1
+  translations:
+    it: giorno
+    en: day
+  example:
+    de: Guten Tag!
+    it: Buongiorno!
+  interference:
+    it_gender: m
+- id: lex:woche
+  lemma: Woche
+  pos: noun
+  gender: f
+  plural: Wochen
+  level: A1
+  translations:
+    it: settimana
+    en: week
+  example:
+    de: Die Woche hat sieben Tage.
+    it: La settimana ha sette giorni.
+  interference:
+    it_gender: f
+- id: lex:monat
+  lemma: Monat
+  pos: noun
+  gender: m
+  plural: Monate
+  level: A1
+  translations:
+    it: mese
+    en: month
+  example:
+    de: Der Monat hat dreißig Tage.
+    it: Il mese ha trenta giorni.
+  interference:
+    it_gender: m
+- id: lex:jahr
+  lemma: Jahr
+  pos: noun
+  gender: n
+  plural: Jahre
+  level: A1
+  translations:
+    it: anno
+    en: year
+  example:
+    de: Ich lerne seit einem Jahr Deutsch.
+    it: Studio tedesco da un anno.
+  interference:
+    it_gender: m
+- id: lex:stunde
+  lemma: Stunde
+  pos: noun
+  gender: f
+  plural: Stunden
+  level: A1
+  translations:
+    it: ora
+    en: hour
+  example:
+    de: Der Kurs dauert eine Stunde.
+    it: Il corso dura un'ora.
+  interference:
+    it_gender: f
+- id: lex:minute
+  lemma: Minute
+  pos: noun
+  gender: f
+  plural: Minuten
+  level: A1
+  translations:
+    it: minuto
+    en: minute
+  example:
+    de: Warte bitte fünf Minuten.
+    it: Aspetta cinque minuti, per favore.
+  interference:
+    it_gender: m
+- id: lex:uhr
+  lemma: Uhr
+  pos: noun
+  gender: f
+  plural: Uhren
+  level: A1
+  translations:
+    it: orologio, ora
+    en: clock, watch, o'clock
+  example:
+    de: Es ist drei Uhr.
+    it: Sono le tre.
+  interference:
+    it_gender: m
+    note_it: Per l'ora si usa «Uhr» (drei Uhr = le tre); per «orologio» anche Uhr.
+- id: lex:morgen#morning
+  lemma: Morgen
+  pos: noun
+  gender: m
+  plural: Morgen
+  level: A1
+  translations:
+    it: mattina
+    en: morning
+  example:
+    de: Am Morgen trinke ich Kaffee.
+    it: La mattina bevo caffè.
+  interference:
+    it_gender: f
+- id: lex:abend
+  lemma: Abend
+  pos: noun
+  gender: m
+  plural: Abende
+  level: A1
+  translations:
+    it: sera
+    en: evening
+  example:
+    de: Am Abend sehen wir einen Film.
+    it: La sera guardiamo un film.
+  interference:
+    it_gender: f
+- id: lex:nacht
+  lemma: Nacht
+  pos: noun
+  gender: f
+  plural: Nächte
+  level: A1
+  translations:
+    it: notte
+    en: night
+  example:
+    de: Gute Nacht!
+    it: Buonanotte!
+  interference:
+    it_gender: f
+- id: lex:wetter
+  lemma: Wetter
+  pos: noun
+  gender: n
+  plural: null
+  level: A1
+  translations:
+    it: tempo (meteorologico)
+    en: weather
+  example:
+    de: Das Wetter ist heute schön.
+    it: Oggi il tempo è bello.
+  interference:
+    it_gender: m
+    note_it: «Tempo» in tedesco è Wetter (meteo) o Zeit (durata).
+- id: lex:sonne
+  lemma: Sonne
+  pos: noun
+  gender: f
+  plural: null
+  level: A1
+  translations:
+    it: sole
+    en: sun
+  example:
+    de: Die Sonne scheint.
+    it: Il sole splende.
+  interference:
+    it_gender: m
+    note_it: Die Sonne è femminile, «il sole» è maschile.
+- id: lex:hund
+  lemma: Hund
+  pos: noun
+  gender: m
+  plural: Hunde
+  level: A1
+  translations:
+    it: cane
+    en: dog
+  example:
+    de: Mein Hund heißt Max.
+    it: Il mio cane si chiama Max.
+  interference:
+    it_gender: m
+- id: lex:katze
+  lemma: Katze
+  pos: noun
+  gender: f
+  plural: Katzen
+  level: A1
+  translations:
+    it: gatto
+    en: cat
+  example:
+    de: Die Katze schläft auf dem Sofa.
+    it: Il gatto dorme sul divano.
+  interference:
+    it_gender: m
+    note_it: Die Katze è femminile (gatta); per il maschio esiste der Kater.
+- id: lex:arbeit
+  lemma: Arbeit
+  pos: noun
+  gender: f
+  plural: Arbeiten
+  level: A1
+  translations:
+    it: lavoro
+    en: work, job
+  example:
+    de: Die Arbeit beginnt um acht.
+    it: Il lavoro comincia alle otto.
+  interference:
+    it_gender: m
+- id: lex:beruf
+  lemma: Beruf
+  pos: noun
+  gender: m
+  plural: Berufe
+  level: A1
+  translations:
+    it: professione, mestiere
+    en: profession, occupation
+  example:
+    de: Was ist Ihr Beruf?
+    it: Qual è la Sua professione?
+  interference:
+    it_gender: f
+- id: lex:hand
+  lemma: Hand
+  pos: noun
+  gender: f
+  plural: Hände
+  level: A1
+  translations:
+    it: mano
+    en: hand
+  example:
+    de: Gib mir deine Hand.
+    it: Dammi la mano.
+  interference:
+    it_gender: f
+- id: lex:kopf
+  lemma: Kopf
+  pos: noun
+  gender: m
+  plural: Köpfe
+  level: A1
+  translations:
+    it: testa
+    en: head
+  example:
+    de: Mein Kopf tut weh.
+    it: Mi fa male la testa.
+  interference:
+    it_gender: f
+- id: lex:auge
+  lemma: Auge
+  pos: noun
+  gender: n
+  plural: Augen
+  level: A1
+  translations:
+    it: occhio
+    en: eye
+  example:
+    de: Sie hat blaue Augen.
+    it: Ha gli occhi azzurri.
+  interference:
+    it_gender: m
+- id: lex:telefon
+  lemma: Telefon
+  pos: noun
+  gender: n
+  plural: Telefone
+  level: A1
+  translations:
+    it: telefono
+    en: telephone
+  example:
+    de: Das Telefon klingelt.
+    it: Il telefono squilla.
+  interference:
+    it_gender: m
+- id: lex:handy
+  lemma: Handy
+  pos: noun
+  gender: n
+  plural: Handys
+  level: A1
+  translations:
+    it: cellulare
+    en: mobile phone, cell phone
+  example:
+    de: Mein Handy ist neu.
+    it: Il mio cellulare è nuovo.
+  interference:
+    it_gender: m
+    false_friend:
+      lang: en
+      word: handy
+      note_it: In inglese «handy» è un aggettivo (pratico); il cellulare tedesco si dice Handy ma in inglese
+        è mobile phone.
+- id: lex:computer
+  lemma: Computer
+  pos: noun
+  gender: m
+  plural: Computer
+  level: A1
+  translations:
+    it: computer
+    en: computer
+  example:
+    de: Der Computer ist zu langsam.
+    it: Il computer è troppo lento.
+  interference:
+    it_gender: m
+- id: lex:zeit
+  lemma: Zeit
+  pos: noun
+  gender: f
+  plural: Zeiten
+  level: A1
+  translations:
+    it: tempo
+    en: time
+  example:
+    de: Ich habe heute keine Zeit.
+    it: Oggi non ho tempo.
+  interference:
+    it_gender: m
+    note_it: Zeit è il tempo cronologico; per il meteo si usa Wetter.
+- id: lex:problem
+  lemma: Problem
+  pos: noun
+  gender: n
+  plural: Probleme
+  level: A1
+  translations:
+    it: problema
+    en: problem
+  example:
+    de: Das ist kein Problem.
+    it: Non è un problema.
+  interference:
+    it_gender: m
+- id: lex:frage
+  lemma: Frage
+  pos: noun
+  gender: f
+  plural: Fragen
+  level: A1
+  translations:
+    it: domanda
+    en: question
+  example:
+    de: Ich habe eine Frage.
+    it: Ho una domanda.
+  interference:
+    it_gender: f
+- id: lex:antwort
+  lemma: Antwort
+  pos: noun
+  gender: f
+  plural: Antworten
+  level: A1
+  translations:
+    it: risposta
+    en: answer
+  example:
+    de: Die Antwort ist richtig.
+    it: La risposta è giusta.
+  interference:
+    it_gender: f
+- id: lex:caf
+  lemma: Café
+  pos: noun
+  gender: n
+  plural: Cafés
+  level: A1
+  translations:
+    it: bar, caffè
+    en: café
+  example:
+    de: Wir treffen uns im Café.
+    it: Ci vediamo al bar.
+  interference:
+    it_gender: m
+- id: lex:restaurant
+  lemma: Restaurant
+  pos: noun
+  gender: n
+  plural: Restaurants
+  level: A1
+  translations:
+    it: ristorante
+    en: restaurant
+  example:
+    de: Das Restaurant ist sehr gut.
+    it: Il ristorante è molto buono.
+  interference:
+    it_gender: m
+- id: lex:hotel
+  lemma: Hotel
+  pos: noun
+  gender: n
+  plural: Hotels
+  level: A1
+  translations:
+    it: albergo, hotel
+    en: hotel
+  example:
+    de: Das Hotel liegt am Meer.
+    it: L'albergo si trova sul mare.
+  interference:
+    it_gender: m
+- id: lex:supermarkt
+  lemma: Supermarkt
+  pos: noun
+  gender: m
+  plural: Supermärkte
+  level: A1
+  translations:
+    it: supermercato
+    en: supermarket
+  example:
+    de: Der Supermarkt ist neben dem Bahnhof.
+    it: Il supermercato è vicino alla stazione.
+  interference:
+    it_gender: m
+- id: lex:arzt
+  lemma: Arzt
+  pos: noun
+  gender: m
+  plural: Ärzte
+  level: A1
+  translations:
+    it: medico, dottore
+    en: doctor
+  example:
+    de: Der Arzt hilft dem Kind.
+    it: Il medico aiuta il bambino.
+  interference:
+    it_gender: m
+- id: lex:aerztin
+  lemma: Ärztin
+  pos: noun
+  gender: f
+  plural: Ärztinnen
+  level: A1
+  translations:
+    it: dottoressa, medico
+    en: doctor (female)
+  example:
+    de: Die Ärztin hat Zeit.
+    it: La dottoressa ha tempo.
+  interference:
+    it_gender: f
+- id: lex:platz
+  lemma: Platz
+  pos: noun
+  gender: m
+  plural: Plätze
+  level: A1
+  translations:
+    it: posto, piazza
+    en: seat, place, square
+  example:
+    de: Ist hier noch ein Platz frei?
+    it: Qui c'è ancora un posto libero?
+  interference:
+    it_gender: m
+- id: lex:farbe
+  lemma: Farbe
+  pos: noun
+  gender: f
+  plural: Farben
+  level: A1
+  translations:
+    it: colore
+    en: colour, color
+  example:
+    de: Welche Farbe hat dein Auto?
+    it: Di che colore è la tua macchina?
+  interference:
+    it_gender: m
+- id: lex:wort
+  lemma: Wort
+  pos: noun
+  gender: n
+  plural: Wörter
+  level: A1
+  translations:
+    it: parola
+    en: word
+  example:
+    de: Ich kenne das Wort nicht.
+    it: Non conosco la parola.
+  interference:
+    it_gender: f
+    note_it: 'Due plurali: die Wörter (parole singole, p. es. in un dizionario) e die Worte (parole in
+      un discorso).'
+- id: lex:sprache
+  lemma: Sprache
+  pos: noun
+  gender: f
+  plural: Sprachen
+  level: A1
+  translations:
+    it: lingua
+    en: language
+  example:
+    de: Ich spreche drei Sprachen.
+    it: Parlo tre lingue.
+  interference:
+    it_gender: f
+- id: lex:film
+  lemma: Film
+  pos: noun
+  gender: m
+  plural: Filme
+  level: A1
+  translations:
+    it: film
+    en: film, movie
+  example:
+    de: Der Film beginnt um acht Uhr.
+    it: Il film comincia alle otto.
+  interference:
+    it_gender: m
+- id: lex:musik
+  lemma: Musik
+  pos: noun
+  gender: f
+  plural: null
+  level: A1
+  translations:
+    it: musica
+    en: music
+  example:
+    de: Ich höre gern Musik.
+    it: Ascolto volentieri musica.
+  interference:
+    it_gender: f
+- id: lex:urlaub
+  lemma: Urlaub
+  pos: noun
+  gender: m
+  plural: null
+  level: A1
+  translations:
+    it: vacanza, ferie
+    en: holiday, vacation
+  example:
+    de: Ich mache im Sommer Urlaub.
+    it: In estate faccio le vacanze.
+  interference:
+    it_gender: f
+- id: lex:reise
+  lemma: Reise
+  pos: noun
+  gender: f
+  plural: Reisen
+  level: A1
+  translations:
+    it: viaggio
+    en: trip, journey
+  example:
+    de: Die Reise war lang.
+    it: Il viaggio è stato lungo.
+  interference:
+    it_gender: m
+- id: lex:hunger
+  lemma: Hunger
+  pos: noun
+  gender: m
+  plural: null
+  level: A1
+  translations:
+    it: fame
+    en: hunger
+  example:
+    de: Ich habe großen Hunger.
+    it: Ho molta fame.
+  interference:
+    it_gender: f
+- id: lex:durst
+  lemma: Durst
+  pos: noun
+  gender: m
+  plural: null
+  level: A1
+  translations:
+    it: sete
+    en: thirst
+  example:
+    de: Ich habe Durst.
+    it: Ho sete.
+  interference:
+    it_gender: f
+- id: lex:sein
+  lemma: sein
+  pos: verb
+  level: A1
+  translations:
+    it: essere
+    en: to be
+  example:
+    de: Ich bin müde.
+    it: Sono stanco.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: war
+    partizip: gewesen
+- id: lex:haben
+  lemma: haben
+  pos: verb
+  level: A1
+  translations:
+    it: avere
+    en: to have
+  example:
+    de: Ich habe einen Bruder.
+    it: Ho un fratello.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: hatte
+    partizip: gehabt
+- id: lex:gehen
+  lemma: gehen
+  pos: verb
+  level: A1
+  translations:
+    it: andare, camminare
+    en: to go, to walk
+  example:
+    de: Wir gehen nach Hause.
+    it: Andiamo a casa.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: ging
+    partizip: gegangen
+- id: lex:kommen
+  lemma: kommen
+  pos: verb
+  level: A1
+  translations:
+    it: venire
+    en: to come
+  example:
+    de: Ich komme aus Italien.
+    it: Vengo dall'Italia.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: kam
+    partizip: gekommen
+- id: lex:machen
+  lemma: machen
+  pos: verb
+  level: A1
+  translations:
+    it: fare
+    en: to do, to make
+  example:
+    de: Was machst du heute?
+    it: Che cosa fai oggi?
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: machte
+    partizip: gemacht
+- id: lex:wohnen
+  lemma: wohnen
+  pos: verb
+  level: A1
+  translations:
+    it: abitare
+    en: to live, to reside
+  example:
+    de: Ich wohne in Rom.
+    it: Abito a Roma.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: wohnte
+    partizip: gewohnt
+- id: lex:heissen
+  lemma: heißen
+  pos: verb
+  level: A1
+  translations:
+    it: chiamarsi
+    en: to be called
+  example:
+    de: Ich heiße Paula.
+    it: Mi chiamo Paula.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: hieß
+    partizip: geheißen
+- id: lex:sprechen
+  lemma: sprechen
+  pos: verb
+  level: A1
+  translations:
+    it: parlare
+    en: to speak
+  example:
+    de: Sprichst du Deutsch?
+    it: Parli tedesco?
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: sprach
+    partizip: gesprochen
+- id: lex:lernen
+  lemma: lernen
+  pos: verb
+  level: A1
+  translations:
+    it: imparare, studiare
+    en: to learn
+  example:
+    de: Ich lerne jeden Tag Deutsch.
+    it: Studio tedesco ogni giorno.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: lernte
+    partizip: gelernt
+- id: lex:arbeiten
+  lemma: arbeiten
+  pos: verb
+  level: A1
+  translations:
+    it: lavorare
+    en: to work
+  example:
+    de: Er arbeitet bei einer Bank.
+    it: Lavora in una banca.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: arbeitete
+    partizip: gearbeitet
+- id: lex:essen#eat
+  lemma: essen
+  pos: verb
+  level: A1
+  translations:
+    it: mangiare
+    en: to eat
+  example:
+    de: Wir essen um zwölf Uhr.
+    it: Mangiamo alle dodici.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: aß
+    partizip: gegessen
+- id: lex:trinken
+  lemma: trinken
+  pos: verb
+  level: A1
+  translations:
+    it: bere
+    en: to drink
+  example:
+    de: Ich trinke gern Tee.
+    it: Bevo volentieri il tè.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: trank
+    partizip: getrunken
+- id: lex:kaufen
+  lemma: kaufen
+  pos: verb
+  level: A1
+  translations:
+    it: comprare
+    en: to buy
+  example:
+    de: Ich kaufe Brot und Milch.
+    it: Compro pane e latte.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: kaufte
+    partizip: gekauft
+- id: lex:sehen
+  lemma: sehen
+  pos: verb
+  level: A1
+  translations:
+    it: vedere
+    en: to see
+  example:
+    de: Ich sehe dich.
+    it: Ti vedo.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: sah
+    partizip: gesehen
+- id: lex:hoeren
+  lemma: hören
+  pos: verb
+  level: A1
+  translations:
+    it: sentire, ascoltare
+    en: to hear, to listen
+  example:
+    de: Ich höre Musik.
+    it: Ascolto musica.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: hörte
+    partizip: gehört
+- id: lex:lesen
+  lemma: lesen
+  pos: verb
+  level: A1
+  translations:
+    it: leggere
+    en: to read
+  example:
+    de: Er liest ein Buch.
+    it: Legge un libro.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: las
+    partizip: gelesen
+- id: lex:schreiben
+  lemma: schreiben
+  pos: verb
+  level: A1
+  translations:
+    it: scrivere
+    en: to write
+  example:
+    de: Ich schreibe eine E-Mail.
+    it: Scrivo un'e-mail.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: schrieb
+    partizip: geschrieben
+- id: lex:fahren
+  lemma: fahren
+  pos: verb
+  level: A1
+  translations:
+    it: andare (con un mezzo), guidare
+    en: to drive, to go (by vehicle)
+  example:
+    de: Wir fahren mit dem Zug.
+    it: Andiamo in treno.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: fuhr
+    partizip: gefahren
+- id: lex:spielen
+  lemma: spielen
+  pos: verb
+  level: A1
+  translations:
+    it: giocare, suonare
+    en: to play
+  example:
+    de: Die Kinder spielen im Park.
+    it: I bambini giocano nel parco.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: spielte
+    partizip: gespielt
+- id: lex:brauchen
+  lemma: brauchen
+  pos: verb
+  level: A1
+  translations:
+    it: aver bisogno di, servire
+    en: to need
+  example:
+    de: Ich brauche Hilfe.
+    it: Ho bisogno di aiuto.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: brauchte
+    partizip: gebraucht
+- id: lex:wissen
+  lemma: wissen
+  pos: verb
+  level: A1
+  translations:
+    it: sapere
+    en: to know (a fact)
+  example:
+    de: Ich weiß es nicht.
+    it: Non lo so.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: wusste
+    partizip: gewusst
+  interference:
+    note_it: Wissen = sapere un fatto; kennen = conoscere una persona o un luogo.
+- id: lex:kennen
+  lemma: kennen
+  pos: verb
+  level: A1
+  translations:
+    it: conoscere
+    en: to know (a person or place)
+  example:
+    de: Ich kenne diese Frau.
+    it: Conosco questa donna.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: kannte
+    partizip: gekannt
+- id: lex:koennen
+  lemma: können
+  pos: verb
+  level: A1
+  translations:
+    it: potere, sapere
+    en: can, to be able to
+  example:
+    de: Ich kann gut schwimmen.
+    it: So nuotare bene.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: konnte
+    partizip: gekonnt
+- id: lex:muessen
+  lemma: müssen
+  pos: verb
+  level: A1
+  translations:
+    it: dover
+    en: must, to have to
+  example:
+    de: Ich muss jetzt gehen.
+    it: Devo andare adesso.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: musste
+    partizip: gemusst
+  interference:
+    false_friend:
+      lang: en
+      word: must
+      note_it: Nella forma negativa «nicht müssen» significa «non è necessario», non «è vietato» (che
+        si dice nicht dürfen).
+- id: lex:wollen
+  lemma: wollen
+  pos: verb
+  level: A1
+  translations:
+    it: volere
+    en: to want
+  example:
+    de: Ich will nach Hause.
+    it: Voglio andare a casa.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: wollte
+    partizip: gewollt
+  interference:
+    false_friend:
+      lang: en
+      word: will
+      note_it: 'Wollen non è il futuro (will): significa «volere». Il futuro si forma con werden.'
+- id: lex:geben
+  lemma: geben
+  pos: verb
+  level: A1
+  translations:
+    it: dare
+    en: to give
+  example:
+    de: Gibst du mir das Buch?
+    it: Mi dai il libro?
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: gab
+    partizip: gegeben
+- id: lex:nehmen
+  lemma: nehmen
+  pos: verb
+  level: A1
+  translations:
+    it: prendere
+    en: to take
+  example:
+    de: Ich nehme den Bus.
+    it: Prendo l'autobus.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: nahm
+    partizip: genommen
+- id: lex:finden
+  lemma: finden
+  pos: verb
+  level: A1
+  translations:
+    it: trovare
+    en: to find
+  example:
+    de: Ich finde meinen Schlüssel nicht.
+    it: Non trovo la mia chiave.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: fand
+    partizip: gefunden
+- id: lex:sagen
+  lemma: sagen
+  pos: verb
+  level: A1
+  translations:
+    it: dire
+    en: to say
+  example:
+    de: Was sagst du?
+    it: Che cosa dici?
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: sagte
+    partizip: gesagt
+- id: lex:fragen
+  lemma: fragen
+  pos: verb
+  level: A1
+  translations:
+    it: chiedere, domandare
+    en: to ask
+  example:
+    de: Ich frage den Lehrer.
+    it: Chiedo all'insegnante.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: fragte
+    partizip: gefragt
+- id: lex:antworten
+  lemma: antworten
+  pos: verb
+  level: A1
+  translations:
+    it: rispondere
+    en: to answer
+  example:
+    de: Bitte antworte schnell.
+    it: Rispondi presto, per favore.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: antwortete
+    partizip: geantwortet
+- id: lex:schlafen
+  lemma: schlafen
+  pos: verb
+  level: A1
+  translations:
+    it: dormire
+    en: to sleep
+  example:
+    de: Das Kind schläft.
+    it: Il bambino dorme.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: schlief
+    partizip: geschlafen
+- id: lex:oeffnen
+  lemma: öffnen
+  pos: verb
+  level: A1
+  translations:
+    it: aprire
+    en: to open
+  example:
+    de: Ich öffne die Tür.
+    it: Apro la porta.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: öffnete
+    partizip: geöffnet
+- id: lex:schliessen
+  lemma: schließen
+  pos: verb
+  level: A1
+  translations:
+    it: chiudere
+    en: to close
+  example:
+    de: Bitte schließ das Fenster.
+    it: Chiudi la finestra, per favore.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: schloss
+    partizip: geschlossen
+- id: lex:moegen
+  lemma: mögen
+  pos: verb
+  level: A1
+  translations:
+    it: piacere, volere bene
+    en: to like
+  example:
+    de: Ich mag Kaffee.
+    it: Mi piace il caffè.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: mochte
+    partizip: gemocht
+  interference:
+    note_it: 'Mögen: soggetto = chi ama («Ich mag Kaffee»); in italiano «mi piace» inverte la costruzione.'
+- id: lex:lieben
+  lemma: lieben
+  pos: verb
+  level: A1
+  translations:
+    it: amare
+    en: to love
+  example:
+    de: Ich liebe meine Familie.
+    it: Amo la mia famiglia.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: liebte
+    partizip: geliebt
+- id: lex:kosten
+  lemma: kosten
+  pos: verb
+  level: A1
+  translations:
+    it: costare
+    en: to cost
+  example:
+    de: Was kostet das?
+    it: Quanto costa?
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: kostete
+    partizip: gekostet
+- id: lex:stehen
+  lemma: stehen
+  pos: verb
+  level: A1
+  translations:
+    it: stare in piedi, trovarsi
+    en: to stand
+  example:
+    de: Das Auto steht vor dem Haus.
+    it: La macchina è davanti alla casa.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: stand
+    partizip: gestanden
+- id: lex:liegen
+  lemma: liegen
+  pos: verb
+  level: A1
+  translations:
+    it: giacere, stare (disteso), trovarsi
+    en: to lie, to be located
+  example:
+    de: Das Buch liegt auf dem Tisch.
+    it: Il libro è sul tavolo.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: lag
+    partizip: gelegen
+- id: lex:sitzen
+  lemma: sitzen
+  pos: verb
+  level: A1
+  translations:
+    it: stare seduto
+    en: to sit, to be sitting
+  example:
+    de: Er sitzt im Garten.
+    it: È seduto in giardino.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: saß
+    partizip: gesessen
+- id: lex:bleiben
+  lemma: bleiben
+  pos: verb
+  level: A1
+  translations:
+    it: restare, rimanere
+    en: to stay, to remain
+  example:
+    de: Ich bleibe heute zu Hause.
+    it: Oggi resto a casa.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: blieb
+    partizip: geblieben
+- id: lex:aufstehen
+  lemma: aufstehen
+  pos: verb
+  level: A1
+  translations:
+    it: alzarsi
+    en: to get up
+  example:
+    de: Ich stehe um sieben Uhr auf.
+    it: Mi alzo alle sette.
+  verb:
+    aux: sein
+    separable: true
+    irregular: true
+    praeteritum: stand auf
+    partizip: aufgestanden
+- id: lex:anfangen
+  lemma: anfangen
+  pos: verb
+  level: A1
+  translations:
+    it: cominciare
+    en: to begin, to start
+  example:
+    de: Der Film fängt gleich an.
+    it: Il film comincia tra poco.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: fing an
+    partizip: angefangen
+- id: lex:einkaufen
+  lemma: einkaufen
+  pos: verb
+  level: A1
+  translations:
+    it: fare la spesa, comprare
+    en: to shop
+  example:
+    de: Ich kaufe am Samstag ein.
+    it: Faccio la spesa il sabato.
+  verb:
+    aux: haben
+    separable: true
+    irregular: false
+    praeteritum: kaufte ein
+    partizip: eingekauft
+- id: lex:anrufen
+  lemma: anrufen
+  pos: verb
+  level: A1
+  translations:
+    it: telefonare, chiamare
+    en: to call, to phone
+  example:
+    de: Ich rufe dich morgen an.
+    it: Ti chiamo domani.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: rief an
+    partizip: angerufen
+- id: lex:kochen
+  lemma: kochen
+  pos: verb
+  level: A1
+  translations:
+    it: cucinare, bollire
+    en: to cook
+  example:
+    de: Mein Vater kocht gern.
+    it: A mio padre piace cucinare.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: kochte
+    partizip: gekocht
+- id: lex:helfen
+  lemma: helfen
+  pos: verb
+  level: A1
+  translations:
+    it: aiutare
+    en: to help
+  example:
+    de: Kannst du mir helfen?
+    it: Puoi aiutarmi?
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: half
+    partizip: geholfen
+  interference:
+    note_it: Helfen regge il dativo (mir helfen), non l'accusativo.
+- id: lex:verstehen
+  lemma: verstehen
+  pos: verb
+  level: A1
+  translations:
+    it: capire
+    en: to understand
+  example:
+    de: Ich verstehe das nicht.
+    it: Non lo capisco.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: verstand
+    partizip: verstanden
+- id: lex:warten
+  lemma: warten
+  pos: verb
+  level: A1
+  translations:
+    it: aspettare
+    en: to wait
+  example:
+    de: Ich warte auf den Bus.
+    it: Aspetto l'autobus.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: wartete
+    partizip: gewartet
+- id: lex:suchen
+  lemma: suchen
+  pos: verb
+  level: A1
+  translations:
+    it: cercare
+    en: to look for
+  example:
+    de: Ich suche meine Brille.
+    it: Cerco i miei occhiali.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: suchte
+    partizip: gesucht
+- id: lex:gut
+  lemma: gut
+  pos: adj
+  level: A1
+  translations:
+    it: buono, bene
+    en: good
+  example:
+    de: Das Essen ist gut.
+    it: Il cibo è buono.
+- id: lex:schlecht
+  lemma: schlecht
+  pos: adj
+  level: A1
+  translations:
+    it: cattivo, brutto
+    en: bad
+  example:
+    de: Das Wetter ist schlecht.
+    it: Il tempo è brutto.
+- id: lex:gross
+  lemma: groß
+  pos: adj
+  level: A1
+  translations:
+    it: grande, alto
+    en: big, tall
+  example:
+    de: Mein Bruder ist sehr groß.
+    it: Mio fratello è molto alto.
+- id: lex:klein
+  lemma: klein
+  pos: adj
+  level: A1
+  translations:
+    it: piccolo
+    en: small, little
+  example:
+    de: Die Wohnung ist klein.
+    it: L'appartamento è piccolo.
+- id: lex:neu
+  lemma: neu
+  pos: adj
+  level: A1
+  translations:
+    it: nuovo
+    en: new
+  example:
+    de: Ich habe ein neues Handy.
+    it: Ho un cellulare nuovo.
+- id: lex:alt
+  lemma: alt
+  pos: adj
+  level: A1
+  translations:
+    it: vecchio, anziano
+    en: old
+  example:
+    de: Mein Großvater ist sehr alt.
+    it: Mio nonno è molto anziano.
+- id: lex:jung
+  lemma: jung
+  pos: adj
+  level: A1
+  translations:
+    it: giovane
+    en: young
+  example:
+    de: Sie ist noch jung.
+    it: È ancora giovane.
+- id: lex:schoen
+  lemma: schön
+  pos: adj
+  level: A1
+  translations:
+    it: bello
+    en: beautiful, nice
+  example:
+    de: Der Garten ist schön.
+    it: Il giardino è bello.
+- id: lex:schnell
+  lemma: schnell
+  pos: adj
+  level: A1
+  translations:
+    it: veloce, rapido
+    en: fast, quick
+  example:
+    de: Der Zug ist schnell.
+    it: Il treno è veloce.
+- id: lex:langsam
+  lemma: langsam
+  pos: adj
+  level: A1
+  translations:
+    it: lento
+    en: slow
+  example:
+    de: Bitte sprich langsam.
+    it: Parla lentamente, per favore.
+- id: lex:teuer
+  lemma: teuer
+  pos: adj
+  level: A1
+  translations:
+    it: caro, costoso
+    en: expensive
+  example:
+    de: Das Hotel ist teuer.
+    it: L'albergo è caro.
+- id: lex:billig
+  lemma: billig
+  pos: adj
+  level: A1
+  translations:
+    it: economico, a buon mercato
+    en: cheap
+  example:
+    de: Das Brot ist billig.
+    it: Il pane è economico.
+- id: lex:kalt
+  lemma: kalt
+  pos: adj
+  level: A1
+  translations:
+    it: freddo
+    en: cold
+  example:
+    de: Heute ist es kalt.
+    it: Oggi fa freddo.
+  interference:
+    false_friend:
+      lang: it
+      word: caldo
+      note_it: Kalt significa «freddo», non «caldo» (che è warm o heiß).
+- id: lex:warm
+  lemma: warm
+  pos: adj
+  level: A1
+  translations:
+    it: caldo (tiepido)
+    en: warm
+  example:
+    de: Das Wasser ist warm.
+    it: L'acqua è calda.
+- id: lex:heiss
+  lemma: heiß
+  pos: adj
+  level: A1
+  translations:
+    it: molto caldo, bollente
+    en: hot
+  example:
+    de: Der Tee ist heiß.
+    it: Il tè è bollente.
+- id: lex:muede
+  lemma: müde
+  pos: adj
+  level: A1
+  translations:
+    it: stanco
+    en: tired
+  example:
+    de: Ich bin sehr müde.
+    it: Sono molto stanco.
+- id: lex:krank
+  lemma: krank
+  pos: adj
+  level: A1
+  translations:
+    it: malato
+    en: sick, ill
+  example:
+    de: Mein Sohn ist krank.
+    it: Mio figlio è malato.
+- id: lex:nett
+  lemma: nett
+  pos: adj
+  level: A1
+  translations:
+    it: gentile, simpatico
+    en: nice, kind
+  example:
+    de: Die Nachbarin ist sehr nett.
+    it: La vicina è molto gentile.
+- id: lex:richtig
+  lemma: richtig
+  pos: adj
+  level: A1
+  translations:
+    it: giusto, corretto
+    en: right, correct
+  example:
+    de: Das ist richtig.
+    it: È giusto.
+- id: lex:falsch
+  lemma: falsch
+  pos: adj
+  level: A1
+  translations:
+    it: sbagliato, falso
+    en: wrong, false
+  example:
+    de: Die Antwort ist falsch.
+    it: La risposta è sbagliata.
+- id: lex:leicht
+  lemma: leicht
+  pos: adj
+  level: A1
+  translations:
+    it: facile, leggero
+    en: easy, light
+  example:
+    de: Die Aufgabe ist leicht.
+    it: L'esercizio è facile.
+- id: lex:schwer
+  lemma: schwer
+  pos: adj
+  level: A1
+  translations:
+    it: difficile, pesante
+    en: difficult, heavy
+  example:
+    de: Der Koffer ist schwer.
+    it: La valigia è pesante.
+- id: lex:lang
+  lemma: lang
+  pos: adj
+  level: A1
+  translations:
+    it: lungo
+    en: long
+  example:
+    de: Der Film ist sehr lang.
+    it: Il film è molto lungo.
+- id: lex:viel
+  lemma: viel
+  pos: adj
+  level: A1
+  translations:
+    it: molto
+    en: much, many, a lot of
+  example:
+    de: Ich habe viel Arbeit.
+    it: Ho molto lavoro.
+- id: lex:wenig
+  lemma: wenig
+  pos: adj
+  level: A1
+  translations:
+    it: poco
+    en: little, few
+  example:
+    de: Wir haben wenig Zeit.
+    it: Abbiamo poco tempo.
+- id: lex:gern
+  lemma: gern
+  pos: adv
+  level: A1
+  translations:
+    it: volentieri
+    en: gladly, with pleasure
+  example:
+    de: Ich spiele gern Fußball.
+    it: Mi piace giocare a calcio.
+  interference:
+    note_it: '«Gern» si usa con un verbo per dire «mi piace fare»: Ich lese gern = mi piace leggere.'
+- id: lex:sehr
+  lemma: sehr
+  pos: adv
+  level: A1
+  translations:
+    it: molto
+    en: very
+  example:
+    de: Das Buch ist sehr gut.
+    it: Il libro è molto buono.
+- id: lex:auch
+  lemma: auch
+  pos: adv
+  level: A1
+  translations:
+    it: anche
+    en: also, too
+  example:
+    de: Ich komme auch.
+    it: Vengo anch'io.
+- id: lex:nur
+  lemma: nur
+  pos: adv
+  level: A1
+  translations:
+    it: solo, soltanto
+    en: only, just
+  example:
+    de: Ich habe nur zehn Euro.
+    it: Ho solo dieci euro.
+- id: lex:immer
+  lemma: immer
+  pos: adv
+  level: A1
+  translations:
+    it: sempre
+    en: always
+  example:
+    de: Er ist immer müde.
+    it: È sempre stanco.
+- id: lex:nie
+  lemma: nie
+  pos: adv
+  level: A1
+  translations:
+    it: mai
+    en: never
+  example:
+    de: Ich trinke nie Bier.
+    it: Non bevo mai birra.
+- id: lex:oft
+  lemma: oft
+  pos: adv
+  level: A1
+  translations:
+    it: spesso
+    en: often
+  example:
+    de: Wir gehen oft ins Kino.
+    it: Andiamo spesso al cinema.
+- id: lex:heute
+  lemma: heute
+  pos: adv
+  level: A1
+  translations:
+    it: oggi
+    en: today
+  example:
+    de: Heute habe ich frei.
+    it: Oggi sono libero.
+- id: lex:morgen#tomorrow
+  lemma: morgen
+  pos: adv
+  level: A1
+  translations:
+    it: domani
+    en: tomorrow
+  example:
+    de: Morgen fahre ich nach Hamburg.
+    it: Domani vado ad Amburgo.
+- id: lex:jetzt
+  lemma: jetzt
+  pos: adv
+  level: A1
+  translations:
+    it: adesso, ora
+    en: now
+  example:
+    de: Ich esse jetzt.
+    it: Adesso mangio.
+- id: lex:hier
+  lemma: hier
+  pos: adv
+  level: A1
+  translations:
+    it: qui, qua
+    en: here
+  example:
+    de: Ich wohne hier.
+    it: Abito qui.
+- id: lex:dort
+  lemma: dort
+  pos: adv
+  level: A1
+  translations:
+    it: là, lì
+    en: there
+  example:
+    de: Dort ist die Bank.
+    it: Là c'è la banca.
+- id: lex:da
+  lemma: da
+  pos: adv
+  level: A1
+  translations:
+    it: lì, qui, ecco
+    en: there, here
+  example:
+    de: Da ist mein Bus.
+    it: Ecco il mio autobus.
+- id: lex:schon
+  lemma: schon
+  pos: adv
+  level: A1
+  translations:
+    it: già
+    en: already
+  example:
+    de: Ich bin schon fertig.
+    it: Ho già finito.
+- id: lex:noch
+  lemma: noch
+  pos: adv
+  level: A1
+  translations:
+    it: ancora
+    en: still, yet
+  example:
+    de: Ich habe noch Hunger.
+    it: Ho ancora fame.
+- id: lex:nicht
+  lemma: nicht
+  pos: adv
+  level: A1
+  translations:
+    it: non
+    en: not
+  example:
+    de: Ich verstehe das nicht.
+    it: Non lo capisco.
+- id: lex:zusammen
+  lemma: zusammen
+  pos: adv
+  level: A1
+  translations:
+    it: insieme
+    en: together
+  example:
+    de: Wir essen zusammen.
+    it: Mangiamo insieme.
+- id: lex:zu-hause
+  lemma: zu Hause
+  pos: adv
+  level: A1
+  translations:
+    it: a casa
+    en: at home
+  example:
+    de: Ich bin heute zu Hause.
+    it: Oggi sono a casa.
+- id: lex:ja
+  lemma: ja
+  pos: particle
+  level: A1
+  translations:
+    it: sì
+    en: 'yes'
+  example:
+    de: Ja, das stimmt.
+    it: Sì, è vero.
+- id: lex:nein
+  lemma: nein
+  pos: particle
+  level: A1
+  translations:
+    it: 'no'
+    en: 'no'
+  example:
+    de: Nein, danke.
+    it: No, grazie.
+- id: lex:bitte
+  lemma: bitte
+  pos: particle
+  level: A1
+  translations:
+    it: per favore, prego
+    en: please, you're welcome
+  example:
+    de: Einen Kaffee, bitte.
+    it: Un caffè, per favore.
+- id: lex:danke
+  lemma: danke
+  pos: particle
+  level: A1
+  translations:
+    it: grazie
+    en: thank you, thanks
+  example:
+    de: Danke für die Hilfe.
+    it: Grazie per l'aiuto.
+- id: lex:guten-morgen
+  lemma: Guten Morgen
+  pos: phrase
+  level: A1
+  translations:
+    it: buongiorno (al mattino)
+    en: good morning
+  example:
+    de: Guten Morgen, Frau Weber!
+    it: Buongiorno, signora Weber!
+- id: lex:auf-wiedersehen
+  lemma: Auf Wiedersehen
+  pos: phrase
+  level: A1
+  translations:
+    it: arrivederci
+    en: goodbye
+  example:
+    de: Auf Wiedersehen und bis morgen!
+    it: Arrivederci e a domani!
+- id: lex:entschuldigung
+  lemma: Entschuldigung
+  pos: phrase
+  level: A1
+  translations:
+    it: scusa, scusi, mi scusi
+    en: excuse me, sorry
+  example:
+    de: Entschuldigung, wo ist der Bahnhof?
+    it: Scusi, dov'è la stazione?
+- id: lex:wie-gehts
+  lemma: Wie geht's?
+  pos: phrase
+  level: A1
+  translations:
+    it: come va?
+    en: how are you?
+  example:
+    de: Hallo Tom, wie geht's?
+    it: Ciao Tom, come va?
+- id: lex:in
+  lemma: in
+  pos: prep
+  level: A1
+  translations:
+    it: in, dentro
+    en: in, into
+  example:
+    de: Ich wohne in einer kleinen Stadt.
+    it: Abito in una piccola città.
+  prep_case: acc_dat
+- id: lex:auf
+  lemma: auf
+  pos: prep
+  level: A1
+  translations:
+    it: su, sopra
+    en: on, onto
+  example:
+    de: Das Buch liegt auf dem Tisch.
+    it: Il libro è sul tavolo.
+  prep_case: acc_dat
+- id: lex:an
+  lemma: an
+  pos: prep
+  level: A1
+  translations:
+    it: a, su (contatto), presso
+    en: at, on, by
+  example:
+    de: Das Bild hängt an der Wand.
+    it: Il quadro è appeso al muro.
+  prep_case: acc_dat
+- id: lex:mit
+  lemma: mit
+  pos: prep
+  level: A1
+  translations:
+    it: con
+    en: with
+  example:
+    de: Ich fahre mit dem Bus.
+    it: Vado con l'autobus.
+  prep_case: dat
+- id: lex:von
+  lemma: von
+  pos: prep
+  level: A1
+  translations:
+    it: di, da
+    en: from, of, by
+  example:
+    de: Das Buch ist von meiner Schwester.
+    it: Il libro è di mia sorella.
+  prep_case: dat
+- id: lex:zu
+  lemma: zu
+  pos: prep
+  level: A1
+  translations:
+    it: a, da, verso
+    en: to, at
+  example:
+    de: Ich gehe zu meiner Freundin.
+    it: Vado dalla mia amica.
+  prep_case: dat
+- id: lex:bei
+  lemma: bei
+  pos: prep
+  level: A1
+  translations:
+    it: presso, da, vicino a
+    en: at, near, with
+  example:
+    de: Ich wohne bei meinen Eltern.
+    it: Abito dai miei genitori.
+  prep_case: dat
+- id: lex:nach
+  lemma: nach
+  pos: prep
+  level: A1
+  translations:
+    it: dopo, verso, a
+    en: after, to
+  example:
+    de: Nach der Arbeit gehe ich nach Hause.
+    it: Dopo il lavoro vado a casa.
+  prep_case: dat
+- id: lex:aus
+  lemma: aus
+  pos: prep
+  level: A1
+  translations:
+    it: da, di (provenienza)
+    en: from, out of
+  example:
+    de: Ich komme aus Italien.
+    it: Vengo dall'Italia.
+  prep_case: dat
+- id: lex:fuer
+  lemma: für
+  pos: prep
+  level: A1
+  translations:
+    it: per
+    en: for
+  example:
+    de: Das Geschenk ist für dich.
+    it: Il regalo è per te.
+  prep_case: acc
+- id: lex:ohne
+  lemma: ohne
+  pos: prep
+  level: A1
+  translations:
+    it: senza
+    en: without
+  example:
+    de: Ich trinke Kaffee ohne Zucker.
+    it: Bevo il caffè senza zucchero.
+  prep_case: acc
+- id: lex:um
+  lemma: um
+  pos: prep
+  level: A1
+  translations:
+    it: a, intorno a
+    en: at, around
+  example:
+    de: Der Kurs beginnt um neun Uhr.
+    it: Il corso comincia alle nove.
+  prep_case: acc
+- id: lex:vor
+  lemma: vor
+  pos: prep
+  level: A1
+  translations:
+    it: davanti a, prima di
+    en: in front of, before
+  example:
+    de: Das Auto steht vor dem Haus.
+    it: La macchina è davanti alla casa.
+  prep_case: acc_dat
+- id: lex:und
+  lemma: und
+  pos: conj
+  level: A1
+  translations:
+    it: e
+    en: and
+  example:
+    de: Ich esse Brot und Käse.
+    it: Mangio pane e formaggio.
+- id: lex:aber
+  lemma: aber
+  pos: conj
+  level: A1
+  translations:
+    it: ma, però
+    en: but
+  example:
+    de: Ich bin müde, aber glücklich.
+    it: Sono stanco ma felice.
+- id: lex:oder
+  lemma: oder
+  pos: conj
+  level: A1
+  translations:
+    it: o, oppure
+    en: or
+  example:
+    de: Möchtest du Tee oder Kaffee?
+    it: Vuoi tè o caffè?
+- id: lex:denn
+  lemma: denn
+  pos: conj
+  level: A1
+  translations:
+    it: perché, poiché
+    en: because, for
+  example:
+    de: Ich bleibe zu Hause, denn ich bin krank.
+    it: Resto a casa perché sono malato.
+- id: lex:ich
+  lemma: ich
+  pos: pron
+  level: A1
+  translations:
+    it: io
+    en: I
+  example:
+    de: Ich komme aus Rom.
+    it: Vengo da Roma.
+- id: lex:du
+  lemma: du
+  pos: pron
+  level: A1
+  translations:
+    it: tu
+    en: you (informal)
+  example:
+    de: Du bist nett.
+    it: Sei gentile.
+- id: lex:er
+  lemma: er
+  pos: pron
+  level: A1
+  translations:
+    it: lui, egli
+    en: he
+  example:
+    de: Er wohnt in Wien.
+    it: Abita a Vienna.
+- id: lex:sie
+  lemma: sie
+  pos: pron
+  level: A1
+  translations:
+    it: lei, loro
+    en: she, they
+  example:
+    de: Sie ist Ärztin.
+    it: Lei è dottoressa.
+  interference:
+    note_it: Sie (minuscolo) = lei/loro; Sie (maiuscolo) = forma di cortesia.
+- id: lex:wir
+  lemma: wir
+  pos: pron
+  level: A1
+  translations:
+    it: noi
+    en: we
+  example:
+    de: Wir gehen ins Kino.
+    it: Andiamo al cinema.
+- id: lex:wer
+  lemma: wer
+  pos: pron
+  level: A1
+  translations:
+    it: chi
+    en: who
+  example:
+    de: Wer ist das?
+    it: Chi è?
+- id: lex:was
+  lemma: was
+  pos: pron
+  level: A1
+  translations:
+    it: che cosa, cosa
+    en: what
+  example:
+    de: Was machst du?
+    it: Che cosa fai?
+- id: lex:wo
+  lemma: wo
+  pos: adv
+  level: A1
+  translations:
+    it: dove
+    en: where
+  example:
+    de: Wo wohnst du?
+    it: Dove abiti?
+- id: lex:wie
+  lemma: wie
+  pos: adv
+  level: A1
+  translations:
+    it: come
+    en: how
+  example:
+    de: Wie heißt du?
+    it: Come ti chiami?
+- id: lex:wann
+  lemma: wann
+  pos: adv
+  level: A1
+  translations:
+    it: quando
+    en: when
+  example:
+    de: Wann kommst du?
+    it: Quando vieni?
+- id: lex:warum
+  lemma: warum
+  pos: adv
+  level: A1
+  translations:
+    it: perché (domanda)
+    en: why
+  example:
+    de: Warum lernst du Deutsch?
+    it: Perché studi il tedesco?
+- id: lex:woher
+  lemma: woher
+  pos: adv
+  level: A1
+  translations:
+    it: da dove
+    en: where from
+  example:
+    de: Woher kommst du?
+    it: Di dove sei?
+- id: lex:wohin
+  lemma: wohin
+  pos: adv
+  level: A1
+  translations:
+    it: verso dove, dove (moto)
+    en: where to
+  example:
+    de: Wohin gehst du?
+    it: Dove vai?
+- id: lex:mein
+  lemma: mein
+  pos: det
+  level: A1
+  translations:
+    it: mio
+    en: my
+  example:
+    de: Das ist mein Bruder.
+    it: Questo è mio fratello.
+- id: lex:dein
+  lemma: dein
+  pos: det
+  level: A1
+  translations:
+    it: tuo
+    en: your (informal)
+  example:
+    de: Wo ist dein Auto?
+    it: Dov'è la tua macchina?
+- id: lex:kein
+  lemma: kein
+  pos: det
+  level: A1
+  translations:
+    it: nessuno, non ... (un)
+    en: no, not any
+  example:
+    de: Ich habe kein Auto.
+    it: Non ho la macchina.
+- id: lex:null
+  lemma: 'null'
+  pos: num
+  level: A1
+  translations:
+    it: zero
+    en: zero
+  example:
+    de: Null Grad ist kalt.
+    it: Zero gradi è freddo.
+- id: lex:eins
+  lemma: eins
+  pos: num
+  level: A1
+  translations:
+    it: uno
+    en: one
+  example:
+    de: Ich habe eins.
+    it: Ne ho uno.
+- id: lex:zwei
+  lemma: zwei
+  pos: num
+  level: A1
+  translations:
+    it: due
+    en: two
+  example:
+    de: Wir haben zwei Kinder.
+    it: Abbiamo due figli.
+- id: lex:drei
+  lemma: drei
+  pos: num
+  level: A1
+  translations:
+    it: tre
+    en: three
+  example:
+    de: Ich bleibe drei Tage.
+    it: Resto tre giorni.
+- id: lex:fuenf
+  lemma: fünf
+  pos: num
+  level: A1
+  translations:
+    it: cinque
+    en: five
+  example:
+    de: Der Kaffee kostet fünf Euro.
+    it: Il caffè costa cinque euro.
+- id: lex:zehn
+  lemma: zehn
+  pos: num
+  level: A1
+  translations:
+    it: dieci
+    en: ten
+  example:
+    de: Es ist zehn Uhr.
+    it: Sono le dieci.
+- id: lex:hundert
+  lemma: hundert
+  pos: num
+  level: A1
+  translations:
+    it: cento
+    en: hundred
+  example:
+    de: Das Buch hat hundert Seiten.
+    it: Il libro ha cento pagine.

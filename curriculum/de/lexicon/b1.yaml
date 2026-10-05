@@ -1,0 +1,2655 @@
+# German lexicon, B1. Original content.
+- id: lex:gift
+  lemma: Gift
+  pos: noun
+  gender: n
+  plural: Gifte
+  level: B1
+  translations:
+    it: veleno
+    en: poison
+  example:
+    de: Dieses Gift ist sehr gefährlich.
+    it: Questo veleno è molto pericoloso.
+  interference:
+    it_gender: m
+    false_friend:
+      lang: en
+      word: gift
+      note_it: Gift significa «veleno», non «regalo» (che è Geschenk).
+- id: lex:gesellschaft
+  lemma: Gesellschaft
+  pos: noun
+  gender: f
+  plural: Gesellschaften
+  level: B1
+  translations:
+    it: società, compagnia
+    en: society, company
+  example:
+    de: Die Gesellschaft verändert sich schnell.
+    it: La società cambia rapidamente.
+  interference:
+    it_gender: f
+- id: lex:regierung
+  lemma: Regierung
+  pos: noun
+  gender: f
+  plural: Regierungen
+  level: B1
+  translations:
+    it: governo
+    en: government
+  example:
+    de: Die Regierung plant neue Gesetze.
+    it: Il governo prepara nuove leggi.
+  interference:
+    it_gender: m
+- id: lex:wirtschaft
+  lemma: Wirtschaft
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: economia
+    en: economy
+  example:
+    de: Die Wirtschaft wächst langsam.
+    it: L'economia cresce lentamente.
+  interference:
+    it_gender: f
+- id: lex:umwelt
+  lemma: Umwelt
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: ambiente
+    en: environment
+  example:
+    de: Wir müssen die Umwelt schützen.
+    it: Dobbiamo proteggere l'ambiente.
+  interference:
+    it_gender: m
+- id: lex:verkehr
+  lemma: Verkehr
+  pos: noun
+  gender: m
+  plural: null
+  level: B1
+  translations:
+    it: traffico
+    en: traffic
+  example:
+    de: Am Morgen ist viel Verkehr.
+    it: La mattina c'è molto traffico.
+  interference:
+    it_gender: m
+- id: lex:unfall
+  lemma: Unfall
+  pos: noun
+  gender: m
+  plural: Unfälle
+  level: B1
+  translations:
+    it: incidente
+    en: accident
+  example:
+    de: Auf der Autobahn gab es einen Unfall.
+    it: Sull'autostrada c'è stato un incidente.
+  interference:
+    it_gender: m
+- id: lex:erfahrung
+  lemma: Erfahrung
+  pos: noun
+  gender: f
+  plural: Erfahrungen
+  level: B1
+  translations:
+    it: esperienza
+    en: experience
+  example:
+    de: Ich habe viel Erfahrung im Verkauf.
+    it: Ho molta esperienza nelle vendite.
+  interference:
+    it_gender: f
+- id: lex:ergebnis
+  lemma: Ergebnis
+  pos: noun
+  gender: n
+  plural: Ergebnisse
+  level: B1
+  translations:
+    it: risultato
+    en: result
+  example:
+    de: Das Ergebnis der Prüfung ist gut.
+    it: Il risultato dell'esame è buono.
+  interference:
+    it_gender: m
+- id: lex:entscheidung
+  lemma: Entscheidung
+  pos: noun
+  gender: f
+  plural: Entscheidungen
+  level: B1
+  translations:
+    it: decisione
+    en: decision
+  example:
+    de: Das war eine schwere Entscheidung.
+    it: È stata una decisione difficile.
+  interference:
+    it_gender: f
+- id: lex:moeglichkeit
+  lemma: Möglichkeit
+  pos: noun
+  gender: f
+  plural: Möglichkeiten
+  level: B1
+  translations:
+    it: possibilità
+    en: possibility, option
+  example:
+    de: Es gibt mehrere Möglichkeiten.
+    it: Ci sono diverse possibilità.
+  interference:
+    it_gender: f
+- id: lex:gelegenheit
+  lemma: Gelegenheit
+  pos: noun
+  gender: f
+  plural: Gelegenheiten
+  level: B1
+  translations:
+    it: occasione
+    en: occasion, opportunity
+  example:
+    de: Ich habe keine Gelegenheit, Deutsch zu sprechen.
+    it: Non ho occasione di parlare tedesco.
+  interference:
+    it_gender: f
+- id: lex:unterschied
+  lemma: Unterschied
+  pos: noun
+  gender: m
+  plural: Unterschiede
+  level: B1
+  translations:
+    it: differenza
+    en: difference
+  example:
+    de: Was ist der Unterschied?
+    it: Qual è la differenza?
+  interference:
+    it_gender: f
+- id: lex:vorteil
+  lemma: Vorteil
+  pos: noun
+  gender: m
+  plural: Vorteile
+  level: B1
+  translations:
+    it: vantaggio
+    en: advantage
+  example:
+    de: Das hat viele Vorteile.
+    it: Questo ha molti vantaggi.
+  interference:
+    it_gender: m
+- id: lex:nachteil
+  lemma: Nachteil
+  pos: noun
+  gender: m
+  plural: Nachteile
+  level: B1
+  translations:
+    it: svantaggio
+    en: disadvantage
+  example:
+    de: Der Nachteil ist der hohe Preis.
+    it: Lo svantaggio è il prezzo alto.
+  interference:
+    it_gender: m
+- id: lex:verantwortung
+  lemma: Verantwortung
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: responsabilità
+    en: responsibility
+  example:
+    de: Ich übernehme die Verantwortung.
+    it: Mi assumo la responsabilità.
+  interference:
+    it_gender: f
+- id: lex:bewerbung
+  lemma: Bewerbung
+  pos: noun
+  gender: f
+  plural: Bewerbungen
+  level: B1
+  translations:
+    it: candidatura, domanda di assunzione
+    en: application (for a job)
+  example:
+    de: Ich schreibe eine Bewerbung.
+    it: Scrivo una candidatura.
+  interference:
+    it_gender: f
+- id: lex:lebenslauf
+  lemma: Lebenslauf
+  pos: noun
+  gender: m
+  plural: Lebensläufe
+  level: B1
+  translations:
+    it: curriculum (vitae)
+    en: CV, résumé
+  example:
+    de: Bitte schicken Sie Ihren Lebenslauf.
+    it: Per favore, mandi il Suo curriculum.
+  interference:
+    it_gender: m
+- id: lex:stelle
+  lemma: Stelle
+  pos: noun
+  gender: f
+  plural: Stellen
+  level: B1
+  translations:
+    it: posto di lavoro, posizione
+    en: job, position
+  example:
+    de: Er sucht eine neue Stelle.
+    it: Cerca un nuovo posto di lavoro.
+  interference:
+    it_gender: m
+    note_it: Stelle significa anche «punto, luogo» (an dieser Stelle).
+- id: lex:gehalt
+  lemma: Gehalt
+  pos: noun
+  gender: n
+  plural: Gehälter
+  level: B1
+  translations:
+    it: stipendio
+    en: salary
+  example:
+    de: Das Gehalt ist gut.
+    it: Lo stipendio è buono.
+  interference:
+    it_gender: m
+- id: lex:vertrag
+  lemma: Vertrag
+  pos: noun
+  gender: m
+  plural: Verträge
+  level: B1
+  translations:
+    it: contratto
+    en: contract
+  example:
+    de: Ich unterschreibe den Vertrag morgen.
+    it: Domani firmo il contratto.
+  interference:
+    it_gender: m
+- id: lex:versicherung
+  lemma: Versicherung
+  pos: noun
+  gender: f
+  plural: Versicherungen
+  level: B1
+  translations:
+    it: assicurazione
+    en: insurance
+  example:
+    de: Die Versicherung zahlt den Schaden.
+    it: L'assicurazione paga il danno.
+  interference:
+    it_gender: f
+- id: lex:steuer
+  lemma: Steuer
+  pos: noun
+  gender: f
+  plural: Steuern
+  level: B1
+  translations:
+    it: tassa, imposta
+    en: tax
+  example:
+    de: Wir müssen mehr Steuern zahlen.
+    it: Dobbiamo pagare più tasse.
+  interference:
+    it_gender: f
+- id: lex:konto
+  lemma: Konto
+  pos: noun
+  gender: n
+  plural: Konten
+  level: B1
+  translations:
+    it: conto (bancario)
+    en: bank account
+  example:
+    de: Ich habe ein Konto bei der Sparkasse.
+    it: Ho un conto presso la cassa di risparmio.
+  interference:
+    it_gender: m
+    note_it: Il plurale è Konten (non Kontos).
+- id: lex:ausbildung
+  lemma: Ausbildung
+  pos: noun
+  gender: f
+  plural: Ausbildungen
+  level: B1
+  translations:
+    it: formazione professionale, apprendistato
+    en: vocational training
+  example:
+    de: Er macht eine Ausbildung zum Koch.
+    it: Sta facendo una formazione da cuoco.
+  interference:
+    it_gender: f
+- id: lex:studium
+  lemma: Studium
+  pos: noun
+  gender: n
+  plural: Studien
+  level: B1
+  translations:
+    it: studi universitari
+    en: university studies
+  example:
+    de: Nach dem Studium suche ich Arbeit.
+    it: Dopo gli studi cerco lavoro.
+  interference:
+    it_gender: m
+    note_it: Il plurale (Studien) è raro e significa «studi, ricerche».
+- id: lex:universitaet
+  lemma: Universität
+  pos: noun
+  gender: f
+  plural: Universitäten
+  level: B1
+  translations:
+    it: università
+    en: university
+  example:
+    de: Sie studiert an der Universität Wien.
+    it: Studia all'università di Vienna.
+  interference:
+    it_gender: f
+- id: lex:wissenschaft
+  lemma: Wissenschaft
+  pos: noun
+  gender: f
+  plural: Wissenschaften
+  level: B1
+  translations:
+    it: scienza
+    en: science, scholarship
+  example:
+    de: Die Wissenschaft macht Fortschritte.
+    it: La scienza fa progressi.
+  interference:
+    it_gender: f
+- id: lex:forschung
+  lemma: Forschung
+  pos: noun
+  gender: f
+  plural: Forschungen
+  level: B1
+  translations:
+    it: ricerca
+    en: research
+  example:
+    de: Die Forschung braucht Geld.
+    it: La ricerca ha bisogno di fondi.
+  interference:
+    it_gender: f
+- id: lex:ausflug
+  lemma: Ausflug
+  pos: noun
+  gender: m
+  plural: Ausflüge
+  level: B1
+  translations:
+    it: gita, escursione
+    en: excursion, trip
+  example:
+    de: Am Sonntag machen wir einen Ausflug.
+    it: Domenica facciamo una gita.
+  interference:
+    it_gender: f
+- id: lex:erinnerung
+  lemma: Erinnerung
+  pos: noun
+  gender: f
+  plural: Erinnerungen
+  level: B1
+  translations:
+    it: ricordo
+    en: memory
+  example:
+    de: Das ist eine schöne Erinnerung.
+    it: È un bel ricordo.
+  interference:
+    it_gender: m
+- id: lex:plan
+  lemma: Plan
+  pos: noun
+  gender: m
+  plural: Pläne
+  level: B1
+  translations:
+    it: piano, progetto
+    en: plan
+  example:
+    de: Ich habe einen Plan für das Wochenende.
+    it: Ho un piano per il fine settimana.
+  interference:
+    it_gender: m
+- id: lex:ziel
+  lemma: Ziel
+  pos: noun
+  gender: n
+  plural: Ziele
+  level: B1
+  translations:
+    it: meta, obiettivo
+    en: goal, destination
+  example:
+    de: Mein Ziel ist ein gutes Ergebnis.
+    it: Il mio obiettivo è un buon risultato.
+  interference:
+    it_gender: m
+- id: lex:erfolg
+  lemma: Erfolg
+  pos: noun
+  gender: m
+  plural: Erfolge
+  level: B1
+  translations:
+    it: successo
+    en: success
+  example:
+    de: Viel Erfolg bei der Prüfung!
+    it: Buona fortuna per l'esame!
+  interference:
+    it_gender: m
+- id: lex:vorschlag
+  lemma: Vorschlag
+  pos: noun
+  gender: m
+  plural: Vorschläge
+  level: B1
+  translations:
+    it: proposta
+    en: suggestion, proposal
+  example:
+    de: Ich habe einen Vorschlag.
+    it: Ho una proposta.
+  interference:
+    it_gender: f
+- id: lex:einladung
+  lemma: Einladung
+  pos: noun
+  gender: f
+  plural: Einladungen
+  level: B1
+  translations:
+    it: invito
+    en: invitation
+  example:
+    de: Danke für die Einladung!
+    it: Grazie per l'invito!
+  interference:
+    it_gender: m
+- id: lex:veranstaltung
+  lemma: Veranstaltung
+  pos: noun
+  gender: f
+  plural: Veranstaltungen
+  level: B1
+  translations:
+    it: evento, manifestazione
+    en: event
+  example:
+    de: Die Veranstaltung beginnt um 19 Uhr.
+    it: L'evento comincia alle 19.
+  interference:
+    it_gender: m
+- id: lex:gesundheit
+  lemma: Gesundheit
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: salute
+    en: health
+  example:
+    de: Gesundheit ist wichtiger als Geld.
+    it: La salute è più importante dei soldi.
+  interference:
+    it_gender: f
+    note_it: Si dice «Gesundheit!» anche per «salute!» dopo uno starnuto.
+- id: lex:ernaehrung
+  lemma: Ernährung
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: alimentazione
+    en: nutrition, diet
+  example:
+    de: Eine gesunde Ernährung ist wichtig.
+    it: Un'alimentazione sana è importante.
+  interference:
+    it_gender: f
+- id: lex:rente
+  lemma: Rente
+  pos: noun
+  gender: f
+  plural: Renten
+  level: B1
+  translations:
+    it: pensione (di vecchiaia)
+    en: pension, retirement income
+  example:
+    de: Mein Großvater bekommt eine kleine Rente.
+    it: Mio nonno riceve una piccola pensione.
+  interference:
+    it_gender: f
+    note_it: Rente = pensione di vecchiaia; Pension = pensione (alloggio, piccolo albergo).
+- id: lex:pension
+  lemma: Pension
+  pos: noun
+  gender: f
+  plural: Pensionen
+  level: B1
+  translations:
+    it: pensione (piccolo albergo)
+    en: guesthouse, B&B
+  example:
+    de: Wir übernachten in einer kleinen Pension.
+    it: Pernottiamo in una piccola pensione.
+  interference:
+    it_gender: f
+    note_it: In Austria e Svizzera anche «pensionamento».
+- id: lex:situation
+  lemma: Situation
+  pos: noun
+  gender: f
+  plural: Situationen
+  level: B1
+  translations:
+    it: situazione
+    en: situation
+  example:
+    de: In dieser Situation brauche ich Hilfe.
+    it: In questa situazione ho bisogno di aiuto.
+  interference:
+    it_gender: f
+- id: lex:beziehung
+  lemma: Beziehung
+  pos: noun
+  gender: f
+  plural: Beziehungen
+  level: B1
+  translations:
+    it: rapporto, relazione
+    en: relationship
+  example:
+    de: Ich habe eine gute Beziehung zu meinen Eltern.
+    it: Ho un buon rapporto con i miei genitori.
+  interference:
+    it_gender: m
+- id: lex:hilfe
+  lemma: Hilfe
+  pos: noun
+  gender: f
+  plural: Hilfen
+  level: B1
+  translations:
+    it: aiuto
+    en: help
+  example:
+    de: Danke für Ihre Hilfe.
+    it: Grazie per il Suo aiuto.
+  interference:
+    it_gender: m
+    note_it: Hilfe è femminile, «aiuto» è maschile.
+- id: lex:loesung
+  lemma: Lösung
+  pos: noun
+  gender: f
+  plural: Lösungen
+  level: B1
+  translations:
+    it: soluzione
+    en: solution
+  example:
+    de: Wir suchen eine Lösung.
+    it: Cerchiamo una soluzione.
+  interference:
+    it_gender: f
+- id: lex:sicherheit
+  lemma: Sicherheit
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: sicurezza
+    en: safety, security
+  example:
+    de: Die Sicherheit ist wichtig.
+    it: La sicurezza è importante.
+  interference:
+    it_gender: f
+- id: lex:zukunft
+  lemma: Zukunft
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: futuro
+    en: future
+  example:
+    de: Was sind deine Pläne für die Zukunft?
+    it: Quali sono i tuoi piani per il futuro?
+  interference:
+    it_gender: m
+    note_it: Die Zukunft è femminile, «il futuro» è maschile.
+- id: lex:geschichte
+  lemma: Geschichte
+  pos: noun
+  gender: f
+  plural: Geschichten
+  level: B1
+  translations:
+    it: storia
+    en: story, history
+  example:
+    de: Er erzählt eine lustige Geschichte.
+    it: Racconta una storia divertente.
+  interference:
+    it_gender: f
+- id: lex:gedanke
+  lemma: Gedanke
+  pos: noun
+  gender: m
+  plural: Gedanken
+  level: B1
+  translations:
+    it: pensiero
+    en: thought
+  example:
+    de: Ich mache mir Gedanken über die Zukunft.
+    it: Mi preoccupo per il futuro.
+  interference:
+    it_gender: m
+    note_it: 'Genitivo: des Gedankens.'
+- id: lex:kultur
+  lemma: Kultur
+  pos: noun
+  gender: f
+  plural: Kulturen
+  level: B1
+  translations:
+    it: cultura
+    en: culture
+  example:
+    de: Ich interessiere mich für fremde Kulturen.
+    it: Mi interesso di culture straniere.
+  interference:
+    it_gender: f
+- id: lex:politik
+  lemma: Politik
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: politica
+    en: politics, policy
+  example:
+    de: Er interessiert sich für Politik.
+    it: Si interessa di politica.
+  interference:
+    it_gender: f
+- id: lex:wahl
+  lemma: Wahl
+  pos: noun
+  gender: f
+  plural: Wahlen
+  level: B1
+  translations:
+    it: scelta, elezione
+    en: choice, election
+  example:
+    de: Du hast die Wahl.
+    it: Hai la scelta.
+  interference:
+    it_gender: f
+- id: lex:gesetz
+  lemma: Gesetz
+  pos: noun
+  gender: n
+  plural: Gesetze
+  level: B1
+  translations:
+    it: legge
+    en: law
+  example:
+    de: Das ist gegen das Gesetz.
+    it: È contro la legge.
+  interference:
+    it_gender: f
+- id: lex:recht
+  lemma: Recht
+  pos: noun
+  gender: n
+  plural: Rechte
+  level: B1
+  translations:
+    it: diritto
+    en: right, law
+  example:
+    de: Jeder hat das Recht auf Bildung.
+    it: Ognuno ha diritto all'istruzione.
+  interference:
+    it_gender: m
+    note_it: Recht haben = avere ragione.
+- id: lex:gruppe
+  lemma: Gruppe
+  pos: noun
+  gender: f
+  plural: Gruppen
+  level: B1
+  translations:
+    it: gruppo
+    en: group
+  example:
+    de: Wir arbeiten in einer Gruppe.
+    it: Lavoriamo in gruppo.
+  interference:
+    it_gender: m
+- id: lex:werbung
+  lemma: Werbung
+  pos: noun
+  gender: f
+  plural: null
+  level: B1
+  translations:
+    it: pubblicità
+    en: advertising
+  example:
+    de: Im Fernsehen gibt es zu viel Werbung.
+    it: In televisione c'è troppa pubblicità.
+  interference:
+    it_gender: f
+- id: lex:gepaeck
+  lemma: Gepäck
+  pos: noun
+  gender: n
+  plural: null
+  level: B1
+  translations:
+    it: bagaglio
+    en: luggage, baggage
+  example:
+    de: Wo ist mein Gepäck?
+    it: Dov'è il mio bagaglio?
+  interference:
+    it_gender: m
+- id: lex:verspaetung
+  lemma: Verspätung
+  pos: noun
+  gender: f
+  plural: Verspätungen
+  level: B1
+  translations:
+    it: ritardo
+    en: delay
+  example:
+    de: Der Zug hat zehn Minuten Verspätung.
+    it: Il treno ha dieci minuti di ritardo.
+  interference:
+    it_gender: m
+- id: lex:grenze
+  lemma: Grenze
+  pos: noun
+  gender: f
+  plural: Grenzen
+  level: B1
+  translations:
+    it: confine, frontiera
+    en: border, limit
+  example:
+    de: Wir fahren über die Grenze.
+    it: Attraversiamo il confine.
+  interference:
+    it_gender: m
+- id: lex:lebensmittel
+  lemma: Lebensmittel
+  pos: noun
+  gender: null
+  plural: null
+  plural_only: true
+  level: B1
+  translations:
+    it: generi alimentari, alimenti
+    en: groceries, food
+  example:
+    de: Die Lebensmittel sind teurer geworden.
+    it: I generi alimentari sono diventati più cari.
+  interference:
+    it_gender: m
+    note_it: 'Quasi sempre plurale: die Lebensmittel.'
+- id: lex:muell
+  lemma: Müll
+  pos: noun
+  gender: m
+  plural: null
+  level: B1
+  translations:
+    it: spazzatura, rifiuti
+    en: rubbish, garbage
+  example:
+    de: Bitte bring den Müll raus.
+    it: Per favore, porta fuori la spazzatura.
+  interference:
+    it_gender: f
+- id: lex:kosten#noun
+  lemma: Kosten
+  pos: noun
+  gender: null
+  plural: null
+  plural_only: true
+  level: B1
+  translations:
+    it: costi, spese
+    en: costs, expenses
+  example:
+    de: Die Kosten sind hoch.
+    it: I costi sono alti.
+  interference:
+    it_gender: m
+    note_it: Die Kosten (solo plurale); verbo kosten = costare.
+- id: lex:anwalt
+  lemma: Anwalt
+  pos: noun
+  gender: m
+  plural: Anwälte
+  level: B1
+  translations:
+    it: avvocato
+    en: lawyer
+  example:
+    de: Ich brauche einen Anwalt.
+    it: Ho bisogno di un avvocato.
+  interference:
+    it_gender: m
+- id: lex:ingenieur
+  lemma: Ingenieur
+  pos: noun
+  gender: m
+  plural: Ingenieure
+  level: B1
+  translations:
+    it: ingegnere
+    en: engineer
+  example:
+    de: Mein Bruder ist Ingenieur.
+    it: Mio fratello è ingegnere.
+  interference:
+    it_gender: m
+- id: lex:stress
+  lemma: Stress
+  pos: noun
+  gender: m
+  plural: null
+  level: B1
+  translations:
+    it: stress
+    en: stress
+  example:
+    de: Ich habe viel Stress bei der Arbeit.
+    it: Ho molto stress al lavoro.
+  interference:
+    it_gender: m
+- id: lex:sehenswuerdigkeit
+  lemma: Sehenswürdigkeit
+  pos: noun
+  gender: f
+  plural: Sehenswürdigkeiten
+  level: B1
+  translations:
+    it: attrazione turistica, luogo da vedere
+    en: sight, tourist attraction
+  example:
+    de: Wir besuchen die Sehenswürdigkeiten der Stadt.
+    it: Visitiamo le attrazioni della città.
+  interference:
+    it_gender: f
+- id: lex:praktikum
+  lemma: Praktikum
+  pos: noun
+  gender: n
+  plural: Praktika
+  level: B1
+  translations:
+    it: tirocinio, stage
+    en: internship
+  example:
+    de: Ich mache ein Praktikum in Berlin.
+    it: Faccio uno stage a Berlino.
+  interference:
+    it_gender: m
+    note_it: 'Plurale latino: die Praktika.'
+- id: lex:kenntnis
+  lemma: Kenntnis
+  pos: noun
+  gender: f
+  plural: Kenntnisse
+  level: B1
+  translations:
+    it: conoscenza, competenza
+    en: knowledge, skill
+  example:
+    de: Gute Deutschkenntnisse sind wichtig.
+    it: Una buona conoscenza del tedesco è importante.
+  interference:
+    it_gender: f
+    note_it: Al plurale (Kenntnisse) = conoscenze, competenze.
+- id: lex:sich-entscheiden
+  lemma: sich entscheiden
+  pos: verb
+  level: B1
+  translations:
+    it: decidere, decidersi
+    en: to decide
+  example:
+    de: Ich kann mich nicht entscheiden.
+    it: Non riesco a decidere.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: entschied sich
+    partizip: entschieden
+- id: lex:sich-interessieren
+  lemma: sich interessieren
+  pos: verb
+  level: B1
+  translations:
+    it: interessarsi
+    en: to be interested
+  example:
+    de: Ich interessiere mich für Musik.
+    it: Mi interesso di musica.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: interessierte sich
+    partizip: interessiert
+  interference:
+    note_it: 'Si costruisce con für + acc.: sich für etwas interessieren.'
+- id: lex:sich-erinnern
+  lemma: sich erinnern
+  pos: verb
+  level: B1
+  translations:
+    it: ricordarsi
+    en: to remember
+  example:
+    de: Ich erinnere mich an den Sommer.
+    it: Mi ricordo dell'estate.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: erinnerte sich
+    partizip: erinnert
+  interference:
+    note_it: 'Si costruisce con an + acc.: sich an etwas erinnern.'
+- id: lex:sich-vorstellen
+  lemma: sich vorstellen
+  pos: verb
+  level: B1
+  translations:
+    it: presentarsi, immaginarsi
+    en: to introduce oneself, to imagine
+  example:
+    de: Darf ich mich vorstellen?
+    it: Posso presentarmi?
+  verb:
+    aux: haben
+    separable: true
+    irregular: false
+    praeteritum: stellte sich vor
+    partizip: vorgestellt
+- id: lex:sich-entschuldigen
+  lemma: sich entschuldigen
+  pos: verb
+  level: B1
+  translations:
+    it: scusarsi
+    en: to apologize
+  example:
+    de: Ich muss mich bei dir entschuldigen.
+    it: Devo scusarmi con te.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: entschuldigte sich
+    partizip: entschuldigt
+- id: lex:sich-aergern
+  lemma: sich ärgern
+  pos: verb
+  level: B1
+  translations:
+    it: arrabbiarsi, irritarsi
+    en: to be annoyed
+  example:
+    de: Ich ärgere mich über den Lärm.
+    it: Mi irrito per il rumore.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: ärgerte sich
+    partizip: geärgert
+- id: lex:sich-beschweren
+  lemma: sich beschweren
+  pos: verb
+  level: B1
+  translations:
+    it: lamentarsi, reclamare
+    en: to complain
+  example:
+    de: Er hat sich beim Chef beschwert.
+    it: Si è lamentato con il capo.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: beschwerte sich
+    partizip: beschwert
+- id: lex:sich-bewerben
+  lemma: sich bewerben
+  pos: verb
+  level: B1
+  translations:
+    it: candidarsi
+    en: to apply (for a job)
+  example:
+    de: Ich bewerbe mich um die Stelle.
+    it: Mi candido per il posto.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: bewarb sich
+    partizip: beworben
+- id: lex:sich-kuemmern
+  lemma: sich kümmern
+  pos: verb
+  level: B1
+  translations:
+    it: occuparsi (di)
+    en: to take care (of)
+  example:
+    de: Ich kümmere mich um die Kinder.
+    it: Mi occupo dei bambini.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: kümmerte sich
+    partizip: gekümmert
+- id: lex:sich-beeilen
+  lemma: sich beeilen
+  pos: verb
+  level: B1
+  translations:
+    it: sbrigarsi, far presto
+    en: to hurry
+  example:
+    de: Wir müssen uns beeilen.
+    it: Dobbiamo sbrigarci.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: beeilte sich
+    partizip: beeilt
+- id: lex:sich-streiten
+  lemma: sich streiten
+  pos: verb
+  level: B1
+  translations:
+    it: litigare
+    en: to quarrel, to argue
+  example:
+    de: Die Kinder streiten sich oft.
+    it: I bambini litigano spesso.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: stritt sich
+    partizip: gestritten
+- id: lex:erfahren
+  lemma: erfahren
+  pos: verb
+  level: B1
+  translations:
+    it: venire a sapere, apprendere
+    en: to learn, to find out
+  example:
+    de: Ich habe es gestern erfahren.
+    it: L'ho saputo ieri.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: erfuhr
+    partizip: erfahren
+- id: lex:erreichen
+  lemma: erreichen
+  pos: verb
+  level: B1
+  translations:
+    it: raggiungere
+    en: to reach, to achieve
+  example:
+    de: Ich habe den Zug noch erreicht.
+    it: Ho ancora preso il treno.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: erreichte
+    partizip: erreicht
+- id: lex:entwickeln
+  lemma: entwickeln
+  pos: verb
+  level: B1
+  translations:
+    it: sviluppare
+    en: to develop
+  example:
+    de: Die Firma entwickelt neue Produkte.
+    it: L'azienda sviluppa nuovi prodotti.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: entwickelte
+    partizip: entwickelt
+- id: lex:entstehen
+  lemma: entstehen
+  pos: verb
+  level: B1
+  translations:
+    it: nascere, formarsi
+    en: to arise, to come into being
+  example:
+    de: Hier entsteht ein neues Viertel.
+    it: Qui sta nascendo un nuovo quartiere.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: entstand
+    partizip: entstanden
+- id: lex:bestehen
+  lemma: bestehen
+  pos: verb
+  level: B1
+  translations:
+    it: superare (un esame), consistere
+    en: to pass (an exam), to exist
+  example:
+    de: Ich habe die Prüfung bestanden.
+    it: Ho superato l'esame.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: bestand
+    partizip: bestanden
+- id: lex:bedeuten
+  lemma: bedeuten
+  pos: verb
+  level: B1
+  translations:
+    it: significare
+    en: to mean
+  example:
+    de: Was bedeutet dieses Wort?
+    it: Che cosa significa questa parola?
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: bedeutete
+    partizip: bedeutet
+- id: lex:bemerken
+  lemma: bemerken
+  pos: verb
+  level: B1
+  translations:
+    it: notare, accorgersi
+    en: to notice
+  example:
+    de: Ich habe den Fehler nicht bemerkt.
+    it: Non ho notato l'errore.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: bemerkte
+    partizip: bemerkt
+- id: lex:beschreiben
+  lemma: beschreiben
+  pos: verb
+  level: B1
+  translations:
+    it: descrivere
+    en: to describe
+  example:
+    de: Kannst du den Weg beschreiben?
+    it: Puoi descrivere la strada?
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: beschrieb
+    partizip: beschrieben
+- id: lex:diskutieren
+  lemma: diskutieren
+  pos: verb
+  level: B1
+  translations:
+    it: discutere
+    en: to discuss
+  example:
+    de: Wir diskutieren über die Lösung.
+    it: Discutiamo sulla soluzione.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: diskutierte
+    partizip: diskutiert
+- id: lex:erwarten
+  lemma: erwarten
+  pos: verb
+  level: B1
+  translations:
+    it: aspettarsi, attendere
+    en: to expect
+  example:
+    de: Ich erwarte eine Antwort.
+    it: Mi aspetto una risposta.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: erwartete
+    partizip: erwartet
+- id: lex:erlauben
+  lemma: erlauben
+  pos: verb
+  level: B1
+  translations:
+    it: permettere
+    en: to allow, to permit
+  example:
+    de: Hier ist das Rauchen nicht erlaubt.
+    it: Qui non è permesso fumare.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: erlaubte
+    partizip: erlaubt
+- id: lex:verbieten
+  lemma: verbieten
+  pos: verb
+  level: B1
+  translations:
+    it: vietare
+    en: to forbid, to ban
+  example:
+    de: Der Arzt verbietet ihm das Rauchen.
+    it: Il medico gli vieta di fumare.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: verbot
+    partizip: verboten
+- id: lex:verbessern
+  lemma: verbessern
+  pos: verb
+  level: B1
+  translations:
+    it: migliorare
+    en: to improve
+  example:
+    de: Ich möchte mein Deutsch verbessern.
+    it: Vorrei migliorare il mio tedesco.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: verbesserte
+    partizip: verbessert
+- id: lex:aendern
+  lemma: ändern
+  pos: verb
+  level: B1
+  translations:
+    it: cambiare, modificare
+    en: to change, to alter
+  example:
+    de: Wir müssen den Plan ändern.
+    it: Dobbiamo cambiare il piano.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: änderte
+    partizip: geändert
+- id: lex:vergleichen
+  lemma: vergleichen
+  pos: verb
+  level: B1
+  translations:
+    it: confrontare, paragonare
+    en: to compare
+  example:
+    de: Vergleiche die beiden Preise.
+    it: Confronta i due prezzi.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: verglich
+    partizip: verglichen
+- id: lex:verpassen
+  lemma: verpassen
+  pos: verb
+  level: B1
+  translations:
+    it: perdere (un mezzo, un'occasione)
+    en: to miss
+  example:
+    de: Ich habe den Bus verpasst.
+    it: Ho perso l'autobus.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: verpasste
+    partizip: verpasst
+- id: lex:verschieben
+  lemma: verschieben
+  pos: verb
+  level: B1
+  translations:
+    it: rimandare, spostare
+    en: to postpone, to move
+  example:
+    de: Wir verschieben den Termin.
+    it: Rimandiamo l'appuntamento.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: verschob
+    partizip: verschoben
+- id: lex:vorschlagen
+  lemma: vorschlagen
+  pos: verb
+  level: B1
+  translations:
+    it: proporre
+    en: to suggest, to propose
+  example:
+    de: Ich schlage ein Treffen vor.
+    it: Propongo un incontro.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: schlug vor
+    partizip: vorgeschlagen
+- id: lex:vorbereiten
+  lemma: vorbereiten
+  pos: verb
+  level: B1
+  translations:
+    it: preparare
+    en: to prepare
+  example:
+    de: Ich bereite das Essen vor.
+    it: Preparo il cibo.
+  verb:
+    aux: haben
+    separable: true
+    irregular: false
+    praeteritum: bereitete vor
+    partizip: vorbereitet
+- id: lex:teilnehmen
+  lemma: teilnehmen
+  pos: verb
+  level: B1
+  translations:
+    it: partecipare
+    en: to take part, to participate
+  example:
+    de: Ich nehme am Kurs teil.
+    it: Partecipo al corso.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: nahm teil
+    partizip: teilgenommen
+  interference:
+    note_it: 'Si costruisce con an + dat.: an etwas teilnehmen.'
+- id: lex:stattfinden
+  lemma: stattfinden
+  pos: verb
+  level: B1
+  translations:
+    it: aver luogo, svolgersi
+    en: to take place
+  example:
+    de: Das Konzert findet im Park statt.
+    it: Il concerto si svolge nel parco.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: fand statt
+    partizip: stattgefunden
+- id: lex:aufhoeren
+  lemma: aufhören
+  pos: verb
+  level: B1
+  translations:
+    it: smettere, finire
+    en: to stop, to quit
+  example:
+    de: Es hört bald auf zu regnen.
+    it: Presto smette di piovere.
+  verb:
+    aux: haben
+    separable: true
+    irregular: false
+    praeteritum: hörte auf
+    partizip: aufgehört
+- id: lex:ausfallen
+  lemma: ausfallen
+  pos: verb
+  level: B1
+  translations:
+    it: essere cancellato, cadere
+    en: to be cancelled, to fall out
+  example:
+    de: Der Unterricht fällt heute aus.
+    it: Oggi la lezione è cancellata.
+  verb:
+    aux: sein
+    separable: true
+    irregular: true
+    praeteritum: fiel aus
+    partizip: ausgefallen
+- id: lex:anbieten
+  lemma: anbieten
+  pos: verb
+  level: B1
+  translations:
+    it: offrire, proporre
+    en: to offer
+  example:
+    de: Darf ich Ihnen einen Kaffee anbieten?
+    it: Posso offrirLe un caffè?
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: bot an
+    partizip: angeboten
+- id: lex:annehmen
+  lemma: annehmen
+  pos: verb
+  level: B1
+  translations:
+    it: accettare, supporre
+    en: to accept, to assume
+  example:
+    de: Ich nehme die Einladung gern an.
+    it: Accetto volentieri l'invito.
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: nahm an
+    partizip: angenommen
+- id: lex:ablehnen
+  lemma: ablehnen
+  pos: verb
+  level: B1
+  translations:
+    it: rifiutare
+    en: to decline, to reject
+  example:
+    de: Er hat das Angebot abgelehnt.
+    it: Ha rifiutato l'offerta.
+  verb:
+    aux: haben
+    separable: true
+    irregular: false
+    praeteritum: lehnte ab
+    partizip: abgelehnt
+- id: lex:sterben
+  lemma: sterben
+  pos: verb
+  level: B1
+  translations:
+    it: morire
+    en: to die
+  example:
+    de: Mein Großvater ist vor einem Jahr gestorben.
+    it: Mio nonno è morto un anno fa.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: starb
+    partizip: gestorben
+- id: lex:fallen
+  lemma: fallen
+  pos: verb
+  level: B1
+  translations:
+    it: cadere
+    en: to fall
+  example:
+    de: Das Glas ist auf den Boden gefallen.
+    it: Il bicchiere è caduto per terra.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: fiel
+    partizip: gefallen
+- id: lex:halten
+  lemma: halten
+  pos: verb
+  level: B1
+  translations:
+    it: tenere, fermarsi
+    en: to hold, to stop
+  example:
+    de: Der Zug hält nicht hier.
+    it: Il treno non si ferma qui.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: hielt
+    partizip: gehalten
+- id: lex:steigen
+  lemma: steigen
+  pos: verb
+  level: B1
+  translations:
+    it: salire, aumentare
+    en: to climb, to rise
+  example:
+    de: Die Preise sind gestiegen.
+    it: I prezzi sono saliti.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: stieg
+    partizip: gestiegen
+- id: lex:wachsen
+  lemma: wachsen
+  pos: verb
+  level: B1
+  translations:
+    it: crescere
+    en: to grow
+  example:
+    de: Die Kinder wachsen schnell.
+    it: I bambini crescono in fretta.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: wuchs
+    partizip: gewachsen
+- id: lex:gelingen
+  lemma: gelingen
+  pos: verb
+  level: B1
+  translations:
+    it: riuscire
+    en: to succeed
+  example:
+    de: Der Kuchen ist mir gelungen.
+    it: La torta mi è riuscita.
+  verb:
+    aux: sein
+    separable: false
+    irregular: true
+    praeteritum: gelang
+    partizip: gelungen
+  interference:
+    note_it: 'Costruzione impersonale con dativo: es gelingt mir.'
+- id: lex:passen
+  lemma: passen
+  pos: verb
+  level: B1
+  translations:
+    it: andare bene, calzare
+    en: to fit, to suit
+  example:
+    de: Die Hose passt mir nicht.
+    it: I pantaloni non mi vanno bene.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: passte
+    partizip: gepasst
+- id: lex:sparen
+  lemma: sparen
+  pos: verb
+  level: B1
+  translations:
+    it: risparmiare
+    en: to save
+  example:
+    de: Ich spare für den Urlaub.
+    it: Risparmio per le vacanze.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: sparte
+    partizip: gespart
+- id: lex:ueberlegen
+  lemma: überlegen
+  pos: verb
+  level: B1
+  translations:
+    it: riflettere, pensarci
+    en: to think over, to consider
+  example:
+    de: Ich muss kurz überlegen.
+    it: Devo pensarci un attimo.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: überlegte
+    partizip: überlegt
+- id: lex:ueberraschen
+  lemma: überraschen
+  pos: verb
+  level: B1
+  translations:
+    it: sorprendere
+    en: to surprise
+  example:
+    de: Das Geschenk hat mich überrascht.
+    it: Il regalo mi ha sorpreso.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: überraschte
+    partizip: überrascht
+- id: lex:uebernachten
+  lemma: übernachten
+  pos: verb
+  level: B1
+  translations:
+    it: pernottare
+    en: to stay overnight
+  example:
+    de: Wir übernachten im Hotel.
+    it: Pernottiamo in albergo.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: übernachtete
+    partizip: übernachtet
+- id: lex:uebersetzen
+  lemma: übersetzen
+  pos: verb
+  level: B1
+  translations:
+    it: tradurre
+    en: to translate
+  example:
+    de: Kannst du den Text übersetzen?
+    it: Puoi tradurre il testo?
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: übersetzte
+    partizip: übersetzt
+- id: lex:unterstuetzen
+  lemma: unterstützen
+  pos: verb
+  level: B1
+  translations:
+    it: sostenere, appoggiare
+    en: to support
+  example:
+    de: Meine Eltern unterstützen mich.
+    it: I miei genitori mi sostengono.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: unterstützte
+    partizip: unterstützt
+- id: lex:vermissen
+  lemma: vermissen
+  pos: verb
+  level: B1
+  translations:
+    it: sentire la mancanza di
+    en: to miss (someone)
+  example:
+    de: Ich vermisse meine Familie.
+    it: Mi manca la mia famiglia.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: vermisste
+    partizip: vermisst
+- id: lex:versprechen
+  lemma: versprechen
+  pos: verb
+  level: B1
+  translations:
+    it: promettere
+    en: to promise
+  example:
+    de: Ich verspreche dir, pünktlich zu sein.
+    it: Ti prometto di essere puntuale.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: versprach
+    partizip: versprochen
+- id: lex:waehlen
+  lemma: wählen
+  pos: verb
+  level: B1
+  translations:
+    it: scegliere, votare
+    en: to choose, to vote
+  example:
+    de: Du kannst zwischen zwei Menüs wählen.
+    it: Puoi scegliere tra due menù.
+  verb:
+    aux: haben
+    separable: false
+    irregular: false
+    praeteritum: wählte
+    partizip: gewählt
+- id: lex:lassen
+  lemma: lassen
+  pos: verb
+  level: B1
+  translations:
+    it: lasciare, far fare
+    en: to let, to leave, to have done
+  example:
+    de: Ich lasse mir die Haare schneiden.
+    it: Mi faccio tagliare i capelli.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: ließ
+    partizip: gelassen
+  interference:
+    note_it: Con un altro infinito il Partizip II è «lassen» (Ich habe ihn kommen lassen).
+- id: lex:ziehen
+  lemma: ziehen
+  pos: verb
+  level: B1
+  translations:
+    it: tirare, trasferirsi
+    en: to pull, to move
+  example:
+    de: Bitte ziehen Sie die Tür.
+    it: Per favore, tiri la porta.
+  verb:
+    aux: haben
+    separable: false
+    irregular: true
+    praeteritum: zog
+    partizip: gezogen
+  interference:
+    note_it: 'Nel senso «trasferirsi» l''ausiliare è sein: Wir sind nach Köln gezogen.'
+- id: lex:vorhaben
+  lemma: vorhaben
+  pos: verb
+  level: B1
+  translations:
+    it: avere in programma, intendere
+    en: to plan, to intend
+  example:
+    de: Was hast du am Wochenende vor?
+    it: Che programmi hai per il fine settimana?
+  verb:
+    aux: haben
+    separable: true
+    irregular: true
+    praeteritum: hatte vor
+    partizip: vorgehabt
+- id: lex:aehnlich
+  lemma: ähnlich
+  pos: adj
+  level: B1
+  translations:
+    it: simile
+    en: similar
+  example:
+    de: Die Wörter sind sehr ähnlich.
+    it: Le parole sono molto simili.
+- id: lex:beruehmt
+  lemma: berühmt
+  pos: adj
+  level: B1
+  translations:
+    it: famoso, celebre
+    en: famous
+  example:
+    de: Das ist ein berühmter Maler.
+    it: È un pittore famoso.
+- id: lex:ernst
+  lemma: ernst
+  pos: adj
+  level: B1
+  translations:
+    it: serio
+    en: serious
+  example:
+    de: Das ist eine ernste Sache.
+    it: È una cosa seria.
+- id: lex:erfolgreich
+  lemma: erfolgreich
+  pos: adj
+  level: B1
+  translations:
+    it: di successo, efficace
+    en: successful
+  example:
+    de: Sie ist eine erfolgreiche Ärztin.
+    it: È una dottoressa di successo.
+- id: lex:gefaehrlich
+  lemma: gefährlich
+  pos: adj
+  level: B1
+  translations:
+    it: pericoloso
+    en: dangerous
+  example:
+    de: Die Straße ist gefährlich.
+    it: La strada è pericolosa.
+- id: lex:hoeflich
+  lemma: höflich
+  pos: adj
+  level: B1
+  translations:
+    it: educato, cortese
+    en: polite
+  example:
+    de: Er ist immer sehr höflich.
+    it: È sempre molto educato.
+- id: lex:noetig
+  lemma: nötig
+  pos: adj
+  level: B1
+  translations:
+    it: necessario
+    en: necessary
+  example:
+    de: Ist das wirklich nötig?
+    it: È davvero necessario?
+- id: lex:puenktlich
+  lemma: pünktlich
+  pos: adj
+  level: B1
+  translations:
+    it: puntuale
+    en: punctual
+  example:
+    de: Der Zug ist pünktlich.
+    it: Il treno è puntuale.
+- id: lex:sicher
+  lemma: sicher
+  pos: adj
+  level: B1
+  translations:
+    it: sicuro
+    en: safe, sure
+  example:
+    de: Bist du sicher?
+    it: Sei sicuro?
+- id: lex:spannend
+  lemma: spannend
+  pos: adj
+  level: B1
+  translations:
+    it: avvincente, emozionante
+    en: exciting
+  example:
+    de: Das Buch ist sehr spannend.
+    it: Il libro è molto avvincente.
+- id: lex:verschieden
+  lemma: verschieden
+  pos: adj
+  level: B1
+  translations:
+    it: diverso, differente
+    en: different, various
+  example:
+    de: Wir haben verschiedene Meinungen.
+    it: Abbiamo opinioni diverse.
+- id: lex:vernuenftig
+  lemma: vernünftig
+  pos: adj
+  level: B1
+  translations:
+    it: ragionevole, sensato
+    en: sensible, reasonable
+  example:
+    de: Das ist ein vernünftiger Vorschlag.
+    it: È una proposta ragionevole.
+- id: lex:sensibel
+  lemma: sensibel
+  pos: adj
+  level: B1
+  translations:
+    it: sensibile
+    en: sensitive
+  example:
+    de: Sie ist sehr sensibel.
+    it: È molto sensibile.
+  interference:
+    false_friend:
+      lang: en
+      word: sensible
+      note_it: Sensibel significa «sensibile» (emotivamente), non «ragionevole» (vernünftig).
+- id: lex:selbststaendig
+  lemma: selbstständig
+  pos: adj
+  level: B1
+  translations:
+    it: autonomo, indipendente
+    en: independent, self-employed
+  example:
+    de: Er arbeitet selbstständig.
+    it: Lavora come autonomo.
+- id: lex:wahr
+  lemma: wahr
+  pos: adj
+  level: B1
+  translations:
+    it: vero
+    en: 'true'
+  example:
+    de: Das ist nicht wahr.
+    it: Non è vero.
+- id: lex:zufrieden
+  lemma: zufrieden
+  pos: adj
+  level: B1
+  translations:
+    it: soddisfatto, contento
+    en: satisfied, content
+  example:
+    de: Ich bin mit dem Ergebnis zufrieden.
+    it: Sono soddisfatto del risultato.
+- id: lex:mutig
+  lemma: mutig
+  pos: adj
+  level: B1
+  translations:
+    it: coraggioso
+    en: brave
+  example:
+    de: Das war sehr mutig von dir.
+    it: È stato molto coraggioso da parte tua.
+- id: lex:gemuetlich
+  lemma: gemütlich
+  pos: adj
+  level: B1
+  translations:
+    it: accogliente, confortevole
+    en: cosy, comfortable
+  example:
+    de: Das Café ist sehr gemütlich.
+    it: Il bar è molto accogliente.
+- id: lex:ehrlich
+  lemma: ehrlich
+  pos: adj
+  level: B1
+  translations:
+    it: onesto, sincero
+    en: honest
+  example:
+    de: Sei bitte ehrlich zu mir.
+    it: Sii sincero con me, per favore.
+- id: lex:anstrengend
+  lemma: anstrengend
+  pos: adj
+  level: B1
+  translations:
+    it: faticoso, stancante
+    en: tiring, exhausting
+  example:
+    de: Die Arbeit ist sehr anstrengend.
+    it: Il lavoro è molto faticoso.
+- id: lex:aktuell
+  lemma: aktuell
+  pos: adj
+  level: B1
+  translations:
+    it: attuale, d'attualità
+    en: current, up-to-date
+  example:
+    de: Das ist die aktuelle Lage.
+    it: Questa è la situazione attuale.
+  interference:
+    false_friend:
+      lang: en
+      word: actual
+      note_it: Aktuell significa «attuale, del momento»; l'inglese «actual» corrisponde a tatsächlich.
+- id: lex:eventuell
+  lemma: eventuell
+  pos: adj
+  level: B1
+  translations:
+    it: eventuale, forse
+    en: possible, possibly
+  example:
+    de: Eventuell komme ich später.
+    it: Forse vengo più tardi.
+  interference:
+    false_friend:
+      lang: en
+      word: eventually
+      note_it: Eventuell significa «eventualmente, forse», non «alla fine» (che è schließlich, letztendlich).
+- id: lex:regelmaessig
+  lemma: regelmäßig
+  pos: adj
+  level: B1
+  translations:
+    it: regolare
+    en: regular
+  example:
+    de: Ich lerne regelmäßig Deutsch.
+    it: Studio tedesco regolarmente.
+- id: lex:kostenlos
+  lemma: kostenlos
+  pos: adj
+  level: B1
+  translations:
+    it: gratuito
+    en: free of charge
+  example:
+    de: Der Eintritt ist kostenlos.
+    it: L'ingresso è gratuito.
+- id: lex:bereit
+  lemma: bereit
+  pos: adj
+  level: B1
+  translations:
+    it: pronto, disposto
+    en: ready, willing
+  example:
+    de: Ich bin bereit.
+    it: Sono pronto.
+- id: lex:anders
+  lemma: anders
+  pos: adj
+  level: B1
+  translations:
+    it: diverso, altrimenti
+    en: different, otherwise
+  example:
+    de: Das ist ganz anders.
+    it: È tutto diverso.
+- id: lex:zustaendig
+  lemma: zuständig
+  pos: adj
+  level: B1
+  translations:
+    it: competente, responsabile
+    en: responsible, in charge
+  example:
+    de: Dafür bin ich nicht zuständig.
+    it: Non è di mia competenza.
+- id: lex:verantwortlich
+  lemma: verantwortlich
+  pos: adj
+  level: B1
+  translations:
+    it: responsabile
+    en: responsible
+  example:
+    de: Wer ist dafür verantwortlich?
+    it: Chi ne è responsabile?
+- id: lex:persoenlich
+  lemma: persönlich
+  pos: adj
+  level: B1
+  translations:
+    it: personale, di persona
+    en: personal, personally
+  example:
+    de: Ich möchte persönlich mit Ihnen sprechen.
+    it: Vorrei parlare con Lei di persona.
+- id: lex:trotzdem
+  lemma: trotzdem
+  pos: adv
+  level: B1
+  translations:
+    it: ciononostante, comunque
+    en: nevertheless, still
+  example:
+    de: Es regnet, trotzdem gehen wir spazieren.
+    it: Piove, eppure facciamo una passeggiata.
+- id: lex:ploetzlich
+  lemma: plötzlich
+  pos: adv
+  level: B1
+  translations:
+    it: improvvisamente, all'improvviso
+    en: suddenly
+  example:
+    de: Plötzlich wurde es dunkel.
+    it: All'improvviso si è fatto buio.
+- id: lex:jedoch
+  lemma: jedoch
+  pos: adv
+  level: B1
+  translations:
+    it: tuttavia, però
+    en: however
+  example:
+    de: Er ist nett, jedoch etwas schüchtern.
+    it: È gentile, però un po' timido.
+- id: lex:zwar
+  lemma: zwar
+  pos: adv
+  level: B1
+  translations:
+    it: certo, è vero (... ma)
+    en: admittedly, though
+  example:
+    de: Es ist zwar teuer, aber gut.
+    it: È vero che è caro, ma è buono.
+- id: lex:uebrigens
+  lemma: übrigens
+  pos: adv
+  level: B1
+  translations:
+    it: a proposito, tra l'altro
+    en: by the way
+  example:
+    de: Übrigens, morgen ist Feiertag.
+    it: A proposito, domani è festa.
+- id: lex:bisher
+  lemma: bisher
+  pos: adv
+  level: B1
+  translations:
+    it: finora
+    en: so far, until now
+  example:
+    de: Bisher habe ich keine Antwort bekommen.
+    it: Finora non ho ricevuto risposta.
+- id: lex:naemlich
+  lemma: nämlich
+  pos: adv
+  level: B1
+  translations:
+    it: infatti, cioè
+    en: namely, you see
+  example:
+    de: Ich kann nicht kommen, ich bin nämlich krank.
+    it: Non posso venire, sono malato, infatti.
+- id: lex:schliesslich
+  lemma: schließlich
+  pos: adv
+  level: B1
+  translations:
+    it: alla fine, in fin dei conti
+    en: finally, after all
+  example:
+    de: Schließlich haben wir uns entschieden.
+    it: Alla fine ci siamo decisi.
+- id: lex:tatsaechlich
+  lemma: tatsächlich
+  pos: adv
+  level: B1
+  translations:
+    it: effettivamente, davvero
+    en: indeed, actually
+  example:
+    de: Es ist tatsächlich passiert.
+    it: È successo davvero.
+- id: lex:wahrscheinlich
+  lemma: wahrscheinlich
+  pos: adv
+  level: B1
+  translations:
+    it: probabilmente
+    en: probably
+  example:
+    de: Er kommt wahrscheinlich später.
+    it: Probabilmente viene più tardi.
+- id: lex:mindestens
+  lemma: mindestens
+  pos: adv
+  level: B1
+  translations:
+    it: almeno, come minimo
+    en: at least
+  example:
+    de: Das dauert mindestens eine Stunde.
+    it: Dura almeno un'ora.
+- id: lex:ueberhaupt
+  lemma: überhaupt
+  pos: adv
+  level: B1
+  translations:
+    it: affatto, in generale
+    en: at all, in general
+  example:
+    de: Ich habe überhaupt keine Zeit.
+    it: Non ho proprio nessun tempo.
+- id: lex:kaum
+  lemma: kaum
+  pos: adv
+  level: B1
+  translations:
+    it: appena, a stento
+    en: hardly, barely
+  example:
+    de: Ich habe kaum geschlafen.
+    it: Ho dormito appena.
+- id: lex:fast
+  lemma: fast
+  pos: adv
+  level: B1
+  translations:
+    it: quasi
+    en: almost, nearly
+  example:
+    de: Ich bin fast fertig.
+    it: Ho quasi finito.
+  interference:
+    false_friend:
+      lang: en
+      word: fast
+      note_it: Fast significa «quasi», non «veloce» (che è schnell).
+- id: lex:sofort
+  lemma: sofort
+  pos: adv
+  level: B1
+  translations:
+    it: subito, immediatamente
+    en: immediately
+  example:
+    de: Komm bitte sofort her.
+    it: Vieni qui subito, per favore.
+- id: lex:normalerweise
+  lemma: normalerweise
+  pos: adv
+  level: B1
+  translations:
+    it: normalmente, di solito
+    en: normally, usually
+  example:
+    de: Normalerweise stehe ich um sechs auf.
+    it: Di solito mi alzo alle sei.
+- id: lex:hoffentlich
+  lemma: hoffentlich
+  pos: adv
+  level: B1
+  translations:
+    it: speriamo, si spera
+    en: hopefully
+  example:
+    de: Hoffentlich regnet es nicht.
+    it: Speriamo che non piova.
+- id: lex:irgendwo
+  lemma: irgendwo
+  pos: adv
+  level: B1
+  translations:
+    it: da qualche parte
+    en: somewhere, anywhere
+  example:
+    de: Ich habe meine Brille irgendwo verloren.
+    it: Ho perso i miei occhiali da qualche parte.
+- id: lex:irgendwann
+  lemma: irgendwann
+  pos: adv
+  level: B1
+  translations:
+    it: prima o poi, un giorno
+    en: sometime, at some point
+  example:
+    de: Irgendwann möchte ich nach Japan reisen.
+    it: Prima o poi vorrei viaggiare in Giappone.
+- id: lex:deswegen
+  lemma: deswegen
+  pos: adv
+  level: B1
+  translations:
+    it: per questo motivo
+    en: for that reason
+  example:
+    de: Ich bin müde, deswegen gehe ich ins Bett.
+    it: Sono stanco, per questo vado a letto.
+- id: lex:trotz
+  lemma: trotz
+  pos: prep
+  level: B1
+  translations:
+    it: nonostante, malgrado
+    en: despite, in spite of
+  example:
+    de: Trotz des Regens gehen wir spazieren.
+    it: Nonostante la pioggia andiamo a passeggio.
+  prep_case: gen
+- id: lex:innerhalb
+  lemma: innerhalb
+  pos: prep
+  level: B1
+  translations:
+    it: entro, all'interno di
+    en: within, inside
+  example:
+    de: Innerhalb einer Woche bekommen Sie eine Antwort.
+    it: Entro una settimana riceverà una risposta.
+  prep_case: gen
+- id: lex:ausserhalb
+  lemma: außerhalb
+  pos: prep
+  level: B1
+  translations:
+    it: fuori da, al di fuori di
+    en: outside of
+  example:
+    de: Er wohnt außerhalb der Stadt.
+    it: Abita fuori città.
+  prep_case: gen
+- id: lex:statt
+  lemma: statt
+  pos: prep
+  level: B1
+  translations:
+    it: invece di, al posto di
+    en: instead of
+  example:
+    de: Statt des Autos nehme ich das Rad.
+    it: Invece della macchina prendo la bicicletta.
+  prep_case: gen
+- id: lex:obwohl
+  lemma: obwohl
+  pos: conj
+  level: B1
+  translations:
+    it: sebbene, benché
+    en: although
+  example:
+    de: Obwohl es regnet, gehen wir spazieren.
+    it: Anche se piove, andiamo a passeggio.
+- id: lex:damit
+  lemma: damit
+  pos: conj
+  level: B1
+  translations:
+    it: affinché, perché (finale)
+    en: so that
+  example:
+    de: Ich spare, damit ich reisen kann.
+    it: Risparmio per poter viaggiare.
+- id: lex:nachdem
+  lemma: nachdem
+  pos: conj
+  level: B1
+  translations:
+    it: dopo che
+    en: after
+  example:
+    de: Nachdem ich gegessen hatte, ging ich spazieren.
+    it: Dopo aver mangiato sono andato a passeggio.
+- id: lex:falls
+  lemma: falls
+  pos: conj
+  level: B1
+  translations:
+    it: nel caso in cui, qualora
+    en: in case, if
+  example:
+    de: Falls du Zeit hast, ruf mich an.
+    it: Se hai tempo, chiamami.
+- id: lex:sobald
+  lemma: sobald
+  pos: conj
+  level: B1
+  translations:
+    it: appena, non appena
+    en: as soon as
+  example:
+    de: Ich rufe dich an, sobald ich ankomme.
+    it: Ti chiamo non appena arrivo.
+- id: lex:solange
+  lemma: solange
+  pos: conj
+  level: B1
+  translations:
+    it: finché, fintanto che
+    en: as long as
+  example:
+    de: Solange es regnet, bleiben wir hier.
+    it: Finché piove, restiamo qui.
+- id: lex:seitdem
+  lemma: seitdem
+  pos: conj
+  level: B1
+  translations:
+    it: da quando
+    en: since (conj)
+  example:
+    de: Seitdem er in Berlin wohnt, ist er glücklicher.
+    it: Da quando abita a Berlino è più felice.
+- id: lex:indem
+  lemma: indem
+  pos: conj
+  level: B1
+  translations:
+    it: facendo, mediante
+    en: by (doing)
+  example:
+    de: Man lernt Deutsch, indem man viel liest.
+    it: Si impara il tedesco leggendo molto.
+- id: lex:entweder-oder
+  lemma: entweder … oder
+  pos: conj
+  level: B1
+  translations:
+    it: o ... o, oppure
+    en: either … or
+  example:
+    de: Wir fahren entweder mit dem Zug oder mit dem Auto.
+    it: Andiamo o in treno o in macchina.
+- id: lex:selbst
+  lemma: selbst
+  pos: pron
+  level: B1
+  translations:
+    it: stesso, da solo
+    en: oneself, myself, himself
+  example:
+    de: Ich mache das selbst.
+    it: Lo faccio io stesso.
+- id: lex:einige
+  lemma: einige
+  pos: pron
+  level: B1
+  translations:
+    it: alcuni, alcune
+    en: some, several
+  example:
+    de: Einige Leute warten schon.
+    it: Alcune persone stanno già aspettando.
+- id: lex:manche
+  lemma: manche
+  pos: pron
+  level: B1
+  translations:
+    it: alcuni, certi
+    en: some, certain
+  example:
+    de: Manche Menschen mögen keinen Käse.
+    it: Certe persone non amano il formaggio.
+- id: lex:mehrere
+  lemma: mehrere
+  pos: pron
+  level: B1
+  translations:
+    it: diversi, parecchi
+    en: several
+  example:
+    de: Ich habe mehrere Fragen.
+    it: Ho diverse domande.
+- id: lex:beide
+  lemma: beide
+  pos: pron
+  level: B1
+  translations:
+    it: entrambi, tutti e due
+    en: both
+  example:
+    de: Wir mögen beide Musik.
+    it: Ad entrambi piace la musica.
+- id: lex:einander
+  lemma: einander
+  pos: pron
+  level: B1
+  translations:
+    it: l'un l'altro, a vicenda
+    en: each other
+  example:
+    de: Sie helfen einander.
+    it: Si aiutano a vicenda.
+- id: lex:irgendein
+  lemma: irgendein
+  pos: det
+  level: B1
+  translations:
+    it: qualche, un qualsiasi
+    en: any, some
+  example:
+    de: Hast du irgendeine Idee?
+    it: Hai qualche idea?
+- id: lex:zum-beispiel
+  lemma: zum Beispiel
+  pos: phrase
+  level: B1
+  translations:
+    it: per esempio
+    en: for example
+  example:
+    de: Ich mag Obst, zum Beispiel Äpfel.
+    it: Mi piace la frutta, per esempio le mele.
+- id: lex:ein-bisschen
+  lemma: ein bisschen
+  pos: phrase
+  level: B1
+  translations:
+    it: un po'
+    en: a little, a bit
+  example:
+    de: Ich spreche ein bisschen Deutsch.
+    it: Parlo un po' di tedesco.
+- id: lex:auf-jeden-fall
+  lemma: auf jeden Fall
+  pos: phrase
+  level: B1
+  translations:
+    it: in ogni caso, assolutamente
+    en: definitely, in any case
+  example:
+    de: Ich komme auf jeden Fall.
+    it: Vengo senz'altro.
+- id: lex:zum-glueck
+  lemma: zum Glück
+  pos: phrase
+  level: B1
+  translations:
+    it: per fortuna
+    en: luckily, fortunately
+  example:
+    de: Zum Glück ist nichts passiert.
+    it: Per fortuna non è successo niente.
+- id: lex:herzlichen-glueckwunsch
+  lemma: Herzlichen Glückwunsch
+  pos: phrase
+  level: B1
+  translations:
+    it: auguri, congratulazioni
+    en: congratulations
+  example:
+    de: Herzlichen Glückwunsch zum Geburtstag!
+    it: Tanti auguri di buon compleanno!
+- id: lex:gute-besserung
+  lemma: Gute Besserung
+  pos: phrase
+  level: B1
+  translations:
+    it: guarigione, buona guarigione
+    en: get well soon
+  example:
+    de: Gute Besserung und bis bald!
+    it: Buona guarigione e a presto!
