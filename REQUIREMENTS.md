@@ -1,7 +1,7 @@
 # LLMLL — Requisiti
 
 > Documento vivo. Raccoglie le decisioni prese finora e le domande ancora aperte.
-> Stato: bozza v0.3 (ottobre 2026).
+> Stato: bozza v0.4 (ottobre 2026).
 
 ## 1. Visione
 
@@ -123,7 +123,9 @@ stato "ripassato" usandolo.
   4. inversione (V2)
   5. verbo finale nella subordinata
 - **Fonti di riferimento per la v1:** Profile Deutsch, liste lessicali Goethe A1–B1
-  (circa 650 / 1300 / 2400 voci). ⚠️ Sono protette da copyright: vanno bene per uso
+  (circa 650 / 1300 / 2400 voci). La wordlist assegna a ogni lemma un livello CEFR:
+  è il riferimento per decidere cosa è "presunto noto", cosa è candidato e cosa è opt-in.
+  Per B2+ serve un'altra fonte (es. ranghi di frequenza mappati sui livelli). ⚠️ Sono protette da copyright: vanno bene per uso
   personale, ma un prodotto commerciale richiede un curriculum proprio (§13).
 - Il curriculum si costruisce **offline** (con l'aiuto dell'LLM, con revisione) e
   l'LLM **non** lo inventa durante le sessioni.
@@ -167,12 +169,10 @@ Ogni esercizio dichiara quali item mette alla prova e con quale peso.
 È la funzione centrale, non un extra.
 
 - **Sorgenti:**
-  - URL o testo incollato (v1);
-  - in seguito, feed RSS su temi scelti.
+  - l'app riceve **un link o un testo incollato**. Se l'estrazione dal link fallisce
+    (paywall, pagina dinamica), si chiede di incollare il testo.
   - **Temi iniziali:** cronaca contemporanea, tecnologia, scienza (da rifinire).
-  - Candidati da verificare: tagesschau.de, Deutsche Welle, nachrichtenleicht.de
-    (notizie in tedesco semplificato, utile anche come riferimento di stile), heise.de
-    (tecnologia), Spektrum.de (scienza), Wikipedia DE.
+  - Fonti specifiche: non rilevanti per ora. In futuro eventuali feed RSS.
   - Da preferire articoli tedeschi originali (tedesco autentico); in alternativa,
     traduzione di articoli italiani o inglesi.
 - **Semplificazione al livello**, con **copertura lessicale misurata**: dopo la
@@ -180,17 +180,38 @@ Ogni esercizio dichiara quali item mette alla prova e con quale peso.
   Se l'LLM non rispetta la soglia, si rigenera. Le parole nuove sono poche e scelte.
 - **Glossario al tocco:** traduzione nel contesto, lemma, genere, plurale. Toccare una
   parola è un segnale: per quell'item vale come ripasso fallito o assistito.
-- **Parole nuove nel corpus:**
-  - **automaticamente** se il lemma supera una soglia di frequenza d'uso generale
-    (es. tra i primi ~5000 lemmi; fonte candidata: libreria `wordfreq`), con un tetto
-    per articolo;
-  - **su richiesta** (un tocco) per tutte le altre.
+- **Parole incontrate leggendo**, classificate rispetto al **livello CEFR corrente**
+  (secondo la wordlist di riferimento, §5):
+  - già nel corpus o "presunta nota" (livello inferiore) → **ripasso implicito**, non è una parola nuova;
+  - del livello corrente, non ancora nel corpus → **candidata automatica** (§7.4);
+  - di livello superiore o assente dalla wordlist → **opt-in** (un tocco).
   - **Esclusi:** nomi propri; **composti trasparenti** (`Klimaschutzgesetz`) se le
     parti sono già note: si scompongono e si ripassano le parti, non il composto.
 - **Dopo la lettura:** 1–2 domande di comprensione e/o un breve riassunto o commento da
   scrivere. Così la lettura alimenta gli esercizi di produzione.
 - **Testi generati da zero**, con le parole da ripassare, come alternativa quando non c'è
   un articolo.
+
+### 7.4 Introduzione di parole nuove
+Le parole nuove entrano **attraverso gli esercizi**, non come liste da studiare: una parola
+è "introdotta" quando compare per la prima volta in un esercizio (frase guidata,
+traduzione, testo generato), con glossa.
+
+- **Stati di una parola:** `candidata` → `introdotta` → in ripasso (FSRS).
+  Essere candidata non costa nulla; il costo, in ripassi futuri, inizia con l'introduzione.
+- **Coda di candidate, in ordine di priorità:**
+  1. parole scelte esplicitamente (opt-in);
+  2. parole del livello corrente incontrate negli articoli;
+  3. parole della wordlist del livello corrente, in ordine di curriculum e frequenza.
+
+  Gli esercizi pescano dalla coda: se gli articoli non danno abbastanza novità, si
+  completa dalla wordlist.
+- **Limite settimanale configurabile** di parole introdotte (finestra mobile di 7 giorni,
+  **senza accumulo**: saltare una settimana non raddoppia la successiva). Valore iniziale
+  indicativo: ~20/settimana.
+- Il limite si **riduce automaticamente se c'è arretrato** di ripassi.
+- **Limite separato e più basso per i punti grammaticali** nuovi (indicativamente 1–2 a settimana).
+- Le candidate in eccesso restano in coda; nessun tetto per articolo, perché lo regola già il limite settimanale.
 
 ## 8. Correzione
 
@@ -243,8 +264,7 @@ Con 1–2 ore a settimana in modo irregolare, il problema principale è **l'arre
 - **Tetto ai ripassi per sessione**, con priorità per:
   - recuperabilità bassa;
   - importanza dell'item (frequenza, prerequisito di altri).
-- **Introduzione di item nuovi limitata dal budget di tempo.** Indicativamente 5–8 per
-  sessione, meno se c'è arretrato.
+- **Introduzione di item nuovi** regolata dal limite settimanale (§7.4).
 - **Due tipi di sessione**, scelti dall'utente:
   - **Ripasso (~10 minuti):** ripassi in scadenza fino a un tetto (~15), poi 1–2 frasi
     da produrre, poi 2–3 item nuovi se avanza tempo.
@@ -307,6 +327,5 @@ Costo dell'LLM trascurabile per un singolo utente; da rivalutare per il prodotto
 
 ## 15. Domande aperte
 
-- Fonti di articoli definitive: da decidere quando si aggiungono i feed automatici
-  (in v1 si incolla URL o testo).
-- Soglia esatta di frequenza e tetto per articolo per l'aggiunta automatica di parole.
+- Fonte della wordlist per i livelli B2–C2.
+- Valori iniziali dei limiti settimanali (da tarare con l'uso).
