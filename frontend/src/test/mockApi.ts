@@ -44,5 +44,6 @@ export const LEARNER = {
     desired_retention: 0.85,
     review_cap: 15,
     new_per_session: 5,
+    production_slots: 2,
   },
 };

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import {
+  ApiError,
   createSession,
+  prepareExercise,
   submitAnswer,
   type AnswerOut,
   type SessionCard,
@@ -9,6 +11,9 @@ import ProductionCard from "./cards/ProductionCard";
 import RecognitionCard from "./cards/RecognitionCard";
 import IntroCard from "./cards/IntroCard";
 import Feedback from "./cards/Feedback";
+import GrammarIntroCard from "./cards/GrammarIntroCard";
+import ProductionExerciseCard from "./cards/ProductionExerciseCard";
+import ProductionFeedback from "./cards/ProductionFeedback";
 
 interface Stats {
   reviewed: number;
@@ -22,12 +27,24 @@ type State =
   | { kind: "running"; sessionId: string; cards: SessionCard[]; index: number }
   | { kind: "summary"; stats: Stats; total: number };
 
+/** Production cards that could not be prepared and have no fallback are skipped. */
+function isFailed(card: SessionCard) {
+  return card.status === "failed";
+}
+
+function gradingMessage(err: unknown): string {
+  if (err instanceof ApiError && (err.status === 503 || err.status === 502))
+    return "Grading is unavailable right now. Your answer is kept: try again.";
+  return err instanceof Error ? err.message : String(err);
+}
+
 const ZERO: Stats = { reviewed: 0, added: 0, errors: 0 };
 
 export default function SessionView() {
   const [state, setState] = useState<State>({ kind: "idle" });
   const [stats, setStats] = useState<Stats>(ZERO);
   const [result, setResult] = useState<AnswerOut | null>(null);
+  const [submitted, setSubmitted] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const startedAt = useRef(0);
@@ -52,10 +69,41 @@ export default function SessionView() {
       });
       if (s.cards.length === 0)
         setState({ kind: "summary", stats: ZERO, total: 0 });
+      for (const c of s.cards)
+        if (c.type === "production" && c.status === "pending")
+          void prefetch(s.session_id, c);
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
       setState({ kind: "idle" });
     }
+  }
+
+  /** Prepares one production card; on failure swaps in its fallback flashcards. */
+  async function prefetch(sessionId: string, card: SessionCard) {
+    let replacement: SessionCard[];
+    try {
+      const { fallback_cards = [], ...prepared } = await prepareExercise(
+        card.exercise_id,
+      );
+      replacement =
+        prepared.status === "failed"
+          ? fallback_cards.length > 0
+            ? fallback_cards
+            : [prepared]
+          : [prepared];
+    } catch {
+      replacement = [{ ...card, status: "failed" }];
+    }
+    setState((prev) =>
+      prev.kind === "running" && prev.sessionId === sessionId
+        ? {
+            ...prev,
+            cards: prev.cards.flatMap((c) =>
+              c.exercise_id === card.exercise_id ? replacement : [c],
+            ),
+          }
+        : prev,
+    );
   }
 
   function advance(nextStats: Stats) {
@@ -80,6 +128,7 @@ export default function SessionView() {
     if (state.kind !== "running" || busy) return;
     setBusy(true);
     setError(null);
+    setSubmitted(payload.text ?? "");
     try {
       const out = await submitAnswer(state.sessionId, {
         exercise_id: card.exercise_id,
@@ -87,19 +136,24 @@ export default function SessionView() {
         used_hint: usedHint,
         duration_ms: Math.round(performance.now() - startedAt.current),
       });
-      const next: Stats =
-        card.type === "flashcard_intro"
-          ? { ...stats, added: stats.added + 1 }
-          : {
-              ...stats,
-              reviewed: stats.reviewed + 1,
-              errors: stats.errors + (out.outcome === "error" ? 1 : 0),
-            };
+      const isIntro =
+        card.type === "flashcard_intro" || card.type === "grammar_intro";
+      const failed =
+        out.kind === "production"
+          ? out.outcome === "major_errors" || out.outcome === "off_task"
+          : out.outcome === "error";
+      const next: Stats = isIntro
+        ? { ...stats, added: stats.added + 1 }
+        : {
+            ...stats,
+            reviewed: stats.reviewed + 1,
+            errors: stats.errors + (failed ? 1 : 0),
+          };
       setStats(next);
-      if (card.type === "flashcard_intro") advance(next);
+      if (isIntro) advance(next);
       else setResult(out);
     } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      setError(gradingMessage(err));
     } finally {
       setBusy(false);
     }
@@ -155,6 +209,7 @@ export default function SessionView() {
   const card = state.cards[state.index];
   if (!card) return null;
   const last = state.index + 1 >= state.cards.length;
+  const flashResult = result?.kind === "flashcard" ? result : null;
 
   return (
     <section>
@@ -173,7 +228,7 @@ export default function SessionView() {
           <RecognitionCard
             card={card}
             busy={busy}
-            result={result}
+            result={flashResult}
             onChoose={(choice) => answer(card, { choice }, false)}
           />
         )}
@@ -181,14 +236,51 @@ export default function SessionView() {
           <ProductionCard
             card={card}
             busy={busy}
-            result={result}
+            result={flashResult}
             onSubmit={(text, usedHint) => answer(card, { text }, usedHint)}
           />
         )}
-        {error && <p role="alert">{error}</p>}
+        {card.type === "grammar_intro" && (
+          <GrammarIntroCard
+            card={card}
+            busy={busy}
+            onDone={() => answer(card, {}, false)}
+          />
+        )}
+        {card.type === "production" && card.status === "pending" && (
+          <p role="status">
+            <span className="spinner" aria-hidden="true" />
+            Preparing your exercise…
+          </p>
+        )}
+        {card.type === "production" && isFailed(card) && (
+          <>
+            <p role="alert">This exercise could not be prepared.</p>
+            <button
+              type="button"
+              className="btn primary"
+              onClick={() => advance(stats)}
+            >
+              {last ? "Finish" : "Skip"}
+            </button>
+          </>
+        )}
+        {card.type === "production" && card.status === "ready" && !result && (
+          <ProductionExerciseCard
+            card={card}
+            busy={busy}
+            error={error}
+            onSubmit={(text) => answer(card, { text }, false)}
+          />
+        )}
+        {error && card.type !== "production" && <p role="alert">{error}</p>}
         {result && (
           <>
-            <Feedback result={result} />
+            {result.kind === "production" ? (
+              <ProductionFeedback answer={submitted} result={result} />
+            ) : (
+              <Feedback result={result} />
+            )}
             <button
               type="button"
               className="btn primary"

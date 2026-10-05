@@ -9,7 +9,7 @@ export default function IntroCard({
   busy: boolean;
   onDone: () => void;
 }) {
-  const p = card.prompt;
+  const p = card.prompt ?? {};
   return (
     <>
       <p className="tag">New word</p>

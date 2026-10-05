@@ -1,8 +1,60 @@
-import { useCallback } from "react";
+import { useCallback, useState, type FormEvent } from "react";
 import { Link, useParams } from "react-router";
-import { getGrammar } from "../api/client";
+import { explainGrammar, getGrammar, type Explanation } from "../api/client";
 import { useApi } from "../useApi";
+import { ExplanationExamples } from "./cards/ExplanationPanel";
 import Markdown from "./Markdown";
+
+function AskBox({ id }: { id: string }) {
+  const [question, setQuestion] = useState("");
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [answer, setAnswer] = useState<Explanation | null>(null);
+
+  async function ask(e: FormEvent) {
+    e.preventDefault();
+    const q = question.trim();
+    if (!q || busy) return;
+    setBusy(true);
+    setError(null);
+    try {
+      setAnswer(await explainGrammar(id, q));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <form className="form" onSubmit={ask}>
+      <label className="field">
+        <span>Fai una domanda</span>
+        <textarea
+          className="text-input multiline"
+          rows={3}
+          maxLength={1000}
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+        />
+      </label>
+      <button
+        type="submit"
+        className="btn primary"
+        disabled={busy || !question.trim()}
+      >
+        {busy ? "Asking…" : "Ask"}
+      </button>
+      {error && <p role="alert">{error}</p>}
+      {answer && (
+        <div className="explanation">
+          <Markdown>{answer.markdown}</Markdown>
+          <ExplanationExamples examples={answer.examples} />
+        </div>
+      )}
+    </form>
+  );
+}
 
 export default function GrammarDetailView() {
   const { id = "" } = useParams();
@@ -24,20 +76,9 @@ export default function GrammarDetailView() {
           <p className="muted">
             {state.data.title_en} · {state.data.level}
           </p>
+          {/* The reference text already contains its examples section. */}
           <Markdown>{state.data.reference_it}</Markdown>
-          {state.data.examples.length > 0 && (
-            <>
-              <h2>Examples</h2>
-              <ul className="list">
-                {state.data.examples.map((ex, i) => (
-                  <li key={i} className="row-static example">
-                    <span lang="de">{ex.de}</span>
-                    <em>{ex.it}</em>
-                  </li>
-                ))}
-              </ul>
-            </>
-          )}
+          <AskBox id={id} />
         </>
       )}
     </section>

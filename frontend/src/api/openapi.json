@@ -203,6 +203,48 @@
         }
       }
     },
+    "/api/exercises/{exercise_id}/prepare": {
+      "post": {
+        "tags": [
+          "sessions"
+        ],
+        "summary": "Prepare Exercise",
+        "operationId": "prepareExercise",
+        "parameters": [
+          {
+            "name": "exercise_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Exercise Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreparedCard"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sessions/{session_id}/answers": {
       "post": {
         "tags": [
@@ -237,7 +279,15 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/AnswerOut"
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/AnswerOut"
+                    },
+                    {
+                      "$ref": "#/components/schemas/ProductionAnswerOut"
+                    }
+                  ],
+                  "title": "Response Submitanswer"
                 }
               }
             }
@@ -495,10 +545,181 @@
           }
         }
       }
+    },
+    "/api/evaluations/{evaluation_id}/explain": {
+      "post": {
+        "tags": [
+          "explanations"
+        ],
+        "summary": "Explain Evaluation",
+        "operationId": "explainEvaluation",
+        "parameters": [
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Evaluation Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EvaluationExplainIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExplanationOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/grammar/{grammar_id}/explain": {
+      "post": {
+        "tags": [
+          "explanations"
+        ],
+        "summary": "Explain Grammar",
+        "operationId": "explainGrammar",
+        "parameters": [
+          {
+            "name": "grammar_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Grammar Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GrammarExplainIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExplanationOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
+      "AnswerError": {
+        "properties": {
+          "start": {
+            "type": "integer",
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End"
+          },
+          "original": {
+            "type": "string",
+            "title": "Original"
+          },
+          "correction": {
+            "type": "string",
+            "title": "Correction"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id"
+          },
+          "diagnostic_tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Diagnostic Tags"
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "minor",
+              "major"
+            ],
+            "title": "Severity"
+          },
+          "confidence": {
+            "type": "number",
+            "title": "Confidence"
+          },
+          "explanation": {
+            "type": "string",
+            "title": "Explanation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "start",
+          "end",
+          "original",
+          "correction",
+          "item_id",
+          "diagnostic_tags",
+          "severity",
+          "confidence",
+          "explanation"
+        ],
+        "title": "AnswerError"
+      },
       "AnswerIn": {
         "properties": {
           "exercise_id": {
@@ -534,6 +755,12 @@
       },
       "AnswerOut": {
         "properties": {
+          "kind": {
+            "type": "string",
+            "const": "flashcard",
+            "title": "Kind",
+            "default": "flashcard"
+          },
           "outcome": {
             "type": "string",
             "enum": [
@@ -544,7 +771,14 @@
             "title": "Outcome"
           },
           "expected": {
-            "$ref": "#/components/schemas/ExpectedAnswer"
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExpectedAnswer"
+              },
+              {
+                "type": "null"
+              }
+            ]
           },
           "diagnostic_tags": {
             "items": {
@@ -759,11 +993,71 @@
               }
             ],
             "title": "Interference Note"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          },
+          "reference_it": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reference It"
+          },
+          "examples": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/components/schemas/CardExample"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Examples"
           }
         },
         "type": "object",
         "title": "CardPrompt",
         "description": "Prompt shown to the learner. Fields depend on the card type; unused ones are null."
+      },
+      "EvaluationExplainIn": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id"
+        ],
+        "title": "EvaluationExplainIn"
       },
       "ExpectedAnswer": {
         "properties": {
@@ -810,6 +1104,17 @@
                 "type": "null"
               }
             ]
+          },
+          "correct_index": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Correct Index"
           }
         },
         "type": "object",
@@ -819,6 +1124,73 @@
           "translation_it"
         ],
         "title": "ExpectedAnswer"
+      },
+      "ExplanationExampleOut": {
+        "properties": {
+          "de": {
+            "type": "string",
+            "title": "De"
+          },
+          "translation": {
+            "type": "string",
+            "title": "Translation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "de",
+          "translation"
+        ],
+        "title": "ExplanationExampleOut"
+      },
+      "ExplanationOut": {
+        "properties": {
+          "markdown": {
+            "type": "string",
+            "title": "Markdown"
+          },
+          "examples": {
+            "items": {
+              "$ref": "#/components/schemas/ExplanationExampleOut"
+            },
+            "type": "array",
+            "title": "Examples"
+          },
+          "cached": {
+            "type": "boolean",
+            "title": "Cached",
+            "default": false
+          }
+        },
+        "type": "object",
+        "required": [
+          "markdown",
+          "examples"
+        ],
+        "title": "ExplanationOut"
+      },
+      "GlossaryEntry": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "de": {
+            "type": "string",
+            "title": "De"
+          },
+          "translation": {
+            "type": "string",
+            "title": "Translation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "de",
+          "translation"
+        ],
+        "title": "GlossaryEntry"
       },
       "GrammarDetail": {
         "properties": {
@@ -898,6 +1270,21 @@
         ],
         "title": "GrammarExample"
       },
+      "GrammarExplainIn": {
+        "properties": {
+          "question": {
+            "type": "string",
+            "maxLength": 1000,
+            "minLength": 1,
+            "title": "Question"
+          }
+        },
+        "type": "object",
+        "required": [
+          "question"
+        ],
+        "title": "GrammarExplainIn"
+      },
       "GrammarSummary": {
         "properties": {
           "id": {
@@ -947,13 +1334,22 @@
           "database": {
             "type": "string",
             "title": "Database"
+          },
+          "llm": {
+            "type": "string",
+            "enum": [
+              "fake",
+              "anthropic"
+            ],
+            "title": "Llm"
           }
         },
         "type": "object",
         "required": [
           "status",
           "version",
-          "database"
+          "database",
+          "llm"
         ],
         "title": "HealthResponse"
       },
@@ -1111,6 +1507,39 @@
           "items"
         ],
         "title": "ItemList"
+      },
+      "ItemResult": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "assisted",
+              "error"
+            ],
+            "title": "Outcome"
+          },
+          "needs_remediation": {
+            "type": "boolean",
+            "title": "Needs Remediation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "label",
+          "outcome",
+          "needs_remediation"
+        ],
+        "title": "ItemResult"
       },
       "ItemSummary": {
         "properties": {
@@ -1384,7 +1813,7 @@
         ],
         "title": "MemoryOut"
       },
-      "SessionCard": {
+      "PreparedCard": {
         "properties": {
           "exercise_id": {
             "type": "string",
@@ -1395,12 +1824,21 @@
             "enum": [
               "flashcard_intro",
               "flashcard_recognition",
-              "flashcard_production"
+              "flashcard_production",
+              "grammar_intro",
+              "production"
             ],
             "title": "Type"
           },
           "item_id": {
-            "type": "string",
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
             "title": "Item Id"
           },
           "prompt": {
@@ -1416,16 +1854,233 @@
               }
             ],
             "title": "Hint"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "ready",
+              "answered",
+              "failed"
+            ],
+            "title": "Status",
+            "default": "ready"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "translation",
+                  "guided",
+                  "transform"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "glossary": {
+            "items": {
+              "$ref": "#/components/schemas/GlossaryEntry"
+            },
+            "type": "array",
+            "title": "Glossary"
+          },
+          "item_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Item Ids"
+          },
+          "fallback_cards": {
+            "items": {
+              "$ref": "#/components/schemas/SessionCard"
+            },
+            "type": "array",
+            "title": "Fallback Cards"
           }
         },
         "type": "object",
         "required": [
           "exercise_id",
-          "type",
-          "item_id",
-          "prompt"
+          "type"
         ],
-        "title": "SessionCard"
+        "title": "PreparedCard",
+        "description": "Result of `prepare`; `fallback_cards` are flashcard intros when generation failed."
+      },
+      "ProductionAnswerOut": {
+        "properties": {
+          "kind": {
+            "type": "string",
+            "const": "production",
+            "title": "Kind",
+            "default": "production"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "minor_errors",
+              "major_errors",
+              "off_task"
+            ],
+            "title": "Outcome"
+          },
+          "corrected_sentence": {
+            "type": "string",
+            "title": "Corrected Sentence"
+          },
+          "errors": {
+            "items": {
+              "$ref": "#/components/schemas/AnswerError"
+            },
+            "type": "array",
+            "title": "Errors"
+          },
+          "feedback": {
+            "type": "string",
+            "title": "Feedback"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ItemResult"
+            },
+            "type": "array",
+            "title": "Items"
+          },
+          "evaluation_id": {
+            "type": "integer",
+            "title": "Evaluation Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "outcome",
+          "corrected_sentence",
+          "errors",
+          "feedback",
+          "items",
+          "evaluation_id"
+        ],
+        "title": "ProductionAnswerOut"
+      },
+      "SessionCard": {
+        "properties": {
+          "exercise_id": {
+            "type": "string",
+            "title": "Exercise Id"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "flashcard_intro",
+              "flashcard_recognition",
+              "flashcard_production",
+              "grammar_intro",
+              "production"
+            ],
+            "title": "Type"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id"
+          },
+          "prompt": {
+            "$ref": "#/components/schemas/CardPrompt"
+          },
+          "hint": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Hint"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "ready",
+              "answered",
+              "failed"
+            ],
+            "title": "Status",
+            "default": "ready"
+          },
+          "subtype": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "translation",
+                  "guided",
+                  "transform"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Subtype"
+          },
+          "instructions": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Instructions"
+          },
+          "glossary": {
+            "items": {
+              "$ref": "#/components/schemas/GlossaryEntry"
+            },
+            "type": "array",
+            "title": "Glossary"
+          },
+          "item_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Item Ids"
+          }
+        },
+        "type": "object",
+        "required": [
+          "exercise_id",
+          "type"
+        ],
+        "title": "SessionCard",
+        "description": "A card of the session.\n\nEvery card carries a `CardPrompt` in `prompt`. Production exercises put the generated text in\n`prompt.text` (null until `prepare` has run) and also set `subtype`, `instructions`,\n`glossary` and `item_ids`; `item_id` is their primary target."
       },
       "SessionOut": {
         "properties": {
@@ -1469,6 +2124,10 @@
           "new_per_session": {
             "type": "integer",
             "title": "New Per Session"
+          },
+          "production_slots": {
+            "type": "integer",
+            "title": "Production Slots"
           }
         },
         "type": "object",
@@ -1477,7 +2136,8 @@
           "weekly_new_grammar",
           "desired_retention",
           "review_cap",
-          "new_per_session"
+          "new_per_session",
+          "production_slots"
         ],
         "title": "SettingsOut"
       },
@@ -1547,6 +2207,19 @@
               }
             ],
             "title": "New Per Session"
+          },
+          "production_slots": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 5.0,
+                "minimum": 0.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Production Slots"
           }
         },
         "type": "object",

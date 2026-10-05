@@ -68,3 +68,41 @@ describe("App", () => {
     });
   });
 });
+
+describe("App fake-LLM banner", () => {
+  const text =
+    "Running without an LLM API key: exercises and grading are simulated.";
+
+  it("shows the banner when the backend uses the fake LLM and lets it be dismissed", async () => {
+    sessionStorage.clear();
+    mockApi({
+      "GET /api/learner": LEARNER,
+      "GET /api/health": {
+        status: "ok",
+        version: "1",
+        database: "ok",
+        llm: "fake",
+      },
+    });
+    renderAt("/");
+    expect(await screen.findByText(text)).toBeInTheDocument();
+    await userEvent.click(screen.getByRole("button", { name: "Dismiss" }));
+    expect(screen.queryByText(text)).not.toBeInTheDocument();
+  });
+
+  it("shows no banner with a real LLM", async () => {
+    sessionStorage.clear();
+    mockApi({
+      "GET /api/learner": LEARNER,
+      "GET /api/health": {
+        status: "ok",
+        version: "1",
+        database: "ok",
+        llm: "anthropic",
+      },
+    });
+    renderAt("/");
+    await screen.findByRole("heading", { name: "Session" });
+    expect(screen.queryByText(text)).not.toBeInTheDocument();
+  });
+});

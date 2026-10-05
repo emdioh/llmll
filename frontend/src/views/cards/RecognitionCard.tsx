@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { AnswerOut, SessionCard } from "../../api/client";
+import type { FlashcardAnswer, SessionCard } from "../../api/client";
 
 export default function RecognitionCard({
   card,
@@ -9,16 +9,16 @@ export default function RecognitionCard({
 }: {
   card: SessionCard;
   busy: boolean;
-  result: AnswerOut | null;
+  result: FlashcardAnswer | null;
   onChoose: (choice: number) => void;
 }) {
   const [chosen, setChosen] = useState<number | null>(null);
-  const options = card.prompt.options ?? [];
+  const options = card.prompt?.options ?? [];
   return (
     <>
       <p className="tag">What does it mean?</p>
       <p className="big" lang="de">
-        {card.prompt.de}
+        {card.prompt?.de}
       </p>
       <div className="options">
         {options.map((opt, i) => {
@@ -27,6 +27,7 @@ export default function RecognitionCard({
             "btn",
             "option",
             picked && result ? `picked ${result.outcome}` : "",
+            result?.expected?.correct_index === i ? "reveal" : "",
           ].join(" ");
           return (
             <button
@@ -35,6 +36,7 @@ export default function RecognitionCard({
               className={cls}
               disabled={busy || result !== null}
               aria-pressed={picked}
+              data-correct={result?.expected?.correct_index === i || undefined}
               onClick={() => {
                 setChosen(i);
                 onChoose(i);

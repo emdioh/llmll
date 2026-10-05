@@ -4,7 +4,14 @@ export type Schemas = components["schemas"];
 export type Learner = Schemas["LearnerOut"];
 export type Settings = Schemas["SettingsOut"];
 export type SessionCard = Schemas["SessionCard"];
-export type AnswerOut = Schemas["AnswerOut"];
+export type FlashcardAnswer = Schemas["AnswerOut"];
+export type ProductionAnswer = Schemas["ProductionAnswerOut"];
+/** Answer response, discriminated by `kind`. */
+export type AnswerOut = FlashcardAnswer | ProductionAnswer;
+export type PreparedCard = Schemas["PreparedCard"];
+export type Explanation = Schemas["ExplanationOut"];
+export type AnswerError = Schemas["AnswerError"];
+export type ItemResult = Schemas["ItemResult"];
 export type ItemSummary = Schemas["ItemSummary"];
 export type ItemDetail = Schemas["ItemDetail"];
 export type MemoryEntry = Schemas["MemoryEntry"];
@@ -73,6 +80,11 @@ export const updateSettings = (body: Schemas["SettingsUpdate"]) =>
 
 export const createSession = () =>
   request<Schemas["SessionOut"]>("POST", "/api/sessions");
+export const prepareExercise = (exerciseId: string) =>
+  request<PreparedCard>(
+    "POST",
+    `/api/exercises/${encodeURIComponent(exerciseId)}/prepare`,
+  );
 export const submitAnswer = (sessionId: string, body: Schemas["AnswerIn"]) =>
   request<AnswerOut>(
     "POST",
@@ -104,3 +116,14 @@ export const listGrammar = () =>
   request<GrammarSummary[]>("GET", "/api/grammar");
 export const getGrammar = (id: string) =>
   request<GrammarDetail>("GET", `/api/grammar/${encodeURIComponent(id)}`);
+
+export const explainEvaluation = (evaluationId: number, itemId: string) =>
+  request<Explanation>("POST", `/api/evaluations/${evaluationId}/explain`, {
+    item_id: itemId,
+  } satisfies Schemas["EvaluationExplainIn"]);
+export const explainGrammar = (id: string, question: string) =>
+  request<Explanation>(
+    "POST",
+    `/api/grammar/${encodeURIComponent(id)}/explain`,
+    { question } satisfies Schemas["GrammarExplainIn"],
+  );

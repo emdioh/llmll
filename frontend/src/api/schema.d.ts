@@ -75,6 +75,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/exercises/{exercise_id}/prepare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Prepare Exercise */
+        post: operations["prepareExercise"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/sessions/{session_id}/answers": {
         parameters: {
             query?: never;
@@ -160,10 +177,68 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/evaluations/{evaluation_id}/explain": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Explain Evaluation */
+        post: operations["explainEvaluation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/grammar/{grammar_id}/explain": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Explain Grammar */
+        post: operations["explainGrammar"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** AnswerError */
+        AnswerError: {
+            /** Start */
+            start: number;
+            /** End */
+            end: number;
+            /** Original */
+            original: string;
+            /** Correction */
+            correction: string;
+            /** Item Id */
+            item_id: string | null;
+            /** Diagnostic Tags */
+            diagnostic_tags: string[];
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "minor" | "major";
+            /** Confidence */
+            confidence: number;
+            /** Explanation */
+            explanation: string;
+        };
         /** AnswerIn */
         AnswerIn: {
             /** Exercise Id */
@@ -180,11 +255,17 @@ export interface components {
         /** AnswerOut */
         AnswerOut: {
             /**
+             * Kind
+             * @default flashcard
+             * @constant
+             */
+            kind: "flashcard";
+            /**
              * Outcome
              * @enum {string}
              */
             outcome: "correct" | "assisted" | "error";
-            expected: components["schemas"]["ExpectedAnswer"];
+            expected: components["schemas"]["ExpectedAnswer"] | null;
             /** Diagnostic Tags */
             diagnostic_tags: string[];
             /** Feedback It */
@@ -233,6 +314,19 @@ export interface components {
             example?: components["schemas"]["CardExample"] | null;
             /** Interference Note */
             interference_note?: string | null;
+            /** Text */
+            text?: string | null;
+            /** Title */
+            title?: string | null;
+            /** Reference It */
+            reference_it?: string | null;
+            /** Examples */
+            examples?: components["schemas"]["CardExample"][] | null;
+        };
+        /** EvaluationExplainIn */
+        EvaluationExplainIn: {
+            /** Item Id */
+            item_id: string;
         };
         /** ExpectedAnswer */
         ExpectedAnswer: {
@@ -247,6 +341,36 @@ export interface components {
             /** Translation It */
             translation_it: string;
             example?: components["schemas"]["CardExample"] | null;
+            /** Correct Index */
+            correct_index?: number | null;
+        };
+        /** ExplanationExampleOut */
+        ExplanationExampleOut: {
+            /** De */
+            de: string;
+            /** Translation */
+            translation: string;
+        };
+        /** ExplanationOut */
+        ExplanationOut: {
+            /** Markdown */
+            markdown: string;
+            /** Examples */
+            examples: components["schemas"]["ExplanationExampleOut"][];
+            /**
+             * Cached
+             * @default false
+             */
+            cached: boolean;
+        };
+        /** GlossaryEntry */
+        GlossaryEntry: {
+            /** Item Id */
+            item_id: string;
+            /** De */
+            de: string;
+            /** Translation */
+            translation: string;
         };
         /** GrammarDetail */
         GrammarDetail: {
@@ -276,6 +400,11 @@ export interface components {
             /** It */
             it: string;
         };
+        /** GrammarExplainIn */
+        GrammarExplainIn: {
+            /** Question */
+            question: string;
+        };
         /** GrammarSummary */
         GrammarSummary: {
             /** Id */
@@ -298,6 +427,11 @@ export interface components {
             version: string;
             /** Database */
             database: string;
+            /**
+             * Llm
+             * @enum {string}
+             */
+            llm: "fake" | "anthropic";
         };
         /** ItemDetail */
         ItemDetail: {
@@ -343,6 +477,20 @@ export interface components {
             total: number;
             /** Items */
             items: components["schemas"]["ItemSummary"][];
+        };
+        /** ItemResult */
+        ItemResult: {
+            /** Item Id */
+            item_id: string;
+            /** Label */
+            label: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "correct" | "assisted" | "error";
+            /** Needs Remediation */
+            needs_remediation: boolean;
         };
         /** ItemSummary */
         ItemSummary: {
@@ -423,7 +571,72 @@ export interface components {
             /** Mastery */
             mastery: number;
         };
-        /** SessionCard */
+        /**
+         * PreparedCard
+         * @description Result of `prepare`; `fallback_cards` are flashcard intros when generation failed.
+         */
+        PreparedCard: {
+            /** Exercise Id */
+            exercise_id: string;
+            /**
+             * Type
+             * @enum {string}
+             */
+            type: "flashcard_intro" | "flashcard_recognition" | "flashcard_production" | "grammar_intro" | "production";
+            /** Item Id */
+            item_id?: string | null;
+            prompt?: components["schemas"]["CardPrompt"];
+            /** Hint */
+            hint?: string | null;
+            /**
+             * Status
+             * @default ready
+             * @enum {string}
+             */
+            status: "pending" | "ready" | "answered" | "failed";
+            /** Subtype */
+            subtype?: ("translation" | "guided" | "transform") | null;
+            /** Instructions */
+            instructions?: string | null;
+            /** Glossary */
+            glossary?: components["schemas"]["GlossaryEntry"][];
+            /** Item Ids */
+            item_ids?: string[];
+            /** Fallback Cards */
+            fallback_cards?: components["schemas"]["SessionCard"][];
+        };
+        /** ProductionAnswerOut */
+        ProductionAnswerOut: {
+            /**
+             * Kind
+             * @default production
+             * @constant
+             */
+            kind: "production";
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "correct" | "minor_errors" | "major_errors" | "off_task";
+            /** Corrected Sentence */
+            corrected_sentence: string;
+            /** Errors */
+            errors: components["schemas"]["AnswerError"][];
+            /** Feedback */
+            feedback: string;
+            /** Items */
+            items: components["schemas"]["ItemResult"][];
+            /** Evaluation Id */
+            evaluation_id: number;
+        };
+        /**
+         * SessionCard
+         * @description A card of the session.
+         *
+         *     Every card carries a `CardPrompt` in `prompt`. Production exercises put the generated text in
+         *     `prompt.text` (null until `prepare` has run) and also set `subtype`, `instructions`,
+         *     `glossary` and `item_ids`; `item_id` is their primary target.
+         */
         SessionCard: {
             /** Exercise Id */
             exercise_id: string;
@@ -431,12 +644,26 @@ export interface components {
              * Type
              * @enum {string}
              */
-            type: "flashcard_intro" | "flashcard_recognition" | "flashcard_production";
+            type: "flashcard_intro" | "flashcard_recognition" | "flashcard_production" | "grammar_intro" | "production";
             /** Item Id */
-            item_id: string;
-            prompt: components["schemas"]["CardPrompt"];
+            item_id?: string | null;
+            prompt?: components["schemas"]["CardPrompt"];
             /** Hint */
             hint?: string | null;
+            /**
+             * Status
+             * @default ready
+             * @enum {string}
+             */
+            status: "pending" | "ready" | "answered" | "failed";
+            /** Subtype */
+            subtype?: ("translation" | "guided" | "transform") | null;
+            /** Instructions */
+            instructions?: string | null;
+            /** Glossary */
+            glossary?: components["schemas"]["GlossaryEntry"][];
+            /** Item Ids */
+            item_ids?: string[];
         };
         /** SessionOut */
         SessionOut: {
@@ -457,6 +684,8 @@ export interface components {
             review_cap: number;
             /** New Per Session */
             new_per_session: number;
+            /** Production Slots */
+            production_slots: number;
         };
         /** SettingsUpdate */
         SettingsUpdate: {
@@ -470,6 +699,8 @@ export interface components {
             review_cap?: number | null;
             /** New Per Session */
             new_per_session?: number | null;
+            /** Production Slots */
+            production_slots?: number | null;
         };
         /** ValidationError */
         ValidationError: {
@@ -672,6 +903,37 @@ export interface operations {
             };
         };
     };
+    prepareExercise: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                exercise_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PreparedCard"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
     submitAnswer: {
         parameters: {
             query?: never;
@@ -693,7 +955,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["AnswerOut"];
+                    "application/json": components["schemas"]["AnswerOut"] | components["schemas"]["ProductionAnswerOut"];
                 };
             };
             /** @description Validation Error */
@@ -812,6 +1074,76 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["GrammarDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    explainEvaluation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                evaluation_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EvaluationExplainIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExplanationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    explainGrammar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                grammar_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrammarExplainIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExplanationOut"];
                 };
             };
             /** @description Validation Error */

@@ -1,5 +1,6 @@
 import { NavLink, Route, Routes } from "react-router";
 import LearnerGate from "./LearnerGate";
+import LlmBanner from "./LlmBanner";
 import CorpusView from "./views/CorpusView";
 import GrammarDetailView from "./views/GrammarDetailView";
 import GrammarView from "./views/GrammarView";
@@ -29,6 +30,7 @@ export default function App() {
           ))}
         </nav>
         <main className="content">
+          <LlmBanner />
           <Routes>
             <Route path="/" element={<SessionView />} />
             <Route path="/reading" element={<ReadingView />} />

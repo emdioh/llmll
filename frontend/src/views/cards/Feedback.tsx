@@ -1,4 +1,4 @@
-import type { AnswerOut } from "../../api/client";
+import type { FlashcardAnswer } from "../../api/client";
 import Markdown from "../Markdown";
 
 const LABELS = {
@@ -7,8 +7,14 @@ const LABELS = {
   error: "Incorrect",
 } as const;
 
-export default function Feedback({ result }: { result: AnswerOut }) {
+export default function Feedback({ result }: { result: FlashcardAnswer }) {
   const { expected } = result;
+  if (!expected)
+    return result.feedback_it ? (
+      <div className="feedback correct" role="status">
+        <Markdown>{result.feedback_it}</Markdown>
+      </div>
+    ) : null;
   return (
     <div className={`feedback ${result.outcome}`} role="status">
       <p className="outcome">{LABELS[result.outcome]}</p>

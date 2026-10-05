@@ -82,6 +82,9 @@ describe("SettingsView", () => {
     const lemmas = screen.getByLabelText("New words per week");
     await user.clear(lemmas);
     await user.type(lemmas, "30");
+    const slots = screen.getByLabelText("Written exercises per session");
+    await user.clear(slots);
+    await user.type(slots, "3");
     await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(await screen.findByText("Settings saved.")).toBeInTheDocument();
@@ -90,6 +93,7 @@ describe("SettingsView", () => {
       weekly_new_lemmas: 30,
       weekly_new_grammar: 2,
       new_per_session: 5,
+      production_slots: 3,
       review_cap: 15,
       desired_retention: 0.85,
     });

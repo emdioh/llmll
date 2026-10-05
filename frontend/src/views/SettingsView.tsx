@@ -54,6 +54,14 @@ const FIELDS: Field[] = [
     step: "1",
   },
   {
+    key: "production_slots",
+    label: "Written exercises per session",
+    min: 0,
+    max: 5,
+    integer: true,
+    step: "1",
+  },
+  {
     key: "review_cap",
     label: "Reviews per session (cap)",
     min: 1,
