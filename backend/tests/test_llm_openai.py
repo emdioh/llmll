@@ -28,9 +28,13 @@ def completion(
     parsed: Any = GENERATED,
     finish: str = "stop",
     refusal: str | None = None,
-    content: str | None = "raw text",
+    content: str | None = None,
 ) -> SimpleNamespace:
-    message = SimpleNamespace(content=content, refusal=refusal, parsed=parsed)
+    """A `chat.completions.create` result: `parsed` is serialized into the message content
+    (as a model would reply); pass `content` to send any other text."""
+    if content is None:
+        content = parsed.model_dump_json() if parsed is not None else "raw text"
+    message = SimpleNamespace(content=content, refusal=refusal)
     return SimpleNamespace(
         choices=[SimpleNamespace(message=message, finish_reason=finish)],
         usage=SimpleNamespace(
@@ -90,11 +94,13 @@ def status_error(cls: type[openai.APIStatusError], status: int) -> openai.APISta
 def test_request_shape_native() -> None:
     client, sdk, _ = make_client(completion())
     assert client.generate_exercise(exercise_request()) == GENERATED
-    assert sdk.create_calls == []
-    (call,) = sdk.parse_calls
+    assert sdk.parse_calls == []  # the SDK's strict parse() is never used
+    (call,) = sdk.create_calls
     assert call["model"] == "m-1"
     assert call["max_completion_tokens"] == 4000 and "max_tokens" not in call
-    assert call["response_format"] is GeneratedExercise
+    fmt = call["response_format"]
+    assert fmt["type"] == "json_schema" and fmt["json_schema"]["strict"] is True
+    assert fmt["json_schema"]["name"] == "GeneratedExercise"
     system, user = call["messages"]
     assert system["role"] == "system" and "German" in system["content"]
     assert user["role"] == "user" and isinstance(user["content"], str)
@@ -109,7 +115,7 @@ def test_request_shape_native() -> None:
 def test_openrouter_uses_max_tokens() -> None:
     client, sdk, records = make_client(completion(), provider="openrouter")
     client.generate_exercise(exercise_request())
-    (call,) = sdk.parse_calls
+    (call,) = sdk.create_calls
     assert call["max_tokens"] == 4000 and "max_completion_tokens" not in call
     assert records[0].provider == "openrouter"
 
@@ -123,7 +129,7 @@ def test_params_pass_through_and_effort_is_ignored() -> None:
         overrides=overrides,
     )
     client.grade_sentence(grade_request())
-    (call,) = sdk.parse_calls
+    (call,) = sdk.create_calls
     assert call["reasoning_effort"] == "high"
     assert call["max_completion_tokens"] == 123  # the explicit parameter wins
     assert "effort" not in call and "output_config" not in call
@@ -138,7 +144,7 @@ def test_every_call_is_logged_with_provider_and_usage() -> None:
     assert rec.stop_reason == "stop"
     assert (rec.input_tokens, rec.output_tokens, rec.cache_read_tokens) == (11, 7, 5)
     assert rec.response["prompt"] == "Il tavolo." and rec.error is None
-    assert rec.request["response_format"] == "GeneratedExercise"
+    assert rec.request["response_format"] == "json_schema:GeneratedExercise"
     assert rec.request["messages"][0]["role"] == "system"
 
 
@@ -155,13 +161,6 @@ def test_content_filter_is_a_refusal() -> None:
         client.explain(explain_request())
 
 
-def test_sdk_content_filter_error_is_a_refusal() -> None:
-    client, _, records = make_client(openai.ContentFilterFinishReasonError())
-    with pytest.raises(LLMRefusal):
-        client.explain(explain_request())
-    assert records[0].stop_reason == "content_filter"
-
-
 def test_truncation_is_an_error() -> None:
     client, _, records = make_client(completion(None, finish="length"))
     with pytest.raises(LLMError) as info:
@@ -170,19 +169,22 @@ def test_truncation_is_an_error() -> None:
     assert records[0].error and records[0].response == "raw text"
 
 
-def test_sdk_length_error_is_a_truncation() -> None:
-    client, _, records = make_client(
-        openai.LengthFinishReasonError(completion=completion(None, "length"))
+def test_native_reply_in_a_code_fence_is_accepted() -> None:
+    """Regression: a model on OpenRouter wrapped its JSON in ```json ... ``` and the SDK's
+    parse() crashed the whole eval run with a pydantic ValidationError."""
+    graded = GradeResult(overall="correct", corrected_sentence="x", feedback="y")
+    client, sdk, records = make_client(
+        completion(None, content=f"```json\n{graded.model_dump_json(indent=2)}\n```")
     )
-    with pytest.raises(LLMError, match="truncated"):
-        client.explain(explain_request())
-    assert records[0].stop_reason == "length"
+    assert client.grade_sentence(grade_request()) == graded
+    assert len(sdk.create_calls) == 1 and records[0].error is None
 
 
-def test_missing_parsed_output_is_an_error() -> None:
-    client, _, _ = make_client(completion(None))
-    with pytest.raises(LLMError, match="no structured output"):
+def test_invalid_native_reply_is_retried_once_then_an_error() -> None:
+    client, sdk, records = make_client(completion(None, content="Sorry, I can't produce JSON."))
+    with pytest.raises(LLMError, match="invalid structured output"):
         client.explain(explain_request())
+    assert len(sdk.create_calls) == 2 and len(records) == 2
 
 
 @pytest.mark.parametrize(

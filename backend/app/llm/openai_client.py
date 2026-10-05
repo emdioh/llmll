@@ -4,6 +4,7 @@
 from typing import Any
 
 import openai
+from openai.lib._parsing._completions import type_to_response_format_param
 from pydantic import BaseModel
 
 from app.llm.base import Completion, ProviderClient
@@ -53,20 +54,17 @@ class OpenAICompatibleLLMClient(ProviderClient):
         if not any(key in cfg.params for key in _TOKEN_LIMIT_PARAMS):
             request[self._limit_param] = cfg.max_tokens
         request.update(cfg.params)
-        request["response_format"] = output if native else {"type": "json_object"}
+        # Native mode sends the strict JSON schema (built by the SDK's own converter) but the
+        # reply is parsed by our tolerant parser, not the SDK's `parse()`: some models (e.g. on
+        # OpenRouter) wrap the JSON in a ```json fence, which `parse()` rejects with an error
+        # that loses the reply text.
+        request["response_format"] = (
+            type_to_response_format_param(output) if native else {"type": "json_object"}
+        )
         return request
 
     def _complete(self, request: dict[str, Any], native: bool) -> Completion:
-        try:
-            if native:
-                completion = self._client.chat.completions.parse(**request)
-            else:
-                completion = self._client.chat.completions.create(**request)
-        except openai.LengthFinishReasonError as exc:
-            completion = exc.completion
-        except openai.ContentFilterFinishReasonError:
-            return Completion(stop_reason="content_filter", refusal="content_filter")
-        return self._normalize(completion)
+        return self._normalize(self._client.chat.completions.create(**request))
 
     @staticmethod
     def _normalize(completion: Any) -> Completion:

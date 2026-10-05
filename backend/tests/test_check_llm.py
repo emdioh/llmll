@@ -74,7 +74,7 @@ def test_check_llm_call(
 
     def parse(**kwargs):  # type: ignore[no-untyped-def]
         message = SimpleNamespace(
-            content="{}", refusal=None, parsed=Gloss(translation="casa", lemma="Haus")
+            content=Gloss(translation="casa", lemma="Haus").model_dump_json(), refusal=None
         )
         return SimpleNamespace(
             choices=[SimpleNamespace(message=message, finish_reason="stop")],
@@ -84,7 +84,9 @@ def test_check_llm_call(
     monkeypatch.setattr(
         openai,
         "OpenAI",
-        lambda **_: SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(parse=parse))),
+        lambda **_: SimpleNamespace(
+            chat=SimpleNamespace(completions=SimpleNamespace(create=parse))
+        ),
     )
     monkeypatch.setenv("LLMLL_LLM_PROVIDER", "openrouter")
     monkeypatch.setenv("LLMLL_LLM_MODEL", "vendor/model")

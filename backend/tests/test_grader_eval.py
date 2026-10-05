@@ -298,7 +298,7 @@ def test_eval_grader_provider_and_model_override(fake_llm_env, monkeypatch, tmp_
     def parse(**kwargs):
         requests.append(kwargs)
         graded = GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
-        message = SimpleNamespace(content="{}", refusal=None, parsed=graded)
+        message = SimpleNamespace(content=graded.model_dump_json(), refusal=None)
         return SimpleNamespace(
             choices=[SimpleNamespace(message=message, finish_reason="stop")],
             usage=SimpleNamespace(
@@ -307,7 +307,7 @@ def test_eval_grader_provider_and_model_override(fake_llm_env, monkeypatch, tmp_
         )
 
     def fake_openai(**kwargs):
-        return SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(parse=parse)))
+        return SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(create=parse)))
 
     monkeypatch.setattr(openai, "OpenAI", fake_openai)
     monkeypatch.setenv("OPENAI_API_KEY", "dummy")
@@ -459,7 +459,7 @@ def test_eval_grader_provider_needs_only_its_own_key(monkeypatch, tmp_path: Path
     def parse(**kwargs):
         models.append(kwargs["model"])
         graded = GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
-        message = SimpleNamespace(content="{}", refusal=None, parsed=graded)
+        message = SimpleNamespace(content=graded.model_dump_json(), refusal=None)
         return SimpleNamespace(
             choices=[SimpleNamespace(message=message, finish_reason="stop")],
             usage=SimpleNamespace(prompt_tokens=1, completion_tokens=1, prompt_tokens_details=None),
@@ -468,7 +468,9 @@ def test_eval_grader_provider_needs_only_its_own_key(monkeypatch, tmp_path: Path
     monkeypatch.setattr(
         openai,
         "OpenAI",
-        lambda **_: SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(parse=parse))),
+        lambda **_: SimpleNamespace(
+            chat=SimpleNamespace(completions=SimpleNamespace(create=parse))
+        ),
     )
     monkeypatch.setenv("OPENROUTER_API_KEY", "dummy")
     get_settings.cache_clear()
@@ -585,3 +587,28 @@ def test_ctrl_c_keeps_a_partial_report(tmp_path: Path) -> None:
     summary = report["summary"]
     assert summary["interrupted"] is True and summary["completed_runs"] == 1
     assert "interrupted: metrics cover the 1 run(s)" in format_summary(report)
+
+
+def test_unexpected_exception_is_a_failed_run_not_a_crash(tmp_path: Path) -> None:
+    from app.evals.cases import load_cases
+    from app.evals.runner import MemoryRecorder, run_eval
+    from app.llm.types import GradeResult
+
+    items = items_of(load_curriculum(CURRICULUM))
+    cases = load_cases(three_cases(tmp_path))
+
+    class FlakyGrader:
+        name = "fake"
+        routes = {"grade_sentence": "fake/fake"}
+        calls = 0
+
+        def grade_sentence(self, request):  # type: ignore[no-untyped-def]
+            self.calls += 1
+            if self.calls == 2:
+                raise ValueError("boom")
+            return GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
+
+    report = run_eval(cases, FlakyGrader(), MemoryRecorder(), items)
+    summary = report["summary"]
+    assert summary["completed_runs"] == 3 and summary["failed_runs"] == 1
+    assert summary["failures"][0]["error"] == "ValueError: boom"

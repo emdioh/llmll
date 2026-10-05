@@ -7,6 +7,7 @@ known to the evaluated learner. LanguageTool is used when reachable; otherwise t
 recorded in the case file (when present) stand in for it.
 """
 
+import logging
 import statistics
 import time
 from collections import defaultdict
@@ -117,6 +118,9 @@ def _lt_matches(
     return case.lt_matches
 
 
+logger = logging.getLogger(__name__)
+
+
 @dataclass(frozen=True)
 class Progress:
     """Emitted twice per run: `phase="start"` before the LLM call, then `"done"` after it
@@ -206,11 +210,16 @@ def run_eval(
                 interrupted = True
                 emit("interrupted", case)
                 break
-            except LLMError as exc:
+            except Exception as exc:
+                # LLMError is the expected failure; anything else is a bug, but one case
+                # must not throw away a paid run: record it, keep its type, and go on.
+                message = str(exc) if isinstance(exc, LLMError) else f"{type(exc).__name__}: {exc}"
+                if not isinstance(exc, LLMError):
+                    logger.exception("unexpected error grading %s", case.id)
                 failures += 1
-                failure_cases[str(exc)].append(case.id)
-                runs.append({"error": str(exc)})
-                emit("done", case, error=str(exc))
+                failure_cases[message].append(case.id)
+                runs.append({"error": message})
+                emit("done", case, error=message)
                 if not successes and failures >= abort_after:
                     aborted = True
                     break

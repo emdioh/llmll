@@ -136,3 +136,10 @@ Implementation (SDKs verified against the installed `openai` 3.24.0 and `google-
   `uv.lock` (resolver constraint of `google-genai`).
 - No real API calls were possible (no keys): the adapters are tested against mocked SDK clients
   only and have not been exercised against the live services.
+- **OpenAI-compatible native mode no longer uses the SDK's `parse()`.** Some models (seen with a
+  model on OpenRouter) return the schema-constrained JSON wrapped in a ```json fence; `parse()`
+  then raises a pydantic `ValidationError` that is not an API error and drops the reply text, which
+  crashed `eval-grader`. The adapter now sends the strict schema built by the SDK's own converter
+  (`type_to_response_format_param`) with `chat.completions.create`, and the reply goes through the
+  shared tolerant parser (fences accepted); invalid output is retried once in native mode too.
+  The call log stores the response format as `json_schema:<Model>`.

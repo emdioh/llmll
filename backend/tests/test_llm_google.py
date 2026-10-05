@@ -143,7 +143,7 @@ def test_max_tokens_is_an_error() -> None:
 
 def test_missing_parsed_output_is_an_error() -> None:
     client, _, _ = make_client(response(None))
-    with pytest.raises(LLMError, match="no structured output"):
+    with pytest.raises(LLMError, match="invalid structured output"):
         client.explain(explain_request())
 
 

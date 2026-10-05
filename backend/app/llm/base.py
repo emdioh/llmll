@@ -84,7 +84,7 @@ class Completion:
 
 
 class InvalidOutput(LLMError):
-    """`json` mode: the reply is not valid JSON for the response model (retried once)."""
+    """The reply is not valid JSON for the response model (retried once, both modes)."""
 
     def __init__(self, message: str, text: str | None) -> None:
         super().__init__(message)
@@ -111,6 +111,9 @@ def loggable(value: Any) -> Any:
     if isinstance(value, BaseModel):
         return value.model_dump(mode="json")
     if isinstance(value, dict):
+        if value.get("type") == "json_schema" and isinstance(value.get("json_schema"), dict):
+            # A response-format schema: log its name, not the whole schema on every call.
+            return f"json_schema:{value['json_schema'].get('name')}"
         return {str(k): loggable(v) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
         return [loggable(v) for v in value]
@@ -158,8 +161,6 @@ class ProviderClient(TypedTasks):
         try:
             return self._attempt(task, version, cfg, system, stable, variable, output, native)
         except InvalidOutput as first:
-            if native:
-                raise
             logger.warning("%s: invalid JSON from %s, retrying once: %s", task, self.name, first)
             feedback = (
                 f"\n\nYour previous reply was rejected: {str(first)[:_MAX_FEEDBACK]}\n"
@@ -220,13 +221,10 @@ class ProviderClient(TypedTasks):
         if completion.truncated:
             record.response = completion.text
             raise LLMError(f"the response was truncated (stop_reason={completion.stop_reason})")
-        parsed: BaseModel | None
-        if native:
-            parsed = completion.parsed
-            if not isinstance(parsed, output):
-                record.response = completion.text
-                raise LLMError("the model returned no structured output")
-        else:
+        parsed: BaseModel | None = completion.parsed if native else None
+        if not isinstance(parsed, output):
+            # json mode, or a native reply the SDK did not parse (or that came back wrapped in
+            # a code fence): validate the text ourselves; InvalidOutput is retried once.
             record.response = completion.text
             parsed = _parse_json(completion.text, output)
         record.response = parsed.model_dump(mode="json")
