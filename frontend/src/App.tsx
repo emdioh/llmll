@@ -5,6 +5,7 @@ import CorpusView from "./views/CorpusView";
 import GrammarDetailView from "./views/GrammarDetailView";
 import GrammarView from "./views/GrammarView";
 import ItemDetailView from "./views/ItemDetailView";
+import ReaderView from "./views/ReaderView";
 import ReadingView from "./views/ReadingView";
 import SessionView from "./views/SessionView";
 import SettingsView from "./views/SettingsView";
@@ -34,6 +35,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<SessionView />} />
             <Route path="/reading" element={<ReadingView />} />
+            <Route path="/reading/:textId" element={<ReaderView />} />
             <Route path="/corpus" element={<CorpusView />} />
             <Route path="/corpus/:id" element={<ItemDetailView />} />
             <Route path="/grammar" element={<GrammarView />} />

@@ -1,3 +1,4 @@
+import { MemoryRouter } from "react-router";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
@@ -11,7 +12,9 @@ function renderView() {
     <LearnerContext.Provider
       value={{ learner: LEARNER as Learner, setLearner: () => {} }}
     >
-      <SessionView />
+      <MemoryRouter>
+        <SessionView />
+      </MemoryRouter>
     </LearnerContext.Provider>,
   );
 }

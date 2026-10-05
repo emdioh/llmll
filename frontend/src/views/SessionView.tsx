@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ApiError,
@@ -173,6 +174,9 @@ export default function SessionView() {
         >
           {state.kind === "loading" ? "Preparing…" : "Start session"}
         </button>
+        <p>
+          <Link to="/reading">Read something</Link>
+        </p>
       </section>
     );
   }

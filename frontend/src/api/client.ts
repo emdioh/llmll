@@ -127,3 +127,35 @@ export const explainGrammar = (id: string, question: string) =>
     `/api/grammar/${encodeURIComponent(id)}/explain`,
     { question } satisfies Schemas["GrammarExplainIn"],
   );
+
+export type TextOut = Schemas["TextOut"];
+export type TextSummary = Schemas["TextSummary"];
+export type TextVersion = Schemas["VersionOut"];
+export type TextToken = Schemas["TokenOut"];
+export type WordClass = TextToken["word_class"];
+export type Gloss = Schemas["GlossOut"];
+export type OptinResult = Schemas["OptinOut"];
+export type ReadingStart = Schemas["ReadingOut"];
+export type FinishResult = Schemas["FinishOut"];
+
+export const listTexts = () => request<TextSummary[]>("GET", "/api/texts");
+export const getText = (id: number) =>
+  request<TextOut>("GET", `/api/texts/${id}`);
+export const createText = (body: Schemas["CreateTextIn"]) =>
+  request<TextOut>("POST", "/api/texts", body);
+export const generateText = (topic?: string) =>
+  request<TextOut>("POST", "/api/texts/generate", {
+    topic: topic || null,
+  } satisfies Schemas["GenerateTextIn"]);
+export const startReading = (textId: number) =>
+  request<ReadingStart>("POST", `/api/texts/${textId}/reading`);
+export const glossToken = (readingId: number, tokenIndex: number) =>
+  request<Gloss>("POST", `/api/reading/${readingId}/gloss`, {
+    token_index: tokenIndex,
+  } satisfies Schemas["GlossIn"]);
+export const optinToken = (readingId: number, tokenIndex: number) =>
+  request<OptinResult>("POST", `/api/reading/${readingId}/optin`, {
+    token_index: tokenIndex,
+  } satisfies Schemas["GlossIn"]);
+export const finishReading = (readingId: number) =>
+  request<FinishResult>("POST", `/api/reading/${readingId}/finish`);
