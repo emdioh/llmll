@@ -150,6 +150,7 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/check-llm.sh [--call]` | Which provider/model/key each task uses (keys not printed); `--call` makes one test request |
 | `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool and a timestamped report in `evals-reports/` (costs API credits) |
 | `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
+| `source scripts/env.fish [--force]` | fish shell: load `.env` into the current shell (bash/zsh: `set -a; . ./.env; set +a`) |
 | `scripts/up.sh [logs\|down]` | Full app with Docker Compose on :8000 |
 
 ## Development
