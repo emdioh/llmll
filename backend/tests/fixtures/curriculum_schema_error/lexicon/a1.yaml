@@ -1,0 +1,128 @@
+- id: lex:tisch
+  lemma: Tisch
+  pos: noun
+  gender: m
+  plural: Tische
+  level: A1
+  translations:
+    it: tavolo
+    en: table
+  example:
+    de: Der Tisch ist groß.
+    it: Questo è.
+  interference:
+    it_gender: m
+- id: lex:katze
+  lemma: Katze
+  pos: noun
+  gender: f
+  plural: Katzen
+  level: A1
+  translations:
+    it: gatto
+    en: cat
+  example:
+    de: Das ist Katze.
+    it: Questo è.
+  interference:
+    it_gender: m
+- id: lex:haus
+  lemma: Haus
+  pos: noun
+  gender: null
+  plural: Häuser
+  level: A1
+  translations:
+    it: casa
+    en: house
+  example:
+    de: Das ist Haus.
+    it: Questo è.
+  interference:
+    it_gender: f
+- id: lex:buch
+  lemma: Buch
+  pos: noun
+  gender: n
+  plural: Bücher
+  level: A1
+  translations:
+    it: libro
+    en: book
+  example:
+    de: Das ist Buch.
+    it: Questo è.
+  interference:
+    it_gender: m
+- id: lex:stuhl
+  lemma: Stuhl
+  pos: noun
+  gender: m
+  plural: Stühle
+  level: Z9
+  translations:
+    it: sedia
+    en: chair
+  example:
+    de: Das ist Stuhl.
+    it: Questo è.
+  interference:
+    it_gender: f
+- id: lex:brot
+  lemma: Brot
+  pos: noun
+  gender: n
+  plural: Brote
+  level: A1
+  translations:
+    it: pane
+    en: bread
+  example:
+    de: Das ist Brot.
+    it: Questo è.
+  interference:
+    it_gender: m
+- id: lex:maedchen
+  lemma: Mädchen
+  pos: noun
+  gender: n
+  plural: Mädchen
+  level: A1
+  translations:
+    it: ragazza
+    en: girl
+  example:
+    de: Das ist Mädchen.
+    it: Questo è.
+  interference:
+    it_gender: f
+- id: lex:eltern
+  lemma: Eltern
+  pos: noun
+  plural_only: true
+  level: A1
+  translations:
+    it: genitori
+    en: parents
+- id: lex:gehen
+  lemma: gehen
+  pos: verb
+  level: A1
+  translations:
+    it: andare
+    en: to go
+  verb:
+    aux: sein
+    irregular: true
+    praeteritum: ging
+    partizip: gegangen
+  example:
+    de: Ich gehe nach Hause.
+    it: Vado a casa.
+- id: lex:schoen
+  lemma: schön
+  pos: adj
+  level: A1
+  translations:
+    it: bello
+    en: beautiful

@@ -1,0 +1,11 @@
+- id: cx:lust-haben-auf
+  pattern: Lust haben auf + Akk
+  level: A2
+  translations:
+    it: avere voglia di
+    en: to feel like
+  example:
+    de: Ich habe Lust auf Pizza.
+    it: Ho voglia di pizza.
+  requires:
+  - gram:cases

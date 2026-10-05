@@ -1,0 +1,49 @@
+- id: lex:fenster
+  lemma: Fenster
+  pos: noun
+  gender: n
+  plural: Fenster
+  level: A2
+  translations:
+    it: finestra
+    en: window
+  example:
+    de: Das ist Fenster.
+    it: Questo è.
+  interference:
+    it_gender: f
+- id: lex:apfel
+  lemma: Apfel
+  pos: noun
+  gender: m
+  plural: Äpfel
+  level: A2
+  translations:
+    it: mela
+    en: apple
+  example:
+    de: Das ist Apfel.
+    it: Questo è.
+  interference:
+    it_gender: f
+- id: lex:strasse
+  lemma: Straße
+  pos: noun
+  gender: f
+  plural: Straßen
+  level: A2
+  translations:
+    it: strada
+    en: street
+  example:
+    de: Das ist Straße.
+    it: Questo è.
+- id: lex:fahren
+  lemma: fahren
+  pos: verb
+  level: A2
+  translations:
+    it: guidare, andare
+    en: to drive
+  requires:
+  - lex:gehen

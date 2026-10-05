@@ -1,0 +1,20 @@
+id: gram:cases
+title_it: Casi
+title_en: Cases
+level: A2
+requires:
+- gram:articles
+diagnostic_tags:
+  gender:
+  - m
+  - f
+  - n
+reference_it: '## Articoli
+
+
+  In tedesco: *der*, *die*, *das*.'
+examples:
+- de: Der Tisch.
+  it: Il tavolo.
+- de: Die Katze.
+  it: Il gatto.

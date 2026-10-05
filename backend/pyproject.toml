@@ -9,6 +9,9 @@ dependencies = [
     "sqlalchemy>=2",
     "alembic",
     "pydantic-settings",
+    "fsrs>=6.3.2",
+    "pyyaml>=6.0.3",
+    "wordfreq>=3.1.1",
 ]
 
 [dependency-groups]

@@ -1,0 +1,20 @@
+id: gram:articles
+title_it: Articoli
+title_en: Articles
+level: A1
+requires:
+- gram:cases
+diagnostic_tags:
+  gender:
+  - m
+  - f
+  - n
+reference_it: '## Articoli
+
+
+  In tedesco: *der*, *die*, *das*.'
+examples:
+- de: Der Tisch.
+  it: Il tavolo.
+- de: Die Katze.
+  it: Il gatto.
