@@ -1,7 +1,7 @@
 # LLMLL — Requisiti
 
 > Documento vivo. Raccoglie le decisioni prese finora e le domande ancora aperte.
-> Stato: bozza v0.1 (ottobre 2026).
+> Stato: bozza v0.2 (ottobre 2026).
 
 ## 1. Visione
 
@@ -45,7 +45,7 @@ Le scelte della v1 non devono precluderlo (vedi §13).
 Tipi:
 - **Lemma:** voce lessicale con un significato preciso. Per i sostantivi include sempre articolo e plurale (`der Tisch, -e`).
   Significati diversi sono item diversi (`die Bank` panchina / banca).
-- **Punto grammaticale:** es. "dativo dopo `mit`", "verbo finale nella subordinata", "desinenze aggettivo dopo articolo determinativo".
+- **Punto grammaticale:** es. "dativo dopo `mit`", "verbo finale nella subordinata", "desinenze dell'aggettivo".
 - **Costrutto / collocazione:** es. `Lust haben auf + Akk`, `es gibt + Akk`.
 
 Metadati per item:
@@ -56,6 +56,18 @@ Metadati per item:
   affinità utili (`haben/sein` ≈ `avere/essere` nel passato prossimo);
 - per i lemmi, la **direzione**: il riconoscimento (DE→IT) e la produzione (IT→DE)
   sono stati di memoria separati.
+
+**Regola di granularità: item grossolani, tag diagnostici fini.**
+Un punto grammaticale è un solo item per curriculum e scheduling (es. "desinenze
+dell'aggettivo"). Ogni errore porta però **tag diagnostici** sulla sotto-dimensione
+coinvolta, ad esempio per le desinenze: caso × genere/numero × tipo di declinazione
+(forte / debole / mista). I tag servono a:
+- spiegazioni mirate al sotto-caso sbagliato, non alla tabella intera;
+- esercizi di recupero sul sotto-caso;
+- distinguere "non so le desinenze" da "sbaglio solo il dativo femminile".
+
+Se un sotto-caso risulta sistematicamente sbagliato, si può promuovere a item a sé
+(o sotto-item) senza rifare il modello.
 
 ### 4.2 Due livelli di stato per item
 
@@ -148,6 +160,10 @@ Ogni esercizio dichiara quali item mette alla prova e con quale peso.
 - **Sorgenti:**
   - URL o testo incollato (v1);
   - in seguito, feed RSS su temi scelti.
+  - **Temi iniziali:** cronaca contemporanea, tecnologia, scienza (da rifinire).
+  - Candidati da verificare: tagesschau.de, Deutsche Welle, nachrichtenleicht.de
+    (notizie in tedesco semplificato, utile anche come riferimento di stile), heise.de
+    (tecnologia), Spektrum.de (scienza), Wikipedia DE.
   - Da preferire articoli tedeschi originali (tedesco autentico); in alternativa,
     traduzione di articoli italiani o inglesi.
 - **Semplificazione al livello**, con **copertura lessicale misurata**: dopo la
@@ -208,13 +224,20 @@ Con 1–2 ore a settimana in modo irregolare, il problema principale è **l'arre
   - 1–2 esercizi di produzione;
   - oppure una sessione di lettura.
 
-## 11. Piattaforma (indicativa, da confermare)
+## 11. Piattaforma e stack
 
-- Web app responsive / PWA: va bene da desktop e da telefono, senza store.
-- Backend con astrazione sul provider dell'LLM.
-- Componenti esterni: libreria FSRS (`py-fsrs` / `ts-fsrs`), LanguageTool,
-  lemmatizzatore tedesco, estrazione del testo dagli articoli (es. trafilatura).
-- Costo dell'LLM trascurabile per un singolo utente; da rivalutare per il prodotto commerciale.
+Criterio: **tecnologie mainstream e mantenibili**, niente di esotico.
+
+| Parte | Scelta | Motivo |
+|---|---|---|
+| Backend | **Python + FastAPI** | L'ecosistema NLP per il tedesco (spaCy, `py-fsrs`, trafilatura) è in Python |
+| Database | **SQLite** via SQLAlchemy (+ Alembic per le migrazioni) | Un file, backup banale; passaggio a PostgreSQL senza riscrivere |
+| Frontend | **React + TypeScript (Vite)**, come PWA responsive | Il più diffuso; funziona da telefono senza store |
+| Correzione deterministica | **LanguageTool** self-hosted (container Docker) | L'API pubblica ha limiti di uso |
+| LLM | Claude API dietro un'interfaccia propria | Provider sostituibile |
+| Deploy | Docker Compose (app + LanguageTool), in locale o su una piccola VPS | Un comando per avviare tutto |
+
+Costo dell'LLM trascurabile per un singolo utente; da rivalutare per il prodotto commerciale.
 
 ## 12. Come capire se funziona
 
@@ -257,9 +280,7 @@ Con 1–2 ore a settimana in modo irregolare, il problema principale è **l'arre
 
 ## 15. Domande aperte
 
-- Granularità dei punti grammaticali: quanto fine? (es. "desinenze aggettivo" come uno o 12 item?)
 - Come stimare la padronanza di un punto grammaticale a partire da prove su item diversi?
-- Quali temi o fonti per gli articoli?
-- Stack tecnico concreto.
+- Fonti di articoli definitive.
 - Formato e strumenti per scrivere il curriculum.
 - Peso relativo di flashcard, produzione e lettura in una sessione.
