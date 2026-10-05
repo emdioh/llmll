@@ -12,7 +12,7 @@ Use `--repeat 1` for routine checks and `--repeat 3` only to measure consistency
 
 ```sh
 cd backend
-export ANTHROPIC_API_KEY=sk-ant-...        # without a key the fake LLM is used: numbers are meaningless
+export ANTHROPIC_API_KEY=sk-ant-...        # or the key of the provider you compare; without any key the fake LLM is used: numbers are meaningless
 uv run python -m app.cli eval-grader --out evals/report.json
 ```
 
@@ -23,6 +23,8 @@ Options:
 | `--cases DIR` | Directory of `*.yaml` case files (default `evals/grader/cases`). |
 | `--curriculum DIR` | Curriculum used to build the item contexts (default `../curriculum/de`). |
 | `--task-config JSON\|FILE` | Per-task LLM overrides, same shape as `LLMLL_LLM_TASKS`, e.g. `'{"grade_sentence": {"model": "claude-opus-4-5", "effort": "max"}}'`. Use it to compare models or effort levels. |
+| `--provider P` | Provider for `grade_sentence` (`anthropic`, `openai`, `google`, `openrouter`), overriding the configuration. Needs that provider's API key and, except for Anthropic, `--model`. |
+| `--model M` | Model for `grade_sentence` (with `--provider`, or for the default provider). |
 | `--repeat N` | Grade every case N times; reports agreement across runs (consistency). |
 | `--out FILE` | Write the full JSON report (summary, per category, per case and run, token cost). |
 | `--max-fp RATE` | Fail (exit 1) when the false-positive rate on correct answers exceeds RATE (default 0.05). |
@@ -37,6 +39,23 @@ recorded in memory (tokens, latency) instead of `llm_calls`, and every curriculu
 known to the evaluated learner. LanguageTool is used when `LLMLL_LANGUAGETOOL_URL` is reachable,
 otherwise the matches recorded in a case (`lt_matches`) stand in for it. As in the app, diagnostic
 tags are offered for the exercise's targets only.
+
+## Comparing providers
+
+`--provider` and `--model` override the `grade_sentence` route, so the same cases can be run on
+several providers; the report records the result in `config.llm` (provider), `config.grader`
+(`provider/model`) and `config.models`:
+
+```sh
+uv run python -m app.cli eval-grader --provider anthropic --out evals/anthropic.json
+uv run python -m app.cli eval-grader --provider openai --model <model id> --out evals/openai.json
+uv run python -m app.cli eval-grader --provider google --model <gemini model id> --out evals/gemini.json
+uv run python -m app.cli eval-grader --provider openrouter --model <vendor>/<model> --out evals/or.json
+```
+
+Token counts are those the provider reports (for OpenAI-compatible APIs the input count includes
+cached tokens; Anthropic reports them separately), so compare cost with the provider's prices, not
+with the raw sums. Other per-task settings (`params`, `structured_output`) go in `--task-config`.
 
 ## Metrics
 

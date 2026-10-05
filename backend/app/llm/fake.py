@@ -5,6 +5,7 @@ import time
 
 from app.llm.calls import CallRecord, CallRecorder
 from app.llm.client import LLMError
+from app.llm.config import DEFAULT_TASKS
 from app.llm.types import (
     ExerciseRequest,
     ExplainRequest,
@@ -48,6 +49,7 @@ def first_paragraph(markdown: str) -> str:
 
 class FakeLLMClient:
     name = "fake"
+    routes = {task: f"fake/{FAKE_MODEL}" for task in DEFAULT_TASKS}
 
     def __init__(self, recorder: CallRecorder | None = None) -> None:
         self._record = recorder
@@ -59,6 +61,7 @@ class FakeLLMClient:
             CallRecord(
                 task=task,
                 prompt_version=FAKE_VERSION,
+                provider="fake",
                 model=FAKE_MODEL,
                 request=request.model_dump(mode="json"),  # type: ignore[attr-defined]
                 response=response.model_dump(mode="json"),  # type: ignore[attr-defined]

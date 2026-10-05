@@ -7,23 +7,11 @@ from typing import Any, TypeVar
 import anthropic
 from pydantic import BaseModel, ValidationError
 
-from app.llm import render
+from app.llm.base import TypedTasks
 from app.llm.calls import CallRecord, CallRecorder
 from app.llm.client import LLMError, LLMRefusal, LLMUnavailable
 from app.llm.config import TaskConfig
 from app.llm.prompt_loader import load_prompt, render_user
-from app.llm.types import (
-    ExerciseRequest,
-    ExplainRequest,
-    Explanation,
-    GeneratedExercise,
-    Gloss,
-    GlossRequest,
-    GradeRequest,
-    GradeResult,
-    SimplifiedText,
-    SimplifyRequest,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -55,7 +43,7 @@ def _dump(value: Any) -> Any:
     return str(value)
 
 
-class AnthropicLLMClient:
+class AnthropicLLMClient(TypedTasks):
     name = "anthropic"
 
     def __init__(
@@ -69,23 +57,6 @@ class AnthropicLLMClient:
         self._tasks = tasks
         self._record = recorder
         self._refusal_fallback = refusal_fallback
-
-    # --- typed tasks -----------------------------------------------------------------------
-
-    def generate_exercise(self, req: ExerciseRequest) -> GeneratedExercise:
-        return self._run("generate_exercise", render.exercise_vars(req), GeneratedExercise)
-
-    def grade_sentence(self, req: GradeRequest) -> GradeResult:
-        return self._run("grade_sentence", render.grade_vars(req), GradeResult)
-
-    def explain(self, req: ExplainRequest) -> Explanation:
-        return self._run("explain", render.explain_vars(req), Explanation)
-
-    def simplify_text(self, req: SimplifyRequest) -> SimplifiedText:
-        return self._run("simplify_text", render.simplify_vars(req), SimplifiedText)
-
-    def gloss(self, req: GlossRequest) -> Gloss:
-        return self._run("gloss", render.gloss_vars(req), Gloss)
 
     # --- plumbing --------------------------------------------------------------------------
 
@@ -103,6 +74,7 @@ class AnthropicLLMClient:
             "system": [{"type": "text", "text": system, "cache_control": {"type": "ephemeral"}}],
             "messages": [{"role": "user", "content": content}],
             "output_config": {"effort": cfg.effort},
+            **cfg.params,
         }
         return request, version
 
@@ -111,6 +83,7 @@ class AnthropicLLMClient:
         record = CallRecord(
             task=task,
             prompt_version=version,
+            provider=self.name,
             model=request["model"],
             request={
                 **request,

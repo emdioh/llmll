@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import Field, SecretStr
+from pydantic import AliasChoices, Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -14,8 +14,22 @@ class Settings(BaseSettings):
     database_url: str = "sqlite:///./data/llmll.db"
     frontend_dist: Path | None = None
     anthropic_api_key: SecretStr | None = Field(default=None, validation_alias="ANTHROPIC_API_KEY")
+    openai_api_key: SecretStr | None = Field(default=None, validation_alias="OPENAI_API_KEY")
+    gemini_api_key: SecretStr | None = Field(
+        default=None, validation_alias=AliasChoices("GEMINI_API_KEY", "GOOGLE_API_KEY")
+    )
+    openrouter_api_key: SecretStr | None = Field(
+        default=None, validation_alias="OPENROUTER_API_KEY"
+    )
     languagetool_url: str = "http://localhost:8010"
-    llm_provider: Literal["anthropic", "fake"] = "anthropic"
+    # Default provider and, for the default provider, its model (required unless `anthropic` or
+    # `fake`). Tasks can override both in `llm_tasks`.
+    llm_provider: Literal["anthropic", "openai", "google", "openrouter", "fake"] = "anthropic"
+    llm_model: str | None = None
+    # Optional OpenAI-compatible endpoint, and the OpenRouter attribution headers.
+    openai_base_url: str | None = None
+    openrouter_app_name: str | None = None
+    openrouter_site_url: str | None = None
     llm_refusal_fallback: bool = True
     llm_max_retries: int = 2
     # Name in the contest resolver registry (app.services.contests.RESOLVERS).

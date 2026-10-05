@@ -280,7 +280,7 @@ Criterion: **mainstream, maintainable technology**, nothing exotic.
 | Database | **SQLite** via SQLAlchemy (+ Alembic for migrations) | One file, trivial backups; moving to PostgreSQL without rewrites |
 | Frontend | **React + TypeScript (Vite)**, as a responsive PWA | The most widespread option; works on a phone without an app store |
 | Deterministic checking | **LanguageTool**, self-hosted (Docker container) | The public API has usage limits |
-| LLM | Claude API behind our own interface | Replaceable provider |
+| LLM | Our own interface with adapters over the official SDKs: Anthropic (default), OpenAI, Google Gemini, OpenRouter; provider and model configurable per task | Replaceable provider; no abstraction library (LiteLLM rejected) |
 | Deploy | Docker Compose (app + LanguageTool), locally or on a small VPS | One command to start everything |
 
 LLM cost is negligible for a single user; to be reassessed for the commercial product.

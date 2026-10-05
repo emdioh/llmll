@@ -213,11 +213,14 @@ def run_eval(
     summary["consistency_error_items"] = (
         statistics.fmean(c["error_items"] for c in consistencies) if consistencies else None
     )
+    # The provider/model that graded (`--provider` / `--model` overrides land here).
+    grader = getattr(llm, "routes", {}).get("grade_sentence")
     return {
         "config": {
             "cases": len(cases),
             "repeat": repeat,
-            "llm": llm.name,
+            "llm": grader.partition("/")[0] if grader else llm.name,
+            "grader": grader,
             "models": sorted(models),
             "prompt_versions": sorted(versions),
             "reconcile_versions": sorted(reconcile_versions),

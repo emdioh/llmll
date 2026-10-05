@@ -25,6 +25,7 @@ def last_call_id() -> int | None:
 class CallRecord:
     task: str
     prompt_version: str
+    provider: str
     model: str
     request: dict[str, Any]
     response: Any = None
@@ -55,6 +56,7 @@ class SqlCallRecorder:
                     ts=self._now(),
                     task=record.task,
                     prompt_version=record.prompt_version,
+                    provider=record.provider,
                     model=record.model,
                     request=record.request,
                     response=record.response,

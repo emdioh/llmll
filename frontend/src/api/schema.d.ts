@@ -925,7 +925,11 @@ export interface components {
              * Llm
              * @enum {string}
              */
-            llm: "fake" | "anthropic";
+            llm: "anthropic" | "openai" | "google" | "openrouter" | "fake";
+            /** Llm Tasks */
+            llm_tasks?: {
+                [key: string]: string;
+            };
             /**
              * Auth
              * @enum {string}

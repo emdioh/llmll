@@ -2641,10 +2641,20 @@
           "llm": {
             "type": "string",
             "enum": [
-              "fake",
-              "anthropic"
+              "anthropic",
+              "openai",
+              "google",
+              "openrouter",
+              "fake"
             ],
             "title": "Llm"
+          },
+          "llm_tasks": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object",
+            "title": "Llm Tasks"
           },
           "auth": {
             "type": "string",

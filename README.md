@@ -19,13 +19,63 @@ speakers.
 ## Running everything with Docker
 
 ```sh
-cp .env.example .env      # add your ANTHROPIC_API_KEY
+cp .env.example .env      # add the API key of your LLM provider (e.g. ANTHROPIC_API_KEY)
 docker compose up --build
 ```
 
 The app is served on <http://localhost:8000> (API under `/api`, OpenAPI docs at `/docs`).
 LanguageTool runs as a separate container. Data lives in the `llmll-data` volume
 (SQLite); back it up by copying `/data/llmll.db`.
+
+## Choosing the LLM
+
+Every LLM task (`generate_exercise`, `grade_sentence`, `explain`, `simplify_text`, `gloss`) can
+run on Anthropic, OpenAI, Google Gemini or any model on OpenRouter, globally or per task. Put the
+settings in `.env`. Anthropic is the default and has a default model; for every other provider
+you must name the model (model ids change often, so none is built in).
+
+```sh
+# Anthropic (default model claude-opus-5-5; LLMLL_LLM_MODEL overrides it)
+ANTHROPIC_API_KEY=sk-ant-...
+
+# OpenAI
+LLMLL_LLM_PROVIDER=openai
+LLMLL_LLM_MODEL=<model id>
+OPENAI_API_KEY=sk-...
+# LLMLL_OPENAI_BASE_URL=https://my-gateway.example/v1   # any OpenAI-compatible endpoint
+
+# Google Gemini
+LLMLL_LLM_PROVIDER=google
+LLMLL_LLM_MODEL=<gemini model id>
+GEMINI_API_KEY=...                                       # or GOOGLE_API_KEY
+
+# OpenRouter (any model it offers, written as <vendor>/<model>)
+LLMLL_LLM_PROVIDER=openrouter
+LLMLL_LLM_MODEL=<vendor>/<model>
+OPENROUTER_API_KEY=sk-or-...
+# LLMLL_OPENROUTER_APP_NAME=LLMLL                        # sent as X-Title
+# LLMLL_OPENROUTER_SITE_URL=https://llmll.example.com    # sent as HTTP-Referer
+```
+
+Mixing providers per task uses `LLMLL_LLM_TASKS` (JSON). Resolution per task is: task setting,
+then `LLMLL_LLM_PROVIDER` / `LLMLL_LLM_MODEL`, then the built-in default (Anthropic only). The
+key of every provider in use must be set; the app refuses to start otherwise, and also when a
+task resolves to a provider without a model. With no key at all it runs on a fake LLM.
+
+```sh
+LLMLL_LLM_TASKS='{"grade_sentence": {"provider": "anthropic", "effort": "high"},
+                  "gloss": {"provider": "openrouter", "model": "<vendor>/<model>"},
+                  "simplify_text": {"provider": "google", "model": "<gemini model id>"}}'
+```
+
+Per-task fields: `provider`, `model`, `max_tokens`, `effort` (Anthropic only, ignored with a
+warning elsewhere), `params` (provider-specific request parameters passed through unchanged, e.g.
+`{"reasoning_effort": "high"}` for OpenAI reasoning models or `{"thinking_config":
+{"thinking_budget": 1024}}` for Gemini) and `structured_output`: `native` (default,
+schema-constrained output) or `json` (JSON requested in the prompt, validated, one retry; for
+OpenRouter models without schema support; not available for Anthropic). `GET /api/health`
+reports the default provider (`llm`) and the routing (`llm_tasks`, `provider/model` per task).
+To compare providers on the grader, see [`backend/evals/README.md`](backend/evals/README.md).
 
 ## Deploying on a server
 

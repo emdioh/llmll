@@ -286,6 +286,75 @@ def test_eval_grader_end_to_end_with_fake_llm(fake_llm_env, tmp_path: Path, caps
     assert report["cost"]["calls"] == 6
 
 
+def test_eval_grader_provider_and_model_override(fake_llm_env, monkeypatch, tmp_path: Path) -> None:
+    from types import SimpleNamespace
+
+    import openai
+
+    from app.llm.types import GradeResult
+
+    requests: list[dict] = []
+
+    def parse(**kwargs):
+        requests.append(kwargs)
+        graded = GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
+        message = SimpleNamespace(content="{}", refusal=None, parsed=graded)
+        return SimpleNamespace(
+            choices=[SimpleNamespace(message=message, finish_reason="stop")],
+            usage=SimpleNamespace(
+                prompt_tokens=10, completion_tokens=5, prompt_tokens_details=None
+            ),
+        )
+
+    def fake_openai(**kwargs):
+        return SimpleNamespace(chat=SimpleNamespace(completions=SimpleNamespace(parse=parse)))
+
+    monkeypatch.setattr(openai, "OpenAI", fake_openai)
+    monkeypatch.setenv("OPENAI_API_KEY", "dummy")
+    get_settings.cache_clear()
+    out = tmp_path / "report.json"
+    code = cli_main(
+        [
+            "eval-grader",
+            "--provider",
+            "openai",
+            "--model",
+            "gpt-test",
+            "--cases",
+            str(three_cases(tmp_path)),
+            "--curriculum",
+            str(CURRICULUM),
+            "--no-languagetool",
+            "--max-fp",
+            "1.0",
+            "--out",
+            str(out),
+        ]
+    )
+    assert code == 0
+    assert len(requests) == 3 and all(r["model"] == "gpt-test" for r in requests)
+    config = json.loads(out.read_text(encoding="utf-8"))["config"]
+    assert config["llm"] == "openai" and config["models"] == ["gpt-test"]
+    assert config["grader"] == "openai/gpt-test"
+
+
+def test_eval_grader_override_errors(fake_llm_env, monkeypatch, tmp_path: Path, capsys) -> None:
+    args = [
+        "eval-grader",
+        "--cases",
+        str(three_cases(tmp_path)),
+        "--curriculum",
+        str(CURRICULUM),
+        "--no-languagetool",
+    ]
+    assert cli_main([*args, "--provider", "openai", "--model", "x"]) == 1  # no OPENAI_API_KEY
+    assert "OPENAI_API_KEY" in capsys.readouterr().err
+    monkeypatch.setenv("OPENAI_API_KEY", "dummy")
+    get_settings.cache_clear()
+    assert cli_main([*args, "--provider", "openai"]) == 1  # no model
+    assert "no model is configured" in capsys.readouterr().err
+
+
 def test_eval_grader_fails_above_max_fp(fake_llm_env, tmp_path: Path) -> None:
     # The fake grader marks an answer that differs from the reference as wrong: a false positive.
     directory = tmp_path / "cases"

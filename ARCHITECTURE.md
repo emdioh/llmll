@@ -321,8 +321,34 @@ class LLMClient(Protocol):
     def gloss(self, req: GlossRequest) -> Gloss: ...
 ```
 
-Inputs and outputs are Pydantic models. The `AnthropicLLMClient` implementation uses the
-official `anthropic` Python SDK. A `FakeLLMClient` with recorded responses is used in tests.
+Inputs and outputs are Pydantic models. Implementations live in `app/llm/`, one small adapter
+per provider on its official SDK: `AnthropicLLMClient` (`anthropic`), `OpenAICompatibleLLMClient`
+(`openai`; serves OpenAI and OpenRouter) and `GeminiLLMClient` (`google-genai`). A
+`FakeLLMClient` is used in tests. No multi-provider abstraction library is used (R§11).
+
+### 7.1.1 Providers and routing (M6)
+- **Configuration.** `LLMLL_LLM_PROVIDER` (default provider), `LLMLL_LLM_MODEL` (its model) and
+  `LLMLL_LLM_TASKS` (per task `provider`, `model`, `effort`, `max_tokens`, `params`,
+  `structured_output`). Resolution per task: task setting, global default, built-in default
+  (Anthropic only: `claude-opus-5-5`). Any other provider needs an explicit model; a missing model
+  or a missing key for a provider in use is a startup error (`LLMConfigError`). With no key at all
+  the whole app uses `FakeLLMClient`.
+- **`factory.py`** builds one client per provider in use. If all tasks go to one provider that
+  client is returned as is; otherwise a `RoutingLLMClient` dispatches each task to its provider.
+  Clients expose `name` and `routes` (`{task: "provider/model"}`), reported by `/api/health` as
+  `llm` and `llm_tasks`.
+- **Shared adapter code** (`base.py`): prompt loading (the same versioned prompts for every
+  provider, stable part first so automatic prefix caching works), `native` or `json` structured
+  output (JSON schema in the system prompt, Pydantic validation, one retry with the validation
+  error), error mapping (rate limit, connection, 5xx to `LLMUnavailable`; other API errors to
+  `LLMError`; refusal or safety block to `LLMRefusal`; truncation to `LLMError`) and `llm_calls`
+  logging, which records `provider` too.
+- **Native structured output:** OpenAI-compatible `chat.completions.parse(response_format=<model>)`;
+  Gemini JSON mime type plus `response_schema=<model>`. Response models must stay convertible by
+  both converters (all fields required or defaulted, no unions of objects, no free-form dicts);
+  `tests/test_llm_schemas.py` checks it.
+- **Caching.** Only Anthropic gets explicit `cache_control`; cached prompt tokens are logged when
+  the provider reports them.
 
 ### 7.2 Claude API implementation
 - **Structured output.** Use `client.messages.parse()` with the Pydantic model as the

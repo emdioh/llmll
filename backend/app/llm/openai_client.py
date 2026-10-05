@@ -1,0 +1,105 @@
+"""`LLMClient` for OpenAI and OpenAI-compatible APIs such as OpenRouter
+(design: docs/design/M6-providers.md §3)."""
+
+from typing import Any
+
+import openai
+from pydantic import BaseModel
+
+from app.llm.base import Completion, ProviderClient
+from app.llm.calls import CallRecorder
+from app.llm.client import LLMError, LLMUnavailable
+from app.llm.config import TaskConfig
+
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+_TOKEN_LIMIT_PARAMS = ("max_tokens", "max_completion_tokens")
+
+
+class OpenAICompatibleLLMClient(ProviderClient):
+    """`client` is an `openai.OpenAI`; `provider_name` is `openai` or `openrouter`."""
+
+    def __init__(
+        self,
+        client: Any,
+        provider_name: str,
+        tasks: dict[str, TaskConfig],
+        recorder: CallRecorder,
+    ) -> None:
+        super().__init__(tasks, recorder)
+        self._client = client
+        self.name = provider_name
+        # OpenAI's newer models reject `max_tokens`; OpenRouter documents `max_tokens`.
+        self._limit_param = (
+            "max_tokens" if provider_name == "openrouter" else "max_completion_tokens"
+        )
+
+    def _request(
+        self,
+        cfg: TaskConfig,
+        system: str,
+        stable: str,
+        variable: str,
+        output: type[BaseModel],
+        native: bool,
+    ) -> dict[str, Any]:
+        user = "\n\n".join(part for part in (stable, variable) if part)
+        request: dict[str, Any] = {
+            "model": cfg.model,
+            "messages": [
+                {"role": "system", "content": system},
+                {"role": "user", "content": user},
+            ],
+        }
+        if not any(key in cfg.params for key in _TOKEN_LIMIT_PARAMS):
+            request[self._limit_param] = cfg.max_tokens
+        request.update(cfg.params)
+        request["response_format"] = output if native else {"type": "json_object"}
+        return request
+
+    def _complete(self, request: dict[str, Any], native: bool) -> Completion:
+        try:
+            if native:
+                completion = self._client.chat.completions.parse(**request)
+            else:
+                completion = self._client.chat.completions.create(**request)
+        except openai.LengthFinishReasonError as exc:
+            completion = exc.completion
+        except openai.ContentFilterFinishReasonError:
+            return Completion(stop_reason="content_filter", refusal="content_filter")
+        return self._normalize(completion)
+
+    @staticmethod
+    def _normalize(completion: Any) -> Completion:
+        usage = getattr(completion, "usage", None)
+        details = getattr(usage, "prompt_tokens_details", None)
+        result = Completion(
+            input_tokens=getattr(usage, "prompt_tokens", None),
+            output_tokens=getattr(usage, "completion_tokens", None),
+            cache_read_tokens=getattr(details, "cached_tokens", None),
+            cache_write_tokens=getattr(details, "cache_write_tokens", None),
+        )
+        choices = getattr(completion, "choices", None)
+        if not choices:
+            return result
+        choice = choices[0]
+        message = choice.message
+        finish = getattr(choice, "finish_reason", None)
+        result.stop_reason = finish
+        result.text = getattr(message, "content", None)
+        result.parsed = getattr(message, "parsed", None)
+        if getattr(message, "refusal", None):
+            result.refusal = str(message.refusal)
+        elif finish == "content_filter":
+            result.refusal = "content_filter"
+        elif finish == "length":
+            result.truncated = True
+        return result
+
+    def _classify(self, exc: Exception) -> type[LLMError] | None:
+        if isinstance(
+            exc, (openai.RateLimitError, openai.APIConnectionError, openai.InternalServerError)
+        ):
+            return LLMUnavailable
+        if isinstance(exc, (openai.APIStatusError, openai.APIError)):
+            return LLMError
+        return None

@@ -215,3 +215,14 @@ def test_api_errors_are_mapped_and_logged(error: Exception, expected: type[LLMEr
         client.explain(explain_request())
     assert type(info.value) is expected
     assert len(records) == 1 and records[0].error
+
+
+def test_provider_is_logged_and_params_pass_through() -> None:
+    tasks = resolve_tasks({"explain": {"params": {"metadata": {"user_id": "u"}}}})
+    sdk = FakeSDK(response())
+    records: list[CallRecord] = []
+    client = AnthropicLLMClient(sdk, tasks, lambda r: records.append(r) or 1)
+    client.explain(explain_request())
+    assert sdk.beta.messages.calls[0]["metadata"] == {"user_id": "u"}
+    assert records[0].provider == "anthropic"
+    assert client.routes["explain"] == f"anthropic/{DEFAULT_MODEL}"

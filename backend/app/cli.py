@@ -12,6 +12,7 @@ from app.config import Settings, get_settings
 from app.curriculum.importer import import_curriculum
 from app.curriculum.loader import CurriculumError, load_curriculum
 from app.evals.cases import DEFAULT_CASES_DIR
+from app.llm.config import PROVIDERS
 from app.main import create_app
 from app.services.learner import projection_config, settings_of
 from app.store.db import create_session_factory
@@ -79,12 +80,20 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         run_eval,
         tags_of,
     )
-    from app.llm.factory import build_llm_client_with_recorder
+    from app.llm.factory import LLMConfigError, build_llm_client_with_recorder
     from app.nlp.languagetool import LanguageToolClient
 
     settings = get_settings()
     try:
-        settings = settings.model_copy(update={"llm_tasks": _load_task_config(args.task_config)})
+        tasks = _load_task_config(args.task_config)
+        if args.provider or args.model:
+            grader = dict(tasks.get("grade_sentence") or {})
+            if args.provider:
+                grader["provider"] = args.provider
+            if args.model:
+                grader["model"] = args.model
+            tasks["grade_sentence"] = grader
+        settings = settings.model_copy(update={"llm_tasks": tasks})
         cases = load_cases(Path(args.cases))
         curriculum = load_curriculum(Path(args.curriculum))
     except (CaseFileError, CurriculumError) as exc:
@@ -103,7 +112,11 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         print(f"no cases in {args.cases}", file=sys.stderr)
         return 1
     recorder = MemoryRecorder()
-    llm = build_llm_client_with_recorder(settings, recorder)
+    try:
+        llm = build_llm_client_with_recorder(settings, recorder)
+    except LLMConfigError as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
     languagetool = None if args.no_languagetool else LanguageToolClient(settings.languagetool_url)
     report = run_eval(
         cases, llm, recorder, items, languagetool=languagetool, repeat=max(args.repeat, 1)
@@ -223,6 +236,14 @@ def main(argv: list[str] | None = None) -> int:
     p_eval.add_argument("--curriculum", default="../curriculum/de")
     p_eval.add_argument(
         "--task-config", help="JSON (or a file) overriding the LLM task config, as LLMLL_LLM_TASKS"
+    )
+    p_eval.add_argument(
+        "--provider",
+        choices=PROVIDERS,
+        help="provider for grade_sentence (overrides the configuration); recorded in the report",
+    )
+    p_eval.add_argument(
+        "--model", help="model for grade_sentence (overrides the configuration); recorded too"
     )
     p_eval.add_argument("--repeat", type=int, default=1, help="runs per case (consistency)")
     p_eval.add_argument("--out", help="write the JSON report here")

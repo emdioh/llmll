@@ -102,3 +102,37 @@ README (configuration examples for each provider), `.env.example`, `ARCHITECTURE
 
 ## Deviations
 _(record any deviation from this spec here, with the reason)_
+
+Implementation (SDKs verified against the installed `openai` 3.24.0 and `google-genai` 2.28.0):
+
+- **Response models unchanged.** All five response models (`GeneratedExercise`, `GradeResult`,
+  `Explanation`, `SimplifiedText`, `Gloss`) already convert with `openai.lib._pydantic.
+  to_strict_json_schema` and with the google-genai schema conversion (also with
+  `raise_error_on_unsupported_field=True`), so `native` works for every task and no model needed
+  `json` mode. `tests/test_llm_schemas.py` guards this.
+- **`structured_output: json` is not available for Anthropic** (configuring it is a startup
+  error): Anthropic always uses its native structured output.
+- **`llm_calls` rows per attempt.** In `json` mode every HTTP call is logged, so a retry produces
+  two rows (the first with the validation error); `last_call_id()` points to the last one.
+- **Single-provider setups return the bare adapter** (not a `RoutingLLMClient`), so existing
+  behaviour and tests are untouched; the router is used only when tasks span several providers.
+  Clients expose a `routes` attribute (`{task: "provider/model"}`) for `/api/health`; the
+  `LLMClient` protocol itself is unchanged. `llm_tasks` defaults to `{}` in the health schema.
+- **Validation order.** Provider/model configuration errors (provider without model, unknown
+  provider, invalid `LLMLL_LLM_TASKS`) are raised before the "no key at all, use the fake LLM"
+  fallback; a missing key is raised only when some key exists. Errors are `LLMConfigError`
+  exceptions with a clear message (a traceback on startup; `eval-grader` prints them and exits 1).
+- **Token limit parameter:** `max_completion_tokens` for OpenAI (newer models reject
+  `max_tokens`), `max_tokens` for OpenRouter; a `params` entry with either name wins.
+- **Usage semantics.** OpenAI-compatible `input_tokens` is `prompt_tokens` (includes cached
+  tokens); Gemini `output_tokens` is `candidates_token_count` (thinking tokens are not included);
+  `cache_write_tokens` is filled only when the API reports it (OpenRouter).
+- **`json` mode request.** The response JSON schema is appended to the system prompt;
+  OpenAI-compatible calls also send `response_format={"type": "json_object"}`, Gemini sends the
+  JSON mime type without a schema. Markdown fences around the reply are tolerated.
+- **Eval report.** `config.grader` (`provider/model` of `grade_sentence`) is new and `config.llm`
+  now reports the grader's provider rather than the default one.
+- **Dependencies.** `uv add openai google-genai` also moved `websockets` from 17.2 to 16.1.1 in
+  `uv.lock` (resolver constraint of `google-genai`).
+- No real API calls were possible (no keys): the adapters are tested against mocked SDK clients
+  only and have not been exercised against the live services.

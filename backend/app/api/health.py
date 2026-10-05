@@ -4,7 +4,7 @@ from importlib.metadata import version
 from typing import Literal
 
 from fastapi import APIRouter, Depends, Request, Response, status
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
@@ -18,7 +18,8 @@ class HealthResponse(BaseModel):
     status: str
     version: str
     database: str
-    llm: Literal["fake", "anthropic"]
+    llm: Literal["anthropic", "openai", "google", "openrouter", "fake"]
+    llm_tasks: dict[str, str] = Field(default_factory=dict)
     auth: Literal["enabled", "disabled"]
 
 
@@ -37,5 +38,6 @@ def health(
         version=version("llmll-backend"),
         database=database,
         llm=request.app.state.llm.name,
+        llm_tasks=dict(getattr(request.app.state.llm, "routes", {})),
         auth=auth_mode(request),
     )

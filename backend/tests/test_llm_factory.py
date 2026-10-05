@@ -33,6 +33,7 @@ def test_failed_calls_are_stored(migrated_settings: Settings) -> None:
         CallRecord(
             task="grade_sentence",
             prompt_version="v1",
+            provider="anthropic",
             model="claude-opus-5-5",
             request={"model": "claude-opus-5-5"},
             error="LLMRefusal: refused",

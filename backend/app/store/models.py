@@ -188,6 +188,7 @@ class LLMCall(Base):
     task: Mapped[str] = mapped_column(String)
     prompt_version: Mapped[str] = mapped_column(String)
     model: Mapped[str] = mapped_column(String)
+    provider: Mapped[str] = mapped_column(String, server_default="anthropic")
     request: Mapped[dict[str, Any]] = mapped_column(JSON)
     response: Mapped[Any | None] = mapped_column(JSON, nullable=True)
     stop_reason: Mapped[str | None] = mapped_column(String, nullable=True)
