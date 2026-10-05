@@ -44,8 +44,12 @@ def snapshot(settings: Settings) -> dict:
 def setup_learner(client: TestClient, level: str = "A1", new_per_session: int | None = 20) -> None:
     resp = client.post("/api/learner", json={"level": level})
     assert resp.status_code == 201, resp.text
-    if new_per_session is not None:  # lift the per-session cap so tests see the whole budget
-        client.put("/api/settings", json={"new_per_session": new_per_session})
+    # M1 tests exercise the flashcard-only mode (no production slots); lift the per-session cap
+    # so tests see the whole budget.
+    changes: dict = {"production_slots": 0}
+    if new_per_session is not None:
+        changes["new_per_session"] = new_per_session
+    client.put("/api/settings", json=changes)
 
 
 def label_of(client: TestClient, item_id: str) -> str:
@@ -74,6 +78,7 @@ def test_learner_setup(curriculum_client: TestClient) -> None:
         "desired_retention": 0.85,
         "review_cap": 15,
         "new_per_session": 5,
+        "production_slots": 2,
     }
     assert client.post("/api/learner", json={"level": "A1"}).status_code == 409
     assert client.get("/api/learner").json()["explanation_language"] == "it"
@@ -170,6 +175,7 @@ def test_full_flow_and_replay(
     correct_idx = rec["prompt"]["options"].index(item["payload"]["translations"]["it"])
     ok = answer(client, session["session_id"], rec, answer={"choice": correct_idx})
     assert ok["outcome"] == "correct" and ok["memory"]["facet"] == "recognition"
+    assert ok["expected"]["correct_index"] == correct_idx
     assert ok["expected"]["translation_it"] == item["payload"]["translations"]["it"]
     bad = answer(client, session["session_id"], cards[1], answer={"choice": 99})
     assert bad["outcome"] == "error"

@@ -2,7 +2,6 @@
 
 import random
 import uuid
-from dataclasses import dataclass
 from datetime import datetime, timedelta
 from typing import Any
 
@@ -20,6 +19,8 @@ from app.domain.answers import (
 from app.domain.budget import new_item_budget
 from app.domain.config import ProjectionConfig
 from app.domain.selection import MemoryView, select_due
+from app.services import production
+from app.services.common import BuiltCard, SessionError
 from app.services.learner import projection_config, settings_of
 from app.store.events import append_event
 from app.store.models import (
@@ -36,22 +37,6 @@ SOURCE_PRIORITY = {"optin": 0, "article": 1, "wordlist": 2}
 INTRO_EVERY = 3
 FACETS = ("recognition", "production")
 GENDER_IT = {"m": "maschile", "f": "femminile", "n": "neutro"}
-
-
-class SessionError(Exception):
-    def __init__(self, status_code: int, detail: str) -> None:
-        super().__init__(detail)
-        self.status_code = status_code
-        self.detail = detail
-
-
-@dataclass
-class BuiltCard:
-    exercise_id: str
-    type: str
-    item_id: str
-    prompt: dict[str, Any]
-    hint: str | None
 
 
 def _gender_of(payload: dict[str, Any]) -> str | None:
@@ -270,7 +255,9 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
         if all(view.item_id != i for i, _ in due_cards):
             due_cards.append((view.item_id, view.facet))
     backlog = len(due_cards)
-    due_cards = due_cards[: settings.review_cap]
+    slots = settings.production_slots
+    # Production slots eat into the review cap; with 0 slots sessions are flashcard-only (M1).
+    due_cards = due_cards[: max(settings.review_cap - slots, 0) if slots else settings.review_cap]
 
     # 2. New lemmas within the budget.
     since = now - timedelta(days=7)
@@ -303,7 +290,8 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
             r[1].id,
         )
     )
-    new_items = [item for _, item in candidates[: min(budget.lemmas, settings.new_per_session)]]
+    lemma_limit = min(budget.lemmas, settings.new_per_session)
+    new_items = [item for _, item in candidates[:lemma_limit]]
 
     # 3. Build exercises, interleaving one intro every INTRO_EVERY reviews.
     reviews = []
@@ -311,7 +299,8 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
         reviews.append(
             _review_card(db, learner.id, session_id, items_by_id[item_id], facet, cfg, now)
         )
-    intros = [_intro_card(learner.id, session_id, item, now) for item in new_items]
+    # With production slots, new lemmas arrive inside exercises (R§7.4); otherwise as intro cards.
+    intros = [] if slots else [_intro_card(learner.id, session_id, item, now) for item in new_items]
     sequence: list[tuple[Exercise, BuiltCard]] = []
     intro_iter = iter(intros)
     for index, review_card in enumerate(reviews, 1):
@@ -319,6 +308,20 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
         if index % INTRO_EVERY == 0 and (nxt := next(intro_iter, None)):
             sequence.append(nxt)
     sequence.extend(intro_iter)
+    if slots:
+        sequence.extend(
+            production.plan_production_slots(
+                db,
+                learner,
+                session_id,
+                cfg,
+                now,
+                slots=slots,
+                lemma_candidates=[item for _, item in candidates],
+                lemma_limit=lemma_limit,
+                grammar_budget=budget.grammar,
+            )
+        )
 
     db.add_all(ex for ex, _ in sequence)
     db.commit()
@@ -361,6 +364,20 @@ def _memory_out(row: ItemMemory | None) -> dict[str, Any] | None:
     return {"facet": row.facet, "due": row.due, "mastery": row.mastery}
 
 
+def load_open_exercise(
+    db: Session, learner: Learner, session_id: str, exercise_id: str
+) -> Exercise:
+    """The exercise of this session that has not been answered yet, or a `SessionError`."""
+    exercise = db.get(Exercise, exercise_id)
+    if exercise is None or exercise.session_id != session_id or exercise.learner_id != learner.id:
+        raise SessionError(404, "Exercise not found in this session")
+    if db.scalar(select(Attempt.id).where(Attempt.exercise_id == exercise_id)) is not None:
+        raise SessionError(409, "Exercise already answered")
+    if exercise.status != "ready":
+        raise SessionError(409, f"Exercise is not ready (status: {exercise.status})")
+    return exercise
+
+
 def submit_answer(
     db: Session,
     learner: Learner,
@@ -371,11 +388,9 @@ def submit_answer(
     duration_ms: int | None,
     now: datetime,
 ) -> dict[str, Any]:
-    exercise = db.get(Exercise, exercise_id)
-    if exercise is None or exercise.session_id != session_id or exercise.learner_id != learner.id:
-        raise SessionError(404, "Exercise not found in this session")
-    if db.scalar(select(Attempt.id).where(Attempt.exercise_id == exercise_id)) is not None:
-        raise SessionError(409, "Exercise already answered")
+    exercise = load_open_exercise(db, learner, session_id, exercise_id)
+    if exercise.type == "production":
+        raise SessionError(500, "production exercises are answered through the grading service")
 
     cfg = projection_config(settings_of(learner))
     solution = exercise.solution
@@ -385,7 +400,7 @@ def submit_answer(
     tags: list[str] = []
     memory_row: ItemMemory | None = None
 
-    if exercise.type == "flashcard_intro":
+    if exercise.type in ("flashcard_intro", "grammar_intro"):
         outcome = "correct"
     elif exercise.type == "flashcard_recognition":
         outcome = check_recognition(answer.get("choice"), solution["correct_index"])
@@ -414,8 +429,9 @@ def submit_answer(
         "attempt_id": attempt.id,
     }
 
-    if exercise.type == "flashcard_intro":
-        for facet in FACETS:
+    if exercise.type in ("flashcard_intro", "grammar_intro"):
+        facets = FACETS if exercise.type == "flashcard_intro" else ("production",)
+        for facet in facets:
             _, row = append_event(db, cfg, facet=facet, kind="introduce", **common)
             if facet == "production":
                 memory_row = row
@@ -445,6 +461,14 @@ def submit_answer(
                 )
     db.commit()
 
+    if exercise.type == "grammar_intro":
+        return {
+            "outcome": outcome,
+            "expected": None,
+            "diagnostic_tags": [],
+            "feedback_it": "Nuovo argomento: lo ritroverai negli esercizi.",
+            "memory": _memory_out(memory_row),
+        }
     return {
         "outcome": outcome,
         "expected": {
@@ -454,6 +478,7 @@ def submit_answer(
             "plural": solution["plural"],
             "translation_it": solution["translation_it"],
             "example": solution["example"],
+            "correct_index": solution.get("correct_index"),
         },
         "diagnostic_tags": tags,
         "feedback_it": _feedback(outcome, tags, used_hint, solution, exercise.type),

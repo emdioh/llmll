@@ -48,3 +48,21 @@ class LearnerSettings:
     desired_retention: float = 0.85
     review_cap: int = 15
     new_per_session: int = 5
+    production_slots: int = 2
+
+
+@dataclass(frozen=True)
+class ReconcileConfig:
+    """Parameters of the LLM / LanguageTool reconciliation (design: M2 §3.3)."""
+
+    lt_agree_confidence: float = 0.9
+    lt_disagree_factor: float = 0.8
+    lt_disagree_below: float = 0.8
+    unmatched_lt_confidence: float = 0.7
+    off_task_confidence: float = 0.5
+    model_version: str = "r1"
+
+    @property
+    def version(self) -> str:
+        blob = json.dumps(asdict(self), sort_keys=True)
+        return f"{self.model_version}-{hashlib.sha256(blob.encode()).hexdigest()[:8]}"

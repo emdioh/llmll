@@ -18,6 +18,7 @@ class SettingsOut(BaseModel):
     desired_retention: float
     review_cap: int
     new_per_session: int
+    production_slots: int
 
 
 class SettingsUpdate(BaseModel):
@@ -26,6 +27,7 @@ class SettingsUpdate(BaseModel):
     desired_retention: float | None = Field(default=None, ge=0.7, le=0.97)
     review_cap: int | None = Field(default=None, ge=1, le=500)
     new_per_session: int | None = Field(default=None, ge=0, le=20)
+    production_slots: int | None = Field(default=None, ge=0, le=5)
 
 
 @router.get("/settings", response_model=SettingsOut, operation_id="getSettings")

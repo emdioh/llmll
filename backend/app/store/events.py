@@ -3,12 +3,14 @@
 from collections import defaultdict
 from collections.abc import Sequence
 from datetime import datetime
+from typing import Any
 
 from fsrs import Card
 from sqlalchemy import and_, delete, or_, select
 from sqlalchemy.orm import Session
 
 from app.domain.config import ProjectionConfig
+from app.domain.grading import GradeDecision
 from app.domain.projection import EventData, MemoryState, apply, replay
 from app.store.models import ItemMemory, LearningEvent
 
@@ -112,6 +114,14 @@ def rebuild_projection(session: Session, learner_id: int, cfg: ProjectionConfig)
 
 
 def append_event(
+    session: Session, cfg: ProjectionConfig, **kwargs: Any
+) -> tuple[LearningEvent, ItemMemory | None]:
+    """Insert an event and update the projection (incrementally when it is the newest)."""
+    event, row, _decision = append_event_with_decision(session, cfg, **kwargs)
+    return event, row
+
+
+def append_event_with_decision(
     session: Session,
     cfg: ProjectionConfig,
     *,
@@ -128,8 +138,8 @@ def append_event(
     exercise_id: str | None = None,
     attempt_id: int | None = None,
     evaluation_id: int | None = None,
-) -> tuple[LearningEvent, ItemMemory | None]:
-    """Insert an event and update the projection (incrementally when it is the newest)."""
+) -> tuple[LearningEvent, ItemMemory | None, GradeDecision | None]:
+    """Like `append_event`, also returning the grading decision (None for backdated events)."""
     event = LearningEvent(
         learner_id=learner_id,
         item_id=item_id,
@@ -163,8 +173,8 @@ def append_event(
         .limit(1)
     )
     if later is not None:
-        return event, replay_key(session, learner_id, item_id, facet, cfg)
+        return event, replay_key(session, learner_id, item_id, facet, cfg), None
 
     row = session.get(ItemMemory, (learner_id, item_id, facet))
-    state, _decision = apply(row_to_state(row, item_id, facet), to_event_data(event), cfg)
-    return event, _write_state(session, row, learner_id, item_id, facet, state, cfg)
+    state, decision = apply(row_to_state(row, item_id, facet), to_event_data(event), cfg)
+    return event, _write_state(session, row, learner_id, item_id, facet, state, cfg), decision

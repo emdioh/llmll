@@ -1,8 +1,9 @@
 """Health check endpoint."""
 
 from importlib.metadata import version
+from typing import Literal
 
-from fastapi import APIRouter, Depends, Response, status
+from fastapi import APIRouter, Depends, Request, Response, status
 from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session
@@ -16,10 +17,13 @@ class HealthResponse(BaseModel):
     status: str
     version: str
     database: str
+    llm: Literal["fake", "anthropic"]
 
 
 @router.get("/health", response_model=HealthResponse)
-def health(response: Response, session: Session = Depends(get_session)) -> HealthResponse:
+def health(
+    request: Request, response: Response, session: Session = Depends(get_session)
+) -> HealthResponse:
     try:
         session.execute(text("SELECT 1"))
         database = "ok"
@@ -30,4 +34,5 @@ def health(response: Response, session: Session = Depends(get_session)) -> Healt
         status="ok" if database == "ok" else "error",
         version=version("llmll-backend"),
         database=database,
+        llm=request.app.state.llm.name,
     )

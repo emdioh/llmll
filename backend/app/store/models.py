@@ -12,7 +12,9 @@ from sqlalchemy import (
     Integer,
     MetaData,
     String,
+    Text,
     TypeDecorator,
+    UniqueConstraint,
     text,
 )
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -112,6 +114,7 @@ class Exercise(Base):
     generator: Mapped[str] = mapped_column(String)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime())
     session_id: Mapped[str] = mapped_column(String, index=True)
+    status: Mapped[str] = mapped_column(String, default="ready", server_default="ready")
 
 
 class Attempt(Base):
@@ -169,3 +172,64 @@ class ItemMemory(Base):
     tag_error_counts: Mapped[dict[str, float]] = mapped_column(JSON, default=dict)
     last_event_id: Mapped[int] = mapped_column(Integer)
     projection_version: Mapped[str] = mapped_column(String)
+
+
+class LLMCall(Base):
+    """Log of every LLM call, including failures (the grader evaluation dataset)."""
+
+    __tablename__ = "llm_calls"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    ts: Mapped[datetime] = mapped_column(UTCDateTime())
+    task: Mapped[str] = mapped_column(String)
+    prompt_version: Mapped[str] = mapped_column(String)
+    model: Mapped[str] = mapped_column(String)
+    request: Mapped[dict[str, Any]] = mapped_column(JSON)
+    response: Mapped[Any | None] = mapped_column(JSON, nullable=True)
+    stop_reason: Mapped[str | None] = mapped_column(String, nullable=True)
+    input_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    output_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    cache_read_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    cache_write_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    latency_ms: Mapped[int] = mapped_column(Integer, default=0)
+    error: Mapped[str | None] = mapped_column(Text, nullable=True)
+
+
+class Evaluation(Base):
+    __tablename__ = "evaluations"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    attempt_id: Mapped[int] = mapped_column(ForeignKey("attempts.id"))
+    llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
+    lt_matches: Mapped[list[dict[str, Any]] | None] = mapped_column(JSON, nullable=True)
+    result: Mapped[dict[str, Any]] = mapped_column(JSON)
+    grader_version: Mapped[str] = mapped_column(String)
+    supersedes: Mapped[int | None] = mapped_column(ForeignKey("evaluations.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+
+
+class RemediationItem(Base):
+    __tablename__ = "remediation_queue"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    learner_id: Mapped[int] = mapped_column(ForeignKey("learners.id"))
+    item_id: Mapped[str] = mapped_column(ForeignKey("items.id"))
+    diagnostic_tags: Mapped[list[str]] = mapped_column(JSON, default=list)
+    evaluation_id: Mapped[int | None] = mapped_column(ForeignKey("evaluations.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+    consumed_at: Mapped[datetime | None] = mapped_column(UTCDateTime(), nullable=True)
+
+
+class StoredExplanation(Base):
+    """Cached error explanations, one per evaluation and item."""
+
+    __tablename__ = "explanations"
+    __table_args__ = (UniqueConstraint("evaluation_id", "item_id"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    evaluation_id: Mapped[int] = mapped_column(ForeignKey("evaluations.id"))
+    item_id: Mapped[str] = mapped_column(ForeignKey("items.id"))
+    llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
+    markdown: Mapped[str] = mapped_column(Text)
+    examples: Mapped[list[dict[str, str]]] = mapped_column(JSON, default=list)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
