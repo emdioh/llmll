@@ -29,9 +29,16 @@ Options:
 | `--out FILE` | Write the full JSON report (summary, per category, per case and run, token cost). |
 | `--max-fp RATE` | Fail (exit 1) when the false-positive rate on correct answers exceeds RATE (default 0.05). |
 | `--no-languagetool` | Never query LanguageTool; use the matches recorded in the cases (if any). |
+| `--quiet` | No per-case progress lines. |
+
+Progress is printed on stderr, one line per graded run: the case id appears before the LLM call
+(so a slow call is visible as such), then latency, `ok` / `MISS expected X, got Y` / `FAILED
+<provider error>`, and the estimated time left. The summary goes to stdout. If the first 3 runs
+all fail the run stops early; failures are grouped by error with a hint in the summary. Ctrl+C
+stops the run and still prints (and writes, with `--out`) the report for the runs completed so far.
 
 Exit codes: `0` ok, `1` false-positive rate above `--max-fp` or invalid cases, `2` some LLM calls
-failed (the metrics are incomplete).
+failed (the metrics are incomplete), `130` interrupted with Ctrl+C.
 
 The run uses the real pipeline (`LLMClient.grade_sentence`, then `reconcile_answer`, the same function
 the app calls) but **no database**: the curriculum is read from the YAML files, LLM calls are

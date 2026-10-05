@@ -530,3 +530,58 @@ def test_failure_hints() -> None:
     )
     assert "credit" in failure_hint("Error code: 402 - Insufficient credits")
     assert failure_hint("something unexpected") is None
+
+
+def test_progress_events_and_printer(tmp_path: Path) -> None:
+    import io
+
+    from app.cli import eval_progress_printer
+    from app.evals.cases import load_cases
+    from app.evals.runner import MemoryRecorder, run_eval
+
+    items = items_of(load_curriculum(CURRICULUM))
+    cases = load_cases(three_cases(tmp_path))
+    events = []
+    llm = _FailingGrader("NotFoundError: Error code: 404 - model not found")
+    run_eval(cases, llm, MemoryRecorder(), items, abort_after=2, progress=events.append)
+    assert [(e.phase, e.run, e.total) for e in events] == [
+        ("start", 1, 3),
+        ("done", 1, 3),
+        ("start", 2, 3),
+        ("done", 2, 3),
+    ]
+    assert events[1].error and events[1].case_id == cases[0].id
+
+    stream = io.StringIO()
+    show = eval_progress_printer(stream)
+    for event in events:
+        show(event)
+    lines = stream.getvalue().splitlines()
+    assert lines[0].startswith("grading 3 run(s)")
+    assert lines[1].startswith("[1/3] " + cases[0].id) and "FAILED" in lines[1]
+    assert "eta" in lines[1] and "eta" in lines[2]
+
+
+def test_ctrl_c_keeps_a_partial_report(tmp_path: Path) -> None:
+    from app.evals.cases import load_cases
+    from app.evals.runner import MemoryRecorder, format_summary, run_eval
+    from app.llm.types import GradeResult
+
+    items = items_of(load_curriculum(CURRICULUM))
+    cases = load_cases(three_cases(tmp_path))
+
+    class InterruptedGrader:
+        name = "fake"
+        routes = {"grade_sentence": "fake/fake"}
+        calls = 0
+
+        def grade_sentence(self, request):  # type: ignore[no-untyped-def]
+            self.calls += 1
+            if self.calls == 2:
+                raise KeyboardInterrupt
+            return GradeResult(overall="correct", corrected_sentence="x", feedback="ok")
+
+    report = run_eval(cases, InterruptedGrader(), MemoryRecorder(), items)
+    summary = report["summary"]
+    assert summary["interrupted"] is True and summary["completed_runs"] == 1
+    assert "interrupted: metrics cover the 1 run(s)" in format_summary(report)

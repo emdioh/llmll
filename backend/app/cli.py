@@ -3,8 +3,10 @@
 import argparse
 import json
 import sys
+from collections.abc import Callable
 from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 from sqlalchemy import select
 
@@ -71,6 +73,41 @@ def _load_task_config(value: str | None) -> dict[str, dict]:
     return config
 
 
+def _duration(seconds: float) -> str:
+    seconds = int(round(seconds))
+    return f"{seconds // 60}m{seconds % 60:02d}s" if seconds >= 60 else f"{seconds}s"
+
+
+def eval_progress_printer(stream: Any = None) -> Callable[[Any], None]:
+    """One line per graded run on stderr: case, outcome vs expectation, latency, ETA.
+    The case id is printed before the (possibly slow) LLM call, the result after it."""
+    out = stream or sys.stderr
+
+    def show(p: Any) -> None:
+        width = len(str(p.total))
+        if p.phase == "start":
+            if p.run == 1:
+                print(f"grading {p.total} run(s); results stream below (Ctrl+C to stop)", file=out)
+            print(f"[{p.run:>{width}}/{p.total}] {p.case_id:<28} ", end="", file=out, flush=True)
+            return
+        if p.phase == "interrupted":
+            print("interrupted", file=out, flush=True)
+            return
+        latency = f"{p.latency_ms / 1000:5.1f}s" if p.latency_ms is not None else "     -"
+        if p.error is not None:
+            message = " ".join(p.error.split())
+            result = f"FAILED  {message[:110]}{'…' if len(message) > 110 else ''}"
+        elif p.overall_ok:
+            result = f"ok      {p.predicted_overall}"
+        else:
+            result = f"MISS    expected {p.expected_overall}, got {p.predicted_overall}"
+        remaining = (p.elapsed_s / p.run) * (p.total - p.run)
+        eta = f"  eta {_duration(remaining)}" if p.run < p.total else ""
+        print(f"{latency}  {result}{eta}", file=out, flush=True)
+
+    return show
+
+
 def cmd_eval_grader(args: argparse.Namespace) -> int:
     from app.evals.cases import CaseFileError, check_against_curriculum, load_cases
     from app.evals.runner import (
@@ -125,7 +162,13 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         return 1
     languagetool = None if args.no_languagetool else LanguageToolClient(settings.languagetool_url)
     report = run_eval(
-        cases, llm, recorder, items, languagetool=languagetool, repeat=max(args.repeat, 1)
+        cases,
+        llm,
+        recorder,
+        items,
+        languagetool=languagetool,
+        repeat=max(args.repeat, 1),
+        progress=None if args.quiet else eval_progress_printer(),
     )
     print(format_summary(report))
     if args.out:
@@ -133,6 +176,8 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         print(f"\nwrote {out}")
+    if report["summary"].get("interrupted"):
+        return 130
     if report["summary"]["failed_runs"]:
         print("some runs failed: the metrics are incomplete", file=sys.stderr)
         return 2
@@ -351,6 +396,7 @@ def main(argv: list[str] | None = None) -> int:
         "--model", help="model for grade_sentence (overrides the configuration); recorded too"
     )
     p_eval.add_argument("--repeat", type=int, default=1, help="runs per case (consistency)")
+    p_eval.add_argument("--quiet", action="store_true", help="no per-case progress lines")
     p_eval.add_argument("--out", help="write the JSON report here")
     p_eval.add_argument(
         "--max-fp", type=float, default=0.05, help="max false-positive rate on correct answers"

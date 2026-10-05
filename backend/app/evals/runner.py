@@ -8,9 +8,11 @@ recorded in the case file (when present) stand in for it.
 """
 
 import statistics
+import time
 from collections import defaultdict
-from collections.abc import Sequence
-from typing import Any
+from collections.abc import Callable, Sequence
+from dataclasses import dataclass
+from typing import Any, Literal
 
 from app.curriculum.loader import Curriculum
 from app.domain.grader_eval import (
@@ -115,6 +117,25 @@ def _lt_matches(
     return case.lt_matches
 
 
+@dataclass(frozen=True)
+class Progress:
+    """Emitted twice per run: `phase="start"` before the LLM call, then `"done"` after it
+    (or `"interrupted"` when Ctrl+C arrives during the call)."""
+
+    phase: Literal["start", "done", "interrupted"]
+    run: int  # 1-based, over cases x repeat
+    total: int
+    case_id: str
+    category: str
+    expected_overall: str
+    predicted_overall: str | None = None
+    overall_ok: bool | None = None
+    n_errors: int | None = None
+    error: str | None = None  # the LLM call failed
+    latency_ms: int | None = None
+    elapsed_s: float = 0.0
+
+
 def run_eval(
     cases: Sequence[GraderCase],
     llm: LLMClient,
@@ -124,6 +145,7 @@ def run_eval(
     languagetool: LanguageToolClient | None = None,
     repeat: int = 1,
     abort_after: int = 3,
+    progress: Callable[[Progress], None] | None = None,
 ) -> dict[str, Any]:
     """Grade every case `repeat` times and compute the report (a JSON-serializable dict).
 
@@ -144,22 +166,51 @@ def run_eval(
     failure_cases: dict[str, list[str]] = defaultdict(list)
     successes = 0
     aborted = False
+    interrupted = False
+    total_runs = len(cases) * repeat
+    run_no = 0
+    started = time.monotonic()
+
+    def emit(
+        phase: Literal["start", "done", "interrupted"], case: GraderCase, **fields: Any
+    ) -> None:
+        if progress is not None:
+            progress(
+                Progress(
+                    phase=phase,
+                    run=run_no,
+                    total=total_runs,
+                    case_id=case.id,
+                    category=case.category,
+                    expected_overall=case.expected.overall,
+                    elapsed_s=time.monotonic() - started,
+                    **fields,
+                )
+            )
 
     for case in cases:
-        if aborted:
+        if aborted or interrupted:
             break
         request = grade_request(case, items, _lt_matches(case, languagetool, live_lt))
         runs: list[dict[str, Any]] = []
         signatures: list[Signature] = []
         for _ in range(repeat):
+            run_no += 1
+            emit("start", case)
             before = len(recorder.records)
             try:
                 grade = llm.grade_sentence(request)
                 evaluation = reconcile_answer(grade, request, known, known)
+            except KeyboardInterrupt:
+                # Ctrl+C: stop here and still report on the runs completed so far.
+                interrupted = True
+                emit("interrupted", case)
+                break
             except LLMError as exc:
                 failures += 1
                 failure_cases[str(exc)].append(case.id)
                 runs.append({"error": str(exc)})
+                emit("done", case, error=str(exc))
                 if not successes and failures >= abort_after:
                     aborted = True
                     break
@@ -206,6 +257,14 @@ def run_eval(
                 models.add(record.model)
             reconcile_versions.add(evaluation.reconcile_version)
             runs.append(run)
+            emit(
+                "done",
+                case,
+                predicted_overall=evaluation.overall,
+                overall_ok=score.overall_ok,
+                n_errors=len(evaluation.errors),
+                latency_ms=record.latency_ms if record is not None else None,
+            )
         agreement = consistency(signatures)
         case_reports.append(
             {
@@ -223,6 +282,8 @@ def run_eval(
     summary = aggregate(scores).to_dict()
     summary["failed_runs"] = failures
     summary["aborted"] = aborted
+    summary["interrupted"] = interrupted
+    summary["completed_runs"] = successes + failures
     summary["failures"] = [
         {"error": error, "count": len(ids), "cases": ids, "hint": failure_hint(error)}
         for error, ids in sorted(failure_cases.items(), key=lambda kv: -len(kv[1]))
@@ -354,6 +415,11 @@ def format_summary(report: dict[str, Any]) -> str:
                 lines.append(f"      hint: {f['hint']}")
         if len(failures) > 5:
             lines.append(f"  … and {len(failures) - 5} more distinct errors (see --out report)")
+    if s.get("interrupted"):
+        lines += [
+            "",
+            f"interrupted: metrics cover the {s['completed_runs']} run(s) completed before Ctrl+C",
+        ]
     if s.get("aborted"):
         lines += [
             "",

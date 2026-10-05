@@ -22,5 +22,7 @@ fi
 
 mkdir -p "$ROOT/evals-reports"
 out="$ROOT/evals-reports/grader-$(date +%Y%m%d-%H%M%S).json"
-(cd "$BACKEND" && uv run python -m app.cli eval-grader --out "$out" ${extra[@]+"${extra[@]}"} "$@")
-echo "report: $out"
+status=0
+(cd "$BACKEND" && uv run python -m app.cli eval-grader --out "$out" ${extra[@]+"${extra[@]}"} "$@") || status=$?
+[[ -f "$out" ]] && echo "report: $out"
+exit "$status"
