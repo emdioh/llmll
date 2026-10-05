@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      LLMLL_LANGUAGETOOL_URL: http://languagetool:8010
+    volumes:
+      - llmll-data:/data
+    depends_on:
+      - languagetool
+    restart: unless-stopped
+
+  languagetool:
+    image: erikvl87/languagetool:latest
+    environment:
+      Java_Xms: 512m
+      Java_Xmx: 1g
+    restart: unless-stopped
+
+volumes:
+  llmll-data:
