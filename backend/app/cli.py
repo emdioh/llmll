@@ -219,6 +219,105 @@ def cmd_optimize_fsrs(args: argparse.Namespace) -> int:
     return 0
 
 
+KEY_PREFIXES = {"anthropic": "sk-ant-", "openai": "sk-", "openrouter": "sk-or-"}
+KEY_VARS = {
+    "anthropic": ("ANTHROPIC_API_KEY",),
+    "openai": ("OPENAI_API_KEY",),
+    "google": ("GEMINI_API_KEY", "GOOGLE_API_KEY"),
+    "openrouter": ("OPENROUTER_API_KEY",),
+}
+
+
+def describe_key(provider: str, raw: str | None) -> list[str]:
+    """Human-readable facts about a key as the app receives it, without revealing it."""
+    if raw is None:
+        return ["not set"]
+    cleaned = raw.strip().strip("\"'").strip()
+    facts = [f"set, {len(cleaned)} characters, starts with {cleaned[:6]!r}…"]
+    if raw != raw.strip():
+        facts.append("had surrounding whitespace or a line ending (now removed automatically)")
+    if raw.strip()[:1] in ("'", '"'):
+        facts.append("was wrapped in quotes (now removed automatically)")
+    if any(c.isspace() for c in cleaned):
+        facts.append("PROBLEM: contains spaces inside: paste the key again")
+    if not cleaned.isascii():
+        facts.append("PROBLEM: contains non-ASCII characters: paste the key again")
+    if "<" in cleaned or "..." in cleaned or "…" in cleaned:
+        facts.append("PROBLEM: looks like a placeholder, not a real key")
+    prefix = KEY_PREFIXES.get(provider)
+    if prefix and not cleaned.startswith(prefix):
+        facts.append(f"PROBLEM: {provider} keys normally start with {prefix!r}")
+    return facts
+
+
+def cmd_check_llm(args: argparse.Namespace) -> int:
+    """Show which provider, model and key each task would use, then (with --call) make one
+    tiny real request. Keys are never printed, only their length and first characters."""
+    import os
+    import time
+
+    from app.evals.runner import failure_hint
+    from app.llm.client import LLMError
+    from app.llm.factory import LLMConfigError, build_llm_client_with_recorder, resolve_routes
+    from app.llm.types import GlossRequest
+
+    settings = get_settings()
+    try:
+        routes = resolve_routes(settings)
+    except LLMConfigError as exc:
+        print(f"configuration error: {exc}", file=sys.stderr)
+        return 1
+    print("task routing:")
+    for task, cfg in routes.items():
+        print(f"  {task:<18} {cfg.provider}/{cfg.model}  ({cfg.structured_output} output)")
+    problems = False
+    for provider in sorted({str(cfg.provider) for cfg in routes.values()} - {"fake"}):
+        print(f"\n{provider} key:")
+        variables = KEY_VARS[provider]
+        if not any(os.environ.get(var, "").strip() for var in variables):
+            problems = True
+            print(f"  PROBLEM: {' / '.join(variables)} is not set in this environment")
+            others = [
+                v for p, vs in KEY_VARS.items() if p != provider for v in vs if os.environ.get(v)
+            ]
+            if others:
+                print(f"  (set instead: {', '.join(others)}: is the key under the wrong name?)")
+            continue
+        for var in variables:
+            facts = describe_key(provider, os.environ.get(var))
+            problems |= any(f.startswith("PROBLEM") for f in facts)
+            print(f"  {var}: " + "; ".join(facts))
+    if not args.call:
+        print("\nrun with --call to make one small real request (costs a fraction of a cent)")
+        return 1 if problems else 0
+
+    print("\ntest call (gloss task):")
+    try:
+        llm = build_llm_client_with_recorder(settings, lambda _r: None, allow_fake_fallback=False)
+    except LLMConfigError as exc:
+        print(f"  configuration error: {exc}", file=sys.stderr)
+        return 1
+    started = time.monotonic()
+    try:
+        gloss = llm.gloss(
+            GlossRequest(
+                word="Haus",
+                lemma="Haus",
+                sentence="Das Haus ist groß.",
+                level="A2",
+                explanation_language="it",
+            )
+        )
+    except LLMError as exc:
+        print(f"  FAILED: {exc}")
+        if hint := failure_hint(str(exc)):
+            print(f"  hint: {hint}")
+        return 1
+    elapsed = int((time.monotonic() - started) * 1000)
+    print(f"  OK in {elapsed} ms: Haus = {gloss.translation!r}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="python -m app.cli")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -268,6 +367,12 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_contests.add_argument("directory")
     p_contests.set_defaults(func=cmd_export_contests)
+
+    p_check = sub.add_parser(
+        "check-llm", help="show provider/model/key per task; --call makes one test request"
+    )
+    p_check.add_argument("--call", action="store_true", help="make one small real request")
+    p_check.set_defaults(func=cmd_check_llm)
 
     p_opt = sub.add_parser("optimize-fsrs", help="fit FSRS parameters to the review history")
     p_opt.add_argument("--min-reviews", type=int, default=1000)

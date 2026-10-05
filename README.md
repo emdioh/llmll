@@ -147,6 +147,7 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/import-curriculum.sh` | Validate and import `curriculum/de` after editing the YAML |
 | `scripts/replay.sh` | Rebuild memory projections from the event log |
 | `scripts/languagetool.sh [stop]` | Start/stop a local LanguageTool on :8010 (Docker) |
+| `scripts/check-llm.sh [--call]` | Which provider/model/key each task uses (keys not printed); `--call` makes one test request |
 | `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool and a timestamped report in `evals-reports/` (costs API credits) |
 | `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
 | `scripts/up.sh [logs\|down]` | Full app with Docker Compose on :8000 |

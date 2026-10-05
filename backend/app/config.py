@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Literal
 
-from pydantic import AliasChoices, Field, SecretStr
+from pydantic import AliasChoices, Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -40,6 +40,27 @@ class Settings(BaseSettings):
     # Force the Secure flag on the session cookie (use behind an HTTPS reverse proxy).
     cookie_secure: bool = False
     llm_tasks: dict[str, dict[str, Any]] = Field(default_factory=dict)
+
+    @field_validator(
+        "anthropic_api_key",
+        "openai_api_key",
+        "gemini_api_key",
+        "openrouter_api_key",
+        "access_token",
+        mode="before",
+    )
+    @classmethod
+    def _clean_secret(cls, value: Any) -> Any:
+        """Forgive the usual copy-paste accidents in keys: surrounding whitespace (including a
+        Windows `\\r`), and quotes that ended up inside the value. Empty means unset."""
+        if isinstance(value, SecretStr):
+            value = value.get_secret_value()
+        if not isinstance(value, str):
+            return value
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in "\"'":
+            value = value[1:-1].strip()
+        return value or None
 
 
 @lru_cache
