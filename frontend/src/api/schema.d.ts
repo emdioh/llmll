@@ -21,6 +21,57 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/auth/status": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Auth Status */
+        get: operations["getAuthStatus"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/login": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Login */
+        post: operations["login"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/auth/logout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Logout */
+        post: operations["logout"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/learner": {
         parameters: {
             query?: never;
@@ -549,6 +600,8 @@ export interface components {
             memory: components["schemas"]["MemoryOut"] | null;
             /** Evaluation Id */
             evaluation_id?: number | null;
+            /** Attempt Id */
+            attempt_id?: number | null;
         };
         /** AnswerPayload */
         AnswerPayload: {
@@ -556,6 +609,16 @@ export interface components {
             choice?: number | null;
             /** Text */
             text?: string | null;
+        };
+        /** AuthStatus */
+        AuthStatus: {
+            /**
+             * Auth
+             * @enum {string}
+             */
+            auth: "enabled" | "disabled";
+            /** Authenticated */
+            authenticated: boolean;
         };
         /** BandResult */
         BandResult: {
@@ -863,6 +926,11 @@ export interface components {
              * @enum {string}
              */
             llm: "fake" | "anthropic";
+            /**
+             * Auth
+             * @enum {string}
+             */
+            auth: "enabled" | "disabled";
         };
         /** ItemDetail */
         ItemDetail: {
@@ -981,6 +1049,11 @@ export interface components {
             known_languages?: string[] | null;
             /** Explanation Language */
             explanation_language?: string | null;
+        };
+        /** LoginIn */
+        LoginIn: {
+            /** Token */
+            token: string;
         };
         /** MemoryEntry */
         MemoryEntry: {
@@ -1110,6 +1183,8 @@ export interface components {
             items: components["schemas"]["ItemResult"][];
             /** Evaluation Id */
             evaluation_id: number;
+            /** Attempt Id */
+            attempt_id?: number | null;
         };
         /** QueueEntry */
         QueueEntry: {
@@ -1362,6 +1437,79 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    getAuthStatus: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuthStatus"];
+                };
+            };
+        };
+    };
+    login: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LoginIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuthStatus"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    logout: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AuthStatus"];
                 };
             };
         };

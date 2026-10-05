@@ -242,4 +242,23 @@ describe("contest: flashcard feedback", () => {
       screen.queryByRole("button", { name: "Secondo me era giusto" }),
     ).not.toBeInTheDocument();
   });
+
+  it("contests via the attempt when there is no evaluation id", async () => {
+    mockApi({
+      "POST /api/attempts/31/contest": contestResult("accepted", [
+        { item_id: "lex:tisch", label: "Tisch", outcome: "correct" },
+      ]),
+    });
+    const user = userEvent.setup();
+    render(
+      <Feedback result={{ ...flash, evaluation_id: null, attempt_id: 31 }} />,
+    );
+    await user.click(
+      screen.getByRole("button", { name: "Secondo me era giusto" }),
+    );
+    await user.click(screen.getByRole("button", { name: "Send contest" }));
+    expect(
+      await screen.findByText("Ok, conteggiato come corretto."),
+    ).toBeInTheDocument();
+  });
 });

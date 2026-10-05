@@ -458,6 +458,7 @@ def submit_answer(
             "diagnostic_tags": [],
             "feedback_it": "Nuovo argomento: lo ritroverai negli esercizi.",
             "memory": _memory_out(memory_row),
+            "attempt_id": attempt.id,
         }
     return {
         "outcome": outcome,
@@ -474,4 +475,5 @@ def submit_answer(
         "feedback_it": feedback,
         "memory": _memory_out(memory_row),
         "evaluation_id": evaluation_id,
+        "attempt_id": attempt.id,
     }

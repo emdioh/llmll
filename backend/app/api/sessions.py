@@ -130,6 +130,8 @@ class AnswerOut(BaseModel):
     memory: MemoryOut | None
     evaluation_id: int | None = None
     """Evaluation to contest (null for intro cards)."""
+    attempt_id: int | None = None
+    """Attempt id; contest via `/api/attempts/{id}/contest` when `evaluation_id` is null."""
 
 
 class AnswerError(BaseModel):
@@ -159,6 +161,7 @@ class ProductionAnswerOut(BaseModel):
     feedback: str
     items: list[ItemResult]
     evaluation_id: int
+    attempt_id: int | None = None
 
 
 def to_card(c: service.BuiltCard) -> SessionCard:

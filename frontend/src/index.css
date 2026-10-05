@@ -779,3 +779,45 @@ button.link {
   width: 100%;
   height: 6px;
 }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 0 0 16px;
+}
+
+.stats-grid > div {
+  padding: 8px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.stats-grid dt {
+  font-size: 0.8rem;
+  opacity: 0.75;
+}
+
+.stats-grid dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.calibration {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.calibration th,
+.calibration td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: right;
+}
+
+.calibration th:first-child,
+.calibration td:first-child {
+  text-align: left;
+}

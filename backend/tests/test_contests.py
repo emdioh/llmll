@@ -118,6 +118,7 @@ def test_contest_production_voids_replays_and_matches_full_replay(
     intro_answer(api, session, intro)
     wrong = answer(api, session, first, "Das Tisch")
     assert wrong["outcome"] == "major_errors"
+    assert wrong["attempt_id"] is not None
     answer(api, session, second, reference_of(migrated_settings, second["exercise_id"]))
     with db_of(migrated_settings) as db:
         assert [r.item_id for r in db.scalars(select(RemediationItem))] == ["gram:cases"]

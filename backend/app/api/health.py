@@ -8,6 +8,7 @@ from pydantic import BaseModel
 from sqlalchemy import text
 from sqlalchemy.orm import Session
 
+from app.api.auth import auth_mode
 from app.store.db import get_session
 
 router = APIRouter(prefix="/api")
@@ -18,6 +19,7 @@ class HealthResponse(BaseModel):
     version: str
     database: str
     llm: Literal["fake", "anthropic"]
+    auth: Literal["enabled", "disabled"]
 
 
 @router.get("/health", response_model=HealthResponse)
@@ -35,4 +37,5 @@ def health(
         version=version("llmll-backend"),
         database=database,
         llm=request.app.state.llm.name,
+        auth=auth_mode(request),
     )

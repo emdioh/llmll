@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import {
   ApiError,
+  contestAttempt,
   contestEvaluation,
   type ContestResult,
 } from "../../api/client";
@@ -8,11 +9,14 @@ import {
 /** Small inline form: optional reason, send/cancel. One contest per evaluation. */
 export function ContestForm({
   evaluationId,
+  attemptId,
   itemIds,
   onResolved,
   onCancel,
 }: {
-  evaluationId: number;
+  /** Evaluation to contest; when null, `attemptId` (pre-M4 flashcard attempts) is used. */
+  evaluationId?: number | null;
+  attemptId?: number | null;
   /** Contested items; empty means the whole answer. */
   itemIds: string[];
   onResolved: (result: ContestResult) => void;
@@ -28,7 +32,11 @@ export function ContestForm({
     setBusy(true);
     setError(null);
     try {
-      onResolved(await contestEvaluation(evaluationId, itemIds, reason));
+      if (evaluationId != null)
+        onResolved(await contestEvaluation(evaluationId, itemIds, reason));
+      else if (attemptId != null)
+        onResolved(await contestAttempt(attemptId, itemIds, reason));
+      else throw new Error("Nothing to contest");
     } catch (err) {
       setError(
         err instanceof ApiError && err.status === 409

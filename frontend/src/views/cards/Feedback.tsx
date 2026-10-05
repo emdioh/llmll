@@ -43,24 +43,30 @@ export default function Feedback({ result }: { result: FlashcardAnswer }) {
           <em>{expected.example.it}</em>
         </p>
       )}
-      {result.evaluation_id != null && result.outcome !== "correct" && (
-        <div className="contest">
-          {contest ? (
-            <p role="status">{contestMessage(contest)}</p>
-          ) : form ? (
-            <ContestForm
-              evaluationId={result.evaluation_id}
-              itemIds={[]}
-              onResolved={setContest}
-              onCancel={() => setForm(false)}
-            />
-          ) : (
-            <button type="button" className="btn" onClick={() => setForm(true)}>
-              Secondo me era giusto
-            </button>
-          )}
-        </div>
-      )}
+      {(result.evaluation_id != null || result.attempt_id != null) &&
+        result.outcome !== "correct" && (
+          <div className="contest">
+            {contest ? (
+              <p role="status">{contestMessage(contest)}</p>
+            ) : form ? (
+              <ContestForm
+                evaluationId={result.evaluation_id}
+                attemptId={result.attempt_id}
+                itemIds={[]}
+                onResolved={setContest}
+                onCancel={() => setForm(false)}
+              />
+            ) : (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setForm(true)}
+              >
+                Secondo me era giusto
+              </button>
+            )}
+          </div>
+        )}
     </div>
   );
 }

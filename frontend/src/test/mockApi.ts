@@ -47,3 +47,27 @@ export const LEARNER = {
     production_slots: 2,
   },
 };
+
+export const AUTH_OFF = { auth: "disabled", authenticated: true };
+export const STATS = {
+  reviews_7d: 42,
+  reviews_30d: 120,
+  sessions_7d: 5,
+  readings_7d: 2,
+  new_items_7d: 17,
+  observed_retention: 0.87,
+  target_retention: 0.9,
+  backlog: 9,
+  calibration: [
+    {
+      bucket_low: 0.8,
+      bucket_high: 0.9,
+      n: 30,
+      predicted: 0.85,
+      observed: 0.8,
+      recalled: 24,
+      assisted: 1,
+      forgotten: 5,
+    },
+  ],
+};

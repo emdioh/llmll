@@ -21,5 +21,19 @@ services:
       Java_Xmx: 1g
     restart: unless-stopped
 
+  # Optional HTTPS reverse proxy (see "Deploying on a server" in README.md).
+  # caddy:
+  #   image: caddy:2
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./Caddyfile:/etc/caddy/Caddyfile:ro
+  #     - caddy-data:/data
+  #   depends_on:
+  #     - app
+  #   restart: unless-stopped
+
 volumes:
   llmll-data:
+  # caddy-data:

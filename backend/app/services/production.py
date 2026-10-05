@@ -623,6 +623,7 @@ def submit_production_answer(
             for o in evaluation.items
         ],
         "evaluation_id": row.id,
+        "attempt_id": attempt.id,
     }
 
 

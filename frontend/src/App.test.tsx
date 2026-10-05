@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { describe, expect, it } from "vitest";
 import App from "./App";
-import { LEARNER, mockApi } from "./test/mockApi";
+import { AUTH_OFF, LEARNER, mockApi } from "./test/mockApi";
 
 function renderAt(path: string) {
   return render(
@@ -16,6 +16,7 @@ function renderAt(path: string) {
 describe("App", () => {
   it("renders the shell and navigates between views", async () => {
     mockApi({
+      "GET /api/auth/status": AUTH_OFF,
       "GET /api/learner": LEARNER,
       "GET /api/grammar": [],
     });
@@ -39,6 +40,7 @@ describe("App", () => {
   it("shows onboarding on 404 and submits the setup form", async () => {
     let created: unknown = null;
     mockApi({
+      "GET /api/auth/status": AUTH_OFF,
       "GET /api/learner": () => ({ status: 404, body: { detail: "none" } }),
       "GET /api/queue": {
         budget: { lemmas_left: 0, grammar_left: 0, backlog: 0 },
@@ -86,6 +88,7 @@ describe("App fake-LLM banner", () => {
   it("shows the banner when the backend uses the fake LLM and lets it be dismissed", async () => {
     sessionStorage.clear();
     mockApi({
+      "GET /api/auth/status": AUTH_OFF,
       "GET /api/learner": LEARNER,
       "GET /api/health": {
         status: "ok",
@@ -103,6 +106,7 @@ describe("App fake-LLM banner", () => {
   it("shows no banner with a real LLM", async () => {
     sessionStorage.clear();
     mockApi({
+      "GET /api/auth/status": AUTH_OFF,
       "GET /api/learner": LEARNER,
       "GET /api/health": {
         status: "ok",

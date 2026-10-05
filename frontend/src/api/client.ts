@@ -44,6 +44,9 @@ function detailMessage(body: unknown, status: number): string {
   return `HTTP ${status}`;
 }
 
+/** Fired when the API answers 401 (not for the login call itself). */
+export const UNAUTHORIZED_EVENT = "llmll:unauthorized";
+
 async function request<T>(
   method: "GET" | "POST" | "PUT",
   path: string,
@@ -61,12 +64,25 @@ async function request<T>(
     throw new ApiError(0, err instanceof Error ? err.message : String(err));
   }
   const data: unknown = await res.json().catch(() => null);
+  if (res.status === 401 && path !== "/api/auth/login")
+    window.dispatchEvent(new Event(UNAUTHORIZED_EVENT));
   if (!res.ok) throw new ApiError(res.status, detailMessage(data, res.status));
   return data as T;
 }
 
 export const getHealth = () =>
   request<Schemas["HealthResponse"]>("GET", "/api/health");
+
+export type AuthStatus = Schemas["AuthStatus"];
+export type Stats = Schemas["StatsOut"];
+export const getAuthStatus = () =>
+  request<AuthStatus>("GET", "/api/auth/status");
+export const login = (token: string) =>
+  request<AuthStatus>("POST", "/api/auth/login", {
+    token,
+  } satisfies Schemas["LoginIn"]);
+export const logout = () => request<AuthStatus>("POST", "/api/auth/logout");
+export const getStats = () => request<Stats>("GET", "/api/stats");
 
 export const getLearner = () => request<Learner>("GET", "/api/learner");
 export const createLearner = (body: Schemas["LearnerCreate"]) =>

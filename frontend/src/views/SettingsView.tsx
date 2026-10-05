@@ -7,7 +7,9 @@ import {
   type Level,
   type Settings,
 } from "../api/client";
+import { useAuth } from "../authContext";
 import { useLearner } from "../learnerContext";
+import StatsSection from "./StatsSection";
 import type { Schemas } from "../api/client";
 
 type HealthResponse = Schemas["HealthResponse"];
@@ -91,6 +93,7 @@ function validate(f: Field, raw: string): string | null {
 
 export default function SettingsView() {
   const { learner, setLearner } = useLearner();
+  const auth = useAuth();
   const [level, setLevel] = useState<Level>(learner.level);
   const [values, setValues] = useState<Record<string, string>>(() =>
     Object.fromEntries(
@@ -200,6 +203,15 @@ export default function SettingsView() {
       <Link to="/placement" className="btn">
         Re-run placement test
       </Link>
+      <StatsSection />
+      {auth.enabled && (
+        <>
+          <h2>Access</h2>
+          <button type="button" className="btn" onClick={auth.logout}>
+            Log out
+          </button>
+        </>
+      )}
       <p className="status" role="status">
         {health.kind === "loading" && "Backend: checking…"}
         {health.kind === "ok" &&

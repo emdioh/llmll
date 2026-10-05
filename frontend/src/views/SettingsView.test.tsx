@@ -4,7 +4,8 @@ import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import type { Learner } from "../api/client";
 import { LearnerContext } from "../learnerContext";
-import { LEARNER, mockApi } from "../test/mockApi";
+import { AuthContext } from "../authContext";
+import { LEARNER, STATS, mockApi } from "../test/mockApi";
 import SettingsView from "./SettingsView";
 
 const health = { status: "ok", version: "0.1.0", database: "ok" };
@@ -21,6 +22,61 @@ function renderView(setLearner = vi.fn()) {
   );
   return setLearner;
 }
+
+describe("SettingsView stats and access", () => {
+  it("shows stats numbers and the calibration table", async () => {
+    mockApi({ "GET /api/health": health, "GET /api/stats": STATS });
+    renderView();
+    expect(await screen.findByText("Reviews, 7 days")).toBeInTheDocument();
+    expect(screen.getByText("42")).toBeInTheDocument();
+    expect(screen.getByText("87%")).toBeInTheDocument();
+    expect(screen.getByText("90%")).toBeInTheDocument();
+    const row = screen.getByRole("row", { name: /80%–90%/ });
+    expect(row).toHaveTextContent("85%");
+    expect(row).toHaveTextContent("30");
+  });
+
+  it("handles empty calibration and null retention", async () => {
+    mockApi({
+      "GET /api/health": health,
+      "GET /api/stats": {
+        ...STATS,
+        observed_retention: null,
+        calibration: [],
+      },
+    });
+    renderView();
+    expect(
+      await screen.findByText("Not enough reviews yet."),
+    ).toBeInTheDocument();
+  });
+
+  it("offers logout only when auth is enabled", async () => {
+    mockApi({ "GET /api/health": health, "GET /api/stats": STATS });
+    const logout = vi.fn();
+    const { unmount } = render(
+      <AuthContext.Provider value={{ enabled: true, logout }}>
+        <LearnerContext.Provider
+          value={{ learner: LEARNER as Learner, setLearner: vi.fn() }}
+        >
+          <MemoryRouter>
+            <SettingsView />
+          </MemoryRouter>
+        </LearnerContext.Provider>
+      </AuthContext.Provider>,
+    );
+    await userEvent
+      .setup()
+      .click(await screen.findByRole("button", { name: "Log out" }));
+    expect(logout).toHaveBeenCalled();
+    unmount();
+    renderView();
+    await screen.findByText("Reviews, 7 days");
+    expect(
+      screen.queryByRole("button", { name: "Log out" }),
+    ).not.toBeInTheDocument();
+  });
+});
 
 describe("SettingsView", () => {
   it("shows backend ok state", async () => {
@@ -41,7 +97,10 @@ describe("SettingsView", () => {
   });
 
   it("validates bounds before sending anything", async () => {
-    const fetchMock = mockApi({ "GET /api/health": health });
+    const fetchMock = mockApi({
+      "GET /api/health": health,
+      "GET /api/stats": STATS,
+    });
     renderView();
     const user = userEvent.setup();
     const retention = screen.getByLabelText("Desired retention");
@@ -61,7 +120,9 @@ describe("SettingsView", () => {
     expect(screen.getByText("Must be between 1 and 500")).toBeInTheDocument();
     expect(screen.getByText("Must be a whole number")).toBeInTheDocument();
     expect(
-      fetchMock.mock.calls.every(([u]) => String(u) === "/api/health"),
+      fetchMock.mock.calls.every(([u]) =>
+        ["/api/health", "/api/stats"].includes(String(u)),
+      ),
     ).toBe(true);
   });
 

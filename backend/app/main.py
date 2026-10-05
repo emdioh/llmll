@@ -3,9 +3,10 @@
 from collections.abc import Callable
 from datetime import UTC, datetime
 
-from fastapi import FastAPI
+from fastapi import Depends, FastAPI
 
 from app.api import (
+    auth,
     contests,
     explain,
     grammar,
@@ -19,6 +20,7 @@ from app.api import (
     stats,
 )
 from app.api import settings as settings_api
+from app.api.auth import LoginThrottle, require_auth
 from app.api.frontend import SPAStaticFiles
 from app.config import Settings, get_settings
 from app.llm.client import LLMClient
@@ -50,8 +52,10 @@ def create_app(
     app.state.analyzer = analyzer or SpacyAnalyzer()
     app.state.article_fetcher = article_fetcher or fetch_article
     app.state.contest_resolver = contest_resolver or build_resolver(settings.contest_resolver)
+    app.state.login_throttle = LoginThrottle()
+    app.include_router(health.router)
+    app.include_router(auth.router)
     for router in (
-        health.router,
         learner.router,
         settings_api.router,
         sessions.router,
@@ -64,7 +68,7 @@ def create_app(
         placement.router,
         stats.router,
     ):
-        app.include_router(router)
+        app.include_router(router, dependencies=[Depends(require_auth)])
     if settings.frontend_dist is not None and settings.frontend_dist.is_dir():
         # Mounted last so that /api/* routes take precedence.
         app.mount("/", SPAStaticFiles(directory=settings.frontend_dist, html=True), name="frontend")

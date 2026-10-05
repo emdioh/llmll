@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter } from "react-router";
 import { beforeEach, describe, expect, it } from "vitest";
 import App from "../App";
-import { LEARNER, mockApi } from "../test/mockApi";
+import { AUTH_OFF, LEARNER, mockApi } from "../test/mockApi";
 
 const BODY = "Der Hund läuft schnell.\n\nBerlin ist groß.";
 
@@ -79,6 +79,7 @@ const grade = {
 
 function base(extra: Parameters<typeof mockApi>[0] = {}) {
   return mockApi({
+    "GET /api/auth/status": AUTH_OFF,
     "GET /api/learner": LEARNER,
     "GET /api/texts": [],
     "GET /api/texts/5": TEXT,
@@ -342,7 +343,7 @@ describe("Reader", () => {
 
 describe("Session view", () => {
   it("links to reading", async () => {
-    mockApi({ "GET /api/learner": LEARNER });
+    mockApi({ "GET /api/auth/status": AUTH_OFF, "GET /api/learner": LEARNER });
     renderAt("/");
     expect(
       await screen.findByRole("link", { name: "Read something" }),

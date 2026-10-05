@@ -21,6 +21,10 @@ class Settings(BaseSettings):
     # Name in the contest resolver registry (app.services.contests.RESOLVERS).
     contest_resolver: str = "accept_all"
     # Per-task overrides, e.g. LLMLL_LLM_TASKS='{"grade_sentence": {"effort": "max"}}'.
+    # Shared access token; when unset the API is open (local development).
+    access_token: SecretStr | None = None
+    # Force the Secure flag on the session cookie (use behind an HTTPS reverse proxy).
+    cookie_secure: bool = False
     llm_tasks: dict[str, dict[str, Any]] = Field(default_factory=dict)
 
 
