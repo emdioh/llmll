@@ -1,4 +1,4 @@
-import { useRef, useState, type FormEvent } from "react";
+import { useLayoutEffect, useRef, useState, type FormEvent } from "react";
 import type { AnswerOut, SessionCard } from "../../api/client";
 
 const UMLAUTS = ["ä", "ö", "ü", "ß", "Ä", "Ö", "Ü"];
@@ -17,19 +17,28 @@ export default function ProductionCard({
   const [text, setText] = useState("");
   const [usedHint, setUsedHint] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
+  const caretRef = useRef<number | null>(null);
   const locked = busy || result !== null;
 
   function insert(ch: string) {
     const el = inputRef.current;
     const start = el?.selectionStart ?? text.length;
     const end = el?.selectionEnd ?? text.length;
+    caretRef.current = start + ch.length;
     setText(text.slice(0, start) + ch + text.slice(end));
-    const caret = start + ch.length;
-    requestAnimationFrame(() => {
-      el?.focus();
-      el?.setSelectionRange(caret, caret);
-    });
   }
+
+  // Restore the caret after React has re-rendered the controlled input, so a second
+  // umlaut tapped right away lands in the right place.
+  useLayoutEffect(() => {
+    const el = inputRef.current;
+    const caret = caretRef.current;
+    if (el && caret !== null) {
+      el.focus();
+      el.setSelectionRange(caret, caret);
+      caretRef.current = null;
+    }
+  }, [text]);
 
   function submit(e: FormEvent) {
     e.preventDefault();
