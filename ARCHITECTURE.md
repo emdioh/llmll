@@ -1,61 +1,60 @@
-# LLMLL — Architettura
+# LLMLL — Architecture
 
-> Documento vivo, complementare a [`REQUIREMENTS.md`](REQUIREMENTS.md): i rimandi `R§n`
-> si riferiscono alle sezioni dei requisiti.
-> Stato: bozza v0.1 (ottobre 2026).
+> Living document, companion to [`REQUIREMENTS.md`](REQUIREMENTS.md): references of the
+> form `R§n` point to sections of the requirements.
+> Status: draft v0.2 (October 2026).
 
-## 1. Principi architetturali
+## 1. Architectural principles
 
-1. **Storia degli eventi come fonte di verità.** Ogni risultato di apprendimento è un
-   evento in sola aggiunta. Lo stato di ogni item (memoria FSRS, padronanza) è una
-   **proiezione** ricalcolabile dagli eventi. Questo permette di annullare le
-   contestazioni (R§8), ottimizzare FSRS e cambiare il modello di padronanza senza
-   perdere dati.
-2. **Dominio puro, I/O ai bordi.** Scheduling, voto FSRS, padronanza, selezione degli
-   item: funzioni pure, senza database né LLM, testabili in isolamento.
-3. **L'LLM è un componente, non il cervello.** Decide l'app *cosa* esercitare; l'LLM
-   genera testi e valuta risposte entro schemi strutturati. Ogni chiamata è registrata.
-4. **Contenuti come dati.** Curriculum in YAML versionato, prompt in file versionati.
-5. **Stack mainstream** (R§11): Python/FastAPI, SQLite/SQLAlchemy, React/TypeScript.
+1. **Event history is the source of truth.** Every learning outcome is an append-only
+   event. The state of each item (FSRS memory, mastery) is a **projection** that can be
+   recomputed from the events. This makes it possible to revert contests (R§8), optimise
+   FSRS and change the mastery model without losing data.
+2. **Pure domain, I/O at the edges.** Scheduling, FSRS grading, mastery and item selection
+   are pure functions, with no database or LLM, testable in isolation.
+3. **The LLM is a component, not the brain.** The app decides *what* to practise; the LLM
+   generates text and grades answers within structured schemas. Every call is logged.
+4. **Content is data.** The curriculum is versioned YAML; prompts are versioned files.
+5. **Mainstream stack** (R§11): Python/FastAPI, SQLite/SQLAlchemy, React/TypeScript.
 
-## 2. Vista d'insieme
+## 2. Overview
 
 ```
 ┌──────────────────────────── Frontend (React + TS, PWA) ────────────────────────────┐
-│  Sessione ripasso │ Lettura │ Corpus │ Grammatica │ Impostazioni                   │
+│  Review session │ Reading │ Corpus │ Grammar │ Settings                            │
 └───────────────────────────────────────┬────────────────────────────────────────────┘
                                         │ REST/JSON
 ┌───────────────────────────── Backend (FastAPI) ────────────────────────────────────┐
-│  api/            endpoint HTTP, validazione (Pydantic)                             │
-│  services/       orchestrazione dei casi d'uso                                     │
+│  api/            HTTP endpoints, validation (Pydantic)                             │
+│  services/       use-case orchestration                                            │
 │    session_builder · exercise_service · grading_service · reading_service         │
 │    contest_service · placement_service                                             │
-│  domain/         funzioni pure                                                     │
+│  domain/         pure functions                                                    │
 │    scheduling (FSRS) · mastery · grade_mapping · new_item_budget · word_classifier │
-│  llm/            interfaccia LLMClient + task tipizzati + prompt versionati        │
-│  nlp/            lemmatizzazione (spaCy) · composti · frequenze · LanguageTool     │
-│  store/          modelli SQLAlchemy · event log · proiezioni                       │
+│  llm/            LLMClient interface + typed tasks + versioned prompts             │
+│  nlp/            lemmatization (spaCy) · compounds · frequencies · LanguageTool    │
+│  store/          SQLAlchemy models · event log · projections                       │
 └──────────┬──────────────────────┬──────────────────────┬───────────────────────────┘
            │                      │                      │
      SQLite (file)        LanguageTool (container)   Claude API
            ▲
-   curriculum/*.yaml ──(script di import)
+   curriculum/*.yaml ──(import script)
 ```
 
-## 3. Struttura del repository
+## 3. Repository layout
 
 ```
 llmll/
 ├── REQUIREMENTS.md  ARCHITECTURE.md
-├── docker-compose.yml          # backend + languagetool (+ frontend in build statica)
-├── curriculum/de/              # contenuti, versionati in git
+├── docker-compose.yml          # backend + languagetool (+ frontend as a static build)
+├── curriculum/de/              # content, versioned in git
 │   ├── lexicon/a1.yaml a2.yaml b1.yaml
-│   ├── grammar/*.yaml          # un file per punto grammaticale, con testo di riferimento
+│   ├── grammar/*.yaml          # one file per grammar point, with reference text
 │   └── constructions.yaml
 ├── backend/
 │   ├── pyproject.toml
 │   ├── app/{api,services,domain,llm,nlp,store}/
-│   ├── app/llm/prompts/        # template versionati (es. grade_sentence.v3.md)
+│   ├── app/llm/prompts/        # versioned templates (e.g. grade_sentence.v3.md)
 │   ├── migrations/             # Alembic
 │   ├── scripts/                # import_curriculum, replay_events, eval_grader
 │   └── tests/
@@ -64,152 +63,150 @@ llmll/
     └── src/
 ```
 
-## 4. Modello dati
+## 4. Data model
 
-### 4.1 Contenuti (importati dal curriculum)
+### 4.1 Content (imported from the curriculum)
 
-**`items`**: tutti i knowledge item (R§4.1).
+**`items`**: all knowledge items (R§4.1).
 
-| Campo | Note |
+| Field | Notes |
 |---|---|
-| `id` | slug stabile, mai riutilizzato: `lex:tisch`, `lex:bank#money`, `gram:adj-endings`, `cx:lust-haben-auf` |
+| `id` | stable slug, never reused: `lex:tisch`, `lex:bank#money`, `gram:adj-endings`, `cx:lust-haben-auf` |
 | `kind` | `lemma` · `grammar` · `construction` |
 | `cefr_level` | A1…C2 |
-| `payload` | JSON specifico del tipo: articolo, plurale, traduzioni, esempi; per la grammatica il testo di riferimento e i **tag diagnostici ammessi** |
-| `interference` | JSON: genere IT diverso, falso amico, affinità |
-| `frequency_rank` | da `wordfreq`, per lemmi |
-| `curriculum_version` | hash del file sorgente |
+| `payload` | type-specific JSON: article, plural, translations, examples; for grammar, the reference text and the **allowed diagnostic tags** |
+| `interference` | JSON: different Italian gender, false friend, similarity |
+| `frequency_rank` | from `wordfreq`, for lemmas |
+| `curriculum_version` | hash of the source file |
 
-**`item_prerequisites`** `(item_id, requires_item_id)`: archi del grafo (R§5).
+**`item_prerequisites`** `(item_id, requires_item_id)`: graph edges (R§5).
 
-Per i lemmi, le **due direzioni** (riconoscimento / produzione) non sono item separati
-nel curriculum ma **due tracce di memoria** nella proiezione (`facet = recognition | production`).
+For lemmas, the **two directions** (recognition / production) are not separate items in
+the curriculum but **two memory tracks** in the projection (`facet = recognition | production`).
 
-### 4.2 Stato dello studente
+### 4.2 Learner state
 
-**`learner`**: una riga in v1. Lingue note, livello corrente, impostazioni (limiti
-settimanali, retention target, pesi delle prove).
+**`learner`**: a single row in v1. Known languages, current level, settings (weekly
+limits, retention target, evidence weights).
 
-**`learner_items`**: ciclo di vita di un item per lo studente (R§7.4).
+**`learner_items`**: lifecycle of an item for the learner (R§7.4).
 
-| Campo | Note |
+| Field | Notes |
 |---|---|
 | `status` | `unseen` · `presumed_known` · `candidate` · `introduced` · `suspended` |
-| `candidate_source` | `optin` · `article` · `wordlist` (determina la priorità) |
+| `candidate_source` | `optin` · `article` · `wordlist` (determines priority) |
 | `candidate_since`, `introduced_at` | |
 
-### 4.3 Attività
+### 4.3 Activities
 
-- **`texts`**: articoli e testi generati. URL, testo originale, lingua, versioni semplificate
-  (`text_versions`: livello, testo, copertura misurata, tentativi).
-- **`exercises`**: tipo (`flashcard`, `translation`, `guided`, `transform`, `free`,
-  `reading_summary`), prompt mostrato, soluzione di riferimento (se c'è), `targets`
-  `[(item_id, facet, weight)]`, riferimento al testo, versione del prompt LLM che l'ha generato.
-- **`attempts`**: risposta, tempo impiegato, aiuti usati (suggerimento, glossario).
-- **`evaluations`**: valutazione strutturata di un tentativo (§6.2). Una valutazione non si
-  modifica mai: una contestazione accettata crea una nuova valutazione con
-  `supersedes = <id>`.
-- **`contests`**: valutazione contestata, motivazione, stato, risoluzione, resolver usato.
+- **`texts`**: articles and generated texts. URL, original text, language, simplified
+  versions (`text_versions`: level, text, measured coverage, attempts).
+- **`exercises`**: type (`flashcard`, `translation`, `guided`, `transform`, `free`,
+  `reading_summary`), the prompt shown, reference solution (if any), `targets`
+  `[(item_id, facet, weight)]`, reference to the text, version of the LLM prompt that
+  generated it.
+- **`attempts`**: answer, time taken, help used (hint, glossary).
+- **`evaluations`**: structured evaluation of an attempt (§6.2). An evaluation is never
+  modified: an accepted contest creates a new evaluation with `supersedes = <id>`.
+- **`contests`**: contested evaluation, reason, status, resolution, resolver used.
 
-### 4.4 Event log e proiezioni
+### 4.4 Event log and projections
 
-**`learning_events`**: in sola aggiunta.
+**`learning_events`**: append-only.
 
-| Campo | Note |
+| Field | Notes |
 |---|---|
 | `id`, `ts` | |
 | `item_id`, `facet` | |
-| `kind` | `review` (esercizio esplicito) · `implicit` (uso corretto in frase, lettura) · `lookup` (glossario toccato) · `introduce` · `status_change` |
+| `kind` | `review` (explicit exercise) · `implicit` (correct use in a sentence, reading) · `lookup` (glossary tapped) · `introduce` · `status_change` |
 | `outcome` | `correct` · `assisted` · `error` |
-| `evidence_weight` | dal tipo di esercizio (R§4.2) |
-| `diagnostic_tags` | per errori su punti grammaticali (R§4.1) |
-| `evaluation_id` | da quale valutazione deriva |
-| `voided_by` | null, oppure l'id della valutazione che la sostituisce |
+| `evidence_weight` | from the exercise type (R§4.2) |
+| `diagnostic_tags` | for errors on grammar points (R§4.1) |
+| `evaluation_id` | the evaluation it derives from |
+| `voided_by` | null, or the id of the evaluation that replaces it |
 
-**`item_memory`**: **proiezione**, ricostruibile in qualsiasi momento.
+**`item_memory`**: a **projection**, rebuildable at any time.
 
-| Campo | Note |
+| Field | Notes |
 |---|---|
 | `item_id`, `facet` | |
-| `fsrs_state` | stabilità, difficoltà, ultimo ripasso, scadenza |
-| `mastery`, `n_effective` | media mobile pesata e numero effettivo di osservazioni |
-| `tag_error_counts` | JSON `{tag: count}` con decadimento |
-| `projection_version` | versione di FSRS e dei parametri usati |
+| `fsrs_state` | stability, difficulty, last review, due date |
+| `mastery`, `n_effective` | weighted moving average and effective number of observations |
+| `tag_error_counts` | JSON `{tag: count}` with decay |
+| `projection_version` | version of FSRS and of the parameters used |
 
-**Ricalcolo.** `replay(item_id, facet)` rilegge gli eventi non annullati in ordine di `ts`
-e riapplica le funzioni pure del dominio. Si usa:
-- incrementalmente: un evento nuovo aggiorna la proiezione senza rileggere tutto;
-- in modo puntuale: dopo una contestazione, si rielaborano gli item toccati;
-- in blocco: dopo un cambio di parametri FSRS o del modello di padronanza (script `replay_events`).
+**Recomputation.** `replay(item_id, facet)` re-reads the non-voided events in `ts` order
+and re-applies the pure domain functions. It is used:
+- incrementally: a new event updates the projection without re-reading everything;
+- selectively: after a contest, the affected items are reprocessed;
+- in bulk: after a change to FSRS parameters or the mastery model (`replay_events` script).
 
-La proiezione deve essere **deterministica**: stessi eventi e stessa configurazione danno
-lo stesso stato. È verificato da test.
+The projection must be **deterministic**: the same events and configuration produce the
+same state. Tests verify this.
 
-### 4.5 Log LLM
+### 4.5 LLM log
 
-**`llm_calls`**: task, versione del prompt, modello, input, output, token, latenza, esito
-(incluso `stop_reason`). È la base per il dataset di valutazione del correttore (R§8).
+**`llm_calls`**: task, prompt version, model, input, output, tokens, latency, outcome
+(including `stop_reason`). This is the basis for the grader evaluation dataset (R§8).
 
-## 5. Dominio (funzioni pure)
+## 5. Domain (pure functions)
 
-### 5.1 Padronanza
-Media mobile esponenziale pesata dalla forza della prova:
+### 5.1 Mastery
+An exponential moving average weighted by strength of evidence:
 
 ```
-m ← m + α · w · (x − m)          x ∈ {1 corretto, 0.5 assistito, 0 errore}
-n_eff ← λ · n_eff + w            λ < 1: le osservazioni vecchie contano meno
+m ← m + α · w · (x − m)          x ∈ {1 correct, 0.5 assisted, 0 error}
+n_eff ← λ · n_eff + w            λ < 1: older observations count less
 ```
 
-`α`, `λ` e i pesi `w` per tipo di esercizio stanno nella configurazione. L'interfaccia
-`MasteryModel` permette di sostituirla in seguito (es. Beta con decadimento) e di
-rielaborare la storia.
+`α`, `λ` and the weights `w` per exercise type live in configuration. The `MasteryModel`
+interface allows replacing it later (e.g. Beta with decay) and reprocessing the history.
 
-### 5.2 Dall'esito al voto FSRS (R§4.3)
+### 5.2 From outcome to FSRS grade (R§4.3)
 `grade(outcome, mastery, n_eff, confidence) → Rating | None`
 
-- `None` = nessun aggiornamento di FSRS. Si usa per valutazioni incerte; la padronanza
-  si aggiorna comunque, con peso ridotto.
-- Errore con `mastery ≥ soglia` e `n_eff ≥ minimo` → `Hard`; altrimenti `Again` e
-  segnalazione `needs_remediation`.
+- `None` = no FSRS update. Used for uncertain evaluations; mastery is still updated, with
+  reduced weight.
+- Error with `mastery ≥ threshold` and `n_eff ≥ minimum` → `Hard`; otherwise `Again` plus
+  a `needs_remediation` flag.
 
 ### 5.3 Scheduling
-Si usa `py-fsrs` per lo scheduler. La retention target è configurabile, di default 0.85
-(R§10). I ripassi impliciti passano dallo stesso scheduler: FSRS gestisce già i ripassi
-anticipati.
+`py-fsrs` is used for scheduling. The retention target is configurable, default 0.85
+(R§10). Implicit reviews go through the same scheduler: FSRS already handles early reviews.
 
-### 5.4 Budget di item nuovi (R§7.4)
+### 5.4 New-item budget (R§7.4)
 `new_item_budget(events_last_7d, backlog, settings) → {lemmas: n, grammar: n}`.
-Finestra mobile di 7 giorni senza accumulo, ridotta in proporzione all'arretrato.
+Rolling 7-day window with no carry-over, reduced in proportion to the backlog.
 
-### 5.5 Classificazione delle parole lette (R§7.3)
+### 5.5 Classifying words met while reading (R§7.3)
 `classify(lemma, learner_state, current_level) → known | presumed_known | auto_candidate | optin | ignore`.
-Nomi propri e composti trasparenti con parti note vanno in `ignore` (o rimandano alle parti).
+Proper nouns and transparent compounds with known parts go to `ignore` (or point to their parts).
 
-## 6. Flussi principali
+## 6. Main flows
 
-### 6.1 Sessione di ripasso
-1. `session_builder` sceglie gli item da trattare:
-   - quelli scaduti, ordinati per recuperabilità e importanza, fino al tetto;
-   - i nuovi, presi dalla coda delle candidate entro il budget settimanale.
-2. Per ogni gruppo di item:
-   - lemmi scaduti → flashcard;
-   - punti grammaticali scaduti e item nuovi → esercizio di produzione generato
-     (§6.2), che li **combina**. Un esercizio introduce le parole nuove usandole, con glossa.
-3. Risposta → valutazione → eventi → aggiornamento della proiezione → feedback.
+### 6.1 Review session
+1. `session_builder` chooses the items to cover:
+   - due items, ordered by retrievability and importance, up to the cap;
+   - new items, taken from the candidate queue within the weekly budget.
+2. For each group of items:
+   - due lemmas → flashcards;
+   - due grammar points and new items → a generated production exercise (§6.2) that
+     **combines** them. An exercise introduces new words by using them, with a gloss.
+3. Answer → evaluation → events → projection update → feedback.
 
-### 6.2 Generazione e valutazione di un esercizio di produzione
+### 6.2 Generating and grading a production exercise
 
-**Generazione** (`llm.generate_exercise`)
-- Input: item obiettivo, vocabolario noto (campione), livello, tipo di esercizio,
-  lingua delle istruzioni (IT).
-- Output strutturato: prompt per lo studente, soluzioni di riferimento, `targets` con pesi.
-- Un controllo post-generazione (lemmatizzazione) verifica che il prompt non usi parole
-  ignote oltre a quelle volute.
+**Generation** (`llm.generate_exercise`)
+- Input: target items, known vocabulary (sample), level, exercise type, instruction
+  language (IT).
+- Structured output: prompt for the learner, reference solutions, `targets` with weights.
+- A post-generation check (lemmatization) verifies the prompt doesn't use unknown words
+  beyond the intended ones.
 
-**Valutazione** (`grading_service`)
-1. **LanguageTool** sulla risposta: errori deterministici di morfologia e accordi.
-2. **LLM** (`llm.grade_sentence`). Riceve esercizio, risposta, item obiettivo, tag
-   diagnostici ammessi ed esito di LanguageTool. Restituisce uno schema strutturato:
+**Grading** (`grading_service`)
+1. **LanguageTool** on the answer: deterministic morphology and agreement errors.
+2. **LLM** (`llm.grade_sentence`). It receives the exercise, the answer, the target items,
+   the allowed diagnostic tags and the LanguageTool result. It returns a structured schema:
 
 ```json
 {
@@ -226,35 +223,35 @@ Nomi propri e composti trasparenti con parti note vanno in `ignore` (o rimandano
 }
 ```
 
-3. **Riconciliazione:**
-   - accordo tra LanguageTool e LLM → confidenza piena;
-   - disaccordo → `confidence` ridotta e item marcati come incerti (R§8);
-   - `item_id` non presenti nel curriculum vengono scartati e registrati.
-4. Si salva `evaluation`, si emettono gli eventi (errori → `review/error`, usi corretti →
-   `implicit/correct` o `review/correct`), si aggiorna la proiezione.
-5. Se scatta `needs_remediation`, `llm.explain` produce una spiegazione mirata al tag
-   diagnostico, ancorata al testo di riferimento dell'item (R§9), e si accodano 1–2
-   esercizi di recupero.
+3. **Reconciliation:**
+   - LanguageTool and LLM agree → full confidence;
+   - they disagree → reduced `confidence`, and the items are marked uncertain (R§8);
+   - `item_id`s not in the curriculum are discarded and logged.
+4. The `evaluation` is saved, events are emitted (errors → `review/error`, correct uses →
+   `implicit/correct` or `review/correct`), and the projection is updated.
+5. If `needs_remediation` is set, `llm.explain` produces an explanation targeted at the
+   diagnostic tag and anchored to the item's reference text (R§9), and 1–2 remedial
+   exercises are queued.
 
-### 6.3 Lettura
-1. **Acquisizione:** URL → estrazione con `trafilatura`; se fallisce, testo incollato.
-2. **Analisi:** spaCy (`de_core_news_md` o simile) per lemmi e POS, scomposizione dei
-   composti, classificazione delle parole (§5.5).
-3. **Semplificazione** (`llm.simplify_text`). Riceve il testo, il livello target, la
-   lista delle parole ammesse (note + candidate) e uno stile di riferimento. Poi:
-   - si misura la copertura;
-   - se è sotto soglia (R§7.3), si rigenera indicando le parole da sostituire, per al
-     massimo N tentativi;
-   - poi si accetta la versione migliore, segnalando la copertura effettiva.
-4. **Lettura** con glossario al tocco (`llm.gloss`, con cache per lemma e contesto).
-   Il tocco emette un evento `lookup`.
-5. **Fine lettura:**
-   - eventi `implicit` per gli item noti non consultati (con peso basso);
-   - le candidate entrano in coda;
-   - si propone il riassunto o commento, cioè un esercizio `reading_summary` valutato come in §6.2.
+### 6.3 Reading
+1. **Ingestion:** URL → extraction with `trafilatura`; if that fails, pasted text.
+2. **Analysis:** spaCy (`de_core_news_md` or similar) for lemmas and POS, compound
+   splitting, word classification (§5.5).
+3. **Simplification** (`llm.simplify_text`). It receives the text, the target level, the
+   list of allowed words (known + candidates) and a reference style. Then:
+   - coverage is measured;
+   - if it is below the threshold (R§7.3), the text is regenerated with the words to
+     replace listed, for at most N attempts;
+   - the best version is then accepted, with its actual coverage shown.
+4. **Reading** with tap-to-gloss (`llm.gloss`, cached per lemma and context).
+   A tap emits a `lookup` event.
+5. **End of reading:**
+   - `implicit` events for known items that were not looked up (with low weight);
+   - candidates enter the queue;
+   - a summary or comment is offered: a `reading_summary` exercise, graded as in §6.2.
 
-### 6.4 Contestazione (R§8)
-1. Lo studente contesta una valutazione → `contests` (stato `open`).
+### 6.4 Contest (R§8)
+1. The learner contests an evaluation → `contests` (status `open`).
 2. `ContestResolver.resolve(contest) → Resolution`.
 
 ```python
@@ -264,32 +261,31 @@ class ContestResolver(Protocol):
 @dataclass
 class Resolution:
     verdict: Literal["accepted", "rejected", "partial"]
-    replacement: EvaluationResult | None   # nuova valutazione, se cambia
+    replacement: EvaluationResult | None   # new evaluation, if it changes
     rationale: str
 ```
 
-   In v1 c'è `AcceptAllResolver`: verdetto `accepted`, con una valutazione sostitutiva in
-   cui gli errori contestati sono rimossi e i relativi item contano come `correct_uses`.
-3. **Applicazione:**
-   - nuova `evaluation` con `supersedes`;
-   - eventi vecchi marcati `voided_by`;
-   - nuovi eventi emessi;
-   - `replay` degli item coinvolti.
-4. Tutto resta nel log: le contestazioni sono il materiale più prezioso per la valutazione
-   del correttore.
+   v1 ships `AcceptAllResolver`: verdict `accepted`, with a replacement evaluation in
+   which the contested errors are removed and the related items count as `correct_uses`.
+3. **Application:**
+   - a new `evaluation` with `supersedes`;
+   - old events marked `voided_by`;
+   - new events emitted;
+   - `replay` of the affected items.
+4. Everything stays in the log: contests are the most valuable material for evaluating
+   the grader.
 
-### 6.5 Valutazione iniziale (R§6)
-1. Il livello dichiarato (A2–B1) imposta `presumed_known` sugli item dei livelli inferiori.
-2. Un test breve affina la stima:
-   - un campione di lemmi per fascia di frequenza (riconoscimento);
-   - 3–5 frasi guidate su punti grammaticali chiave, in particolare gli stadi di ordine
-     delle parole (R§5).
-3. Gli esiti diventano eventi come gli altri: il piazzamento è solo storia iniziale.
+### 6.5 Initial assessment (R§6)
+1. The declared level (A2–B1) sets `presumed_known` on items from lower levels.
+2. A short test refines the estimate:
+   - a sample of lemmas per frequency band (recognition);
+   - 3–5 guided sentences on key grammar points, especially the word-order stages (R§5).
+3. The outcomes become events like any other: placement is just initial history.
 
-## 7. Livello LLM
+## 7. LLM layer
 
-### 7.1 Interfaccia
-I servizi usano **task tipizzati**, non chiamate generiche:
+### 7.1 Interface
+Services use **typed tasks**, not generic calls:
 
 ```python
 class LLMClient(Protocol):
@@ -300,39 +296,38 @@ class LLMClient(Protocol):
     def gloss(self, req: GlossRequest) -> Gloss: ...
 ```
 
-Input e output sono modelli Pydantic. L'implementazione `AnthropicLLMClient` usa l'SDK
-ufficiale `anthropic` per Python. Un `FakeLLMClient` con risposte registrate serve per i test.
+Inputs and outputs are Pydantic models. The `AnthropicLLMClient` implementation uses the
+official `anthropic` Python SDK. A `FakeLLMClient` with recorded responses is used in tests.
 
-### 7.2 Implementazione con la Claude API
-- **Output strutturato.** Si usa `client.messages.parse()` con il modello Pydantic come
-  schema, invece di fare parsing di testo libero.
-- **Modello.** È configurabile **per task**. Default per tutti i task: `claude-opus-5-5`.
-  Usare modelli più economici per task semplici (glossa, generazione) è una scelta da fare
-  dopo averli misurati sul dataset di valutazione, non a priori.
-- **Effort.** È configurabile per task. Va alto per la valutazione (la correttezza conta),
-  più basso per glossa e generazione.
-- **Prompt caching.** Le parti stabili vanno all'inizio del prompt: istruzioni di sistema,
-  testo di riferimento del punto grammaticale, profilo dello studente. Le parti variabili
-  (risposta, testo) vanno alla fine. Utile soprattutto per sessioni con più esercizi sullo
-  stesso item.
-- **Rifiuti e errori.** Si controlla sempre `stop_reason` prima di leggere il contenuto.
-  Gli errori dell'API si gestiscono distinguendo quelli ritentabili (429, 5xx) dagli altri.
-- **Batch API.** Si usa per lavori offline, a costo ridotto: bozze del curriculum,
-  pre-generazione di esempi.
-- I **prompt** stanno in `app/llm/prompts/*.vN.md`. La versione viene registrata in
-  `llm_calls` e `evaluations`.
+### 7.2 Claude API implementation
+- **Structured output.** Use `client.messages.parse()` with the Pydantic model as the
+  schema, instead of parsing free text.
+- **Model.** Configurable **per task**. Default for all tasks: `claude-opus-5-5`.
+  Using cheaper models for simple tasks (gloss, generation) is a decision to make after
+  measuring them on the evaluation dataset, not up front.
+- **Effort.** Configurable per task. High for grading (correctness matters), lower for
+  gloss and generation.
+- **Prompt caching.** Stable parts go at the start of the prompt: system instructions,
+  the grammar point's reference text, the learner profile. Variable parts (answer, text)
+  go at the end. Especially useful for sessions with several exercises on the same item.
+- **Refusals and errors.** Always check `stop_reason` before reading the content.
+  API errors are handled by distinguishing retryable ones (429, 5xx) from the rest.
+- **Batch API.** Used for offline work, at reduced cost: curriculum drafts,
+  pre-generated examples.
+- **Prompts** live in `app/llm/prompts/*.vN.md`. The version is recorded in
+  `llm_calls` and `evaluations`.
 
-## 8. Livello NLP
+## 8. NLP layer
 
-| Componente | Strumento | Note |
+| Component | Tool | Notes |
 |---|---|---|
-| Lemmi, POS, nomi propri | spaCy, modello tedesco | Lemmatizzazione affidabile ma non perfetta: errori registrati |
-| Composti | libreria di splitting (candidata: CharSplit) + verifica sulle parti nel lessico | Da valutare |
-| Frequenze | `wordfreq` | Rango per lemma |
-| Controllo grammaticale | LanguageTool, server in container | Chiamato via HTTP locale |
-| Estrazione articoli | `trafilatura` | |
+| Lemmas, POS, proper nouns | spaCy, German model | Reliable but imperfect lemmatization: errors are logged |
+| Compounds | splitting library (candidate: CharSplit) + check of the parts against the lexicon | To be evaluated |
+| Frequencies | `wordfreq` | Rank per lemma |
+| Grammar checking | LanguageTool, server in a container | Called over local HTTP |
+| Article extraction | `trafilatura` | |
 
-## 9. Curriculum: formato YAML
+## 9. Curriculum: YAML format
 
 ```yaml
 # curriculum/de/lexicon/a2.yaml
@@ -343,7 +338,7 @@ ufficiale `anthropic` per Python. Un `FakeLLMClient` con risposte registrate ser
   plural: Tische
   level: A1
   translations: {it: tavolo, en: table}
-  interference: {it_gender: m}          # coincide: nessun avviso
+  interference: {it_gender: m}          # same gender: no warning
 - id: lex:sonne
   lemma: Sonne
   pos: noun
@@ -351,7 +346,7 @@ ufficiale `anthropic` per Python. Un `FakeLLMClient` con risposte registrate ser
   plural: Sonnen
   level: A1
   translations: {it: sole, en: sun}
-  interference: {it_gender: m}          # diverso → priorità e avviso
+  interference: {it_gender: m}          # different → priority and warning
 ```
 
 ```yaml
@@ -365,61 +360,65 @@ diagnostic_tags:
   gender_number: [masc, fem, neut, plural]
   declension: [strong, weak, mixed]
 reference_it: |
-  Testo di riferimento curato: regole, tabella, esempi, errori tipici di chi parla italiano.
+  Curated reference text: rules, table, examples, typical errors of Italian speakers.
 ```
 
-Lo script `import_curriculum`:
-- valida lo schema;
-- controlla che gli id siano unici e che i prerequisiti esistano, senza cicli;
-- aggiorna `items` senza toccare lo stato dello studente.
+User-facing fields (`title_it`, `reference_it`) are in Italian, the explanation language
+for v1; the `_it` suffix leaves room for other explanation languages.
 
-Gli id rimossi diventano `suspended`, non vengono cancellati.
+The `import_curriculum` script:
+- validates the schema;
+- checks that ids are unique and that prerequisites exist, with no cycles;
+- updates `items` without touching learner state.
+
+Removed ids become `suspended`; they are not deleted.
 
 ## 10. Frontend
 
-- **Viste:** Sessione (flashcard + esercizi), Lettura (testo con glossario al tocco),
-  Corpus (stato degli item, filtri), Grammatica (spiegazioni su richiesta), Impostazioni.
-- **PWA:** manifest e service worker per installarla sul telefono. Niente funzionamento
-  offline in v1, perché la valutazione richiede l'LLM.
-- **Prima il telefono:** sessioni da 10 minuti pensate per lo schermo piccolo.
-- Il client API è generato dallo schema OpenAPI di FastAPI (es. `openapi-typescript`),
-  così i tipi restano allineati.
+- **Views:** Session (flashcards + exercises), Reading (text with tap-to-gloss),
+  Corpus (item state, filters), Grammar (on-demand explanations), Settings.
+- **PWA:** manifest and service worker so it can be installed on a phone. No offline
+  mode in v1, because grading requires the LLM.
+- **Phone first:** 10-minute sessions designed for a small screen.
+- The API client is generated from FastAPI's OpenAPI schema (e.g. `openapi-typescript`),
+  so the types stay in sync.
 
-## 11. Test e qualità
+## 11. Testing and quality
 
-- **Dominio:** unit test sulle funzioni pure (padronanza, voto, budget, classificazione).
-- **Determinismo del ricalcolo:** test che ricostruiscono le proiezioni dagli eventi e le
-  confrontano con lo stato incrementale.
-- **Servizi:** test con `FakeLLMClient` e LanguageTool simulato.
-- **Valutazione del correttore:** `scripts/eval_grader.py` fa girare il correttore su un
-  set di frasi annotate (e sulle contestazioni). Misura falsi positivi e falsi negativi
-  per item. Si esegue a ogni cambio di prompt o modello.
+- **Domain:** unit tests on the pure functions (mastery, grading, budget, classification).
+- **Replay determinism:** tests that rebuild the projections from the events and compare
+  them with the incremental state.
+- **Services:** tests with `FakeLLMClient` and a mocked LanguageTool.
+- **Grader evaluation:** `scripts/eval_grader.py` runs the grader on a set of annotated
+  sentences (and on the contests). It measures false positives and false negatives per
+  item. Run it on every prompt or model change.
 
-## 12. Deploy
+## 12. Deployment
 
 - `docker compose up`:
-  - `backend`: FastAPI, che serve anche il frontend compilato;
+  - `backend`: FastAPI, which also serves the built frontend;
   - `languagetool`;
-  - un volume per SQLite.
-- Configurazione via variabili d'ambiente (`ANTHROPIC_API_KEY`, percorsi, parametri).
-- Backup: copia periodica del file SQLite. Il curriculum è già in git.
-- In locale o su una piccola VPS. Serve HTTPS per la PWA sul telefono (es. reverse proxy con certificati automatici).
+  - a volume for SQLite.
+- Configuration via environment variables (`ANTHROPIC_API_KEY`, paths, parameters).
+- Backups: periodic copy of the SQLite file. The curriculum is already in git.
+- Local or on a small VPS. Installing the PWA on a phone requires HTTPS (e.g. a reverse
+  proxy with automatic certificates).
 
-## 13. Tappe
+## 13. Milestones
 
-| Tappa | Contenuto | Risultato usabile |
+| Milestone | Content | Usable result |
 |---|---|---|
-| **M0** | Scheletro: repo, compose, FastAPI, React, DB, migrazioni, CI con test | App vuota che parte |
-| **M1** | Curriculum (import YAML, lessico A1–B1), event log, proiezioni, FSRS, flashcard | Flashcard con scheduling |
-| **M2** | Livello LLM, esercizi di produzione, correzione (LLM + LanguageTool), spiegazioni | Sessione di ripasso completa |
-| **M3** | Lettura: acquisizione, semplificazione con copertura, glossario, candidate | Leggere articoli |
-| **M4** | Coda delle candidate e budget settimanale, contestazioni, valutazione iniziale | Ciclo completo dei requisiti |
-| **M5** | Dataset e script di valutazione del correttore, ottimizzazione FSRS | Misura della qualità |
+| **M0** | Skeleton: repo, compose, FastAPI, React, DB, migrations, CI with tests | Empty app that starts |
+| **M1** | Curriculum (YAML import, A1–B1 vocabulary), event log, projections, FSRS, flashcards | Flashcards with scheduling |
+| **M2** | LLM layer, production exercises, grading (LLM + LanguageTool), explanations | Complete review session |
+| **M3** | Reading: ingestion, simplification with coverage, glossary, candidates | Reading articles |
+| **M4** | Candidate queue and weekly budget, contests, initial assessment | Full requirements loop |
+| **M5** | Grader dataset and evaluation script, FSRS optimisation | Quality measurement |
 
-## 14. Decisioni aperte
+## 14. Open decisions
 
-- Granularità degli eventi impliciti dalla lettura: peso e quanti item per testo.
-- Libreria di scomposizione dei composti: da valutare su un campione.
-- Modello spaCy: `md` o `lg`, a seconda dell'accuratezza dei lemmi sul campione.
-- Valori iniziali di `α`, `λ`, pesi delle prove e soglie del voto: da tarare con l'uso
-  (l'event log permette di ricalcolare tutto).
+- Granularity of implicit events from reading: weight, and how many items per text.
+- Compound-splitting library: to be evaluated on a sample.
+- spaCy model: `md` or `lg`, depending on lemma accuracy on a sample.
+- Starting values for `α`, `λ`, evidence weights and grading thresholds: to be tuned
+  through use (the event log makes it possible to recompute everything).
