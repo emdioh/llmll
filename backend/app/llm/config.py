@@ -17,6 +17,8 @@ DEFAULT_TASKS: dict[str, TaskConfig] = {
     "generate_exercise": TaskConfig(effort="medium", max_tokens=4000),
     "grade_sentence": TaskConfig(effort="high", max_tokens=4000),
     "explain": TaskConfig(effort="medium", max_tokens=3000),
+    "simplify_text": TaskConfig(effort="medium", max_tokens=8000),
+    "gloss": TaskConfig(effort="low", max_tokens=500),
 }
 
 

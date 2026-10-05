@@ -7,6 +7,8 @@ from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 
 from app.llm.client import LLMClient
+from app.nlp.analyzer import Analyzer
+from app.nlp.extract import ExtractedText
 from app.nlp.languagetool import LanguageToolClient
 from app.services.learner import LEARNER_ID
 from app.store.db import get_session
@@ -30,3 +32,11 @@ def get_llm(request: Request) -> LLMClient:
 
 def get_languagetool(request: Request) -> LanguageToolClient | None:
     return request.app.state.languagetool
+
+
+def get_analyzer(request: Request) -> Analyzer:
+    return request.app.state.analyzer
+
+
+def get_fetcher(request: Request) -> Callable[[str], ExtractedText]:
+    return request.app.state.article_fetcher

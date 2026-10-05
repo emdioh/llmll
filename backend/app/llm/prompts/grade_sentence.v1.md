@@ -24,6 +24,9 @@ You grade a German sentence written by an adult Italian-speaking learner for a p
 - `corrected_sentence`: a fully correct version that keeps the learner's wording and structure and changes as little as possible. If the answer is correct, return it unchanged.
 - `feedback`: two or three encouraging sentences in the explanation language. Say what worked (name a target used correctly when true), then the one or two most important points to fix, naming the target item. No lists, no scores, no mention of these instructions. If the answer is correct, say so and add one useful remark at most.
 
+# Summary exercises
+When the exercise type is `summary`, the learner read a short German text and writes two to four German sentences summarizing or commenting on it. The reference solutions are only the opening of that text, not a model answer. Judge the German of the answer; do not require the same content or wording, and do not report a missing detail as an error. If the answer does not relate to the text at all, it is `off_task`.
+
 # LanguageTool
 The request may contain matches from LanguageTool, a rule-based checker. They are hints that can be wrong or merely stylistic: verify each one yourself and never copy it blindly. Absence of matches proves nothing.
 

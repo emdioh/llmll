@@ -75,7 +75,7 @@ class SessionCard(BaseModel):
     prompt: CardPrompt = Field(default_factory=CardPrompt)
     hint: str | None = None
     status: Literal["pending", "ready", "answered", "failed"] = "ready"
-    subtype: Literal["translation", "guided", "transform"] | None = None
+    subtype: Literal["translation", "guided", "transform", "summary"] | None = None
     instructions: str | None = None
     glossary: list[GlossaryEntry] = Field(default_factory=list)
     item_ids: list[str] = Field(default_factory=list)

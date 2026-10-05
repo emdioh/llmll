@@ -233,3 +233,59 @@ class StoredExplanation(Base):
     markdown: Mapped[str] = mapped_column(Text)
     examples: Mapped[list[dict[str, str]]] = mapped_column(JSON, default=list)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+
+
+class SourceText(Base):
+    """A source text (pasted, fetched or generated) of the learner."""
+
+    __tablename__ = "texts"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    learner_id: Mapped[int] = mapped_column(ForeignKey("learners.id"))
+    source_url: Mapped[str | None] = mapped_column(String, nullable=True)
+    source_title: Mapped[str] = mapped_column(String)
+    source_text: Mapped[str] = mapped_column(Text)
+    source_language: Mapped[str] = mapped_column(String)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+
+
+class TextVersion(Base):
+    """One simplification attempt of a text; exactly one per text is `selected`."""
+
+    __tablename__ = "text_versions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    text_id: Mapped[int] = mapped_column(ForeignKey("texts.id"), index=True)
+    level: Mapped[str] = mapped_column(String)
+    title: Mapped[str] = mapped_column(String)
+    body: Mapped[str] = mapped_column(Text)
+    coverage: Mapped[float] = mapped_column(Float)
+    attempt: Mapped[int] = mapped_column(Integer)
+    llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
+    selected: Mapped[bool] = mapped_column(default=False)
+    analysis: Mapped[dict[str, Any]] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+
+
+class ReadingSession(Base):
+    __tablename__ = "reading_sessions"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    text_version_id: Mapped[int] = mapped_column(ForeignKey("text_versions.id"), index=True)
+    started_at: Mapped[datetime] = mapped_column(UTCDateTime())
+    finished_at: Mapped[datetime | None] = mapped_column(UTCDateTime(), nullable=True)
+    lookups: Mapped[list[dict[str, Any]]] = mapped_column(JSON, default=list)
+
+
+class GlossCache(Base):
+    """Cached LLM glosses of unlisted words, keyed by lemma and context."""
+
+    __tablename__ = "glosses"
+    __table_args__ = (UniqueConstraint("lemma", "context_hash"),)
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    lemma: Mapped[str] = mapped_column(String)
+    context_hash: Mapped[str] = mapped_column(String)
+    data: Mapped[dict[str, Any]] = mapped_column(JSON)
+    llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())

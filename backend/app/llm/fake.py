@@ -11,10 +11,14 @@ from app.llm.types import (
     Explanation,
     ExplanationExample,
     GeneratedExercise,
+    Gloss,
     GlossEntry,
+    GlossRequest,
     GradeError,
     GradeRequest,
     GradeResult,
+    SimplifiedText,
+    SimplifyRequest,
     TargetWeight,
 )
 
@@ -100,7 +104,14 @@ class FakeLLMClient:
         answer = req.answer
         target_ids = [t.item.item_id for t in req.targets]
         references = {normalize(s) for s in req.reference_solutions}
-        if not answer.strip():
+        if answer.strip() and req.exercise_type == "summary":
+            result = GradeResult(
+                overall="correct",
+                correct_uses=target_ids,
+                corrected_sentence=answer,
+                feedback="Ottimo riassunto!",
+            )
+        elif not answer.strip():
             result = GradeResult(
                 overall="off_task",
                 corrected_sentence=req.reference_solutions[0],
@@ -146,4 +157,37 @@ class FakeLLMClient:
         )
         result = Explanation(markdown=text, examples=examples)
         self._log("explain", req, result, started)
+        return result
+
+    def simplify_text(self, req: SimplifyRequest) -> SimplifiedText:
+        """Source split into paragraphs; the words it is told to replace become a known word."""
+        started = time.monotonic()
+        if req.mode == "generate":
+            words = req.seed_lemmas or req.allowed_lemmas[:5]
+            body = "Heute sprechen wir über: " + ", ".join(words) + "."
+            title = req.topic or "Ein neuer Text"
+        else:
+            body = req.previous_text or req.source_text
+            title = " ".join(req.source_text.split()[:6]) or "Text"
+        replacement = req.allowed_lemmas[0] if req.allowed_lemmas else "und"
+        for word in req.replace_words:
+            for form in {word.lemma, *word.forms}:
+                body = re.sub(rf"\b{re.escape(form)}\b", replacement, body, flags=re.IGNORECASE)
+        paragraphs = [p.strip() for p in re.split(r"\n\s*\n", body) if p.strip()]
+        result = SimplifiedText(title=title, paragraphs=paragraphs, new_words=[], notes="")
+        self._log("simplify_text", req, result, started)
+        return result
+
+    def gloss(self, req: GlossRequest) -> Gloss:
+        started = time.monotonic()
+        noun = req.lemma[:1].isupper()
+        result = Gloss(
+            translation=f"{req.lemma.lower()} (it)",
+            lemma=req.lemma,
+            pos="noun" if noun else "adj",
+            gender="n" if noun else None,
+            plural=f"{req.lemma}e" if noun else None,
+            note="fake gloss",
+        )
+        self._log("gloss", req, result, started)
         return result

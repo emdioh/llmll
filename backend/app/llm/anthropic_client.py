@@ -17,8 +17,12 @@ from app.llm.types import (
     ExplainRequest,
     Explanation,
     GeneratedExercise,
+    Gloss,
+    GlossRequest,
     GradeRequest,
     GradeResult,
+    SimplifiedText,
+    SimplifyRequest,
 )
 
 logger = logging.getLogger(__name__)
@@ -76,6 +80,12 @@ class AnthropicLLMClient:
 
     def explain(self, req: ExplainRequest) -> Explanation:
         return self._run("explain", render.explain_vars(req), Explanation)
+
+    def simplify_text(self, req: SimplifyRequest) -> SimplifiedText:
+        return self._run("simplify_text", render.simplify_vars(req), SimplifiedText)
+
+    def gloss(self, req: GlossRequest) -> Gloss:
+        return self._run("gloss", render.gloss_vars(req), Gloss)
 
     # --- plumbing --------------------------------------------------------------------------
 

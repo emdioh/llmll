@@ -4,8 +4,10 @@ from app.llm.types import (
     ErrorContext,
     ExerciseRequest,
     ExplainRequest,
+    GlossRequest,
     GradeRequest,
     ItemContext,
+    SimplifyRequest,
     TargetContext,
     VocabEntry,
 )
@@ -143,4 +145,56 @@ def explain_vars(req: ExplainRequest) -> dict[str, str]:
         "known_grammar": known or "(none)",
         "error": render_error(req.error),
         "question": neutralize(req.question or "(none)"),
+    }
+
+
+def _csv(values: list[str]) -> str:
+    return ", ".join(values) or "(none)"
+
+
+def simplify_vars(req: SimplifyRequest) -> dict[str, str]:
+    if req.mode == "generate":
+        task = (
+            "Write a new text from scratch on the topic below (free choice if none is given), "
+            "built around the seed words."
+        )
+    else:
+        task = "Rewrite the source text for the learner."
+    replace = "\n".join(
+        f"- {w.lemma}" + (f" (forms in the text: {', '.join(w.forms)})" if w.forms else "")
+        for w in req.replace_words
+    )
+    if req.previous_text:
+        retry = (
+            "This is a revision. The previous attempt below still contains words outside the "
+            "learner's vocabulary. Rewrite it so that none of the words listed here remain "
+            "(use simpler words or rephrase), keeping the content.\n"
+            f"<words_to_replace>\n{replace or '(none)'}\n</words_to_replace>\n"
+            f"<previous_attempt>\n{neutralize(req.previous_text)}\n</previous_attempt>"
+        )
+    else:
+        retry = "(first attempt)"
+    return {
+        "level": req.level,
+        "language": language_name(req.explanation_language),
+        "allowed_vocabulary": _csv(req.allowed_lemmas),
+        "candidate_vocabulary": _csv(req.candidate_lemmas),
+        "known_grammar": _csv(req.known_grammar),
+        "task": task,
+        "source_language": "German" if req.source_language == "de" else "not German (translate)",
+        "max_words": str(req.max_words),
+        "topic": neutralize(req.topic or "(none)"),
+        "seed_words": _csv(req.seed_lemmas),
+        "source_text": neutralize(req.source_text) or "(none)",
+        "retry": retry,
+    }
+
+
+def gloss_vars(req: GlossRequest) -> dict[str, str]:
+    return {
+        "level": req.level,
+        "language": language_name(req.explanation_language),
+        "word": neutralize(req.word),
+        "lemma": neutralize(req.lemma),
+        "sentence": neutralize(req.sentence),
     }

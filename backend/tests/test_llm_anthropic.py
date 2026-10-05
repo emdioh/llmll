@@ -83,7 +83,9 @@ def http_error(cls: type[anthropic.APIStatusError], status: int) -> anthropic.AP
 # --- prompts ---------------------------------------------------------------------------------
 
 
-@pytest.mark.parametrize("task", ["generate_exercise", "grade_sentence", "explain"])
+@pytest.mark.parametrize(
+    "task", ["generate_exercise", "grade_sentence", "explain", "simplify_text", "gloss"]
+)
 def test_prompt_files_load(task: str) -> None:
     system, user, version = load_prompt(task)
     assert version == f"v{latest_version(task)}" == "v1"

@@ -66,3 +66,18 @@ class ReconcileConfig:
     def version(self) -> str:
         blob = json.dumps(asdict(self), sort_keys=True)
         return f"{self.model_version}-{hashlib.sha256(blob.encode()).hexdigest()[:8]}"
+
+
+@dataclass(frozen=True)
+class ReadingConfig:
+    """Parameters of the reading flow (design: M3 §3, §5)."""
+
+    coverage_target: float = 0.95
+    max_simplify_attempts: int = 3
+    max_implicit_per_text: int = 30
+    max_candidate_words: int = 10
+    max_source_chars: int = 20000
+    long_text_words: int = 333
+    long_text_max_words: int = 400
+    generated_words: int = 150
+    seed_lemmas: int = 15

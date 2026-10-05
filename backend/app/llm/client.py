@@ -7,8 +7,12 @@ from app.llm.types import (
     ExplainRequest,
     Explanation,
     GeneratedExercise,
+    Gloss,
+    GlossRequest,
     GradeRequest,
     GradeResult,
+    SimplifiedText,
+    SimplifyRequest,
 )
 
 
@@ -32,3 +36,7 @@ class LLMClient(Protocol):
     def grade_sentence(self, req: GradeRequest) -> GradeResult: ...
 
     def explain(self, req: ExplainRequest) -> Explanation: ...
+
+    def simplify_text(self, req: SimplifyRequest) -> SimplifiedText: ...
+
+    def gloss(self, req: GlossRequest) -> Gloss: ...

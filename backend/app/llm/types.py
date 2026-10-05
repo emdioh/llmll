@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 from app.nlp.types import LTMatch
 
-ExerciseSubtype = Literal["translation", "guided", "transform"]
+ExerciseSubtype = Literal["translation", "guided", "transform", "summary"]
 Overall = Literal["correct", "minor_errors", "major_errors", "off_task"]
 Severity = Literal["minor", "major"]
 
@@ -151,3 +151,65 @@ class ExplanationExample(BaseModel):
 class Explanation(BaseModel):
     markdown: str
     examples: list[ExplanationExample] = Field(default_factory=list)
+
+
+# --- simplify_text -------------------------------------------------------------------------
+
+
+class OovWord(BaseModel):
+    """A lemma of the previous attempt that is outside the learner's vocabulary."""
+
+    lemma: str
+    forms: list[str] = Field(default_factory=list)
+
+
+class SimplifyRequest(BaseModel):
+    mode: Literal["simplify", "generate"] = "simplify"
+    source_text: str = ""
+    source_language: Literal["de", "other"] = "de"
+    topic: str | None = None
+    level: str
+    explanation_language: str
+    allowed_lemmas: list[str] = Field(default_factory=list)
+    candidate_lemmas: list[str] = Field(default_factory=list)
+    seed_lemmas: list[str] = Field(default_factory=list)
+    known_grammar: list[str] = Field(default_factory=list)
+    max_words: int = 400
+    previous_text: str | None = None
+    replace_words: list[OovWord] = Field(default_factory=list)
+
+
+class NewWord(BaseModel):
+    lemma: str
+    translation: str
+
+
+class SimplifiedText(BaseModel):
+    title: str
+    paragraphs: list[str]
+    new_words: list[NewWord] = Field(default_factory=list)
+    notes: str = ""
+
+
+# --- gloss ---------------------------------------------------------------------------------
+
+GlossPos = Literal[
+    "noun", "verb", "adj", "adv", "prep", "conj", "pron", "det", "num", "particle", "phrase"
+]
+
+
+class GlossRequest(BaseModel):
+    word: str
+    lemma: str
+    sentence: str
+    level: str
+    explanation_language: str
+
+
+class Gloss(BaseModel):
+    translation: str
+    lemma: str
+    pos: GlossPos = "noun"
+    gender: Literal["m", "f", "n"] | None = None
+    plural: str | None = None
+    note: str | None = None

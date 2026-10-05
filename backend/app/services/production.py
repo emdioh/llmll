@@ -54,7 +54,12 @@ logger = logging.getLogger(__name__)
 KNOWN_VOCAB_LIMIT = 150
 MAX_GENERATION_ATTEMPTS = 2
 KNOWN_STATUSES = ("introduced", "presumed_known")
-TYPE_WEIGHT = {"translation": "translation", "guided": "guided", "transform": "guided"}
+TYPE_WEIGHT = {
+    "translation": "translation",
+    "guided": "guided",
+    "transform": "guided",
+    "summary": "free",
+}
 RECONCILE_CFG = ReconcileConfig()
 _locks: defaultdict[str, threading.Lock] = defaultdict(threading.Lock)
 

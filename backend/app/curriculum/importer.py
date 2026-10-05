@@ -10,6 +10,8 @@ from wordfreq import zipf_frequency
 from app.curriculum.loader import Curriculum, LoadedItem
 from app.store.models import Item, ItemPrerequisite, Learner, LearnerItem
 
+USER_SOURCE = "user"
+
 
 @dataclass
 class ImportReport:
@@ -67,6 +69,8 @@ def import_curriculum(session: Session, curriculum: Curriculum, now: datetime) -
             report.unchanged += 1
 
     for item_id, row in existing.items():
+        if row.source_file == USER_SOURCE:
+            continue  # learner-created items (opt-in while reading) are not curriculum content
         if item_id not in present and not row.suspended:
             row.suspended = True
             report.suspended += 1
