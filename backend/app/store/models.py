@@ -153,6 +153,8 @@ class LearningEvent(Base):
     attempt_id: Mapped[int | None] = mapped_column(ForeignKey("attempts.id"), nullable=True)
     evaluation_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
     voided_by: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    # null for normal events, "placement" for the initial assessment
+    context: Mapped[str | None] = mapped_column(String, nullable=True)
 
 
 class ItemMemory(Base):
@@ -289,3 +291,38 @@ class GlossCache(Base):
     data: Mapped[dict[str, Any]] = mapped_column(JSON)
     llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
     created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+
+
+class Contest(Base):
+    """A contested evaluation and its resolution (design: M4 §2)."""
+
+    __tablename__ = "contests"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    evaluation_id: Mapped[int] = mapped_column(ForeignKey("evaluations.id"), index=True)
+    item_ids: Mapped[list[str]] = mapped_column(JSON, default=list)
+    reason: Mapped[str | None] = mapped_column(Text, nullable=True)
+    status: Mapped[str] = mapped_column(String)  # open | resolved
+    verdict: Mapped[str | None] = mapped_column(String, nullable=True)
+    resolver: Mapped[str] = mapped_column(String)
+    rationale: Mapped[str] = mapped_column(Text, default="", server_default="")
+    replacement_evaluation_id: Mapped[int | None] = mapped_column(
+        ForeignKey("evaluations.id"), nullable=True
+    )
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+    resolved_at: Mapped[datetime | None] = mapped_column(UTCDateTime(), nullable=True)
+
+
+class Placement(Base):
+    """One run of the initial assessment; its exercises have `session_id = id`."""
+
+    __tablename__ = "placements"
+
+    id: Mapped[str] = mapped_column(String, primary_key=True)
+    learner_id: Mapped[int] = mapped_column(ForeignKey("learners.id"))
+    declared_level: Mapped[str] = mapped_column(String)
+    created_at: Mapped[datetime] = mapped_column(UTCDateTime())
+    finished_at: Mapped[datetime | None] = mapped_column(UTCDateTime(), nullable=True)
+    estimated_level: Mapped[str | None] = mapped_column(String, nullable=True)
+    changed: Mapped[bool | None] = mapped_column(nullable=True)
+    result: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)

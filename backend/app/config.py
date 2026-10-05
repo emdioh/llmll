@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     llm_provider: Literal["anthropic", "fake"] = "anthropic"
     llm_refusal_fallback: bool = True
     llm_max_retries: int = 2
+    # Name in the contest resolver registry (app.services.contests.RESOLVERS).
+    contest_resolver: str = "accept_all"
     # Per-task overrides, e.g. LLMLL_LLM_TASKS='{"grade_sentence": {"effort": "max"}}'.
     llm_tasks: dict[str, dict[str, Any]] = Field(default_factory=dict)
 

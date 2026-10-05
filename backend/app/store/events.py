@@ -1,7 +1,7 @@
 """Append-only event log and the `item_memory` projection derived from it."""
 
 from collections import defaultdict
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from datetime import datetime
 from typing import Any
 
@@ -138,6 +138,7 @@ def append_event_with_decision(
     exercise_id: str | None = None,
     attempt_id: int | None = None,
     evaluation_id: int | None = None,
+    context: str | None = None,
 ) -> tuple[LearningEvent, ItemMemory | None, GradeDecision | None]:
     """Like `append_event`, also returning the grading decision (None for backdated events)."""
     event = LearningEvent(
@@ -154,6 +155,7 @@ def append_event_with_decision(
         exercise_id=exercise_id,
         attempt_id=attempt_id,
         evaluation_id=evaluation_id,
+        context=context,
     )
     session.add(event)
     session.flush()
@@ -178,3 +180,51 @@ def append_event_with_decision(
     row = session.get(ItemMemory, (learner_id, item_id, facet))
     state, decision = apply(row_to_state(row, item_id, facet), to_event_data(event), cfg)
     return event, _write_state(session, row, learner_id, item_id, facet, state, cfg), decision
+
+
+def replace_events(
+    session: Session,
+    cfg: ProjectionConfig,
+    old_events: Sequence[LearningEvent],
+    replacement_evaluation_id: int,
+    changes: Callable[[LearningEvent], dict[str, Any]],
+) -> list[LearningEvent]:
+    """Void `old_events` and append a copy of each with its original timestamp.
+
+    `changes(event)` returns the fields that differ in the copy (outcome, confidence, tags...).
+    The copies get new ids, in the order of the originals, so replay order (`ts`, `id`) stays
+    deterministic. Afterwards every affected (item, facet) is rebuilt from its non-voided events.
+    Flushes only; the caller owns the transaction.
+    """
+    copies: list[LearningEvent] = []
+    keys: set[tuple[int, str, str]] = set()
+    ordered = sorted(old_events, key=lambda e: e.id)
+    for old in ordered:
+        fields: dict[str, Any] = {
+            "learner_id": old.learner_id,
+            "item_id": old.item_id,
+            "facet": old.facet,
+            "ts": old.ts,
+            "kind": old.kind,
+            "outcome": old.outcome,
+            "evidence_weight": old.evidence_weight,
+            "diagnostic_tags": list(old.diagnostic_tags or ()),
+            "presumed_known": old.presumed_known,
+            "confidence": old.confidence,
+            "exercise_id": old.exercise_id,
+            "attempt_id": old.attempt_id,
+            "context": old.context,
+            **changes(old),
+            "evaluation_id": replacement_evaluation_id,
+        }
+        copy = LearningEvent(**fields)
+        session.add(copy)
+        copies.append(copy)
+        keys.add((old.learner_id, old.item_id, old.facet))
+    session.flush()
+    for old in ordered:
+        old.voided_by = replacement_evaluation_id
+    session.flush()
+    for learner_id, item_id, facet in sorted(keys):
+        replay_key(session, learner_id, item_id, facet, cfg)
+    return copies

@@ -331,6 +331,145 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/queue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Queue */
+        get: operations["getQueue"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/items/{item_id}/optin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Optin Item */
+        post: operations["optinItem"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/items/{item_id}/optout": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Optout Item */
+        post: operations["optoutItem"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/evaluations/{evaluation_id}/contest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Contest Evaluation */
+        post: operations["contestEvaluation"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/attempts/{attempt_id}/contest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Contest Attempt
+         * @description Contest an attempt; flashcard attempts from before M4 get their evaluation on demand.
+         */
+        post: operations["contestAttempt"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/contests": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Contests */
+        get: operations["listContests"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/placement": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start Placement */
+        post: operations["startPlacement"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/placement/{placement_id}/finish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Finish Placement */
+        post: operations["finishPlacement"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -391,6 +530,8 @@ export interface components {
             /** Feedback It */
             feedback_it: string;
             memory: components["schemas"]["MemoryOut"] | null;
+            /** Evaluation Id */
+            evaluation_id?: number | null;
         };
         /** AnswerPayload */
         AnswerPayload: {
@@ -398,6 +539,22 @@ export interface components {
             choice?: number | null;
             /** Text */
             text?: string | null;
+        };
+        /** BandResult */
+        BandResult: {
+            /** N */
+            n: number;
+            /** Score */
+            score: number;
+        };
+        /** BudgetOut */
+        BudgetOut: {
+            /** Lemmas Left */
+            lemmas_left: number;
+            /** Grammar Left */
+            grammar_left: number;
+            /** Backlog */
+            backlog: number;
         };
         /** CardExample */
         CardExample: {
@@ -442,6 +599,66 @@ export interface components {
             reference_it?: string | null;
             /** Examples */
             examples?: components["schemas"]["CardExample"][] | null;
+        };
+        /** ContestIn */
+        ContestIn: {
+            /** Item Ids */
+            item_ids?: string[];
+            /** Reason */
+            reason?: string | null;
+        };
+        /** ContestItemOutcome */
+        ContestItemOutcome: {
+            /** Item Id */
+            item_id: string;
+            /** Label */
+            label: string;
+            /** Previous */
+            previous: ("correct" | "assisted" | "error") | null;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "correct" | "assisted" | "error";
+        };
+        /** ContestOut */
+        ContestOut: {
+            /** Id */
+            id: number;
+            /** Evaluation Id */
+            evaluation_id: number;
+            /** Item Ids */
+            item_ids: string[];
+            /** Reason */
+            reason: string | null;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "resolved";
+            /** Verdict */
+            verdict: ("accepted" | "rejected" | "partial") | null;
+            /** Resolver */
+            resolver: string;
+            /** Rationale */
+            rationale: string;
+            /** Replacement Evaluation Id */
+            replacement_evaluation_id: number | null;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Resolved At */
+            resolved_at: string | null;
+        };
+        /** ContestResultOut */
+        ContestResultOut: {
+            contest: components["schemas"]["ContestOut"];
+            /** Evaluation Id */
+            evaluation_id: number;
+            /** Items */
+            items: components["schemas"]["ContestItemOutcome"][];
         };
         /** CreateTextIn */
         CreateTextIn: {
@@ -756,6 +973,15 @@ export interface components {
             /** Translation */
             translation: string;
         };
+        /** OptStatusOut */
+        OptStatusOut: {
+            /** Item Id */
+            item_id: string;
+            /** Status */
+            status: string;
+            /** Candidate Source */
+            candidate_source: string | null;
+        };
         /** OptinOut */
         OptinOut: {
             /** Item Id */
@@ -766,6 +992,30 @@ export interface components {
             status: string;
             /** Created */
             created: boolean;
+        };
+        /** PlacementFinishOut */
+        PlacementFinishOut: {
+            /** Placement Id */
+            placement_id: string;
+            /** Estimated Level */
+            estimated_level: string;
+            /** Previous Level */
+            previous_level: string;
+            /** Changed */
+            changed: boolean;
+            /** Answered */
+            answered: number;
+            /** Bands */
+            bands: {
+                [key: string]: components["schemas"]["BandResult"];
+            };
+        };
+        /** PlacementOut */
+        PlacementOut: {
+            /** Placement Id */
+            placement_id: string;
+            /** Cards */
+            cards: components["schemas"]["SessionCard"][];
         };
         /**
          * PreparedCard
@@ -824,6 +1074,29 @@ export interface components {
             items: components["schemas"]["ItemResult"][];
             /** Evaluation Id */
             evaluation_id: number;
+        };
+        /** QueueEntry */
+        QueueEntry: {
+            /** Item Id */
+            item_id: string;
+            /** Label */
+            label: string;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "optin" | "article" | "wordlist";
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lemma" | "grammar" | "construction";
+        };
+        /** QueueOut */
+        QueueOut: {
+            budget: components["schemas"]["BudgetOut"];
+            /** Next */
+            next: components["schemas"]["QueueEntry"][];
         };
         /** ReadingOut */
         ReadingOut: {
@@ -1685,6 +1958,240 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["FinishOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getQueue: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["QueueOut"];
+                };
+            };
+        };
+    };
+    optinItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OptStatusOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    optoutItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OptStatusOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    contestEvaluation: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                evaluation_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContestIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContestResultOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    contestAttempt: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                attempt_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContestIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContestResultOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    listContests: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ContestOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    startPlacement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlacementOut"];
+                };
+            };
+        };
+    };
+    finishPlacement: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                placement_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlacementFinishOut"];
                 };
             };
             /** @description Validation Error */

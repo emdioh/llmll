@@ -30,7 +30,7 @@ from app.llm.types import (
     VocabEntry,
 )
 from app.nlp.languagetool import LanguageToolClient
-from app.services.common import BuiltCard, SessionError
+from app.services.common import BuiltCard, SessionError, event_context, mark_introduced
 from app.services.corpus import item_label, item_translation_it
 from app.services.learner import projection_config, settings_of
 from app.store.events import append_event, append_event_with_decision
@@ -39,7 +39,6 @@ from app.store.models import (
     Exercise,
     Item,
     ItemMemory,
-    ItemPrerequisite,
     Learner,
     LearnerItem,
     LLMCall,
@@ -144,41 +143,6 @@ def _grammar_intro_card(
     return exercise, BuiltCard(exercise.id, "grammar_intro", item.id, prompt)
 
 
-def _eligible_new_grammar(db: Session, learner: Learner) -> list[Item]:
-    """Unseen grammar points and constructions up to the learner's level, prerequisites met."""
-    rank = CEFR_LEVELS.index(learner.level)
-    rows = db.execute(
-        select(Item, LearnerItem.status)
-        .join(LearnerItem, LearnerItem.item_id == Item.id)
-        .where(
-            LearnerItem.learner_id == learner.id,
-            Item.kind.in_(("grammar", "construction")),
-            ~Item.suspended,
-        )
-    ).all()
-    all_status = dict(
-        db.execute(
-            select(LearnerItem.item_id, LearnerItem.status).where(
-                LearnerItem.learner_id == learner.id
-            )
-        ).all()
-    )
-    prereqs: defaultdict[str, list[str]] = defaultdict(list)
-    for item_id, required in db.execute(
-        select(ItemPrerequisite.item_id, ItemPrerequisite.requires_item_id)
-    ):
-        prereqs[item_id].append(required)
-    eligible = [
-        item
-        for item, status in rows
-        if status in ("unseen", "candidate")
-        and CEFR_LEVELS.index(item.cefr_level) <= rank
-        and all(all_status.get(r) in KNOWN_STATUSES for r in prereqs.get(item.id, []))
-    ]
-    eligible.sort(key=lambda i: (CEFR_LEVELS.index(i.cefr_level), i.kind != "grammar", i.id))
-    return eligible
-
-
 def plan_production_slots(
     db: Session,
     learner: Learner,
@@ -188,6 +152,7 @@ def plan_production_slots(
     *,
     slots: int,
     lemma_candidates: list[Item],
+    queued_grammar: list[Item],
     lemma_limit: int,
     grammar_budget: int,
 ) -> list[tuple[Exercise, BuiltCard]]:
@@ -243,7 +208,7 @@ def plan_production_slots(
         r = retrievability(card, now, cfg.desired_retention) if card is not None else None
         due.append(Candidate(item.id, item.kind, mem.mastery, r))
 
-    new_grammar_items = _eligible_new_grammar(db, learner)
+    new_grammar_items = queued_grammar
     for item in new_grammar_items:
         items_by_id.setdefault(item.id, item)
     for item in lemma_candidates[:lemma_limit]:
@@ -663,6 +628,7 @@ def _emit_events(
         "exercise_id": exercise.id,
         "attempt_id": attempt.id,
         "evaluation_id": evaluation_row.id,
+        "context": event_context(exercise),
     }
     # Introduction first: every new target becomes known by being used in the exercise.
     for item_id, target in target_by_id.items():
@@ -673,7 +639,7 @@ def _emit_events(
         for facet in facets:
             append_event(db, cfg, item_id=item_id, facet=facet, kind="introduce", **common)
         learner_item.status = "introduced"
-        learner_item.introduced_at = learner_item.introduced_at or now
+        mark_introduced(learner_item, now, common["context"])
         status_of[item_id] = "introduced"
 
     needs: set[str] = set()
@@ -703,7 +669,7 @@ def _emit_events(
         )
         if learner_item is not None and learner_item.status != "introduced":
             learner_item.status = "introduced"
-            learner_item.introduced_at = learner_item.introduced_at or now
+            mark_introduced(learner_item, now, common["context"])
             if was_presumed:
                 append_event(
                     db,

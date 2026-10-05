@@ -391,8 +391,20 @@ def get_text(db: Session, learner: Learner, text_id: int) -> SourceText:
 
 
 def start_reading(db: Session, learner: Learner, text_id: int, now: datetime) -> ReadingSession:
+    """Start reading a text, or resume its unfinished session (a page reload must not open a
+    second session for the same text)."""
     get_text(db, learner, text_id)
     version = selected_version(db, text_id)
+    open_session = db.scalar(
+        select(ReadingSession)
+        .where(
+            ReadingSession.text_version_id == version.id,
+            ReadingSession.finished_at.is_(None),
+        )
+        .order_by(ReadingSession.id.desc())
+    )
+    if open_session is not None:
+        return open_session
     session = ReadingSession(text_version_id=version.id, started_at=now, lookups=[])
     db.add(session)
     db.commit()

@@ -2,11 +2,11 @@
 
 import random
 import uuid
-from datetime import datetime, timedelta
+from datetime import datetime
 from typing import Any
 
 from fsrs import Card
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.curriculum.schema import CEFR_LEVELS
@@ -16,11 +16,10 @@ from app.domain.answers import (
     check_recognition,
     display_form,
 )
-from app.domain.budget import new_item_budget
 from app.domain.config import ProjectionConfig
 from app.domain.selection import MemoryView, select_due
-from app.services import production
-from app.services.common import BuiltCard, SessionError
+from app.services import contests, production, queue
+from app.services.common import BuiltCard, SessionError, event_context, mark_introduced
 from app.services.learner import projection_config, settings_of
 from app.store.events import append_event
 from app.store.models import (
@@ -33,7 +32,6 @@ from app.store.models import (
 )
 
 GENERATOR = "flashcards.v1"
-SOURCE_PRIORITY = {"optin": 0, "article": 1, "wordlist": 2}
 INTRO_EVERY = 3
 FACETS = ("recognition", "production")
 GENDER_IT = {"m": "maschile", "f": "femminile", "n": "neutro"}
@@ -254,44 +252,16 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
     for view in ordered:
         if all(view.item_id != i for i, _ in due_cards):
             due_cards.append((view.item_id, view.facet))
-    backlog = len(due_cards)
     slots = settings.production_slots
     # Production slots eat into the review cap; with 0 slots sessions are flashcard-only (M1).
     due_cards = due_cards[: max(settings.review_cap - slots, 0) if slots else settings.review_cap]
 
-    # 2. New lemmas within the budget.
-    since = now - timedelta(days=7)
-    introduced = dict(
-        db.execute(
-            select(Item.kind, func.count())
-            .join(LearnerItem, LearnerItem.item_id == Item.id)
-            .where(LearnerItem.learner_id == learner.id, LearnerItem.introduced_at >= since)
-            .group_by(Item.kind)
-        ).all()
-    )
-    budget = new_item_budget(
-        introduced.get("lemma", 0), introduced.get("grammar", 0), backlog, settings
-    )
-    candidates = db.execute(
-        select(LearnerItem, Item)
-        .join(Item, Item.id == LearnerItem.item_id)
-        .where(
-            LearnerItem.learner_id == learner.id,
-            LearnerItem.status == "candidate",
-            Item.kind == "lemma",
-            ~Item.suspended,
-        )
-    ).all()
-    candidates.sort(
-        key=lambda r: (
-            SOURCE_PRIORITY.get(r[0].candidate_source or "wordlist", 9),
-            CEFR_LEVELS.index(r[1].cefr_level),
-            -(r[1].frequency_zipf or 0.0),
-            r[1].id,
-        )
-    )
+    # 2. New lemmas within the budget, from the candidate queue (R§7.4).
+    budget, _backlog = queue.weekly_budget(db, learner, now)
+    queued = queue.candidate_items(db, learner, now)
+    lemma_candidates = [item for item, _source in queued if item.kind == "lemma"]
     lemma_limit = min(budget.lemmas, settings.new_per_session)
-    new_items = [item for _, item in candidates[:lemma_limit]]
+    new_items = lemma_candidates[:lemma_limit]
 
     # 3. Build exercises, interleaving one intro every INTRO_EVERY reviews.
     reviews = []
@@ -317,7 +287,8 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
                 cfg,
                 now,
                 slots=slots,
-                lemma_candidates=[item for _, item in candidates],
+                lemma_candidates=lemma_candidates,
+                queued_grammar=[item for item, _source in queued if item.kind != "lemma"],
                 lemma_limit=lemma_limit,
                 grammar_budget=budget.grammar,
             )
@@ -421,13 +392,26 @@ def submit_answer(
     )
     db.add(attempt)
     db.flush()
-    common = {
+    common: dict[str, Any] = {
         "learner_id": learner.id,
         "item_id": item_id,
         "ts": now,
         "exercise_id": exercise_id,
         "attempt_id": attempt.id,
+        "context": event_context(exercise),
     }
+    feedback = (
+        ""
+        if exercise.type == "grammar_intro"
+        else _feedback(outcome, tags, used_hint, solution, exercise.type)
+    )
+    evaluation_id: int | None = None
+    if exercise.type in contests.FLASHCARD_TYPES:
+        # Synthetic evaluation (grader `flashcards.v1`) so that flashcards can be contested too.
+        evaluation_id = contests.create_flashcard_evaluation(
+            db, attempt, item_id, outcome, tags, solution["text"], feedback, now
+        ).id
+        common["evaluation_id"] = evaluation_id
 
     if exercise.type in ("flashcard_intro", "grammar_intro"):
         facets = FACETS if exercise.type == "flashcard_intro" else ("production",)
@@ -437,7 +421,7 @@ def submit_answer(
                 memory_row = row
         if learner_item is not None:
             learner_item.status = "introduced"
-            learner_item.introduced_at = learner_item.introduced_at or now
+            mark_introduced(learner_item, now, common["context"])
     else:
         facet = target["facet"]
         was_presumed = learner_item is not None and learner_item.status == "presumed_known"
@@ -454,7 +438,7 @@ def submit_answer(
         )
         if learner_item is not None and learner_item.status != "introduced":
             learner_item.status = "introduced"
-            learner_item.introduced_at = learner_item.introduced_at or now
+            mark_introduced(learner_item, now, common["context"])
             if was_presumed:
                 append_event(
                     db, cfg, facet=facet, kind="status_change", presumed_known=True, **common
@@ -481,6 +465,7 @@ def submit_answer(
             "correct_index": solution.get("correct_index"),
         },
         "diagnostic_tags": tags,
-        "feedback_it": _feedback(outcome, tags, used_hint, solution, exercise.type),
+        "feedback_it": feedback,
         "memory": _memory_out(memory_row),
+        "evaluation_id": evaluation_id,
     }

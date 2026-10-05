@@ -5,7 +5,18 @@ from datetime import UTC, datetime
 
 from fastapi import FastAPI
 
-from app.api import explain, grammar, health, items, learner, reading, sessions
+from app.api import (
+    contests,
+    explain,
+    grammar,
+    health,
+    items,
+    learner,
+    placement,
+    queue,
+    reading,
+    sessions,
+)
 from app.api import settings as settings_api
 from app.api.frontend import SPAStaticFiles
 from app.config import Settings, get_settings
@@ -14,6 +25,7 @@ from app.llm.factory import build_llm_client
 from app.nlp.analyzer import Analyzer, SpacyAnalyzer
 from app.nlp.extract import ExtractedText, fetch_article
 from app.nlp.languagetool import LanguageToolClient
+from app.services.contests import ContestResolver, build_resolver
 from app.store.db import create_session_factory
 
 
@@ -24,6 +36,7 @@ def create_app(
     languagetool: LanguageToolClient | None = None,
     analyzer: Analyzer | None = None,
     article_fetcher: Callable[[str], ExtractedText] | None = None,
+    contest_resolver: ContestResolver | None = None,
 ) -> FastAPI:
     settings = settings or get_settings()
     app = FastAPI(title="LLMLL")
@@ -35,6 +48,7 @@ def create_app(
     # The spaCy model is loaded lazily on the first analysis.
     app.state.analyzer = analyzer or SpacyAnalyzer()
     app.state.article_fetcher = article_fetcher or fetch_article
+    app.state.contest_resolver = contest_resolver or build_resolver(settings.contest_resolver)
     for router in (
         health.router,
         learner.router,
@@ -44,6 +58,9 @@ def create_app(
         grammar.router,
         explain.router,
         reading.router,
+        queue.router,
+        contests.router,
+        placement.router,
     ):
         app.include_router(router)
     if settings.frontend_dist is not None and settings.frontend_dist.is_dir():

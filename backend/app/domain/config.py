@@ -81,3 +81,24 @@ class ReadingConfig:
     long_text_max_words: int = 400
     generated_words: int = 150
     seed_lemmas: int = 15
+
+
+@dataclass(frozen=True)
+class PlacementConfig:
+    """Parameters of the initial assessment (design: M4 §3)."""
+
+    vocab_per_band: int = 10
+    grammar_count: int = 4
+    # Word-order stages (R§5) with the declared level from which they are always tested.
+    word_order_stages: tuple[tuple[str, str], ...] = (
+        ("gram:svo-word-order", "A1"),
+        ("gram:adverb-fronting", "A1"),
+        ("gram:verbal-bracket", "A1"),
+        ("gram:inversion-v2", "A2"),
+        ("gram:verb-final-subordinate", "B1"),
+    )
+    # At least this many grammar slots are kept for points that are not word-order stages.
+    min_other_grammar: int = 2
+    raise_threshold: float = 0.7
+    lower_threshold: float = 0.4
+    min_band_results: int = 4

@@ -603,3 +603,11 @@ def test_reading_events_replay_to_the_same_projection(
     finally:
         get_settings.cache_clear()
     assert snapshot(migrated_settings) == before
+
+
+def test_start_reading_resumes_unfinished_session(client: TestClient) -> None:
+    text = create_text(client)
+    first = start(client, text)
+    assert start(client, text) == first  # e.g. a page reload
+    assert client.post(f"/api/reading/{first}/finish").status_code == 200
+    assert start(client, text) != first  # a finished session is not reused

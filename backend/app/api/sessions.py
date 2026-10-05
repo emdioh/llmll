@@ -128,6 +128,8 @@ class AnswerOut(BaseModel):
     diagnostic_tags: list[str]
     feedback_it: str
     memory: MemoryOut | None
+    evaluation_id: int | None = None
+    """Evaluation to contest (null for intro cards)."""
 
 
 class AnswerError(BaseModel):

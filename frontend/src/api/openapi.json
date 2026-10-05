@@ -984,6 +984,328 @@
           }
         }
       }
+    },
+    "/api/queue": {
+      "get": {
+        "tags": [
+          "queue"
+        ],
+        "summary": "Get Queue",
+        "operationId": "getQueue",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueueOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/{item_id}/optin": {
+      "post": {
+        "tags": [
+          "queue"
+        ],
+        "summary": "Optin Item",
+        "operationId": "optinItem",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Item Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptStatusOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/items/{item_id}/optout": {
+      "post": {
+        "tags": [
+          "queue"
+        ],
+        "summary": "Optout Item",
+        "operationId": "optoutItem",
+        "parameters": [
+          {
+            "name": "item_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Item Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptStatusOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/evaluations/{evaluation_id}/contest": {
+      "post": {
+        "tags": [
+          "contests"
+        ],
+        "summary": "Contest Evaluation",
+        "operationId": "contestEvaluation",
+        "parameters": [
+          {
+            "name": "evaluation_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Evaluation Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContestIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestResultOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/attempts/{attempt_id}/contest": {
+      "post": {
+        "tags": [
+          "contests"
+        ],
+        "summary": "Contest Attempt",
+        "description": "Contest an attempt; flashcard attempts from before M4 get their evaluation on demand.",
+        "operationId": "contestAttempt",
+        "parameters": [
+          {
+            "name": "attempt_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Attempt Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContestIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContestResultOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/contests": {
+      "get": {
+        "tags": [
+          "contests"
+        ],
+        "summary": "List Contests",
+        "operationId": "listContests",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "maximum": 200,
+              "minimum": 1,
+              "default": 50,
+              "title": "Limit"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ContestOut"
+                  },
+                  "title": "Response Listcontests"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/placement": {
+      "post": {
+        "tags": [
+          "placement"
+        ],
+        "summary": "Start Placement",
+        "operationId": "startPlacement",
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementOut"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/placement/{placement_id}/finish": {
+      "post": {
+        "tags": [
+          "placement"
+        ],
+        "summary": "Finish Placement",
+        "operationId": "finishPlacement",
+        "parameters": [
+          {
+            "name": "placement_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "title": "Placement Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementFinishOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1135,6 +1457,17 @@
                 "type": "null"
               }
             ]
+          },
+          "evaluation_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Evaluation Id"
           }
         },
         "type": "object",
@@ -1174,6 +1507,47 @@
         },
         "type": "object",
         "title": "AnswerPayload"
+      },
+      "BandResult": {
+        "properties": {
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "score": {
+            "type": "number",
+            "title": "Score"
+          }
+        },
+        "type": "object",
+        "required": [
+          "n",
+          "score"
+        ],
+        "title": "BandResult"
+      },
+      "BudgetOut": {
+        "properties": {
+          "lemmas_left": {
+            "type": "integer",
+            "title": "Lemmas Left"
+          },
+          "grammar_left": {
+            "type": "integer",
+            "title": "Grammar Left"
+          },
+          "backlog": {
+            "type": "integer",
+            "title": "Backlog"
+          }
+        },
+        "type": "object",
+        "required": [
+          "lemmas_left",
+          "grammar_left",
+          "backlog"
+        ],
+        "title": "BudgetOut"
       },
       "CardExample": {
         "properties": {
@@ -1380,6 +1754,206 @@
         "type": "object",
         "title": "CardPrompt",
         "description": "Prompt shown to the learner. Fields depend on the card type; unused ones are null."
+      },
+      "ContestIn": {
+        "properties": {
+          "item_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Item Ids"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          }
+        },
+        "type": "object",
+        "title": "ContestIn"
+      },
+      "ContestItemOutcome": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "previous": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "correct",
+                  "assisted",
+                  "error"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Previous"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "assisted",
+              "error"
+            ],
+            "title": "Outcome"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "label",
+          "previous",
+          "outcome"
+        ],
+        "title": "ContestItemOutcome"
+      },
+      "ContestOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "evaluation_id": {
+            "type": "integer",
+            "title": "Evaluation Id"
+          },
+          "item_ids": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Item Ids"
+          },
+          "reason": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Reason"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "resolved"
+            ],
+            "title": "Status"
+          },
+          "verdict": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "accepted",
+                  "rejected",
+                  "partial"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verdict"
+          },
+          "resolver": {
+            "type": "string",
+            "title": "Resolver"
+          },
+          "rationale": {
+            "type": "string",
+            "title": "Rationale"
+          },
+          "replacement_evaluation_id": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Replacement Evaluation Id"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "resolved_at": {
+            "anyOf": [
+              {
+                "type": "string",
+                "format": "date-time"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Resolved At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "evaluation_id",
+          "item_ids",
+          "reason",
+          "status",
+          "verdict",
+          "resolver",
+          "rationale",
+          "replacement_evaluation_id",
+          "created_at",
+          "resolved_at"
+        ],
+        "title": "ContestOut"
+      },
+      "ContestResultOut": {
+        "properties": {
+          "contest": {
+            "$ref": "#/components/schemas/ContestOut"
+          },
+          "evaluation_id": {
+            "type": "integer",
+            "title": "Evaluation Id"
+          },
+          "items": {
+            "items": {
+              "$ref": "#/components/schemas/ContestItemOutcome"
+            },
+            "type": "array",
+            "title": "Items"
+          }
+        },
+        "type": "object",
+        "required": [
+          "contest",
+          "evaluation_id",
+          "items"
+        ],
+        "title": "ContestResultOut"
       },
       "CreateTextIn": {
         "properties": {
@@ -2375,6 +2949,36 @@
         ],
         "title": "NewWordOut"
       },
+      "OptStatusOut": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "candidate_source": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Candidate Source"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "status",
+          "candidate_source"
+        ],
+        "title": "OptStatusOut"
+      },
       "OptinOut": {
         "properties": {
           "item_id": {
@@ -2402,6 +3006,68 @@
           "created"
         ],
         "title": "OptinOut"
+      },
+      "PlacementFinishOut": {
+        "properties": {
+          "placement_id": {
+            "type": "string",
+            "title": "Placement Id"
+          },
+          "estimated_level": {
+            "type": "string",
+            "title": "Estimated Level"
+          },
+          "previous_level": {
+            "type": "string",
+            "title": "Previous Level"
+          },
+          "changed": {
+            "type": "boolean",
+            "title": "Changed"
+          },
+          "answered": {
+            "type": "integer",
+            "title": "Answered"
+          },
+          "bands": {
+            "additionalProperties": {
+              "$ref": "#/components/schemas/BandResult"
+            },
+            "type": "object",
+            "title": "Bands"
+          }
+        },
+        "type": "object",
+        "required": [
+          "placement_id",
+          "estimated_level",
+          "previous_level",
+          "changed",
+          "answered",
+          "bands"
+        ],
+        "title": "PlacementFinishOut"
+      },
+      "PlacementOut": {
+        "properties": {
+          "placement_id": {
+            "type": "string",
+            "title": "Placement Id"
+          },
+          "cards": {
+            "items": {
+              "$ref": "#/components/schemas/SessionCard"
+            },
+            "type": "array",
+            "title": "Cards"
+          }
+        },
+        "type": "object",
+        "required": [
+          "placement_id",
+          "cards"
+        ],
+        "title": "PlacementOut"
       },
       "PreparedCard": {
         "properties": {
@@ -2569,6 +3235,64 @@
           "evaluation_id"
         ],
         "title": "ProductionAnswerOut"
+      },
+      "QueueEntry": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "optin",
+              "article",
+              "wordlist"
+            ],
+            "title": "Source"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lemma",
+              "grammar",
+              "construction"
+            ],
+            "title": "Kind"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "label",
+          "source",
+          "kind"
+        ],
+        "title": "QueueEntry"
+      },
+      "QueueOut": {
+        "properties": {
+          "budget": {
+            "$ref": "#/components/schemas/BudgetOut"
+          },
+          "next": {
+            "items": {
+              "$ref": "#/components/schemas/QueueEntry"
+            },
+            "type": "array",
+            "title": "Next"
+          }
+        },
+        "type": "object",
+        "required": [
+          "budget",
+          "next"
+        ],
+        "title": "QueueOut"
       },
       "ReadingOut": {
         "properties": {
