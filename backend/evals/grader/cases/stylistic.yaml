@@ -1,0 +1,161 @@
+# Grader evaluation cases: stylistic. Hand-reviewed; see evals/README.md.
+- id: sty-01
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Di dove sei?
+    reference_solutions:
+    - Woher kommst du?
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: lex:woher
+  answer: Woher bist du?
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:inversion-v2
+    - lex:woher
+  notes: Colloquial but correct.
+- id: sty-02
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mia madre cucina molto bene.
+    reference_solutions:
+    - Meine Mutter kocht sehr gut.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:kochen
+  answer: Meine Mutter kocht richtig gut.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:articles-nom-akk
+    - lex:kochen
+  notes: Colloquial intensifier.
+- id: sty-03
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non ho tempo.
+    reference_solutions:
+    - Ich habe keine Zeit.
+    targets:
+    - item_id: gram:negation
+    - item_id: lex:zeit
+  answer: Ich hab keine Zeit.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:negation
+    - lex:zeit
+  notes: Colloquial elision of -e.
+- id: sty-04
+  category: stylistic
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri ho mangiato una pizza.
+    reference_solutions:
+    - Gestern habe ich eine Pizza gegessen.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: lex:essen#eat
+  answer: Gestern aß ich eine Pizza.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:perfekt
+    - lex:essen#eat
+  notes: 'Präteritum of essen: correct, more literary than spoken.'
+- id: sty-05
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Come stai?
+    reference_solutions:
+    - Wie geht's dir?
+    targets:
+    - item_id: cx:wie-geht-es-dat
+    - item_id: gram:personal-pronouns
+  answer: Wie geht es dir?
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - cx:wie-geht-es-dat
+    - gram:personal-pronouns
+  notes: Full form instead of the contraction.
+- id: sty-06
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Vorrei un tè.
+    reference_solutions:
+    - Ich hätte gern einen Tee.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:tee
+  answer: Ich nehme einen Tee.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:articles-nom-akk
+    - lex:tee
+  notes: Café-style ordering.
+- id: sty-07
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Puoi aiutarmi?
+    reference_solutions:
+    - Kannst du mir helfen?
+    targets:
+    - item_id: gram:modal-verbs
+    - item_id: cx:helfen-dat
+  answer: Kannst du mir bitte helfen?
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:modal-verbs
+    - cx:helfen-dat
+  notes: Added bitte.
+- id: sty-08
+  category: stylistic
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Nelle vicinanze c'è un parco.
+    reference_solutions:
+    - In der Nähe gibt es einen Park.
+    targets:
+    - item_id: cx:es-gibt-akk
+    - item_id: gram:articles-nom-akk
+  answer: Es gibt einen Park in der Nähe.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - cx:es-gibt-akk
+    - gram:articles-nom-akk
+  notes: es gibt first, place at the end.

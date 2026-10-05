@@ -21,6 +21,8 @@ dependencies = [
 
 [dependency-groups]
 dev = ["pytest", "ruff"]
+# Only for `python -m app.cli optimize-fsrs` (pulls in PyTorch): `uv sync --group optimizer`.
+optimizer = ["fsrs[optimizer]"]
 
 [build-system]
 requires = ["hatchling"]

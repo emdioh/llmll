@@ -1,0 +1,445 @@
+# Grader evaluation cases: correct_variant. Hand-reviewed; see evals/README.md.
+- id: var-01
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Domani vado a Roma in treno.
+    reference_solutions:
+    - Morgen fahre ich mit dem Zug nach Rom.
+    targets:
+    - item_id: gram:prepositions-dat
+    - item_id: lex:fahren
+  answer: Ich fahre morgen mit dem Zug nach Rom.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:prepositions-dat
+    - lex:fahren
+  notes: Subject first instead of the fronted adverb.
+- id: var-02
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Oggi sono a casa.
+    reference_solutions:
+    - Heute bin ich zu Hause.
+    targets:
+    - item_id: gram:adverb-fronting
+    - item_id: lex:zu-hause
+  answer: Ich bin heute zu Hause.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:adverb-fronting
+    - lex:zu-hause
+  notes: No fronting; still correct word order.
+- id: var-03
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Questa città mi piace molto.
+    reference_solutions:
+    - Diese Stadt gefällt mir sehr.
+    targets:
+    - item_id: cx:gefallen-dat
+    - item_id: lex:stadt
+  answer: Mir gefällt diese Stadt sehr.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - cx:gefallen-dat
+    - lex:stadt
+  notes: Dative object fronted.
+- id: var-04
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Vorrei un caffè, per favore.
+    reference_solutions:
+    - Ich hätte gern einen Kaffee, bitte.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:kaffee
+  answer: Ich möchte bitte einen Kaffee.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:articles-nom-akk
+    - lex:kaffee
+  notes: Different construction; articles still correct.
+- id: var-05
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Se piove, restiamo a casa.
+    reference_solutions:
+    - Wenn es regnet, bleiben wir zu Hause.
+    targets:
+    - item_id: gram:conjunctions-subordinating
+    - item_id: gram:verb-final-subordinate
+    - item_id: lex:bleiben
+  answer: Wir bleiben zu Hause, wenn es regnet.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:conjunctions-subordinating
+    - gram:verb-final-subordinate
+    - lex:bleiben
+  notes: Subordinate clause after the main clause.
+- id: var-06
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho comprato un libro per mio padre.
+    reference_solutions:
+    - Ich habe ein Buch für meinen Vater gekauft.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: gram:dative-case
+  answer: Ich habe meinem Vater ein Buch gekauft.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:perfekt
+    - gram:dative-case
+  notes: Dative object instead of für + accusative.
+- id: var-07
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non ho una macchina.
+    reference_solutions:
+    - Ich habe kein Auto.
+    targets:
+    - item_id: gram:negation
+    - item_id: lex:auto
+  answer: Ich habe gar kein Auto.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:negation
+    - lex:auto
+  notes: Emphatic gar.
+- id: var-08
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Voglio imparare il tedesco.
+    reference_solutions:
+    - Ich will Deutsch lernen.
+    targets:
+    - item_id: gram:modal-verbs
+    - item_id: lex:lernen
+  answer: Ich möchte Deutsch lernen.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:modal-verbs
+    - lex:lernen
+  notes: möchte instead of will.
+- id: var-09
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il treno parte alle otto.
+    reference_solutions:
+    - Der Zug fährt um acht Uhr ab.
+    targets:
+    - item_id: gram:separable-verbs
+    - item_id: gram:inversion-v2
+  answer: Um acht Uhr fährt der Zug ab.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:separable-verbs
+    - gram:inversion-v2
+  notes: ""
+- id: var-10
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri ero stanco.
+    reference_solutions:
+    - Gestern war ich müde.
+    targets:
+    - item_id: gram:praeteritum-sein-haben-modals
+    - item_id: lex:muede
+  answer: Ich war gestern müde.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:praeteritum-sein-haben-modals
+    - lex:muede
+  notes: ""
+- id: var-11
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Possiamo aprire la finestra?
+    reference_solutions:
+    - Können wir das Fenster öffnen?
+    targets:
+    - item_id: gram:modal-verbs
+    - item_id: lex:fenster
+  answer: Dürfen wir das Fenster aufmachen?
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:modal-verbs
+    - lex:fenster
+  notes: Synonymous verb and modal; both correct.
+- id: var-12
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il libro è sul tavolo.
+    reference_solutions:
+    - Das Buch liegt auf dem Tisch.
+    targets:
+    - item_id: gram:prepositions-two-way
+    - item_id: lex:liegen
+  answer: Das Buch ist auf dem Tisch.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:prepositions-two-way
+    - lex:liegen
+  notes: sein instead of liegen is natural German.
+- id: var-13
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mi chiamo Marco.
+    reference_solutions:
+    - Ich heiße Marco.
+    targets:
+    - item_id: gram:praesens
+    - item_id: lex:name
+  answer: Mein Name ist Marco.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:praesens
+    - lex:name
+  notes: ""
+- id: var-14
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: L'anno scorso sono andato in Germania.
+    reference_solutions:
+    - Letztes Jahr bin ich nach Deutschland gefahren.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: lex:fahren
+  answer: Ich bin letztes Jahr nach Deutschland gefahren.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:perfekt
+    - lex:fahren
+  notes: ""
+- id: var-15
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mia sorella è più alta di me.
+    reference_solutions:
+    - Meine Schwester ist größer als ich.
+    targets:
+    - item_id: gram:comparative-superlative
+    - item_id: lex:schwester
+  answer: Ich bin kleiner als meine Schwester.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:comparative-superlative
+    - lex:schwester
+  notes: Reversed comparison, same meaning.
+- id: var-16
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ti aiuto volentieri.
+    reference_solutions:
+    - Ich helfe dir gern.
+    targets:
+    - item_id: cx:helfen-dat
+    - item_id: gram:personal-pronouns
+  answer: Ich helfe dir gerne.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - cx:helfen-dat
+    - gram:personal-pronouns
+  notes: ""
+- id: var-17
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Dopo la scuola gioco a calcio.
+    reference_solutions:
+    - Nach der Schule spiele ich Fußball.
+    targets:
+    - item_id: gram:prepositions-dat
+    - item_id: lex:spielen
+  answer: Ich spiele nach der Schule Fußball.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:prepositions-dat
+    - lex:spielen
+  notes: ""
+- id: var-18
+  category: correct_variant
+  level: B1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Penso che sia difficile.
+    reference_solutions:
+    - Ich denke, dass es schwer ist.
+    targets:
+    - item_id: gram:verb-final-subordinate
+    - item_id: gram:conjunctions-subordinating
+  answer: Ich denke, es ist schwer.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:verb-final-subordinate
+    - gram:conjunctions-subordinating
+  notes: 'dass dropped: verb-second order is correct here, not a verb-final error.'
+- id: var-19
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Lui fa il medico.
+    reference_solutions:
+    - Er ist Arzt.
+    targets:
+    - item_id: gram:svo-word-order
+    - item_id: lex:arzt
+  answer: Er arbeitet als Arzt.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:svo-word-order
+    - lex:arzt
+  notes: ""
+- id: var-20
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mangio spesso pane e formaggio.
+    reference_solutions:
+    - Ich esse oft Brot und Käse.
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: lex:essen#eat
+  answer: Brot und Käse esse ich oft.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:inversion-v2
+    - lex:essen#eat
+  notes: Object fronted.
+- id: var-21
+  category: correct_variant
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Oggi abbiamo molto lavoro.
+    reference_solutions:
+    - Wir haben heute viel Arbeit.
+    targets:
+    - item_id: gram:adverb-fronting
+    - item_id: lex:arbeit
+  answer: Heute haben wir viel Arbeit.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:adverb-fronting
+    - lex:arbeit
+  notes: ""
+- id: var-22
+  category: correct_variant
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non posso venire perché sono malato.
+    reference_solutions:
+    - Ich kann nicht kommen, weil ich krank bin.
+    targets:
+    - item_id: gram:verb-final-subordinate
+    - item_id: gram:modal-verbs
+    - item_id: lex:krank
+  answer: Ich bin krank und kann deshalb nicht kommen.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:verb-final-subordinate
+    - gram:modal-verbs
+    - lex:krank
+  notes: Main clauses with deshalb instead of weil.

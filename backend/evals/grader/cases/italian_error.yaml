@@ -1,0 +1,525 @@
+# Grader evaluation cases: italian_error. Hand-reviewed; see evals/README.md.
+- id: ita-01
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il tavolo è grande.
+    reference_solutions:
+    - Der Tisch ist groß.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:tisch
+  answer: Die Tisch ist groß.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:articles-nom-akk
+      diagnostic_tags:
+      - wrong-gender
+      severity: major
+      span_text: Die
+    correct_uses: []
+  notes: Wrong article gender.
+- id: ita-02
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il sole è caldo.
+    reference_solutions:
+    - Die Sonne ist warm.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:sonne
+  answer: Der Sonne ist warm.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:articles-nom-akk
+      diagnostic_tags:
+      - wrong-gender
+      severity: major
+      span_text: Der
+    correct_uses: []
+  notes: 'Interference: il sole (m) vs die Sonne (f).'
+- id: ita-03
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Vado al cinema con il mio amico.
+    reference_solutions:
+    - Ich gehe mit meinem Freund ins Kino.
+    targets:
+    - item_id: gram:prepositions-dat
+    - item_id: lex:freund
+  answer: Ich gehe mit meinen Freund ins Kino.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:prepositions-dat
+      diagnostic_tags:
+      - accusative-instead-of-dative
+      severity: major
+      span_text: meinen
+    correct_uses: []
+  notes: ""
+- id: ita-04
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Questo regalo è per te.
+    reference_solutions:
+    - Das Geschenk ist für dich.
+    targets:
+    - item_id: gram:prepositions-akk
+    - item_id: gram:personal-pronouns
+  answer: Das Geschenk ist für dir.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:prepositions-akk
+      diagnostic_tags:
+      - dative-instead-of-accusative
+      severity: major
+      span_text: dir
+    correct_uses: []
+  notes: ""
+- id: ita-05
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Metto il libro sul tavolo.
+    reference_solutions:
+    - Ich lege das Buch auf den Tisch.
+    targets:
+    - item_id: gram:prepositions-two-way
+    - item_id: lex:legen
+  answer: Ich lege das Buch auf dem Tisch.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:prepositions-two-way
+      diagnostic_tags:
+      - wrong-case-wo-wohin
+      severity: major
+      span_text: auf dem Tisch
+    correct_uses: []
+  notes: ""
+- id: ita-06
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho un cane grande.
+    reference_solutions:
+    - Ich habe einen großen Hund.
+    targets:
+    - item_id: gram:adjective-endings
+    - item_id: lex:hund
+  answer: Ich habe einen große Hund.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:adjective-endings
+      diagnostic_tags:
+      - m
+      severity: major
+      span_text: große
+    correct_uses: []
+  notes: ""
+- id: ita-07
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Oggi vado a scuola.
+    reference_solutions:
+    - Heute gehe ich zur Schule.
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: lex:schule
+  answer: Heute ich gehe zur Schule.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:inversion-v2
+      diagnostic_tags:
+      - subject-before-verb
+      severity: major
+      span_text: ich gehe
+    correct_uses: []
+  notes: ""
+- id: ita-08
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: So che lui viene domani.
+    reference_solutions:
+    - Ich weiß, dass er morgen kommt.
+    targets:
+    - item_id: gram:verb-final-subordinate
+    - item_id: gram:conjunctions-subordinating
+  answer: Ich weiß, dass er kommt morgen.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:verb-final-subordinate
+      diagnostic_tags:
+      - verb-not-final
+      severity: major
+      span_text: kommt morgen
+    correct_uses: []
+  notes: ""
+- id: ita-09
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Resto a casa perché sono malato.
+    reference_solutions:
+    - Ich bleibe zu Hause, weil ich krank bin.
+    targets:
+    - item_id: gram:verb-final-subordinate
+    - item_id: lex:krank
+  answer: Ich bleibe zu Hause, weil ich bin krank.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:verb-final-subordinate
+      diagnostic_tags:
+      - verb-not-final
+      severity: major
+      span_text: ich bin krank
+    correct_uses: []
+  notes: ""
+- id: ita-10
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Sono andato a Roma.
+    reference_solutions:
+    - Ich bin nach Rom gefahren.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: lex:fahren
+  answer: Ich habe nach Rom gefahren.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:perfekt
+      diagnostic_tags:
+      - wrong-auxiliary
+      severity: major
+      span_text: habe
+    correct_uses: []
+  notes: avere/essere carry-over.
+- id: ita-11
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho mangiato una mela.
+    reference_solutions:
+    - Ich habe einen Apfel gegessen.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: lex:apfel
+  answer: Ich habe einen Apfel gegesst.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:perfekt
+      diagnostic_tags:
+      - wrong-partizip-form
+      severity: major
+      span_text: gegesst
+    correct_uses: []
+  notes: ""
+- id: ita-12
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri ho comprato il pane.
+    reference_solutions:
+    - Gestern habe ich Brot gekauft.
+    targets:
+    - item_id: gram:verbal-bracket
+    - item_id: lex:brot
+  answer: Gestern habe ich gekauft Brot.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:verbal-bracket
+      diagnostic_tags:
+      - second-part-after-object
+      severity: major
+      span_text: gekauft Brot
+    correct_uses: []
+  notes: ""
+- id: ita-13
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mi alzo alle sette.
+    reference_solutions:
+    - Ich stehe um sieben Uhr auf.
+    targets:
+    - item_id: gram:separable-verbs
+    - item_id: lex:aufstehen
+  answer: Ich aufstehe um sieben Uhr.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:separable-verbs
+      diagnostic_tags:
+      - particle-not-separated
+      severity: major
+      span_text: aufstehe
+    correct_uses: []
+  notes: ""
+- id: ita-14
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non ho fame.
+    reference_solutions:
+    - Ich habe keinen Hunger.
+    targets:
+    - item_id: gram:negation
+    - item_id: lex:hunger
+  answer: Ich habe nicht Hunger.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:negation
+      diagnostic_tags:
+      - nicht-vs-kein
+      severity: major
+      span_text: nicht Hunger
+    correct_uses: []
+  notes: ""
+- id: ita-15
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Lui legge un libro.
+    reference_solutions:
+    - Er liest ein Buch.
+    targets:
+    - item_id: gram:praesens
+    - item_id: lex:lesen
+  answer: Er lest ein Buch.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:praesens
+      diagnostic_tags:
+      - missing-vowel-change
+      severity: major
+      span_text: lest
+    correct_uses: []
+  notes: ""
+- id: ita-16
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Sono contento delle vacanze che arrivano.
+    reference_solutions:
+    - Ich freue mich auf die Ferien.
+    targets:
+    - item_id: cx:sich-freuen-auf-akk
+    - item_id: lex:ferien
+  answer: Ich freue mich über die Ferien.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: cx:sich-freuen-auf-akk
+      diagnostic_tags: []
+      severity: major
+      span_text: über
+    correct_uses: []
+  notes: 'Wrong preposition: auf (future) vs über (present).'
+- id: ita-17
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho vent'anni.
+    reference_solutions:
+    - Ich bin zwanzig Jahre alt.
+    targets:
+    - item_id: cx:wie-alt-sein
+    - item_id: lex:zwanzig
+  answer: Ich habe zwanzig Jahre.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: cx:wie-alt-sein
+      diagnostic_tags: []
+      severity: major
+      span_text: habe zwanzig Jahre
+    correct_uses: []
+  notes: Calque of 'avere ... anni'.
+- id: ita-18
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Questo libro mi piace.
+    reference_solutions:
+    - Das Buch gefällt mir.
+    targets:
+    - item_id: cx:gefallen-dat
+    - item_id: lex:buch
+  answer: Ich gefalle das Buch.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: cx:gefallen-dat
+      diagnostic_tags: []
+      severity: major
+      span_text: Ich gefalle
+    correct_uses: []
+  notes: Subject/object swap of piacere.
+- id: ita-19
+  category: italian_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il mio amico è più alto di me.
+    reference_solutions:
+    - Mein Freund ist größer als ich.
+    targets:
+    - item_id: gram:comparative-superlative
+    - item_id: lex:freund
+  answer: Mein Freund ist größer wie ich.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:comparative-superlative
+      diagnostic_tags:
+      - wie-instead-of-als
+      severity: major
+      span_text: wie
+    correct_uses: []
+  notes: ""
+- id: ita-20
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Oggi devo lavorare.
+    reference_solutions:
+    - Heute muss ich arbeiten.
+    targets:
+    - item_id: gram:modal-verbs
+    - item_id: lex:arbeiten
+  answer: Heute muss ich zu arbeiten.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:modal-verbs
+      diagnostic_tags:
+      - zu-added
+      severity: major
+      span_text: zu arbeiten
+    correct_uses: []
+  notes: Italian da/di + infinitive.
+- id: ita-21
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Vedo lui.
+    reference_solutions:
+    - Ich sehe ihn.
+    targets:
+    - item_id: gram:personal-pronouns
+    - item_id: lex:sehen
+  answer: Ich sehe er.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:personal-pronouns
+      diagnostic_tags:
+      - wrong-case
+      severity: major
+      span_text: er
+    correct_uses: []
+  notes: ""
+- id: ita-22
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Nella mia città c'è un parco.
+    reference_solutions:
+    - In meiner Stadt gibt es einen Park.
+    targets:
+    - item_id: cx:es-gibt-akk
+    - item_id: gram:articles-nom-akk
+  answer: In meiner Stadt gibt es ein Park.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:articles-nom-akk
+      diagnostic_tags:
+      - case-not-marked
+      severity: major
+      span_text: ein Park
+    correct_uses: []
+  notes: ""
+- id: ita-23
+  category: italian_error
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il bambino mangia una mela.
+    reference_solutions:
+    - Das Kind isst einen Apfel.
+    targets:
+    - item_id: gram:articles-nom-akk
+  answer: Das Kind isst einen apfel.
+  expected:
+    overall: minor_errors
+    errors:
+    - item_id: null
+      diagnostic_tags: []
+      severity: minor
+      span_text: apfel
+    correct_uses: []
+  notes: Nouns are capitalized in German (not in Italian); spelling slip, no target involved.

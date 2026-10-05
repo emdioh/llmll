@@ -1,0 +1,91 @@
+# Grader evaluation cases: off_task. Hand-reviewed; see evals/README.md.
+- id: off-01
+  category: off_task
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Sono stanco.
+    reference_solutions:
+    - Ich bin müde.
+    targets:
+    - item_id: gram:praesens
+    - item_id: lex:muede
+  answer: Non lo so.
+  expected:
+    overall: off_task
+    errors: []
+    correct_uses: []
+  notes: 'Italian answer: the learner gave up.'
+- id: off-02
+  category: off_task
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il gatto dorme.
+    reference_solutions:
+    - Die Katze schläft.
+    targets:
+    - item_id: gram:praesens
+    - item_id: lex:katze
+  answer: ""
+  expected:
+    overall: off_task
+    errors: []
+    correct_uses: []
+  notes: Empty answer.
+- id: off-03
+  category: off_task
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho una sorella.
+    reference_solutions:
+    - Ich habe eine Schwester.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: lex:schwester
+  answer: I have one sister.
+  expected:
+    overall: off_task
+    errors: []
+    correct_uses: []
+  notes: English instead of German.
+- id: off-04
+  category: off_task
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il cane è nel giardino.
+    reference_solutions:
+    - Der Hund ist im Garten.
+    targets:
+    - item_id: gram:prepositions-two-way
+    - item_id: lex:hund
+  answer: Ich mag Pizza sehr gern.
+  expected:
+    overall: off_task
+    errors: []
+    correct_uses: []
+  notes: Correct German, unrelated to the prompt.
+- id: off-05
+  category: off_task
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Bevo un tè.
+    reference_solutions:
+    - Ich trinke einen Tee.
+    targets:
+    - item_id: gram:praesens
+    - item_id: lex:trinken
+  answer: asdf asdf qwer
+  expected:
+    overall: off_task
+    errors: []
+    correct_uses: []
+  notes: Gibberish.

@@ -1,0 +1,204 @@
+# Grader evaluation cases: multi_error. Hand-reviewed; see evals/README.md.
+- id: mul-01
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri sono andato con il mio amico al cinema.
+    reference_solutions:
+    - Gestern bin ich mit meinem Freund ins Kino gegangen.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: gram:prepositions-dat
+  answer: Gestern habe ich mit meinen Freund ins Kino gegangen.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:perfekt
+      diagnostic_tags:
+      - wrong-auxiliary
+      severity: major
+      span_text: habe
+    - item_id: gram:prepositions-dat
+      diagnostic_tags:
+      - accusative-instead-of-dative
+      severity: major
+      span_text: meinen
+    correct_uses: []
+  notes: ""
+- id: mul-02
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Domani resto a casa perché piove.
+    reference_solutions:
+    - Morgen bleibe ich zu Hause, weil es regnet.
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: gram:verb-final-subordinate
+  answer: Morgen ich bleibe zu Hause, weil regnet es.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:inversion-v2
+      diagnostic_tags:
+      - subject-before-verb
+      severity: major
+      span_text: ich bleibe
+    - item_id: gram:verb-final-subordinate
+      diagnostic_tags:
+      - verb-not-final
+      severity: major
+      span_text: regnet es
+    correct_uses: []
+  notes: ""
+- id: mul-03
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ho dato un libro alla mia amica.
+    reference_solutions:
+    - Ich habe meiner Freundin ein Buch gegeben.
+    targets:
+    - item_id: gram:dative-case
+    - item_id: gram:perfekt
+  answer: Ich habe meine Freundin ein Buch gegebt.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:dative-case
+      diagnostic_tags:
+      - accusative-instead-of-dative
+      severity: major
+      span_text: meine Freundin
+    - item_id: gram:perfekt
+      diagnostic_tags:
+      - wrong-partizip-form
+      severity: major
+      span_text: gegebt
+    correct_uses: []
+  notes: ""
+- id: mul-04
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Mio fratello ha una macchina nuova.
+    reference_solutions:
+    - Mein Bruder hat ein neues Auto.
+    targets:
+    - item_id: gram:articles-nom-akk
+    - item_id: gram:adjective-endings
+  answer: Meine Bruder hat ein neue Auto.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:articles-nom-akk
+      diagnostic_tags:
+      - wrong-gender
+      severity: major
+      span_text: Meine
+    - item_id: gram:adjective-endings
+      diagnostic_tags:
+      - n
+      severity: major
+      span_text: neue
+    correct_uses: []
+  notes: ""
+- id: mul-05
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non vado a scuola perché sono malato.
+    reference_solutions:
+    - Ich gehe nicht zur Schule, weil ich krank bin.
+    targets:
+    - item_id: gram:prepositions-dat
+    - item_id: gram:verb-final-subordinate
+  answer: Ich gehe nicht zu Schule, weil ich bin krank.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:prepositions-dat
+      diagnostic_tags:
+      - contraction-missed
+      severity: major
+      span_text: zu Schule
+    - item_id: gram:verb-final-subordinate
+      diagnostic_tags:
+      - verb-not-final
+      severity: major
+      span_text: ich bin krank
+    correct_uses: []
+  notes: ""
+- id: mul-06
+  category: multi_error
+  level: A2
+  exercise:
+    type: guided
+    instructions: Scrivi una frase in tedesco per dire quanto segue.
+    prompt: Ieri ho invitato i miei colleghi a cena.
+    reference_solutions:
+    - Ich habe gestern meine Kollegen zum Abendessen eingeladen.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: gram:inversion-v2
+    - item_id: lex:einladen
+  answer: Gestern ich habe meine Kollegen zum Abendessen eingeladet.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:inversion-v2
+      diagnostic_tags:
+      - subject-before-verb
+      severity: major
+      span_text: ich habe
+    - item_id: gram:perfekt
+      diagnostic_tags:
+      - wrong-partizip-form
+      severity: major
+      span_text: eingeladet
+    correct_uses: []
+  notes: ""
+- id: mul-07
+  category: multi_error
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri ho visto un film con i miei amici.
+    reference_solutions:
+    - Gestern habe ich einen Film mit meinen Freunden gesehen.
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: gram:articles-nom-akk
+    - item_id: gram:prepositions-dat
+  answer: Gestern ich habe ein Film mit meine Freunde gesehen.
+  expected:
+    overall: major_errors
+    errors:
+    - item_id: gram:inversion-v2
+      diagnostic_tags:
+      - subject-before-verb
+      severity: major
+      span_text: ich habe
+    - item_id: gram:articles-nom-akk
+      diagnostic_tags:
+      - case-not-marked
+      severity: major
+      span_text: ein Film
+    - item_id: gram:prepositions-dat
+      diagnostic_tags:
+      - accusative-instead-of-dative
+      severity: major
+      span_text: meine Freunde
+    correct_uses: []
+  notes: ""

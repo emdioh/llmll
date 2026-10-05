@@ -22,13 +22,17 @@ class MemoryView:
 
 
 def select_due(
-    memories: Iterable[MemoryView], now: datetime, limit: int, desired_retention: float = 0.85
+    memories: Iterable[MemoryView],
+    now: datetime,
+    limit: int,
+    desired_retention: float = 0.85,
+    parameters: tuple[float, ...] | None = None,
 ) -> list[MemoryView]:
     """Due memories ordered by retrievability (asc), frequency (desc), then item id."""
     due = [m for m in memories if m.due is not None and m.due <= now]
     due.sort(
         key=lambda m: (
-            retrievability(m.card, now, desired_retention),
+            retrievability(m.card, now, desired_retention, parameters),
             -(m.frequency_zipf or 0.0),
             m.item_id,
             FACET_ORDER.get(m.facet, 9),

@@ -155,6 +155,8 @@ class LearningEvent(Base):
     voided_by: Mapped[int | None] = mapped_column(Integer, nullable=True)
     # null for normal events, "placement" for the initial assessment
     context: Mapped[str | None] = mapped_column(String, nullable=True)
+    # FSRS retrievability of the card just before this review; null when no card existed yet
+    predicted_retrievability: Mapped[float | None] = mapped_column(Float, nullable=True)
 
 
 class ItemMemory(Base):

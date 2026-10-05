@@ -1306,6 +1306,27 @@
           }
         }
       }
+    },
+    "/api/stats": {
+      "get": {
+        "tags": [
+          "stats"
+        ],
+        "summary": "Get Stats",
+        "operationId": "getStats",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatsOut"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1548,6 +1569,54 @@
           "backlog"
         ],
         "title": "BudgetOut"
+      },
+      "CalibrationBucketOut": {
+        "properties": {
+          "bucket_low": {
+            "type": "number",
+            "title": "Bucket Low"
+          },
+          "bucket_high": {
+            "type": "number",
+            "title": "Bucket High"
+          },
+          "n": {
+            "type": "integer",
+            "title": "N"
+          },
+          "predicted": {
+            "type": "number",
+            "title": "Predicted"
+          },
+          "observed": {
+            "type": "number",
+            "title": "Observed"
+          },
+          "recalled": {
+            "type": "integer",
+            "title": "Recalled"
+          },
+          "assisted": {
+            "type": "integer",
+            "title": "Assisted"
+          },
+          "forgotten": {
+            "type": "integer",
+            "title": "Forgotten"
+          }
+        },
+        "type": "object",
+        "required": [
+          "bucket_low",
+          "bucket_high",
+          "n",
+          "predicted",
+          "observed",
+          "recalled",
+          "assisted",
+          "forgotten"
+        ],
+        "title": "CalibrationBucketOut"
       },
       "CardExample": {
         "properties": {
@@ -3564,6 +3633,69 @@
         },
         "type": "object",
         "title": "SettingsUpdate"
+      },
+      "StatsOut": {
+        "properties": {
+          "reviews_7d": {
+            "type": "integer",
+            "title": "Reviews 7D"
+          },
+          "reviews_30d": {
+            "type": "integer",
+            "title": "Reviews 30D"
+          },
+          "sessions_7d": {
+            "type": "integer",
+            "title": "Sessions 7D"
+          },
+          "readings_7d": {
+            "type": "integer",
+            "title": "Readings 7D"
+          },
+          "new_items_7d": {
+            "type": "integer",
+            "title": "New Items 7D"
+          },
+          "observed_retention": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Observed Retention"
+          },
+          "target_retention": {
+            "type": "number",
+            "title": "Target Retention"
+          },
+          "calibration": {
+            "items": {
+              "$ref": "#/components/schemas/CalibrationBucketOut"
+            },
+            "type": "array",
+            "title": "Calibration"
+          },
+          "backlog": {
+            "type": "integer",
+            "title": "Backlog"
+          }
+        },
+        "type": "object",
+        "required": [
+          "reviews_7d",
+          "reviews_30d",
+          "sessions_7d",
+          "readings_7d",
+          "new_items_7d",
+          "observed_retention",
+          "target_retention",
+          "calibration",
+          "backlog"
+        ],
+        "title": "StatsOut"
       },
       "TextOut": {
         "properties": {

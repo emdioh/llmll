@@ -51,7 +51,13 @@ def apply(
     if event.kind == "introduce":
         card = state.card
         if card is None:
-            card = review(new_card(state.card_id), Rating.Good, event.ts, cfg.desired_retention)
+            card = review(
+                new_card(state.card_id),
+                Rating.Good,
+                event.ts,
+                cfg.desired_retention,
+                cfg.fsrs_parameters,
+            )
         return replace(state, card=card, last_event_id=event.id), None
 
     if event.kind in REVIEW_KINDS and event.outcome is not None:
@@ -67,7 +73,11 @@ def apply(
         card = state.card
         if decision.rating is not None:
             card = review(
-                card or new_card(state.card_id), decision.rating, event.ts, cfg.desired_retention
+                card or new_card(state.card_id),
+                decision.rating,
+                event.ts,
+                cfg.desired_retention,
+                cfg.fsrs_parameters,
             )
         mastery, n_eff = update_mastery(
             state.mastery, state.n_eff, event.outcome, event.evidence_weight, event.confidence, cfg

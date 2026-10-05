@@ -40,7 +40,10 @@ def settings_of(learner: Learner) -> LearnerSettings:
 
 
 def projection_config(settings: LearnerSettings) -> ProjectionConfig:
-    return ProjectionConfig(desired_retention=settings.desired_retention)
+    parameters = tuple(settings.fsrs_parameters) if settings.fsrs_parameters else None
+    return ProjectionConfig(
+        desired_retention=settings.desired_retention, fsrs_parameters=parameters
+    )
 
 
 def create_learner(

@@ -16,6 +16,7 @@ from app.api import (
     queue,
     reading,
     sessions,
+    stats,
 )
 from app.api import settings as settings_api
 from app.api.frontend import SPAStaticFiles
@@ -61,6 +62,7 @@ def create_app(
         queue.router,
         contests.router,
         placement.router,
+        stats.router,
     ):
         app.include_router(router)
     if settings.frontend_dist is not None and settings.frontend_dist.is_dir():

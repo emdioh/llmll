@@ -11,7 +11,8 @@ from sqlalchemy.orm import Session
 
 from app.domain.config import ProjectionConfig
 from app.domain.grading import GradeDecision
-from app.domain.projection import EventData, MemoryState, apply, replay
+from app.domain.projection import REVIEW_KINDS, EventData, MemoryState, apply, replay
+from app.domain.scheduling import retrievability
 from app.store.models import ItemMemory, LearningEvent
 
 
@@ -178,7 +179,12 @@ def append_event_with_decision(
         return event, replay_key(session, learner_id, item_id, facet, cfg), None
 
     row = session.get(ItemMemory, (learner_id, item_id, facet))
-    state, decision = apply(row_to_state(row, item_id, facet), to_event_data(event), cfg)
+    before = row_to_state(row, item_id, facet)
+    if kind in REVIEW_KINDS and before.card is not None and before.card.last_review is not None:
+        event.predicted_retrievability = retrievability(
+            before.card, ts, cfg.desired_retention, cfg.fsrs_parameters
+        )
+    state, decision = apply(before, to_event_data(event), cfg)
     return event, _write_state(session, row, learner_id, item_id, facet, state, cfg), decision
 
 
@@ -214,6 +220,7 @@ def replace_events(
             "exercise_id": old.exercise_id,
             "attempt_id": old.attempt_id,
             "context": old.context,
+            "predicted_retrievability": old.predicted_retrievability,
             **changes(old),
             "evaluation_id": replacement_evaluation_id,
         }

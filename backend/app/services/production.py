@@ -5,6 +5,7 @@ import re
 import threading
 import uuid
 from collections import defaultdict
+from collections.abc import Collection
 from datetime import datetime
 from typing import Any
 
@@ -25,6 +26,7 @@ from app.llm.types import (
     GeneratedExercise,
     GlossEntry,
     GradeRequest,
+    GradeResult,
     ItemContext,
     TargetContext,
     VocabEntry,
@@ -205,7 +207,11 @@ def plan_production_slots(
     for mem, item in due_rows:
         items_by_id.setdefault(item.id, item)
         card = Card.from_dict(mem.fsrs_card) if mem.fsrs_card else None
-        r = retrievability(card, now, cfg.desired_retention) if card is not None else None
+        r = (
+            retrievability(card, now, cfg.desired_retention, cfg.fsrs_parameters)
+            if card is not None
+            else None
+        )
         due.append(Candidate(item.id, item.kind, mem.mastery, r))
 
     new_grammar_items = queued_grammar
@@ -479,6 +485,27 @@ def _attempt_outcome(overall: str, used_hint: bool) -> str:
     return "error"
 
 
+def reconcile_answer(
+    grade: GradeResult,
+    request: GradeRequest,
+    known_ids: Collection[str],
+    curriculum_ids: Collection[str],
+    used_hint: bool = False,
+) -> Evaluation:
+    """Reconcile a grade with LanguageTool; shared by the app and `eval-grader`."""
+    return reconcile(
+        grade,
+        request.lt_matches,
+        [t.item.item_id for t in request.targets],
+        known_ids,
+        request.allowed_tags,
+        RECONCILE_CFG,
+        curriculum_item_ids=curriculum_ids,
+        answer=request.answer,
+        used_hint=used_hint,
+    )
+
+
 def submit_production_answer(
     db: Session,
     learner: Learner,
@@ -537,17 +564,7 @@ def submit_production_answer(
         ).all()
     )
     known_ids = {i for i, s in status_of.items() if s in KNOWN_STATUSES}
-    evaluation = reconcile(
-        grade,
-        lt_matches,
-        target_ids,
-        known_ids,
-        allowed_tags,
-        RECONCILE_CFG,
-        curriculum_item_ids=curriculum_ids,
-        answer=text,
-        used_hint=used_hint,
-    )
+    evaluation = reconcile_answer(grade, request, known_ids, curriculum_ids, used_hint)
 
     attempt = Attempt(
         exercise_id=exercise.id,

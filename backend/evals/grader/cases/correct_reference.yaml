@@ -1,0 +1,101 @@
+# Grader evaluation cases: correct_reference. Hand-reviewed; see evals/README.md.
+- id: ref-01
+  category: correct_reference
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Io abito a Berlino con mia sorella.
+    reference_solutions:
+    - Ich wohne mit meiner Schwester in Berlin.
+    targets:
+    - item_id: gram:prepositions-dat
+    - item_id: lex:wohnen
+  answer: Ich wohne mit meiner Schwester in Berlin.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:prepositions-dat
+    - lex:wohnen
+  notes: ""
+- id: ref-02
+  category: correct_reference
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Il film mi piace.
+    reference_solutions:
+    - Der Film gefällt mir.
+    targets:
+    - item_id: cx:gefallen-dat
+    - item_id: gram:dative-case
+  answer: Der Film gefällt mir.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - cx:gefallen-dat
+    - gram:dative-case
+  notes: ""
+- id: ref-03
+  category: correct_reference
+  level: A1
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Domani vado alla stazione.
+    reference_solutions:
+    - Morgen gehe ich zum Bahnhof.
+    targets:
+    - item_id: gram:inversion-v2
+    - item_id: lex:bahnhof
+  answer: Morgen gehe ich zum Bahnhof.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:inversion-v2
+    - lex:bahnhof
+  notes: ""
+- id: ref-04
+  category: correct_reference
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Non ho tempo perché lavoro molto.
+    reference_solutions:
+    - Ich habe keine Zeit, weil ich viel arbeite.
+    targets:
+    - item_id: gram:verb-final-subordinate
+    - item_id: gram:negation
+  answer: Ich habe keine Zeit, weil ich viel arbeite.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:verb-final-subordinate
+    - gram:negation
+  notes: ""
+- id: ref-05
+  category: correct_reference
+  level: A2
+  exercise:
+    type: translation
+    instructions: Traduci in tedesco.
+    prompt: Ieri abbiamo comprato una torta.
+    reference_solutions:
+    - Gestern haben wir einen Kuchen gekauft.
+    targets:
+    - item_id: gram:perfekt
+    - item_id: lex:kuchen
+  answer: Gestern haben wir einen Kuchen gekauft.
+  expected:
+    overall: correct
+    errors: []
+    correct_uses:
+    - gram:perfekt
+    - lex:kuchen
+  notes: ""

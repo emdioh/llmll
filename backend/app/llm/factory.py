@@ -9,7 +9,7 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from app.config import Settings
 from app.llm.anthropic_client import AnthropicLLMClient
-from app.llm.calls import SqlCallRecorder
+from app.llm.calls import CallRecorder, SqlCallRecorder
 from app.llm.client import LLMClient
 from app.llm.config import resolve_tasks
 from app.llm.fake import FakeLLMClient
@@ -20,7 +20,10 @@ logger = logging.getLogger(__name__)
 def build_llm_client(
     settings: Settings, session_factory: sessionmaker[Session], now: Callable[[], datetime]
 ) -> LLMClient:
-    recorder = SqlCallRecorder(session_factory, now)
+    return build_llm_client_with_recorder(settings, SqlCallRecorder(session_factory, now))
+
+
+def build_llm_client_with_recorder(settings: Settings, recorder: CallRecorder) -> LLMClient:
     key = settings.anthropic_api_key
     if settings.llm_provider == "fake" or key is None or not key.get_secret_value():
         if settings.llm_provider != "fake":

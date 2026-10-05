@@ -29,6 +29,8 @@ class ProjectionConfig:
     slip_mastery_threshold: float = 0.75
     slip_min_n_eff: float = 3.0
     uncertain_confidence: float = 0.5
+    # Fitted FSRS parameters (None = library defaults); part of the version hash.
+    fsrs_parameters: tuple[float, ...] | None = None
     model_version: str = "m1"
 
     def weight(self, name: str) -> float:
@@ -49,6 +51,8 @@ class LearnerSettings:
     review_cap: int = 15
     new_per_session: int = 5
     production_slots: int = 2
+    # Fitted by `optimize-fsrs --apply`; not editable through the settings API.
+    fsrs_parameters: list[float] | None = None
 
 
 @dataclass(frozen=True)

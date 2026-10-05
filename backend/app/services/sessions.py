@@ -247,7 +247,13 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
         )
         for mem, item in rows
     ]
-    ordered = select_due(views, now, limit=len(views), desired_retention=cfg.desired_retention)
+    ordered = select_due(
+        views,
+        now,
+        limit=len(views),
+        desired_retention=cfg.desired_retention,
+        parameters=cfg.fsrs_parameters,
+    )
     due_cards: list[tuple[str, str]] = []
     for view in ordered:
         if all(view.item_id != i for i, _ in due_cards):
