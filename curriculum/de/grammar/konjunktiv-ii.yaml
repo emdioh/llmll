@@ -1,0 +1,48 @@
+id: gram:konjunktiv-ii
+title_it: "Konjunktiv II: würde + infinito, hätte, wäre"
+title_en: "Subjunctive II: würde, hätte, wäre"
+level: B1
+requires: ["gram:praeteritum-sein-haben-modals", "gram:conjunctions-subordinating"]
+diagnostic_tags:
+  form: [wuerde-infinitive, haette, waere, modal-konjunktiv]
+  function: [polite-request, wish, unreal-condition, advice]
+  error_type: [wuerde-in-wenn-clause, wrong-stem, indicative-instead-of-konjunktiv, missing-umlaut]
+reference_it: |
+  ## Regola
+  Il **Konjunktiv II** esprime ciò che è irreale, desiderato o cortese (*italiano: condizionale e congiuntivo imperfetto*).
+
+  | | würde | hätte | wäre | könnte |
+  |---|---|---|---|---|
+  | ich | würde | hätte | wäre | könnte |
+  | du | würdest | hättest | wärest / wärst | könntest |
+  | er/sie/es | würde | hätte | wäre | könnte |
+  | wir | würden | hätten | wären | könnten |
+  | ihr | würdet | hättet | wäret / wärt | könntet |
+  | sie/Sie | würden | hätten | wären | könnten |
+
+  - **würde + infinito** (in fondo) sostituisce il Konjunktiv II della maggior parte dei verbi: *Ich würde gern reisen.*
+  - **hätte, wäre** e i modali (**könnte, müsste, dürfte**; *sollte, wollte* come il Präteritum) si usano con la forma propria.
+  - Usi: **richieste cortesi** (*Könnten Sie mir helfen? Ich hätte gern einen Kaffee.*), **desideri** (*Ich wäre gern reich.*), **condizioni irreali** (*Wenn ich Zeit hätte, würde ich kommen.*), **consigli** (*Du solltest mehr schlafen.*).
+  - Nella frase con **wenn** si preferisce *hätte/wäre* (non *würde*): *Wenn ich Zeit **hätte**, **würde** ich kommen.*
+  - Condizione irreale nel passato: **hätte/wäre + participio II**: *Wenn ich das gewusst hätte, wäre ich gekommen.*
+
+  ## Esempi
+  - *Ich hätte gern einen Tee.* — Vorrei un tè.
+  - *Könnten Sie mir bitte helfen?* — Potrebbe aiutarmi, per favore?
+  - *Wenn ich mehr Zeit hätte, würde ich mehr lesen.* — Se avessi più tempo, leggerei di più.
+  - *An deiner Stelle würde ich nicht warten.* — Al posto tuo non aspetterei.
+  - *Ich wäre gern in Italien.* — Vorrei essere in Italia.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha due modi: **condizionale** (*verrei*) e **congiuntivo imperfetto** (*se avessi*): in tedesco entrambi sono Konjunktiv II
+    (*wenn ich hätte, würde ich*), ma **non si usa würde nella frase con wenn** (**\*Wenn ich Zeit haben würde…**).
+  - *vorrei* → **ich möchte** (presente di cortesia) o **ich hätte gern**: **\*Ich wollte einen Kaffee** è un'altra cosa.
+  - **\*wenn ich war** → *wenn ich wäre* (irreale) — l'indicativo non basta.
+  - Dimenticare l'**umlaut**: *hätte, wäre, könnte, müsste* (in *hatte*, *war*, *konnte* l'umlaut manca: sono Präteritum, non Konjunktiv II).
+  - Non c'è il congiuntivo dopo *credo che* come in italiano: *Ich glaube, dass er kommt* (indicativo).
+examples:
+  - {de: "Ich hätte gern einen Tee.", it: "Vorrei un tè."}
+  - {de: "Könnten Sie mir bitte helfen?", it: "Potrebbe aiutarmi, per favore?"}
+  - {de: "Wenn ich mehr Zeit hätte, würde ich mehr lesen.", it: "Se avessi più tempo, leggerei di più."}
+  - {de: "An deiner Stelle würde ich nicht warten.", it: "Al posto tuo non aspetterei."}
+  - {de: "Ich wäre gern in Italien.", it: "Vorrei essere in Italia."}

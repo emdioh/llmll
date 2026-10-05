@@ -1,0 +1,68 @@
+id: gram:praesens
+title_it: "Presente: verbi regolari e irregolari"
+title_en: "Present tense: regular and irregular verbs"
+level: A1
+requires: []
+diagnostic_tags:
+  person: [ich, du, er-sie-es, wir, ihr, sie-Sie]
+  verb_type: [regular, stem-vowel-change-e-i, stem-vowel-change-e-ie, stem-vowel-change-a-ae, sein, haben, werden, wissen, stem-ends-t-d, stem-ends-s]
+  error_type: [wrong-ending, missing-vowel-change, regularized-irregular]
+reference_it: |
+  ## Regola
+  Si toglie **-en** dall'infinito (radice) e si aggiungono le desinenze.
+
+  | | lernen | arbeiten (radice in -t/-d) | heißen (radice in -s/-ß) |
+  |---|---|---|---|
+  | ich | lerne | arbeite | heiße |
+  | du | lernst | arbeitest | heißt |
+  | er/sie/es | lernt | arbeitet | heißt |
+  | wir | lernen | arbeiten | heißen |
+  | ihr | lernt | arbeitet | heißt |
+  | sie/Sie | lernen | arbeiten | heißen |
+
+  **Verbi con cambio vocalico** (solo *du* e *er/sie/es*):
+
+  | tipo | infinito | du | er/sie/es |
+  |---|---|---|---|
+  | e → i | sprechen | sprichst | spricht |
+  | e → i | essen | isst | isst |
+  | e → i | geben | gibst | gibt |
+  | e → i | nehmen | nimmst | nimmt |
+  | e → ie | sehen | siehst | sieht |
+  | e → ie | lesen | liest | liest |
+  | a → ä | fahren | fährst | fährt |
+  | a → ä | schlafen | schläfst | schläft |
+
+  **Verbi molto irregolari:**
+
+  | | sein | haben | werden | wissen |
+  |---|---|---|---|---|
+  | ich | bin | habe | werde | weiß |
+  | du | bist | hast | wirst | weißt |
+  | er/sie/es | ist | hat | wird | weiß |
+  | wir | sind | haben | werden | wissen |
+  | ihr | seid | habt | werdet | wisst |
+  | sie/Sie | sind | haben | werden | wissen |
+
+  Il presente tedesco serve anche per il **futuro prossimo** con un'indicazione di tempo: *Morgen fahre ich nach Berlin.*
+
+  ## Esempi
+  - *Ich wohne in Rom.* — Abito a Roma.
+  - *Du sprichst gut Deutsch.* — Parli bene il tedesco.
+  - *Er liest jeden Tag die Zeitung.* — Legge il giornale ogni giorno.
+  - *Sie fährt mit dem Zug.* — Lei va in treno.
+  - *Wir haben Hunger.* — Abbiamo fame.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano le forme sono 6 distinte; in tedesco *er/sie/es* e *ihr* coincidono (-t) e *wir/sie/Sie* coincidono (-en).
+  - Il **cambio vocalico** non esiste in italiano nello stesso modo: si dice *er sprechet* o *er fahrt* invece di *spricht*, *fährt*.
+    Il cambio non riguarda *ich*, *wir*, *ihr*.
+  - **Verbo omesso o pronome omesso**: *Hunger ho* / *Bin Student* → servono *Ich habe Hunger*, *Ich bin Student*.
+  - Il tedesco non ha una forma progressiva: *Ich lerne gerade* = *sto studiando*.
+  - *Du* e *Sie*: *Sie* (maiuscolo) è la forma di cortesia, con il verbo alla terza persona plurale (come il *Lei* italiano ma al plurale).
+examples:
+  - {de: "Ich wohne in Rom.", it: "Abito a Roma."}
+  - {de: "Du sprichst gut Deutsch.", it: "Parli bene il tedesco."}
+  - {de: "Er liest jeden Tag die Zeitung.", it: "Legge il giornale ogni giorno."}
+  - {de: "Sie fährt mit dem Zug.", it: "Lei va in treno."}
+  - {de: "Morgen fahre ich nach Berlin.", it: "Domani vado a Berlino."}

@@ -1,0 +1,47 @@
+id: gram:passive-werden
+title_it: "Passivo con werden"
+title_en: "Passive voice with werden"
+level: B1
+requires: ["gram:perfekt", "gram:praeteritum-sein-haben-modals"]
+diagnostic_tags:
+  tense: [praesens, praeteritum, perfekt, modal-passive]
+  agent: [von-dativ, durch-akkusativ, none]
+  error_type: [sein-instead-of-werden, wrong-agent-preposition, partizip-not-at-end, subject-object-case]
+reference_it: |
+  ## Regola
+  **Passivo = werden + participio II** (in fondo). L'oggetto accusativo della frase attiva diventa **soggetto nominativo**:
+
+  *Der Koch kocht die Suppe.* → *Die Suppe **wird** (vom Koch) **gekocht**.*
+
+  | tempo | forma | esempio |
+  |---|---|---|
+  | presente | wird / werden + Part. II | Das Haus **wird** gebaut. |
+  | Präteritum | wurde / wurden + Part. II | Das Haus **wurde** 1990 gebaut. |
+  | Perfekt | ist / sind + Part. II + **worden** | Das Haus **ist** gebaut **worden**. |
+  | con modale | modale + Part. II + **werden** | Das Haus **muss** gebaut **werden**. |
+
+  - **werden**: *ich werde, du wirst, er wird, wir werden, ihr werdet, sie werden*; Präteritum: *ich wurde, du wurdest, er wurde, wir wurden, ihr wurdet, sie wurden*.
+  - L'**agente** si esprime con **von + Dativ** (persone) o **durch + Akkusativ** (causa/mezzo): *Das Buch wurde **von einem Studenten** geschrieben.*
+  - Se non c'è un oggetto accusativo il passivo è **impersonale**: *Hier wird getanzt.*
+  - **Zustandspassiv**: **sein + Part. II** descrive lo **stato**: *Die Tür **ist** geöffnet.* (è aperta) ≠ *Die Tür **wird** geöffnet.* (viene aperta).
+  - Il passivo con *man* è alternativa: *Man spricht hier Deutsch.* = *Hier wird Deutsch gesprochen.*
+
+  ## Esempi
+  - *Das Auto wird repariert.* — La macchina viene riparata.
+  - *Die Brücke wurde 1998 gebaut.* — Il ponte fu costruito nel 1998.
+  - *Der Brief ist gestern geschrieben worden.* — La lettera è stata scritta ieri.
+  - *Hier wird Deutsch gesprochen.* — Qui si parla tedesco.
+  - *Das Buch wurde von einem berühmten Autor geschrieben.* — Il libro è stato scritto da un autore famoso.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il passivo usa **essere** o **venire** (*è costruito, viene costruito*); in tedesco **werden**, **non sein** (che indica stato):
+    **\*Das Haus ist gebaut** (= è costruita, finita) ≠ *Das Haus wird gebaut* (viene costruita).
+  - Il **si passivante** italiano (*si parla tedesco*) → *wird … gesprochen* oppure *man spricht*.
+  - L'agente italiano con **da** → **von** (non **\*durch**, che indica causa/mezzo): *scritto da Anna → von Anna geschrieben*.
+  - Perfekt: **\*ist gebaut geworden** → *ist gebaut **worden*** (cioè *worden*, non *geworden*).
+  - Si dimentica che il participio va **in fondo**, e che l'accusativo diventa nominativo (**\*Den Brief wird geschrieben**).
+examples:
+  - {de: "Das Auto wird repariert.", it: "La macchina viene riparata."}
+  - {de: "Die Brücke wurde 1998 gebaut.", it: "Il ponte fu costruito nel 1998."}
+  - {de: "Der Brief ist gestern geschrieben worden.", it: "La lettera è stata scritta ieri."}
+  - {de: "Hier wird Deutsch gesprochen.", it: "Qui si parla tedesco."}

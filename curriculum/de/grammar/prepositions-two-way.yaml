@@ -1,0 +1,47 @@
+id: gram:prepositions-two-way
+title_it: "Preposizioni con accusativo o dativo (Wechselpräpositionen)"
+title_en: "Two-way prepositions (accusative or dative)"
+level: A2
+requires: ["gram:prepositions-akk", "gram:prepositions-dat"]
+diagnostic_tags:
+  preposition: [an, auf, hinter, in, neben, ueber, unter, vor, zwischen]
+  case_choice: [wo-dativ, wohin-akkusativ]
+  verb_pair: [stehen-stellen, liegen-legen, sitzen-setzen, haengen-haengen, sein-gehen]
+  error_type: [wrong-case-wo-wohin, wrong-verb-pair, wrong-preposition]
+reference_it: |
+  ## Regola
+  Nove preposizioni: **an, auf, hinter, in, neben, über, unter, vor, zwischen**. Reggono
+
+  - il **dativo** se rispondono a **Wo?** (dove?, stato in luogo, posizione): *Das Buch liegt **auf dem** Tisch.*
+  - l'**accusativo** se rispondono a **Wohin?** (verso dove?, moto a luogo): *Ich lege das Buch **auf den** Tisch.*
+
+  | preposizione | Wo? (Dat.) | Wohin? (Akk.) |
+  |---|---|---|
+  | in | Ich bin **in der** Schule. | Ich gehe **in die** Schule. |
+  | an | Das Bild hängt **an der** Wand. | Ich hänge das Bild **an die** Wand. |
+  | auf | Die Katze sitzt **auf dem** Sofa. | Sie springt **auf das** Sofa. |
+  | vor | Das Auto steht **vor dem** Haus. | Er fährt das Auto **vor das** Haus. |
+  | neben | Er sitzt **neben mir**. | Er setzt sich **neben mich**. |
+
+  Coppie di verbi: **stehen (posizione) – stellen (mettere in piedi)**, **liegen – legen (orizzontale)**, **sitzen – setzen**, **hängen – hängen**.
+  Contrazioni: *an dem → am*, *in dem → im*, *in das → ins*, *an das → ans*, *auf das → aufs*.
+
+  ## Esempi
+  - *Die Flasche steht auf dem Tisch.* — La bottiglia è sul tavolo.
+  - *Ich stelle die Flasche auf den Tisch.* — Metto la bottiglia sul tavolo.
+  - *Wir sind im Kino.* — Siamo al cinema.
+  - *Wir gehen ins Kino.* — Andiamo al cinema.
+  - *Das Foto hängt an der Wand.* — La foto è appesa alla parete.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *a/in/su* non cambiano a seconda di stato o moto (*sono in casa / vado in casa*): in tedesco bisogna decidere **Wo? o Wohin?**
+    e scegliere il caso: **\*Ich gehe in der Schule** → *in die Schule*; **\*Ich bin in die Schule** → *in der Schule*.
+  - **Attenzione**: per andare in una città/paese o da una persona non si usa una Wechselpräposition: *Ich gehe **nach** Hause / **zu** meiner Freundin / **nach** Rom.*
+  - *sul tavolo* = *auf dem Tisch*, *nel* = *im / in dem*; *su* può essere *auf*, *über* (sopra), *an* (contro/parete).
+  - I verbi **stellen/legen/setzen** si usano con un oggetto e l'accusativo; **stehen/liegen/sitzen** con il dativo. Non scambiarli.
+  - Con *in* i nomi di città e paesi: *in Berlin, in Italien* (Wo?), ma *nach Berlin, nach Italien* (Wohin?).
+examples:
+  - {de: "Die Flasche steht auf dem Tisch.", it: "La bottiglia è sul tavolo."}
+  - {de: "Ich stelle die Flasche auf den Tisch.", it: "Metto la bottiglia sul tavolo."}
+  - {de: "Wir sind im Kino.", it: "Siamo al cinema."}
+  - {de: "Wir gehen ins Kino.", it: "Andiamo al cinema."}

@@ -1,0 +1,46 @@
+id: gram:infinitive-zu
+title_it: "Infinito con zu (e um … zu, ohne … zu)"
+title_en: "Infinitive with zu"
+level: B1
+requires: ["gram:modal-verbs", "gram:separable-verbs", "gram:verb-final-subordinate"]
+diagnostic_tags:
+  construction: [zu-infinitive, um-zu, ohne-zu, statt-zu, no-zu-after-modal]
+  separable: [yes, no]
+  error_type: [zu-missing, zu-with-modal, zu-position-separable, missing-comma, dass-instead-of-zu]
+reference_it: |
+  ## Regola
+  Molti verbi, aggettivi e nomi sono seguiti da un **infinito con zu**, che sta **in fondo**: *Ich habe Lust, ins Kino **zu gehen**.*
+
+  | costruzione | esempio |
+  |---|---|
+  | verbo + zu-Inf. | Ich habe vergessen, dich **anzurufen**. |
+  | Es ist + agg. + zu-Inf. | Es ist schwer, Deutsch **zu lernen**. |
+  | um … zu (scopo) | Ich lerne Deutsch, **um** in Berlin **zu** arbeiten. |
+  | ohne … zu (senza) | Er geht, **ohne** etwas **zu** sagen. |
+  | (an)statt … zu | **Anstatt** **zu** lernen, schläft er. |
+
+  - **Verbi separabili**: *zu* si inserisce **tra prefisso e verbo**: *aufstehen → aufzustehen*, *anrufen → anzurufen*.
+  - **Nessun zu** dopo i **modali** (*Ich muss gehen*), **werden**, **lassen**, **gehen** (*Ich gehe einkaufen*), **bleiben**, **sehen/hören**.
+  - La virgola si mette di norma prima di *um … zu, ohne … zu, statt … zu* e dopo infiniti con complementi.
+  - Se il soggetto della frase principale e dell'infinito coincidono si usa *zu*-Inf.; altrimenti *dass*: *Ich hoffe, dass du kommst.*
+  - Verbi che reggono *zu*: *anfangen, aufhören, beginnen, versuchen, vergessen, vorhaben, hoffen, planen, beschließen*; costruzioni *Lust haben, Zeit haben, Angst haben*.
+
+  ## Esempi
+  - *Ich habe Lust, ins Kino zu gehen.* — Ho voglia di andare al cinema.
+  - *Es ist wichtig, regelmäßig zu üben.* — È importante esercitarsi regolarmente.
+  - *Er fängt an, Deutsch zu lernen.* — Comincia a studiare il tedesco.
+  - *Sie hat vergessen, mich anzurufen.* — Ha dimenticato di telefonarmi.
+  - *Ich lerne Deutsch, um in Berlin zu arbeiten.* — Studio tedesco per lavorare a Berlino.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa **di / a / per / da + infinito**; in tedesco c'è un'unica forma **zu + infinito** (o *um … zu* per *per*): *comincio a studiare* → *ich fange an zu lernen*; *ho deciso di partire* → *ich habe beschlossen zu fahren*.
+  - **\*Ich habe Lust, zu ins Kino gehen** → *Ich habe Lust, ins Kino zu gehen*: *zu* è subito prima dell'infinito, in fondo.
+  - Con **verbi separabili** *zu* va nel mezzo: **\*zu aufstehen** → *aufzustehen*.
+  - **\*Ich muss zu gehen**: dopo i modali **mai** *zu*.
+  - **per + infinito** = *um … zu*: **\*Ich lerne für arbeiten** → *Ich lerne, um zu arbeiten*; non **\*für zu**.
+  - **senza + infinito** = *ohne … zu*: **\*ohne sagen** → *ohne zu sagen*. Attenzione: *ohne dass* se i soggetti sono diversi.
+examples:
+  - {de: "Ich habe Lust, ins Kino zu gehen.", it: "Ho voglia di andare al cinema."}
+  - {de: "Es ist wichtig, regelmäßig zu üben.", it: "È importante esercitarsi regolarmente."}
+  - {de: "Sie hat vergessen, mich anzurufen.", it: "Ha dimenticato di telefonarmi."}
+  - {de: "Ich lerne Deutsch, um in Berlin zu arbeiten.", it: "Studio tedesco per lavorare a Berlino."}

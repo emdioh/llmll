@@ -1,0 +1,40 @@
+id: gram:adverb-fronting
+title_it: "Avverbio all'inizio della frase (il verbo resta secondo)"
+title_en: "Adverb fronting (verb stays second)"
+level: A1
+requires: ["gram:svo-word-order", "gram:praesens"]
+diagnostic_tags:
+  fronted_element: [time-adverb, place-adverb, connector-adverb, other]
+  error_type: [subject-before-verb-after-adverb, adverb-position-in-middle, missing-subject]
+reference_it: |
+  ## Regola
+  Gli avverbi (di tempo, luogo...) possono stare all'inizio della frase. L'avverbio occupa la **posizione 1**,
+  quindi il verbo coniugato resta in **posizione 2** e il soggetto lo segue (questo è già un primo passo verso
+  l'inversione):
+
+  | Posizione 1 | Posizione 2 | Soggetto / resto |
+  |---|---|---|
+  | Heute | gehe | ich ins Kino. |
+  | Morgen | arbeitet | er nicht. |
+  | Dann | essen | wir zusammen. |
+  | Hier | wohne | ich seit 2020. |
+
+  Se l'avverbio sta in posizione centrale l'ordine è quello normale: *Ich gehe heute ins Kino.*
+  Avverbi frequenti: *heute, morgen, gestern, jetzt, dann, später, oft, immer, hier, dort, zuerst, danach, leider.*
+
+  ## Esempi
+  - *Heute gehe ich ins Kino.* — Oggi vado al cinema.
+  - *Dann essen wir zusammen.* — Poi mangiamo insieme.
+  - *Leider habe ich keine Zeit.* — Purtroppo non ho tempo.
+  - *Hier wohne ich seit zwei Jahren.* — Abito qui da due anni.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *Oggi io vado al cinema* oppure *Oggi vado al cinema* (soggetto sottinteso): in tedesco si sente spesso l'errore
+    **\*Heute ich gehe ins Kino**. Il verbo deve essere subito dopo l'avverbio.
+  - Il soggetto non può essere omesso: **\*Heute gehe ins Kino**.
+  - Attenzione a *dann* e *da*: *Dann* = poi / allora, *da* = lì / allora.
+examples:
+  - {de: "Heute gehe ich ins Kino.", it: "Oggi vado al cinema."}
+  - {de: "Dann essen wir zusammen.", it: "Poi mangiamo insieme."}
+  - {de: "Leider habe ich keine Zeit.", it: "Purtroppo non ho tempo."}
+  - {de: "Hier wohne ich seit zwei Jahren.", it: "Abito qui da due anni."}

@@ -1,0 +1,40 @@
+id: gram:prepositions-akk
+title_it: "Preposizioni con l'accusativo"
+title_en: "Prepositions with the accusative"
+level: A1
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  preposition: [durch, fuer, gegen, ohne, um, bis, entlang]
+  error_type: [dative-instead-of-accusative, wrong-preposition, contraction-missed]
+reference_it: |
+  ## Regola
+  Queste preposizioni reggono sempre l'**accusativo**:
+
+  | preposizione | uso | esempio |
+  |---|---|---|
+  | **durch** | attraverso | Wir gehen **durch den** Park. |
+  | **für** | per (beneficiario, scopo) | Das Geschenk ist **für meinen** Vater. |
+  | **gegen** | contro; verso (ora approssimativa) | Er spielt **gegen einen** starken Gegner. |
+  | **ohne** | senza | Ich trinke Kaffee **ohne Zucker**. |
+  | **um** | intorno a; a (ora) | Wir treffen uns **um** 8 Uhr. |
+  | **bis** | fino a (spesso con altra prep.) | Ich bleibe **bis** Montag. |
+
+  - Contrazioni: *durch das → durchs*, *für das → fürs*, *um das → ums* (colloquiali).
+  - Con **ohne** si omette di solito l'articolo davanti ai nomi di materia o plurali, e non si usa *kein*: *Ich trinke Kaffee ohne Zucker.*
+
+  ## Esempi
+  - *Das Buch ist für dich.* — Il libro è per te.
+  - *Wir gehen durch den Park.* — Attraversiamo il parco.
+  - *Ich fahre ohne meinen Bruder nach Rom.* — Vado a Roma senza mio fratello.
+  - *Er kommt um halb acht.* — Viene alle sette e mezza.
+  - *Sie ist gegen den Plan.* — È contraria al piano.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano le preposizioni non cambiano la forma del nome: in tedesco **cambiano il caso dell'articolo**. L'errore tipico è **\*für der Mann** (→ *für den Mann*).
+  - *per* italiano ha più traduzioni: *für* (beneficiario: *per te* = *für dich*), *um … zu* (scopo con un verbo, più avanti), *nach* (direzione verso una città: *il treno per Roma* = *der Zug nach Rom*).
+  - *a* italiano per le ore → *um* (*alle otto* = *um acht Uhr*), non *zu*.
+examples:
+  - {de: "Das Buch ist für dich.", it: "Il libro è per te."}
+  - {de: "Wir gehen durch den Park.", it: "Attraversiamo il parco."}
+  - {de: "Ich fahre ohne meinen Bruder nach Rom.", it: "Vado a Roma senza mio fratello."}
+  - {de: "Er kommt um halb acht.", it: "Viene alle sette e mezza."}

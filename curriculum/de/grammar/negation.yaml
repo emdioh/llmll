@@ -1,0 +1,48 @@
+id: gram:negation
+title_it: "Negazione: nicht, kein, nie, niemand, nichts"
+title_en: "Negation: nicht, kein, nie, niemand, nichts"
+level: A1
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  negation_word: [nicht, kein, nie, niemand, nichts]
+  error_type: [nicht-vs-kein, nicht-position, double-negation, doch-vs-ja]
+reference_it: |
+  ## Regola
+  - **kein** nega un sostantivo che ha l'articolo indeterminativo o nessun articolo; si declina come *ein*:
+    *Ich habe ein Auto. → Ich habe **kein** Auto. / Ich trinke Kaffee. → Ich trinke **keinen** Kaffee.*
+  - **nicht** nega tutto il resto (verbo, aggettivo, avverbio, sostantivo con articolo determinativo o possessivo):
+    *Ich arbeite **nicht**. Das Auto ist **nicht** neu. Ich kenne **den** Mann **nicht**.*
+  - Posizione di *nicht*: di solito **alla fine** della frase se nega il verbo; **prima** di aggettivi, avverbi e complementi di luogo;
+    nei tempi composti **prima della parte finale** della forma verbale:
+    *Ich habe ihn **nicht** gesehen. Ich kann **nicht** kommen. Er steht **nicht** auf.*
+  - **nie** (mai), **niemand** (nessuno), **nichts** (niente) sono negazioni già complete: **non** si aggiunge *nicht*.
+  - **doch**: risposta affermativa a una domanda negativa: *Kommst du nicht? — Doch, ich komme.*
+
+  | italiano | tedesco |
+  |---|---|
+  | non ho una macchina | Ich habe kein Auto. |
+  | non vado a casa | Ich gehe nicht nach Hause. |
+  | non ho visto nessuno | Ich habe niemanden gesehen. |
+  | non faccio mai sport | Ich mache nie Sport. |
+  | non so niente | Ich weiß nichts. |
+
+  ## Esempi
+  - *Ich habe keine Zeit.* — Non ho tempo.
+  - *Er kommt heute nicht.* — Oggi non viene.
+  - *Wir haben das nicht gewusst.* — Non lo sapevamo.
+  - *Ich sehe niemanden.* — Non vedo nessuno.
+  - *Hast du keinen Hunger? — Doch!* — Non hai fame? — Sì, ce l'ho!
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa la **doppia negazione** (*non ... niente, non ... nessuno, non ... mai*); in tedesco è **un errore**:
+    **\*Ich habe nicht nichts gesehen** → *Ich habe nichts gesehen*.
+  - L'italiano ha un'unica forma *non*: in tedesco bisogna scegliere tra **nicht** e **kein**
+    (**\*Ich habe nicht Zeit** → *Ich habe keine Zeit*).
+  - Il *non* italiano sta prima del verbo; *nicht* sta **dopo** il verbo (di solito in fondo): **\*Ich nicht arbeite**.
+  - *Sì* a una domanda negativa è *doch*, non *ja* (*ja* confermerebbe la negazione).
+examples:
+  - {de: "Ich habe keine Zeit.", it: "Non ho tempo."}
+  - {de: "Er kommt heute nicht.", it: "Oggi non viene."}
+  - {de: "Wir haben das nicht gewusst.", it: "Non lo sapevamo."}
+  - {de: "Ich sehe niemanden.", it: "Non vedo nessuno."}
+  - {de: "Kommst du nicht? — Doch, ich komme.", it: "Non vieni? — Sì, vengo."}

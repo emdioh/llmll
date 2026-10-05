@@ -1,0 +1,53 @@
+id: gram:inversion-v2
+title_it: "Inversione: verbo in seconda posizione e domande"
+title_en: "Inversion: V2 after any first element, and questions"
+level: A2
+requires: ["gram:verbal-bracket"]
+diagnostic_tags:
+  first_element: [adverb, object, prepositional-phrase, subordinate-clause, question-word, none-yes-no-question]
+  sentence_type: [statement, w-question, yes-no-question, imperative]
+  error_type: [subject-before-verb, verb-not-second, question-without-inversion, wrong-question-word]
+reference_it: |
+  ## Regola
+  In ogni frase dichiarativa il verbo coniugato è in **posizione 2**; la posizione 1 può essere occupata da **qualsiasi elemento**
+  (avverbio, complemento oggetto, complemento di luogo, una subordinata). Se non è il soggetto, il soggetto segue il verbo (**inversione**).
+
+  | Posizione 1 | Posizione 2 | Resto |
+  |---|---|---|
+  | Ich | gehe | morgen ins Kino. |
+  | Morgen | gehe | ich ins Kino. |
+  | Ins Kino | gehe | ich morgen. |
+  | Nach dem Essen | gehen | wir spazieren. |
+  | Gestern | habe | ich Maria gesehen. |
+
+  **Domande:**
+
+  | tipo | schema | esempio |
+  |---|---|---|
+  | W-Frage | parola interrogativa + verbo + soggetto | **Wann** kommst du? **Wo** wohnt er? |
+  | Ja/Nein-Frage | **verbo in posizione 1** | **Kommst** du morgen? **Hast** du Zeit? |
+  | Imperativo | verbo in posizione 1 | **Komm** bitte! **Gehen** Sie! |
+
+  Parole interrogative: *wer, was, wo, wohin, woher, wann, wie, warum, welch-, wie viel(e)*.
+
+  ## Esempi
+  - *Gestern habe ich Maria gesehen.* — Ieri ho visto Maria.
+  - *Den Film sehe ich morgen.* — Il film lo vedo domani.
+  - *Wo wohnst du?* — Dove abiti?
+  - *Kommst du morgen mit?* — Vieni anche tu domani?
+  - *Nach dem Essen gehen wir spazieren.* — Dopo mangiato facciamo una passeggiata.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha un ordine delle parole libero e non richiede l'inversione. È frequente l'errore **\*Morgen ich gehe ins Kino** o
+    **\*Nach dem Essen wir gehen spazieren**. Anche quando la posizione 1 è occupata da una subordinata intera, il verbo principale viene subito dopo
+    (*Wenn es regnet, bleibe ich zu Hause*).
+  - Nelle domande italiane si può mantenere l'ordine della frase con la sola intonazione (*Vieni domani?*): in tedesco il verbo va **al primo posto**
+    (*Kommst du morgen?*), non **\*Du kommst morgen?** (accettato solo come domanda colloquiale con intonazione).
+  - Nelle W-Fragen non si mette il soggetto prima del verbo: **\*Wann du kommst?** → *Wann kommst du?*
+  - *Wann kommst du?* (domanda diretta) vs *Ich weiß nicht, wann du kommst.* (subordinata: verbo in fondo, vedi punto successivo).
+examples:
+  - {de: "Gestern habe ich Maria gesehen.", it: "Ieri ho visto Maria."}
+  - {de: "Den Film sehe ich morgen.", it: "Il film lo vedo domani."}
+  - {de: "Wo wohnst du?", it: "Dove abiti?"}
+  - {de: "Kommst du morgen mit?", it: "Vieni anche tu domani?"}
+  - {de: "Nach dem Essen gehen wir spazieren.", it: "Dopo mangiato facciamo una passeggiata."}

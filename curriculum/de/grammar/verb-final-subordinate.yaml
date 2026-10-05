@@ -1,0 +1,51 @@
+id: gram:verb-final-subordinate
+title_it: "Verbo in fondo nelle subordinate"
+title_en: "Verb-final order in subordinate clauses"
+level: A2
+requires: ["gram:inversion-v2"]
+diagnostic_tags:
+  verb_form: [finite-only, modal-plus-infinitive, perfekt, separable-verb, passive]
+  clause_position: [subordinate-after-main, subordinate-before-main]
+  error_type: [verb-not-final, wrong-verb-order-with-modal, separable-split, missing-comma, main-clause-after-subordinate-no-inversion]
+reference_it: |
+  ## Regola
+  Nelle frasi subordinate il **verbo coniugato va in ultima posizione**. La subordinata è sempre separata da una **virgola**.
+  Questo vale per le frasi introdotte da congiunzioni subordinanti (*weil, dass, wenn, ob, obwohl, als...*), da pronomi relativi
+  e da parole interrogative in domande indirette.
+
+  | frase principale | subordinata (verbo in fondo) |
+  |---|---|
+  | Ich bleibe zu Hause, | weil ich krank **bin**. |
+  | Er sagt, | dass er heute nicht **kommt**. |
+  | Ich weiß nicht, | wann der Zug **abfährt**. (domanda indiretta) |
+
+  Con forme verbali composte:
+
+  | tipo | subordinata |
+  |---|---|
+  | modale | …, weil ich heute arbeiten **muss**. |
+  | Perfekt | …, weil er gestern nicht gekommen **ist**. |
+  | verbo separabile | …, weil ich früh **aufstehe**. (il prefisso si riattacca) |
+
+  Quando la subordinata sta **prima** della principale, occupa la posizione 1: nella principale il verbo segue subito
+  (**inversione**): *Weil ich krank bin, bleibe ich zu Hause.*
+
+  ## Esempi
+  - *Ich lerne Deutsch, weil ich in Berlin arbeiten möchte.* — Studio il tedesco perché vorrei lavorare a Berlino.
+  - *Er sagt, dass er morgen nicht kommt.* — Dice che domani non viene.
+  - *Wenn du Zeit hast, rufst du mich an.* — Quando hai tempo, mi chiami.
+  - *Weil es regnet, bleiben wir zu Hause.* — Poiché piove, restiamo a casa.
+  - *Ich weiß nicht, wann der Zug abfährt.* — Non so quando parte il treno.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano l'ordine delle parole nella subordinata è uguale a quello della principale (*perché sono stanco*). In tedesco il verbo **va in fondo**:
+    **\*Ich bleibe zu Hause, weil ich bin krank** → *…, weil ich krank bin*.
+  - Con i verbi separabili: **\*weil ich stehe früh auf** → *weil ich früh aufstehe*.
+  - Quando la subordinata apre la frase, si dimentica l'inversione nella principale: **\*Weil ich krank bin, ich bleibe zu Hause**.
+  - **Domande indirette**: la parola interrogativa agisce come congiunzione: **\*Ich weiß nicht, wann kommt der Zug** → *…, wann der Zug kommt*.
+  - Si dimentica la virgola, che in tedesco è obbligatoria.
+examples:
+  - {de: "Ich lerne Deutsch, weil ich in Berlin arbeiten möchte.", it: "Studio il tedesco perché vorrei lavorare a Berlino."}
+  - {de: "Er sagt, dass er morgen nicht kommt.", it: "Dice che domani non viene."}
+  - {de: "Weil es regnet, bleiben wir zu Hause.", it: "Poiché piove, restiamo a casa."}
+  - {de: "Ich weiß nicht, wann der Zug abfährt.", it: "Non so quando parte il treno."}

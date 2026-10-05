@@ -1,0 +1,47 @@
+id: gram:conjunctions-subordinating
+title_it: "Congiunzioni subordinanti: weil, dass, wenn, ob"
+title_en: "Subordinating conjunctions: weil, dass, wenn, ob"
+level: A2
+requires: ["gram:verb-final-subordinate"]
+diagnostic_tags:
+  conjunction: [weil, dass, wenn, ob, als, obwohl]
+  error_type: [wenn-vs-ob, wenn-vs-als, weil-vs-denn, dass-omitted-ordering, verb-not-final, missing-comma]
+reference_it: |
+  ## Regola
+
+  | congiunzione | significato | esempio |
+  |---|---|---|
+  | **weil** | perché (causa) | Ich bleibe zu Hause, weil ich krank bin. |
+  | **dass** | che (dichiarativa) | Er sagt, dass er kommt. |
+  | **wenn** | se (condizione); quando (ripetuto o futuro) | Wenn es regnet, bleibe ich hier. |
+  | **ob** | se (domanda indiretta sì/no) | Ich weiß nicht, ob er kommt. |
+  | **als** | quando (evento singolo nel passato) | Als ich klein war, wohnte ich in Rom. |
+  | **obwohl** | sebbene | Er arbeitet, obwohl er krank ist. |
+
+  - Dopo tutte il **verbo coniugato va in fondo** e la subordinata è preceduta (o chiusa) da virgola.
+  - **weil** (subordinante) ≠ **denn** (coordinante, nessuna inversione): *…, denn ich bin krank.*
+  - **dass** = *che*. Con *dass* il verbo va in fondo (*Ich glaube, dass er kommt*); si può anche omettere *dass* e usare l'ordine normale
+    (*Ich glaube, er kommt*), ma mai **\*dass er kommt** con il verbo in seconda posizione.
+  - **wenn** e **ob**: *Wenn* introduce condizione/tempo, *ob* introduce una domanda indiretta (sì/no): *Ich frage, ob du kommst.*
+  - **wenn** per eventi ripetuti o futuri, **als** per un singolo evento nel passato; **wann** per domande dirette e indirette sul tempo.
+
+  ## Esempi
+  - *Ich lerne Deutsch, weil ich in Berlin arbeiten will.* — Studio tedesco perché voglio lavorare a Berlino.
+  - *Ich glaube, dass er recht hat.* — Credo che abbia ragione.
+  - *Wenn du Hunger hast, kochen wir etwas.* — Se hai fame, cuciniamo qualcosa.
+  - *Weißt du, ob sie heute kommt?* — Sai se oggi viene?
+  - *Als ich ein Kind war, spielte ich oft Fußball.* — Quando ero bambino giocavo spesso a calcio.
+
+  ## Errori tipici di chi parla italiano
+  - **se** italiano = **wenn** (condizione) *o* **ob** (domanda indiretta): *Se piove* = *Wenn es regnet*; *Non so se viene* = *Ich weiß nicht, ob er kommt*.
+    **\*Ich weiß nicht, wenn er kommt** è errato (significa un'altra cosa).
+  - **quando** italiano = *wenn* / *als* / *wann* (domanda): *Wann kommst du?*; *Wenn ich Zeit habe, …*; *Als ich in Rom war, …*
+  - Si usa **perché** per tutto: *weil* (subordinata, verbo in fondo) o *denn* (ordine normale); non **\*weil ich bin krank**.
+  - In italiano *che* si può spesso omettere o sostituire con il congiuntivo (*penso sia vero*); in tedesco di norma serve *dass* e il verbo indicativo.
+  - Dimenticare la virgola: in tedesco è obbligatoria.
+examples:
+  - {de: "Ich lerne Deutsch, weil ich in Berlin arbeiten will.", it: "Studio tedesco perché voglio lavorare a Berlino."}
+  - {de: "Ich glaube, dass er recht hat.", it: "Credo che abbia ragione."}
+  - {de: "Wenn du Hunger hast, kochen wir etwas.", it: "Se hai fame, cuciniamo qualcosa."}
+  - {de: "Weißt du, ob sie heute kommt?", it: "Sai se oggi viene?"}
+  - {de: "Als ich ein Kind war, spielte ich oft Fußball.", it: "Quando ero bambino giocavo spesso a calcio."}

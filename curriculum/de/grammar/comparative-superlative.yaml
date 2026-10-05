@@ -1,0 +1,46 @@
+id: gram:comparative-superlative
+title_it: "Comparativo e superlativo"
+title_en: "Comparative and superlative"
+level: A2
+requires: ["gram:adjective-endings"]
+diagnostic_tags:
+  form: [comparative, superlative-am, superlative-attributive, equality-so-wie]
+  adjective_type: [regular, umlaut, irregular-gut-viel-gern-hoch-nah, ends-in-d-t-s-z]
+  error_type: [wie-instead-of-als, missing-umlaut, wrong-superlative-form, double-comparison]
+reference_it: |
+  ## Regola
+
+  | grado | formazione | esempio |
+  |---|---|---|
+  | positivo | — | klein, schnell |
+  | comparativo | + **-er** (+ *als*) | kleiner, schneller |
+  | superlativo | **am** + radice + **-sten** | am kleinsten, am schnellsten |
+  | uguaglianza | **so … wie** / **genauso … wie** | so groß wie |
+
+  - **Umlaut** in molti monosillabi: *alt → älter → am ältesten*, *groß → größer → am größten*, *jung → jünger → am jüngsten*, *lang → länger → am längsten*, *warm → wärmer → am wärmsten*.
+  - Aggettivi in **-d, -t, -s, -ß, -z, -sch** prendono **-esten**: *alt → am ältesten*, *heiß → am heißesten*, *kurz → am kürzesten*, *frisch → am frischesten*. (Eccezione: *groß → am größten*.)
+  - **Irregolari**: *gut → besser → am besten*, *viel → mehr → am meisten*, *gern → lieber → am liebsten*, *hoch → höher → am höchsten*, *nah → näher → am nächsten*.
+  - Aggettivi in **-el/-er/-en** perdono la *e*: *dunkel → dunkler*, *teuer → teurer*.
+  - Davanti al nome comparativo e superlativo prendono le **desinenze dell'aggettivo**: *ein größeres Haus*, *das größte Haus*, *die jüngste Schwester*.
+  - Nel confronto: **als** dopo il comparativo (*Er ist größer **als** ich*), **wie** dopo *so/genauso* (*Er ist so groß **wie** ich*).
+
+  ## Esempi
+  - *Mein Bruder ist älter als ich.* — Mio fratello è più grande di me.
+  - *Berlin ist größer als München.* — Berlino è più grande di Monaco.
+  - *Ich bin so groß wie mein Vater.* — Sono alto come mio padre.
+  - *Das ist der schönste Tag meines Lebens.* — È il giorno più bello della mia vita.
+  - *Ich trinke am liebsten Tee.* — Preferisco bere il tè (mi piace più di tutto il tè).
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *più … di/che* e *il più …*: il tedesco **non usa "mehr"** (*più*) davanti all'aggettivo: **\*mehr groß** → *größer*.
+  - **\*größer wie** → *größer **als***: dopo il comparativo si usa *als* (*più grande **di** me*), *wie* solo con *so … wie* (*grande **come** me*).
+  - **\*am meisten schön** → *am schönsten*; non esiste una forma perifrastica come *più bello*.
+  - Il superlativo italiano ha l'articolo (*il più bello*); in tedesco con il verbo *sein* si usa **am … -sten** (*Sie ist am schönsten*), davanti al nome l'articolo determinativo + aggettivo (*die schönste Frau*).
+  - Dimenticare l'**umlaut** (*älter*, *jünger*, *größer*) o la forma irregolare (*gut → besser*, non **\*guter**).
+  - *gern → lieber → am liebsten* esprime la preferenza (*preferire*): *Ich trinke lieber Tee*.
+examples:
+  - {de: "Mein Bruder ist älter als ich.", it: "Mio fratello è più grande di me."}
+  - {de: "Berlin ist größer als München.", it: "Berlino è più grande di Monaco."}
+  - {de: "Ich bin so groß wie mein Vater.", it: "Sono alto come mio padre."}
+  - {de: "Das ist der schönste Tag meines Lebens.", it: "È il giorno più bello della mia vita."}
+  - {de: "Ich trinke am liebsten Tee.", it: "Preferisco il tè a qualsiasi altra bevanda."}

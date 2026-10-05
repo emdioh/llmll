@@ -1,0 +1,52 @@
+id: gram:dative-case
+title_it: "Dativo: articoli, complemento di termine e verbi con il dativo"
+title_en: "Dative case: articles, indirect object and dative verbs"
+level: A1
+requires: ["gram:articles-nom-akk", "gram:personal-pronouns"]
+diagnostic_tags:
+  gender_number: [m, f, n, pl]
+  article_type: [definite, indefinite, negative-kein, possessive]
+  function: [indirect-object, dative-verb, dative-pronoun, after-preposition]
+  error_type: [accusative-instead-of-dative, missing-plural-n, wrong-object-order]
+reference_it: |
+  ## Regola
+  Il **dativo** è il caso del **complemento di termine** (*a chi?*): *Ich gebe **dem Mann** das Buch.*
+  Si usa inoltre dopo certi verbi e preposizioni.
+
+  | | maschile | femminile | neutro | plurale |
+  |---|---|---|---|---|
+  | determ. | dem Mann | der Frau | dem Kind | den Kindern |
+  | indeterm. | einem Mann | einer Frau | einem Kind | — (Kindern) |
+  | negativo | keinem Mann | keiner Frau | keinem Kind | keinen Kindern |
+
+  - Al **dativo plurale** il sostantivo prende **-n** (*den Kindern, den Freunden*), tranne se il plurale termina già in -n o -s
+    (*den Frauen*, *den Autos*).
+  - Verbi con il **solo dativo**: *helfen, danken, gefallen, gehören, schmecken, passen, antworten, glauben, gratulieren, fehlen, folgen.*
+    *Das Buch gehört mir. Die Suppe schmeckt dir. Er hilft der Frau.*
+  - Verbi con **dativo + accusativo**: *geben, schenken, zeigen, schicken, schreiben, erklären, kaufen, bringen, empfehlen.*
+    Con due sostantivi prima il dativo, poi l'accusativo; con due pronomi prima l'accusativo (*Ich gebe es ihm*).
+  - Con un pronome e un sostantivo: il pronome per primo (*Ich gebe ihm das Buch. Ich gebe es dem Mann.*).
+  - Il possesso si esprime con **von + dativo** nel parlato o con il genitivo nello scritto (*das Auto von meinem Vater*).
+
+  ## Esempi
+  - *Ich gebe dem Kind einen Apfel.* — Do una mela al bambino.
+  - *Das Buch gehört meiner Schwester.* — Il libro appartiene a mia sorella.
+  - *Wir helfen den Nachbarn.* — Aiutiamo i vicini.
+  - *Der Kuchen schmeckt mir gut.* — La torta mi piace (mi sa di buono).
+  - *Das ist das Auto von meinem Bruder.* — È la macchina di mio fratello.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il complemento di termine è marcato da **a** (*do il libro **a** Marco*), non dal caso: in tedesco **non si mette una preposizione**
+    (**\*Ich gebe das Buch zu Marco**, **\*an Marco**) ma si usa il dativo: *Ich gebe Marco das Buch.*
+  - **"di" ≠ genitivo**: *il libro di Marco* si dice *Marcos Buch* o *das Buch von Marco*; il **genitivo** (*das Buch des Lehrers*) è un caso a parte.
+    Non tradurre ogni *di* con *von*: *una tazza di caffè → eine Tasse Kaffee*, *una bottiglia d'acqua → eine Flasche Wasser*, *il sabato sera → am Samstagabend*.
+  - Dopo verbi come *helfen* (aiutare), *danken* (ringraziare), *antworten* (rispondere): in italiano l'oggetto è diretto
+    (*aiuto Anna*, *ringrazio Anna*), in tedesco **dativo** (*ich helfe Anna*, *ich danke Anna*).
+  - *gefallen* è come *piacere*: la cosa che piace è il soggetto, chi prova piacere è il dativo (*Der Film gefällt mir* = *Mi piace il film*).
+  - Il dativo plurale con **-n** si dimentica spesso: *mit den Kinder* → *mit den Kindern*.
+examples:
+  - {de: "Ich gebe dem Kind einen Apfel.", it: "Do una mela al bambino."}
+  - {de: "Das Buch gehört meiner Schwester.", it: "Il libro appartiene a mia sorella."}
+  - {de: "Wir helfen den Nachbarn.", it: "Aiutiamo i vicini."}
+  - {de: "Der Film gefällt mir.", it: "Mi piace il film."}
+  - {de: "Das ist das Auto von meinem Bruder.", it: "È la macchina di mio fratello."}

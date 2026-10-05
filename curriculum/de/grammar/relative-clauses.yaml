@@ -1,0 +1,45 @@
+id: gram:relative-clauses
+title_it: "Frasi relative"
+title_en: "Relative clauses"
+level: B1
+requires: ["gram:verb-final-subordinate", "gram:dative-case", "gram:prepositions-dat"]
+diagnostic_tags:
+  relative_case: [nom, akk, dat, prepositional]
+  gender_number: [m, f, n, pl]
+  error_type: [wrong-case, wrong-gender-from-antecedent, verb-not-final, missing-comma, was-vs-das]
+reference_it: |
+  ## Regola
+  Il pronome relativo ha **genere e numero dell'antecedente** (la parola a cui si riferisce) e il **caso richiesto dal ruolo nella relativa**.
+  Le forme sono quelle dell'articolo determinativo, con eccezione del dativo plurale (*denen*) e del genitivo (*dessen, deren*).
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | der | die | das | die |
+  | Akk. | den | die | das | die |
+  | Dat. | dem | der | dem | denen |
+
+  - La relativa è sempre separata da **virgole**, il **verbo va in fondo**.
+  - Con una preposizione: la preposizione va **prima** del pronome: *der Mann, **mit dem** ich spreche*.
+  - Dopo *alles, etwas, nichts, das Beste* si usa **was**: *Alles, was ich weiß, …* — Dopo una frase intera: *Er kommt, was mich freut.*
+
+  Per scegliere il pronome: 1. genere e numero dell'antecedente; 2. funzione nella relativa (soggetto → Nom., oggetto → Akk., compl. di termine → Dat.).
+
+  ## Esempi
+  - *Das ist der Mann, der neben mir wohnt.* — Questo è l'uomo che abita accanto a me.
+  - *Die Frau, die ich gestern gesehen habe, ist meine Lehrerin.* — La donna che ho visto ieri è la mia insegnante.
+  - *Das Buch, das ich lese, ist spannend.* — Il libro che sto leggendo è avvincente.
+  - *Die Kinder, mit denen ich spiele, sind nett.* — I bambini con cui gioco sono simpatici.
+  - *Alles, was er sagt, ist wahr.* — Tutto ciò che dice è vero.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha **che** (invariabile) e **cui** (dopo preposizione). In tedesco il pronome cambia con **genere, numero e caso**: non si può usare un pronome unico.
+  - Si sceglie il caso in base all'antecedente: *Der Mann, **der** ich gestern gesehen habe* è sbagliato: serve *den* (oggetto della relativa).
+  - In italiano *che* introduce anche dichiarative; in tedesco **dass** (dichiarativa) ≠ **der/die/das** (relativa): **\*Das ist das Buch, dass ich lese** → *das ich lese*.
+  - Con la preposizione: **\*Der Mann, ich spreche mit** → *mit dem ich spreche* (preposizione + pronome all'inizio della relativa).
+  - La virgola davanti alla relativa è obbligatoria.
+examples:
+  - {de: "Das ist der Mann, der neben mir wohnt.", it: "Questo è l'uomo che abita accanto a me."}
+  - {de: "Die Frau, die ich gestern gesehen habe, ist meine Lehrerin.", it: "La donna che ho visto ieri è la mia insegnante."}
+  - {de: "Das Buch, das ich lese, ist spannend.", it: "Il libro che sto leggendo è avvincente."}
+  - {de: "Die Kinder, mit denen ich spiele, sind nett.", it: "I bambini con cui gioco sono simpatici."}
+  - {de: "Alles, was er sagt, ist wahr.", it: "Tutto ciò che dice è vero."}

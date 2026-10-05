@@ -1,0 +1,58 @@
+id: gram:modal-verbs
+title_it: "Verbi modali: können, müssen, wollen, sollen, dürfen, mögen / möchte"
+title_en: "Modal verbs"
+level: A1
+requires: ["gram:svo-word-order", "gram:praesens"]
+diagnostic_tags:
+  modal: [koennen, muessen, wollen, sollen, duerfen, moegen, moechte]
+  error_type: [wrong-conjugation, infinitive-not-at-end, zu-added, meaning-confusion-muessen-duerfen]
+reference_it: |
+  ## Regola
+  Il verbo modale è coniugato in posizione 2, il verbo principale va all'**infinito in fondo alla frase**
+  (senza *zu*): *Ich **muss** heute **arbeiten**.*
+
+  | | können | müssen | wollen | sollen | dürfen | mögen | möchte |
+  |---|---|---|---|---|---|---|---|
+  | ich | kann | muss | will | soll | darf | mag | möchte |
+  | du | kannst | musst | willst | sollst | darfst | magst | möchtest |
+  | er/sie/es | kann | muss | will | soll | darf | mag | möchte |
+  | wir | können | müssen | wollen | sollen | dürfen | mögen | möchten |
+  | ihr | könnt | müsst | wollt | sollt | dürft | mögt | möchtet |
+  | sie/Sie | können | müssen | wollen | sollen | dürfen | mögen | möchten |
+
+  *ich/er* hanno la **stessa forma** (nessuna desinenza -t alla 3ª persona singolare).
+
+  | modale | significato | esempio |
+  |---|---|---|
+  | können | potere (capacità, possibilità) / sapere | Ich kann schwimmen. |
+  | müssen | dovere (necessità) | Wir müssen gehen. |
+  | wollen | volere (intenzione forte) | Er will ein Auto kaufen. |
+  | sollen | dovere (per volere di altri) | Du sollst zum Arzt gehen. |
+  | dürfen | potere (permesso) | Hier darf man nicht rauchen. |
+  | mögen | piacere / gradire | Ich mag Kaffee. |
+  | möchte | vorrei | Ich möchte ein Wasser. |
+
+  *möchte* è una forma di cortesia: *vorrei*. *Ich will ein Wasser* suona brusco.
+  Il verbo di moto può essere omesso: *Ich muss nach Hause.*
+
+  ## Esempi
+  - *Ich kann gut kochen.* — So cucinare bene.
+  - *Du musst jetzt lernen.* — Devi studiare ora.
+  - *Darf ich hier sitzen?* — Posso sedermi qui?
+  - *Wir möchten zwei Kaffee, bitte.* — Vorremmo due caffè, per favore.
+  - *Er will nächstes Jahr nach Berlin ziehen.* — Vuole trasferirsi a Berlino l'anno prossimo.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il verbo modale è seguito dall'infinito subito dopo (*devo andare a casa*): in tedesco l'infinito va **in fondo**
+    (*Ich muss nach Hause **gehen***), non **\*Ich muss gehen nach Hause**.
+  - Si aggiunge *zu* per analogia con *di/a* italiani: **\*Ich kann zu schwimmen**. Dopo i modali l'infinito è senza *zu*.
+  - **müssen nicht ≠ dürfen nicht**: *Du musst nicht kommen* = non è necessario venire (*non devi venire* in italiano è ambiguo!);
+    *Du darfst nicht kommen* = è vietato venire.
+  - *können* corrisponde sia a *potere* sia a *sapere* (una capacità): *Ich kann Deutsch* = so il tedesco. *wissen* non si usa per le abilità.
+  - Non confondere **möchte** (vorrei, desiderio) con **mag** (mi piace): *Ich möchte einen Kaffee* (ne vorrei uno) ≠ *Ich mag Kaffee* (mi piace).
+examples:
+  - {de: "Ich kann gut kochen.", it: "So cucinare bene."}
+  - {de: "Du musst jetzt lernen.", it: "Devi studiare ora."}
+  - {de: "Darf ich hier sitzen?", it: "Posso sedermi qui?"}
+  - {de: "Wir möchten zwei Kaffee, bitte.", it: "Vorremmo due caffè, per favore."}
+  - {de: "Du musst nicht kommen.", it: "Non è necessario che tu venga."}

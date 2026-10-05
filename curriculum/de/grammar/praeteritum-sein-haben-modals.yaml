@@ -1,0 +1,45 @@
+id: gram:praeteritum-sein-haben-modals
+title_it: "Präteritum di sein, haben e dei verbi modali"
+title_en: "Simple past (Präteritum) of sein, haben and modal verbs"
+level: A2
+requires: ["gram:modal-verbs", "gram:perfekt"]
+diagnostic_tags:
+  verb: [sein, haben, koennen, muessen, wollen, sollen, duerfen, moegen]
+  error_type: [wrong-stem, umlaut-kept, extra-ending-er-sie-es, perfekt-instead-of-praeteritum]
+reference_it: |
+  ## Regola
+  Per *sein, haben* e i **verbi modali** nel parlato si usa quasi sempre il **Präteritum**, non il Perfekt.
+
+  | | sein | haben | können | müssen | wollen | sollen | dürfen | mögen |
+  |---|---|---|---|---|---|---|---|---|
+  | ich | war | hatte | konnte | musste | wollte | sollte | durfte | mochte |
+  | du | warst | hattest | konntest | musstest | wolltest | solltest | durftest | mochtest |
+  | er/sie/es | war | hatte | konnte | musste | wollte | sollte | durfte | mochte |
+  | wir | waren | hatten | konnten | mussten | wollten | sollten | durften | mochten |
+  | ihr | wart | hattet | konntet | musstet | wolltet | solltet | durftet | mochtet |
+  | sie/Sie | waren | hatten | konnten | mussten | wollten | sollten | durften | mochten |
+
+  - Nei modali al Präteritum **cade l'umlaut** (*können → konnte*) e si aggiunge **-te-**.
+  - Alla 1ª e 3ª persona singolare **non c'è desinenza** (*ich war, er war; ich konnte, er konnte*).
+  - Frase: *Ich **konnte** gestern nicht **kommen**.* (modale in posizione 2, infinito in fondo)
+  - Con altri verbi si preferisce il Perfekt nel parlato; il Präteritum degli altri verbi è tipico della lingua scritta.
+
+  ## Esempi
+  - *Gestern war ich krank.* — Ieri ero malato.
+  - *Wir hatten keine Zeit.* — Non avevamo tempo.
+  - *Ich konnte gestern nicht kommen.* — Ieri non ho potuto venire.
+  - *Er musste lange arbeiten.* — Ha dovuto lavorare a lungo.
+  - *Als Kind wollte ich Pilot werden.* — Da bambino volevo fare il pilota.
+
+  ## Errori tipici di chi parla italiano
+  - Il Präteritum **non coincide con l'imperfetto** italiano: *ich war* può tradurre *ero* ma anche *sono stato*; *ich konnte* = *potevo* / *sono riuscito*.
+  - Per analogia con il passato prossimo si dice *Ich bin krank gewesen* o *Ich habe kommen können*: è grammaticale, ma nel parlato si preferisce *Ich war krank*, *Ich konnte kommen*.
+  - Si mette l'umlaut: **\*ich könnte** (è Konjunktiv II, *potrei*) invece di *ich konnte* (*potevo / sono potuto*).
+  - Si aggiunge una desinenza a *ich/er*: **\*er hattet**, **\*er wart** → *er hatte*, *er war*.
+  - Attenzione: *wart* è 2ª plurale di *sein* (ihr wart) e non la 3ª persona.
+examples:
+  - {de: "Gestern war ich krank.", it: "Ieri ero malato."}
+  - {de: "Wir hatten keine Zeit.", it: "Non avevamo tempo."}
+  - {de: "Ich konnte gestern nicht kommen.", it: "Ieri non sono potuto venire."}
+  - {de: "Er musste lange arbeiten.", it: "Ha dovuto lavorare a lungo."}
+  - {de: "Als Kind wollte ich Pilot werden.", it: "Da bambino volevo fare il pilota."}

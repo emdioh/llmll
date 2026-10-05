@@ -1,0 +1,53 @@
+id: gram:separable-verbs
+title_it: "Verbi separabili"
+title_en: "Separable verbs"
+level: A1
+requires: ["gram:svo-word-order", "gram:praesens"]
+diagnostic_tags:
+  context: [main-clause, modal, perfekt, subordinate-clause, zu-infinitive, imperative]
+  error_type: [particle-not-separated, particle-wrong-position, particle-dropped, separable-inseparable-confusion]
+  particle: [an, auf, aus, ein, mit, vor, zu, ab, weg, zurueck, fern, nach, um]
+reference_it: |
+  ## Regola
+  Molti verbi tedeschi hanno un **prefisso accentato e separabile**. Nella frase principale al presente il prefisso
+  si stacca e va **in fondo alla frase**:
+
+  | infinito | frase |
+  |---|---|
+  | aufstehen | Ich **stehe** um sieben Uhr **auf**. |
+  | anrufen | Er **ruft** seine Mutter **an**. |
+  | einkaufen | Wir **kaufen** am Samstag **ein**. |
+  | mitkommen | **Kommst** du **mit**? |
+  | ankommen | Der Zug **kommt** um 10 Uhr **an**. |
+
+  | contesto | forma |
+  |---|---|
+  | infinito con modale | Ich muss früh **aufstehen**. |
+  | Perfekt | Er hat mich **angerufen**. Ich bin früh **aufgestanden**. (*-ge-* tra prefisso e radice) |
+  | infinito con *zu* | Es ist schwer, früh **aufzustehen**. |
+  | subordinata | …, weil ich früh **aufstehe**. (il prefisso resta attaccato) |
+
+  I prefissi separabili più frequenti: **ab-, an-, auf-, aus-, ein-, mit-, nach-, vor-, weg-, zu-, zurück-, fern-**.
+  I prefissi **inseparabili** (non accentati) sono **be-, emp-, ent-, er-, ge-, ver-, zer-**: *Ich besuche dich.* *Er versteht mich.*
+  Con inseparabili il participio **non** ha *ge-* (*besucht, verstanden*).
+
+  ## Esempi
+  - *Ich stehe jeden Tag um 6 Uhr auf.* — Mi alzo ogni giorno alle 6.
+  - *Rufst du mich später an?* — Mi chiami più tardi?
+  - *Wir kaufen heute im Supermarkt ein.* — Oggi facciamo la spesa al supermercato.
+  - *Sie hat das Fenster aufgemacht.* — Ha aperto la finestra.
+  - *Der Zug fährt um acht Uhr ab.* — Il treno parte alle otto.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano **non esistono verbi separabili**: *mi alzo*, *chiamo*, *arrivo* sono una sola parola. È tipico lasciare il verbo intero
+    (**\*Ich aufstehe um sieben**) o dimenticare il prefisso (**\*Ich stehe um sieben**).
+  - Alcuni verbi riflessivi italiani corrispondono a verbi tedeschi separabili e non riflessivi: *alzarsi → aufstehen* (non **\*sich aufstehen**), *addormentarsi → einschlafen*.
+  - Il prefisso cambia il significato: *kommen* (venire), *ankommen* (arrivare), *mitkommen* (venire con), *zurückkommen* (tornare).
+  - La particella va **in fondo** anche se la frase è lunga: *Ich rufe meine Mutter jeden Abend um acht Uhr an.*
+  - Non separare i verbi inseparabili: *besuchen* è inseparabile (*Ich besuche dich*), non **\*Ich suche dich be**.
+examples:
+  - {de: "Ich stehe jeden Tag um 6 Uhr auf.", it: "Mi alzo ogni giorno alle 6."}
+  - {de: "Rufst du mich später an?", it: "Mi chiami più tardi?"}
+  - {de: "Wir kaufen heute im Supermarkt ein.", it: "Oggi facciamo la spesa al supermercato."}
+  - {de: "Der Zug fährt um acht Uhr ab.", it: "Il treno parte alle otto."}
+  - {de: "Ich muss morgen früh aufstehen.", it: "Domani devo alzarmi presto."}

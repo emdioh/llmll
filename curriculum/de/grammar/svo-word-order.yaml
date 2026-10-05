@@ -1,0 +1,42 @@
+id: gram:svo-word-order
+title_it: "Frase principale: ordine Soggetto–Verbo–Oggetto"
+title_en: "Main clause: Subject–Verb–Object order"
+level: A1
+requires: []
+diagnostic_tags:
+  element: [subject, finite-verb, object, predicate-adjective]
+  error_type: [verb-not-second, wrong-element-order, missing-subject, coordinating-conjunction-position]
+reference_it: |
+  ## Regola
+  Nella frase dichiarativa tedesca il **verbo coniugato sta sempre in seconda posizione**. Nella forma più semplice
+  la frase segue lo schema **Soggetto – Verbo – Complemento** (come in italiano):
+
+  | Posizione 1 | Posizione 2 (verbo) | Resto della frase |
+  |---|---|---|
+  | Ich | lerne | Deutsch. |
+  | Anna | trinkt | einen Kaffee. |
+  | Wir | wohnen | in Mailand. |
+  | Das Wetter | ist | schön. |
+
+  - Il **soggetto è obbligatorio**: in tedesco il pronome non si può omettere (*ich lerne*, non *lerne*).
+  - Le congiunzioni coordinanti **und, aber, oder, denn, sondern** stanno "in posizione zero" e non cambiano l'ordine:
+    *Ich bleibe hier, denn ich bin müde.*
+  - Anche il verbo *sein* segue la regola: *Er ist Lehrer.*
+
+  ## Esempi
+  - *Ich komme aus Italien.* — Vengo dall'Italia.
+  - *Maria liest ein Buch.* — Maria legge un libro.
+  - *Wir haben einen Hund.* — Abbiamo un cane.
+  - *Er ist müde, aber er arbeitet.* — È stanco, ma lavora.
+
+  ## Errori tipici di chi parla italiano
+  - **Soggetto omesso**: in italiano *Vado a casa* è normale; in tedesco serve *Ich gehe nach Hause*.
+  - **Il verbo non resta al suo posto** quando si aggiungono altri elementi (vedi i punti successivi sull'inversione).
+  - Si tende a trasferire l'ordine italiano delle parole libero (*Mangia la pizza Marco*): in tedesco il soggetto
+    di norma sta prima del verbo, finché non c'è un altro elemento iniziale.
+  - Con **aber/denn/und** non si sposta il verbo in fondo (quello succede solo nelle subordinate).
+examples:
+  - {de: "Ich lerne Deutsch.", it: "Studio il tedesco."}
+  - {de: "Anna trinkt einen Kaffee.", it: "Anna beve un caffè."}
+  - {de: "Wir wohnen in Mailand.", it: "Abitiamo a Milano."}
+  - {de: "Ich bleibe hier, denn ich bin müde.", it: "Resto qui, perché sono stanco."}

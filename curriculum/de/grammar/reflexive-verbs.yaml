@@ -1,0 +1,49 @@
+id: gram:reflexive-verbs
+title_it: "Verbi riflessivi"
+title_en: "Reflexive verbs"
+level: A2
+requires: ["gram:personal-pronouns", "gram:praesens"]
+diagnostic_tags:
+  reflexive_case: [akk, dat]
+  person: [ich, du, er-sie-es, wir, ihr, sie-Sie]
+  error_type: [missing-reflexive-pronoun, wrong-case-mir-mich, wrong-position, false-reflexive-it-de]
+reference_it: |
+  ## Regola
+  Il pronome riflessivo (*sich*) cambia con la persona:
+
+  | | Akkusativ | Dativ |
+  |---|---|---|
+  | ich | mich | mir |
+  | du | dich | dir |
+  | er/sie/es | sich | sich |
+  | wir | uns | uns |
+  | ihr | euch | euch |
+  | sie/Sie | sich | sich |
+
+  - Quasi sempre è l'**accusativo**: *Ich freue **mich**. Er interessiert **sich** für Musik. Wir treffen **uns** morgen.*
+  - Il **dativo** si usa se c'è già un complemento oggetto (di solito parti del corpo o vestiti): *Ich wasche **mir** die Hände. Ich kaufe **mir** ein Buch.*
+  - Posizione: dopo il verbo coniugato; se il soggetto è un nome, il pronome segue il verbo: *Heute freut **sich** Anna.*; nella subordinata il riflessivo segue la congiunzione: *…, weil **ich mich** freue.*
+  - Nel Perfekt l'ausiliare è sempre **haben**: *Ich habe **mich** gewaschen.*
+  - Verbi comuni: *sich waschen, sich freuen (auf/über), sich interessieren (für), sich treffen, sich beeilen, sich erinnern (an), sich fühlen, sich setzen, sich ausruhen, sich vorstellen.*
+
+  ## Esempi
+  - *Ich wasche mich jeden Morgen.* — Mi lavo ogni mattina.
+  - *Sie freut sich auf die Ferien.* — Si rallegra per le vacanze (in arrivo).
+  - *Wir treffen uns um acht Uhr.* — Ci vediamo alle otto.
+  - *Ich putze mir die Zähne.* — Mi lavo i denti.
+  - *Er hat sich schnell angezogen.* — Si è vestito in fretta.
+
+  ## Errori tipici di chi parla italiano
+  - **Non tutto ciò che è riflessivo in italiano lo è in tedesco**: *alzarsi → aufstehen*, *svegliarsi → aufwachen*, *addormentarsi → einschlafen*,
+    *chiamarsi → heißen*, *innamorarsi → sich verlieben* (invece riflessivo).
+  - **Non tutto ciò che è riflessivo in tedesco lo è in italiano**: *sich vorstellen* (immaginare / presentarsi), *sich erinnern* (*ricordare* o *ricordarsi*).
+  - Con parti del corpo si usa il **dativo** (*ich wasche mir die Hände*), come in italiano *mi lavo le mani* — ma l'articolo è **definito**, non il possessivo (**\*meine Hände**).
+  - **mich ≠ mir**: senza oggetto si usa l'accusativo (*Ich habe **mich** gewaschen*, non **\*mir**); con oggetto il dativo (*Ich habe **mir** die Hände gewaschen*).
+  - Perfekt: in italiano **essere** (*mi sono lavato*), in tedesco **haben** (*ich habe mich gewaschen*).
+  - Le preposizioni dei riflessivi vanno imparate: *sich freuen auf/über, sich interessieren für, sich erinnern an*.
+examples:
+  - {de: "Ich wasche mich jeden Morgen.", it: "Mi lavo ogni mattina."}
+  - {de: "Sie freut sich auf die Ferien.", it: "Si rallegra per le vacanze in arrivo."}
+  - {de: "Wir treffen uns um acht Uhr.", it: "Ci vediamo alle otto."}
+  - {de: "Ich putze mir die Zähne.", it: "Mi lavo i denti."}
+  - {de: "Er hat sich schnell angezogen.", it: "Si è vestito in fretta."}

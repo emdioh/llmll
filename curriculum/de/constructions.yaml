@@ -1,0 +1,204 @@
+- id: cx:es-gibt-akk
+  pattern: "es gibt + Akk"
+  level: A1
+  translations: {it: "c'è / ci sono; esiste", en: "there is / there are"}
+  example: {de: "In unserer Stadt gibt es einen großen Park.", it: "Nella nostra città c'è un grande parco."}
+  requires: ["gram:articles-nom-akk"]
+- id: cx:zu-hause-nach-hause
+  pattern: "zu Hause (Wo?) / nach Hause (Wohin?)"
+  level: A1
+  translations: {it: "a casa (stato) / a casa (moto)", en: "at home / (to) home"}
+  example: {de: "Ich bin heute zu Hause und gehe morgen nach Hause zu meinen Eltern.", it: "Oggi sono a casa e domani vado a casa dai miei genitori."}
+- id: cx:gefallen-dat
+  pattern: "jemandem gefallen (Dat)"
+  level: A1
+  translations: {it: "piacere a qualcuno", en: "to please / like (someone likes it)"}
+  example: {de: "Der Film gefällt mir sehr.", it: "Il film mi piace molto."}
+  requires: ["gram:dative-case"]
+- id: cx:helfen-dat
+  pattern: "jemandem helfen (Dat)"
+  level: A1
+  translations: {it: "aiutare qualcuno", en: "to help someone"}
+  example: {de: "Kannst du mir bitte helfen?", it: "Puoi aiutarmi, per favore?"}
+  requires: ["gram:dative-case"]
+- id: cx:gehoeren-dat
+  pattern: "jemandem gehören (Dat)"
+  level: A1
+  translations: {it: "appartenere a qualcuno", en: "to belong to someone"}
+  example: {de: "Das Fahrrad gehört meinem Bruder.", it: "La bicicletta appartiene a mio fratello."}
+  requires: ["gram:dative-case"]
+- id: cx:danken-dat-fuer-akk
+  pattern: "jemandem danken für + Akk"
+  level: A2
+  translations: {it: "ringraziare qualcuno per qualcosa", en: "to thank someone for something"}
+  example: {de: "Ich danke dir für die Einladung.", it: "Ti ringrazio per l'invito."}
+  requires: ["gram:dative-case", "gram:prepositions-akk"]
+- id: cx:schmecken-dat
+  pattern: "jemandem schmecken (Dat)"
+  level: A1
+  translations: {it: "piacere (di cibo) a qualcuno", en: "to taste good to someone"}
+  example: {de: "Die Pizza schmeckt mir.", it: "La pizza mi piace."}
+  requires: ["gram:dative-case"]
+- id: cx:wie-geht-es-dat
+  pattern: "Wie geht es + Dat?"
+  level: A1
+  translations: {it: "come sta/stai?", en: "how are you?"}
+  example: {de: "Wie geht es Ihnen heute?", it: "Come sta oggi?"}
+  requires: ["gram:personal-pronouns"]
+- id: cx:warten-auf-akk
+  pattern: "warten auf + Akk"
+  level: A1
+  translations: {it: "aspettare qualcuno/qualcosa", en: "to wait for"}
+  example: {de: "Ich warte auf den Bus.", it: "Aspetto l'autobus."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:lust-haben-auf-akk
+  pattern: "Lust haben auf + Akk"
+  level: A2
+  translations: {it: "avere voglia di qualcosa", en: "to feel like something"}
+  example: {de: "Ich habe Lust auf ein Eis.", it: "Ho voglia di un gelato."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:sich-freuen-auf-akk
+  pattern: "sich freuen auf + Akk"
+  level: A2
+  translations: {it: "essere contento in attesa di qualcosa (futuro)", en: "to look forward to"}
+  example: {de: "Wir freuen uns auf den Urlaub.", it: "Non vediamo l'ora di andare in vacanza."}
+  requires: ["gram:reflexive-verbs", "gram:prepositions-two-way"]
+- id: cx:sich-freuen-ueber-akk
+  pattern: "sich freuen über + Akk"
+  level: A2
+  translations: {it: "rallegrarsi di qualcosa (presente/passato)", en: "to be happy about"}
+  example: {de: "Ich freue mich über dein Geschenk.", it: "Sono contento del tuo regalo."}
+  requires: ["gram:reflexive-verbs", "gram:prepositions-two-way"]
+- id: cx:angst-haben-vor-dat
+  pattern: "Angst haben vor + Dat"
+  level: A2
+  translations: {it: "avere paura di", en: "to be afraid of"}
+  example: {de: "Sie hat Angst vor Hunden.", it: "Ha paura dei cani."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:sich-interessieren-fuer-akk
+  pattern: "sich interessieren für + Akk"
+  level: A2
+  translations: {it: "interessarsi di", en: "to be interested in"}
+  example: {de: "Er interessiert sich für Geschichte.", it: "Si interessa di storia."}
+  requires: ["gram:reflexive-verbs", "gram:prepositions-akk"]
+- id: cx:teilnehmen-an-dat
+  pattern: "teilnehmen an + Dat"
+  level: B1
+  translations: {it: "partecipare a", en: "to take part in"}
+  example: {de: "Ich nehme an einem Deutschkurs teil.", it: "Partecipo a un corso di tedesco."}
+  requires: ["gram:prepositions-two-way", "gram:separable-verbs"]
+- id: cx:es-geht-um-akk
+  pattern: "es geht um + Akk"
+  level: B1
+  translations: {it: "si tratta di / riguarda", en: "it is about"}
+  example: {de: "In dem Film geht es um eine Familie.", it: "Nel film si parla di una famiglia."}
+  requires: ["gram:prepositions-akk"]
+- id: cx:denken-an-akk
+  pattern: "denken an + Akk"
+  level: A2
+  translations: {it: "pensare a", en: "to think of"}
+  example: {de: "Ich denke oft an meine Familie.", it: "Penso spesso alla mia famiglia."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:sich-erinnern-an-akk
+  pattern: "sich erinnern an + Akk"
+  level: B1
+  translations: {it: "ricordarsi di", en: "to remember"}
+  example: {de: "Erinnerst du dich an unseren ersten Urlaub?", it: "Ti ricordi della nostra prima vacanza?"}
+  requires: ["gram:reflexive-verbs", "gram:prepositions-two-way"]
+- id: cx:sprechen-ueber-akk
+  pattern: "sprechen über + Akk"
+  level: A2
+  translations: {it: "parlare di", en: "to talk about"}
+  example: {de: "Wir sprechen über das Wetter.", it: "Parliamo del tempo."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:fragen-nach-dat
+  pattern: "fragen nach + Dat"
+  level: A2
+  translations: {it: "chiedere di / informarsi su", en: "to ask about"}
+  example: {de: "Er fragt nach dem Weg zum Bahnhof.", it: "Chiede la strada per la stazione."}
+  requires: ["gram:prepositions-dat"]
+- id: cx:abhaengen-von-dat
+  pattern: "abhängen von + Dat"
+  level: B1
+  translations: {it: "dipendere da", en: "to depend on"}
+  example: {de: "Das hängt vom Wetter ab.", it: "Dipende dal tempo."}
+  requires: ["gram:prepositions-dat", "gram:separable-verbs"]
+- id: cx:bestehen-aus-dat
+  pattern: "bestehen aus + Dat"
+  level: B1
+  translations: {it: "essere composto da", en: "to consist of"}
+  example: {de: "Das Frühstück besteht aus Brot und Käse.", it: "La colazione consiste in pane e formaggio."}
+  requires: ["gram:prepositions-dat"]
+- id: cx:gratulieren-zu-dat
+  pattern: "jemandem gratulieren zu + Dat"
+  level: A2
+  translations: {it: "congratularsi con qualcuno per", en: "to congratulate someone on"}
+  example: {de: "Ich gratuliere dir zum Geburtstag.", it: "Ti faccio gli auguri per il compleanno."}
+  requires: ["gram:dative-case", "gram:prepositions-dat"]
+- id: cx:sich-vorbereiten-auf-akk
+  pattern: "sich vorbereiten auf + Akk"
+  level: B1
+  translations: {it: "prepararsi a", en: "to prepare for"}
+  example: {de: "Sie bereitet sich auf die Prüfung vor.", it: "Si prepara all'esame."}
+  requires: ["gram:reflexive-verbs", "gram:prepositions-two-way", "gram:separable-verbs"]
+- id: cx:gut-schlecht-in-dat
+  pattern: "gut / schlecht in + Dat sein"
+  level: A2
+  translations: {it: "essere bravo / scarso in", en: "to be good / bad at"}
+  example: {de: "Sie ist gut in Mathematik.", it: "È brava in matematica."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:verheiratet-sein-mit-dat
+  pattern: "verheiratet sein mit + Dat"
+  level: A2
+  translations: {it: "essere sposato con", en: "to be married to"}
+  example: {de: "Er ist mit einer Italienerin verheiratet.", it: "È sposato con un'italiana."}
+  requires: ["gram:prepositions-dat"]
+- id: cx:ich-haette-gern
+  pattern: "Ich hätte gern + Akk"
+  level: A2
+  translations: {it: "vorrei (ordinando)", en: "I would like (when ordering)"}
+  example: {de: "Ich hätte gern einen Kaffee und ein Stück Kuchen.", it: "Vorrei un caffè e una fetta di torta."}
+  requires: ["gram:konjunktiv-ii"]
+- id: cx:ich-moechte-akk
+  pattern: "Ich möchte + Akk / Inf."
+  level: A1
+  translations: {it: "vorrei", en: "I would like"}
+  example: {de: "Ich möchte ein Glas Wasser.", it: "Vorrei un bicchiere d'acqua."}
+  requires: ["gram:modal-verbs"]
+- id: cx:es-ist-warm-kalt
+  pattern: "Es ist + Adj. (Wetter)"
+  level: A1
+  translations: {it: "fa caldo / freddo", en: "it is warm / cold"}
+  example: {de: "Heute ist es sehr kalt.", it: "Oggi fa molto freddo."}
+- id: cx:es-regnet
+  pattern: "es regnet / es schneit"
+  level: A1
+  translations: {it: "piove / nevica", en: "it rains / it snows"}
+  example: {de: "Morgen regnet es den ganzen Tag.", it: "Domani piove tutto il giorno."}
+- id: cx:recht-haben
+  pattern: "recht haben"
+  level: A2
+  translations: {it: "avere ragione", en: "to be right"}
+  example: {de: "Du hast völlig recht.", it: "Hai perfettamente ragione."}
+- id: cx:hunger-durst-haben
+  pattern: "Hunger / Durst haben"
+  level: A1
+  translations: {it: "avere fame / sete", en: "to be hungry / thirsty"}
+  example: {de: "Ich habe Hunger und Durst.", it: "Ho fame e sete."}
+- id: cx:wie-alt-sein
+  pattern: "Wie alt bist du? / Ich bin ... Jahre alt"
+  level: A1
+  translations: {it: "quanti anni hai? / ho ... anni", en: "how old are you? / I am ... years old"}
+  example: {de: "Ich bin dreißig Jahre alt.", it: "Ho trent'anni."}
+- id: cx:in-in-nach-richtung
+  pattern: "in + Land (Akk) / nach + Stadt"
+  level: A1
+  translations: {it: "andare in / a (paese, città)", en: "to go to (country, city)"}
+  example: {de: "Wir fahren nach Berlin und dann in die Schweiz.", it: "Andiamo a Berlino e poi in Svizzera."}
+  requires: ["gram:prepositions-two-way"]
+- id: cx:spass-machen-dat
+  pattern: "jemandem Spaß machen"
+  level: A2
+  translations: {it: "divertire qualcuno, piacere", en: "to be fun for someone"}
+  example: {de: "Deutsch lernen macht mir Spaß.", it: "Studiare il tedesco mi diverte."}
+  requires: ["gram:dative-case"]

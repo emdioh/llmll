@@ -1,0 +1,47 @@
+id: gram:prepositions-dat
+title_it: "Preposizioni con il dativo"
+title_en: "Prepositions with the dative"
+level: A1
+requires: ["gram:dative-case"]
+diagnostic_tags:
+  preposition: [aus, bei, mit, nach, seit, von, zu, gegenueber, ab, ausser]
+  error_type: [accusative-instead-of-dative, contraction-missed, wrong-preposition-nach-zu, missing-plural-n]
+reference_it: |
+  ## Regola
+  Queste preposizioni reggono sempre il **dativo**:
+
+  | preposizione | significato principale | esempio |
+  |---|---|---|
+  | **aus** | da (provenienza, interno) | Ich komme **aus Italien**. Er geht **aus dem** Haus. |
+  | **bei** | presso, da (persona/luogo) | Ich wohne **bei meinen** Eltern. |
+  | **mit** | con; con (mezzo di trasporto) | Ich fahre **mit dem** Bus. |
+  | **nach** | dopo; verso/a (città, paesi) | **Nach dem** Essen gehe ich **nach Hause**. |
+  | **seit** | da (durata) | Ich lerne **seit** einem Jahr Deutsch. |
+  | **von** | da, di (origine); di (possessore) | Das ist ein Brief **von meiner** Mutter. |
+  | **zu** | a, da (persona/luogo) | Ich gehe **zum** Arzt. |
+  | **gegenüber** | di fronte a | **Dem Bahnhof gegenüber** ist ein Café. |
+
+  - **Contrazioni**: *bei dem → beim*, *von dem → vom*, *zu dem → zum*, *zu der → zur*.
+  - *nach* si usa con città, paesi senza articolo, *nach Hause*; *zu* con persone e luoghi (*zum Arzt, zur Schule*).
+  - *seit* con il **presente** (azione ancora in corso): *Ich wohne seit 2020 hier.* (non *wohnte*)
+
+  ## Esempi
+  - *Ich komme aus Italien und wohne seit zwei Jahren bei einer Familie.* — Vengo dall'Italia e abito da due anni presso una famiglia.
+  - *Wir fahren mit dem Zug nach Berlin.* — Andiamo a Berlino in treno.
+  - *Nach dem Unterricht gehe ich zum Arzt.* — Dopo la lezione vado dal medico.
+  - *Das ist ein Geschenk von meinen Eltern.* — È un regalo dei miei genitori.
+  - *Ich lerne seit einem Jahr Deutsch.* — Studio tedesco da un anno.
+
+  ## Errori tipici di chi parla italiano
+  - La preposizione italiana non si traduce parola per parola: *vado a Roma* = *Ich fahre **nach** Rom*; *vado dal medico* = *Ich gehe **zum** Arzt* (non **\*in den Arzt**).
+  - **con** + mezzo: *mit dem Bus* (non *in Bus*); **\*mit der Auto** → *mit dem Auto* (*das Auto*).
+  - **da** italiano è ambiguo: *da Roma → aus Rom / von Rom*; *da 3 anni → seit drei Jahren*; *dal medico → zum Arzt*; *da mia madre → bei meiner Mutter* (stato) / *zu meiner Mutter* (moto).
+  - Con **seit** si usa il **presente**, come in italiano (*vivo qui da due anni*): *Ich wohne seit zwei Jahren hier*, non **\*Ich habe seit zwei Jahren hier gewohnt**.
+  - Dativo plurale in -n: *mit den Kindern*.
+  - *dopo* = *nach* (dopo cena: *nach dem Abendessen*), ma *dopo che* = *nachdem* (con verbo in fondo).
+examples:
+  - {de: "Ich fahre mit dem Bus zur Arbeit.", it: "Vado al lavoro in autobus."}
+  - {de: "Nach dem Unterricht gehe ich zum Arzt.", it: "Dopo la lezione vado dal medico."}
+  - {de: "Ich lerne seit einem Jahr Deutsch.", it: "Studio il tedesco da un anno."}
+  - {de: "Das ist ein Geschenk von meinen Eltern.", it: "È un regalo dei miei genitori."}
+  - {de: "Er kommt aus dem Haus.", it: "Esce di casa."}

@@ -1,0 +1,50 @@
+id: gram:articles-nom-akk
+title_it: "Nominativo e accusativo: articoli determinativi, indeterminativi e kein"
+title_en: "Nominative and accusative: definite, indefinite and negative articles"
+level: A1
+requires: ["gram:svo-word-order"]
+diagnostic_tags:
+  case: [nom, akk]
+  gender_number: [m, f, n, pl]
+  article_type: [definite, indefinite, negative-kein, possessive]
+  error_type: [wrong-gender, case-not-marked, article-omitted]
+reference_it: |
+  ## Regola
+  In tedesco i sostantivi hanno **tre generi** (der = maschile, die = femminile, das = neutro) e l'articolo cambia
+  secondo il **caso**. Il **nominativo** è il caso del soggetto (e dopo *sein*, *werden*); l'**accusativo** è il caso
+  del complemento oggetto diretto. Nell'accusativo cambia **solo il maschile singolare**.
+
+  | | maschile | femminile | neutro | plurale |
+  |---|---|---|---|---|
+  | **Nom.** determ. | der Mann | die Frau | das Kind | die Kinder |
+  | **Akk.** determ. | den Mann | die Frau | das Kind | die Kinder |
+  | **Nom.** indeterm. | ein Mann | eine Frau | ein Kind | — (Kinder) |
+  | **Akk.** indeterm. | einen Mann | eine Frau | ein Kind | — (Kinder) |
+  | **Nom.** negativo | kein Mann | keine Frau | kein Kind | keine Kinder |
+  | **Akk.** negativo | keinen Mann | keine Frau | kein Kind | keine Kinder |
+
+  - **kein** si declina come *ein* (e così i possessivi *mein, dein, sein, ihr, unser, euer*), con plurale *keine*.
+  - **kein** nega un nome con articolo indeterminativo o senza articolo: *Ich habe kein Auto.* (vedi anche *Negazione*).
+  - Il genere va imparato con ogni sostantivo (*der Tisch, die Lampe, das Buch*).
+
+  ## Esempi
+  - *Der Mann liest den Brief.* — L'uomo legge la lettera.
+  - *Ich kaufe einen Apfel.* — Compro una mela.
+  - *Das ist eine gute Idee.* — È una buona idea.
+  - *Wir haben keinen Fernseher.* — Non abbiamo la televisione.
+  - *Ich sehe die Kinder.* — Vedo i bambini.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano **non ci sono casi**: l'oggetto non cambia forma. In tedesco bisogna segnare l'accusativo
+    (*Ich sehe **den** Mann*, non **\*der Mann**).
+  - **I generi non coincidono** con quelli italiani: *il sole → die Sonne*, *la luna → der Mond*, *il mare → das Meer*,
+    *il fiore → die Blume*, *il latte → die Milch*, *il burro → die Butter*, *la mano → die Hand* (qui coincidono: succede, ma non è una regola). Non dedurre il genere dall'italiano.
+  - Il neutro non esiste in italiano: *das Kind*, *das Auto*, *das Mädchen* (perché finisce in -chen).
+  - Il **plurale indeterminato non ha articolo**: *Ich habe Bücher* (non esiste un *eine* plurale); il negativo è *keine Bücher*.
+  - Dopo *es gibt* si usa l'accusativo: *Es gibt einen Park.*
+examples:
+  - {de: "Der Mann liest den Brief.", it: "L'uomo legge la lettera."}
+  - {de: "Ich kaufe einen Apfel.", it: "Compro una mela."}
+  - {de: "Das ist eine gute Idee.", it: "È una buona idea."}
+  - {de: "Wir haben keinen Fernseher.", it: "Non abbiamo la televisione."}
+  - {de: "Ich sehe die Kinder.", it: "Vedo i bambini."}

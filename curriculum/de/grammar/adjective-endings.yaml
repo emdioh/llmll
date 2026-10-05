@@ -1,0 +1,69 @@
+id: gram:adjective-endings
+title_it: "Declinazione dell'aggettivo (desinenze)"
+title_en: "Adjective endings"
+level: A2
+requires: ["gram:articles-nom-akk", "gram:dative-case"]
+diagnostic_tags:
+  case: [nom, akk, dat]
+  gender_number: [m, f, n, pl]
+  declension: [strong, weak, mixed]
+reference_it: |
+  ## Regola
+  L'aggettivo **davanti al sostantivo** (attributivo) prende una desinenza; **dopo sein/werden/bleiben** (predicativo) resta **invariabile**:
+  *Das Haus ist **groß**.* ma *das **große** Haus*.
+
+  La desinenza dipende da **caso, genere/numero** e da ciò che precede l'aggettivo:
+
+  - **declinazione debole**: dopo l'articolo determinativo (*der, die, das*) e *dieser, jeder, welcher*;
+  - **declinazione mista**: dopo *ein, kein* e i possessivi (*mein, dein...*);
+  - **declinazione forte**: senza articolo.
+
+  **Debole** (der/die/das/die):
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | der gute Mann | die gute Frau | das gute Kind | die guten Kinder |
+  | Akk. | den guten Mann | die gute Frau | das gute Kind | die guten Kinder |
+  | Dat. | dem guten Mann | der guten Frau | dem guten Kind | den guten Kindern |
+
+  **Mista** (ein/kein/mein):
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | ein guter Mann | eine gute Frau | ein gutes Kind | keine guten Kinder |
+  | Akk. | einen guten Mann | eine gute Frau | ein gutes Kind | keine guten Kinder |
+  | Dat. | einem guten Mann | einer guten Frau | einem guten Kind | keinen guten Kindern |
+
+  **Forte** (senza articolo):
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | guter Wein | gute Milch | gutes Brot | gute Freunde |
+  | Akk. | guten Wein | gute Milch | gutes Brot | gute Freunde |
+  | Dat. | gutem Wein | guter Milch | gutem Brot | guten Freunden |
+
+  Principio: il caso e il genere vengono marcati **una sola volta**. Se l'articolo li mostra già (*der, die, den, dem, der, einem, einer…*) l'aggettivo prende
+  solo **-e** o **-en**; se l'articolo non li mostra (*ein* al nominativo maschile e al nominativo/accusativo neutro, oppure nessun articolo) l'aggettivo
+  prende la desinenza dell'articolo determinativo (*-er, -es, -em…*).
+  Aggettivi in *-el, -er* e *hoch* perdono la *e*/*c*: *dunkel → ein dunkles Zimmer*, *teuer → ein teurer Wagen*, *hoch → ein hohes Haus*.
+
+  ## Esempi
+  - *Das ist ein interessantes Buch.* — È un libro interessante.
+  - *Ich kaufe den roten Pullover.* — Compro il maglione rosso.
+  - *Sie wohnt in einer kleinen Wohnung.* — Abita in un piccolo appartamento.
+  - *Ich trinke gern kalte Milch.* — Bevo volentieri latte freddo.
+  - *Mit meinem alten Auto fahre ich nach Rom.* — Con la mia vecchia macchina vado a Roma.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano l'aggettivo concorda per genere e numero ma di solito **segue il nome** (*un libro interessante*); in tedesco **precede il nome** e porta
+    una desinenza che dipende **anche dal caso** (*einem alten Mann*).
+  - Si inserisce la desinenza anche nel predicato (**\*Das Haus ist große**): italiano concorda (*la casa è grande*), tedesco **no**.
+  - **-en è la desinenza più frequente**; si usa invece *-e* per tutto: **\*in einer kleine Wohnung** → *in einer kleinen Wohnung*.
+  - Dopo *ein* al nominativo maschile serve *-er*, al neutro *-es*: **\*ein guten Mann** → *ein guter Mann*; **\*ein gute Buch** → *ein gutes Buch*.
+  - I generi non coincidono con l'italiano: *la luna piena → der volle Mond*, *il latte caldo → die heiße Milch*.
+examples:
+  - {de: "Das ist ein interessantes Buch.", it: "È un libro interessante."}
+  - {de: "Ich kaufe den roten Pullover.", it: "Compro il maglione rosso."}
+  - {de: "Sie wohnt in einer kleinen Wohnung.", it: "Abita in un piccolo appartamento."}
+  - {de: "Ich trinke gern kalte Milch.", it: "Bevo volentieri latte freddo."}
+  - {de: "Mit meinem alten Auto fahre ich nach Rom.", it: "Con la mia vecchia macchina vado a Roma."}

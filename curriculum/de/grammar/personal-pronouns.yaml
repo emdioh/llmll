@@ -1,0 +1,52 @@
+id: gram:personal-pronouns
+title_it: "Pronomi personali: nominativo, accusativo, dativo"
+title_en: "Personal pronouns: nominative, accusative, dative"
+level: A1
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  case: [nom, akk, dat]
+  person: [ich, du, er, sie-sg, es, wir, ihr, sie-pl, Sie]
+  error_type: [wrong-case, wrong-gender-reference, word-order-pronoun]
+reference_it: |
+  ## Regola
+
+  | | Nominativo | Accusativo | Dativo |
+  |---|---|---|---|
+  | io | ich | mich | mir |
+  | tu | du | dich | dir |
+  | lui | er | ihn | ihm |
+  | lei | sie | sie | ihr |
+  | esso (neutro) | es | es | ihm |
+  | noi | wir | uns | uns |
+  | voi | ihr | euch | euch |
+  | loro | sie | sie | ihnen |
+  | Lei (cortesia) | Sie | Sie | Ihnen |
+
+  - Il pronome segue il **genere grammaticale** del sostantivo a cui si riferisce, anche per le cose:
+    *Der Tisch ist neu. **Er** ist teuer.* (non *es*).
+  - Ordine nella frase: i pronomi vengono prima dei sostantivi; con due pronomi: **accusativo prima del dativo**
+    (*Ich gebe **es ihm***); con due sostantivi: **dativo prima dell'accusativo** (*Ich gebe dem Mann das Buch*).
+  - Le forme *mich/dich* sono accusativo, *mir/dir* dativo: *Ich sehe dich. Ich helfe dir. Wie geht es dir?*
+
+  ## Esempi
+  - *Ich sehe ihn jeden Tag.* — Lo vedo ogni giorno.
+  - *Sie schenkt mir ein Buch.* — Mi regala un libro.
+  - *Kannst du uns helfen?* — Puoi aiutarci?
+  - *Ich gebe es ihr.* — Lo do a lei.
+  - *Der Kaffee ist heiß. Er schmeckt mir.* — Il caffè è caldo. Mi piace.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano i pronomi clitici (*lo, gli, mi*) stanno prima del verbo: in tedesco **non si mettono** davanti al verbo
+    (**\*Ich ihn sehe**). Si dice *Ich sehe ihn*.
+  - L'italiano ha forme diverse per accusativo e dativo di 3ª persona (*lo/gli*, *la/le*): il tedesco ha *ihn, sie, es / ihm, ihr, ihm*.
+    Non confondere *ihn* (lo) con *ihm* (gli) e *sie* (la) con *ihr* (le).
+  - Le cose hanno **genere**: *il tavolo → er*, *la lampada → sie*, *il libro → es*, non sempre come in italiano
+    (*la luna → er*, perché *der Mond*).
+  - *Sie* maiuscolo = Lei di cortesia, *sie* minuscolo = lei o loro (dal contesto e dal verbo).
+  - Si dice *Wie geht es dir?* (dativo), come l'italiano *Come ti va?*, ma non **\*Wie gehst du?**
+examples:
+  - {de: "Ich sehe ihn jeden Tag.", it: "Lo vedo ogni giorno."}
+  - {de: "Sie schenkt mir ein Buch.", it: "Mi regala un libro."}
+  - {de: "Kannst du uns helfen?", it: "Puoi aiutarci?"}
+  - {de: "Ich gebe es ihr.", it: "Lo do a lei."}
+  - {de: "Wie geht es Ihnen?", it: "Come sta?"}

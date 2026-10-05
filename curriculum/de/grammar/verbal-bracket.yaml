@@ -1,0 +1,43 @@
+id: gram:verbal-bracket
+title_it: "Parentesi verbale (Satzklammer): seconda parte del verbo in fondo"
+title_en: "Verbal bracket: second verb part at the end"
+level: A1
+requires: ["gram:adverb-fronting", "gram:separable-verbs", "gram:modal-verbs"]
+diagnostic_tags:
+  bracket_type: [modal-infinitive, separable-particle, perfekt-participle, werden-infinitive, passive-participle]
+  error_type: [second-part-not-at-end, second-part-after-object, nicht-position, tekamolo-order]
+reference_it: |
+  ## Regola
+  Nella frase principale il **verbo coniugato è in posizione 2** e la **seconda parte del verbo** (infinito, participio, prefisso separabile)
+  sta **in ultima posizione**. Tra le due parti c'è il "campo centrale" con tutti gli altri elementi (**parentesi verbale**).
+
+  | Pos. 1 | Pos. 2 (verbo coniugato) | Campo centrale | Fine |
+  |---|---|---|---|
+  | Ich | muss | morgen früh | aufstehen. |
+  | Ich | stehe | morgen früh | auf. |
+  | Wir | haben | gestern einen Film | gesehen. |
+  | Er | will | seine Freunde in Berlin | besuchen. |
+  | Sie | wird | nächste Woche | kommen. |
+
+  - Nel campo centrale l'ordine usuale è **Tempo – Modo – Luogo** (*TeKaMoLo*): *Ich fahre **morgen** (Te) **mit dem Zug** (Ka/Mo) **nach Berlin** (Lo).*
+  - **nicht** sta di norma prima della parte finale: *Ich habe ihn **nicht** gesehen. Ich kann heute **nicht** kommen.*
+  - Pronomi prima dei sostantivi: *Ich habe **ihm** das Buch gegeben.*
+
+  ## Esempi
+  - *Ich muss heute lange arbeiten.* — Devo lavorare a lungo oggi.
+  - *Wir haben gestern einen Film gesehen.* — Ieri abbiamo visto un film.
+  - *Der Zug fährt um 8 Uhr ab.* — Il treno parte alle 8.
+  - *Ich möchte am Wochenende meine Freunde besuchen.* — Nel fine settimana vorrei andare a trovare i miei amici.
+  - *Sie wird bald nach Italien fahren.* — Presto andrà in Italia.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il participio e l'infinito stanno **subito dopo l'ausiliare** (*ho visto un film*, *devo andare a casa*). In tedesco vanno in fondo:
+    **\*Ich habe gesehen einen Film** → *Ich habe einen Film gesehen*; **\*Ich muss gehen nach Hause** → *Ich muss nach Hause gehen*.
+  - Il prefisso separabile non può restare attaccato al verbo (**\*Ich anrufe dich**).
+  - L'ordine di tempo e luogo è più rigido in tedesco: di solito il tempo prima del luogo (*heute in Berlin*).
+  - Per le frasi lunghe, il lettore italiano si sente "perso": bisogna tenere in mente il verbo finale.
+examples:
+  - {de: "Ich muss heute lange arbeiten.", it: "Devo lavorare a lungo oggi."}
+  - {de: "Wir haben gestern einen Film gesehen.", it: "Ieri abbiamo visto un film."}
+  - {de: "Der Zug fährt um 8 Uhr ab.", it: "Il treno parte alle 8."}
+  - {de: "Ich möchte am Wochenende meine Freunde besuchen.", it: "Nel fine settimana vorrei andare a trovare i miei amici."}

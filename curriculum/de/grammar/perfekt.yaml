@@ -1,0 +1,60 @@
+id: gram:perfekt
+title_it: "Perfekt con haben e sein"
+title_en: "Perfect tense with haben and sein"
+level: A2
+requires: ["gram:verbal-bracket", "gram:praesens"]
+diagnostic_tags:
+  aux: [haben, sein]
+  partizip: [regular-ge-t, irregular-ge-en, separable-ge-inside, inseparable-no-ge, ieren-no-ge, mixed-ge-t-vowel-change]
+  error_type: [wrong-auxiliary, wrong-partizip-form, partizip-not-at-end, missing-ge, reflexive-auxiliary]
+reference_it: |
+  ## Regola
+  **Perfekt = haben/sein (presente) in posizione 2 + participio II in fondo.** È il passato abituale del parlato.
+
+  | | haben-Perfekt | sein-Perfekt |
+  |---|---|---|
+  | ich | habe gemacht | bin gegangen |
+  | du | hast gemacht | bist gegangen |
+  | er/sie/es | hat gemacht | ist gegangen |
+  | wir | haben gemacht | sind gegangen |
+  | ihr | habt gemacht | seid gegangen |
+  | sie/Sie | haben gemacht | sind gegangen |
+
+  **Formazione del participio II:**
+
+  | tipo | regola | esempi |
+  |---|---|---|
+  | regolare | ge- + radice + -t | machen → **ge**mach**t**, lernen → **ge**lern**t**, arbeiten → **ge**arbeit**et** |
+  | irregolare (forte) | ge- + radice (spesso modificata) + -en | gehen → **ge**gang**en**, sehen → **ge**seh**en**, trinken → **ge**trunk**en**, nehmen → **ge**nomm**en**, schreiben → **ge**schrieb**en** |
+  | separabile | prefisso + ge + radice | aufstehen → auf**ge**stand**en**, einkaufen → ein**ge**kauf**t**, anrufen → an**ge**ruf**en** |
+  | inseparabile | senza ge- | besuchen → besucht, verstehen → verstanden, vergessen → vergessen |
+  | verbi in -ieren | senza ge- | studieren → studiert |
+  | misti | ge-…-t con cambio vocale | bringen → gebracht, denken → gedacht, wissen → gewusst |
+
+  **Quale ausiliare?**
+  - **sein** con verbi di **movimento verso una meta** (*gehen, fahren, kommen, fliegen, reisen, laufen*), **cambiamento di stato** (*aufstehen, einschlafen, werden, sterben*) e con *sein, bleiben, passieren*.
+  - **haben** con tutti gli altri verbi, con i verbi transitivi (con accusativo) e con i **riflessivi**.
+
+  Esempi con ausiliare: *Ich **habe** gelernt, **habe** gegessen, **habe** geschlafen* – *Ich **bin** gegangen, **bin** gekommen, **bin** geblieben, **bin** gewesen*.
+
+  ## Esempi
+  - *Ich habe gestern Pizza gegessen.* — Ieri ho mangiato la pizza.
+  - *Wir sind nach Berlin gefahren.* — Siamo andati a Berlino.
+  - *Er hat seine Mutter angerufen.* — Ha telefonato a sua madre.
+  - *Sie ist früh aufgestanden.* — Si è alzata presto.
+  - *Hast du den Film schon gesehen?* — Hai già visto il film?
+
+  ## Errori tipici di chi parla italiano
+  - **Somiglianza utile**: come l'italiano *passato prossimo* (*ho mangiato, sono andato*), il Perfekt usa *haben/sein* (≈ *avere/essere*) + participio.
+  - **Ma l'ausiliare non coincide sempre**: i riflessivi in italiano prendono *essere* (*mi sono lavato*), in tedesco sempre *haben* (*ich habe mich gewaschen*);
+    *ho viaggiato* → *ich **bin** gereist*; *è piaciuto* → *hat gefallen* (haben).
+  - Il participio va **in fondo**: **\*Ich habe gesehen den Film** → *Ich habe den Film gesehen*.
+  - L'accordo del participio con il genere/numero (*le ho viste*) **non esiste** in tedesco.
+  - Il tedesco **non ha il passato remoto**: il Perfekt copre sia *ho fatto* sia *feci* nel parlato.
+  - Dimenticare *ge-* nei separabili (**\*aufstanden**) o aggiungerlo dove non va (**\*gebesucht**).
+examples:
+  - {de: "Ich habe gestern Pizza gegessen.", it: "Ieri ho mangiato la pizza."}
+  - {de: "Wir sind nach Berlin gefahren.", it: "Siamo andati a Berlino."}
+  - {de: "Er hat seine Mutter angerufen.", it: "Ha telefonato a sua madre."}
+  - {de: "Sie ist früh aufgestanden.", it: "Si è alzata presto."}
+  - {de: "Hast du den Film schon gesehen?", it: "Hai già visto il film?"}
