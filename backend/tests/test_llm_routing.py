@@ -252,3 +252,29 @@ def test_app_startup_fails_clearly_without_a_model() -> None:
     config = settings(llm_provider="openai", openai_api_key="k")
     with pytest.raises(LLMConfigError, match="LLMLL_LLM_MODEL"):
         create_app(config)
+
+
+# --- provider/model mix-ups -----------------------------------------------------------------
+
+
+@pytest.mark.parametrize(
+    "provider,key", [("google", "gemini"), ("anthropic", "anthropic"), ("openai", "openai")]
+)
+def test_openrouter_style_id_with_other_provider_is_rejected(provider: str, key: str) -> None:
+    with pytest.raises(LLMConfigError, match="looks like an OpenRouter id"):
+        build(
+            llm_provider=provider,
+            llm_model="anthropic/some-model",
+            **{f"{key}_api_key": "k"},
+        )
+
+
+def test_slashes_allowed_where_valid() -> None:
+    build(llm_provider="openrouter", llm_model="vendor/model", openrouter_api_key="k")
+    build(llm_provider="google", llm_model="models/some-gemini", gemini_api_key="k")
+    build(
+        llm_provider="openai",
+        llm_model="org/model",
+        openai_api_key="k",
+        openai_base_url="https://gateway.example/v1",
+    )

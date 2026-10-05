@@ -90,8 +90,25 @@ def resolve_routes(settings: Settings) -> dict[str, TaskConfig]:
                 "LLMLL_LLM_MODEL (for the default provider) or a 'model' for the task in "
                 "LLMLL_LLM_TASKS"
             )
+        _check_model_matches_provider(task, provider, str(model), settings)
         resolved[task] = cfg.model_copy(update={"provider": provider, "model": str(model)})
     return resolved
+
+
+def _check_model_matches_provider(task: str, provider: str, model: str, settings: Settings) -> None:
+    """Catch the common mix-up of an OpenRouter id (`<vendor>/<model>`) used with another
+    provider, before any (paid) call fails with an opaque "model not found"."""
+    if "/" not in model or provider in ("openrouter", "fake"):
+        return
+    if provider == "google" and model.startswith("models/") and model.count("/") == 1:
+        return  # google-genai accepts the "models/<id>" form
+    if provider == "openai" and settings.openai_base_url:
+        return  # other OpenAI-compatible servers may use slashes in model ids
+    raise LLMConfigError(
+        f"task {task!r}: model {model!r} looks like an OpenRouter id (<vendor>/<model>) but the "
+        f"provider is {provider!r}. Use provider 'openrouter' for that id, or the provider's own "
+        "model id."
+    )
 
 
 def _warn_ignored_settings(settings: Settings, tasks: dict[str, TaskConfig]) -> None:
