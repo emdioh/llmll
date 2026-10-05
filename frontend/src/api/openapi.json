@@ -649,6 +649,341 @@
           }
         }
       }
+    },
+    "/api/texts": {
+      "get": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "List Texts",
+        "operationId": "listTexts",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "$ref": "#/components/schemas/TextSummary"
+                  },
+                  "type": "array",
+                  "title": "Response Listtexts"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Create Text",
+        "operationId": "createText",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTextIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/texts/generate": {
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Generate Text",
+        "operationId": "generateText",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GenerateTextIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/texts/{text_id}": {
+      "get": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Get Text",
+        "operationId": "getText",
+        "parameters": [
+          {
+            "name": "text_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Text Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TextOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/texts/{text_id}/reading": {
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Start Reading",
+        "operationId": "startReading",
+        "parameters": [
+          {
+            "name": "text_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Text Id"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReadingOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reading/{reading_id}/gloss": {
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Gloss Token",
+        "operationId": "glossToken",
+        "parameters": [
+          {
+            "name": "reading_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Reading Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlossIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GlossOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reading/{reading_id}/optin": {
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Optin Token",
+        "operationId": "optinToken",
+        "parameters": [
+          {
+            "name": "reading_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Reading Id"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GlossIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OptinOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reading/{reading_id}/finish": {
+      "post": {
+        "tags": [
+          "reading"
+        ],
+        "summary": "Finish Reading",
+        "operationId": "finishReading",
+        "parameters": [
+          {
+            "name": "reading_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "title": "Reading Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FinishOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1046,6 +1381,47 @@
         "title": "CardPrompt",
         "description": "Prompt shown to the learner. Fields depend on the card type; unused ones are null."
       },
+      "CreateTextIn": {
+        "properties": {
+          "url": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 2000
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Url"
+          },
+          "text": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Text"
+          },
+          "title": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 200
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Title"
+          }
+        },
+        "type": "object",
+        "title": "CreateTextIn"
+      },
       "EvaluationExplainIn": {
         "properties": {
           "item_id": {
@@ -1168,6 +1544,174 @@
           "examples"
         ],
         "title": "ExplanationOut"
+      },
+      "FinishOut": {
+        "properties": {
+          "session_id": {
+            "type": "string",
+            "title": "Session Id"
+          },
+          "exercise": {
+            "$ref": "#/components/schemas/SessionCard"
+          },
+          "implicit_events": {
+            "type": "integer",
+            "title": "Implicit Events"
+          },
+          "candidates": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Candidates"
+          }
+        },
+        "type": "object",
+        "required": [
+          "session_id",
+          "exercise",
+          "implicit_events",
+          "candidates"
+        ],
+        "title": "FinishOut"
+      },
+      "GenerateTextIn": {
+        "properties": {
+          "topic": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Topic"
+          }
+        },
+        "type": "object",
+        "title": "GenerateTextIn"
+      },
+      "GlossIn": {
+        "properties": {
+          "token_index": {
+            "type": "integer",
+            "minimum": 0.0,
+            "title": "Token Index"
+          }
+        },
+        "type": "object",
+        "required": [
+          "token_index"
+        ],
+        "title": "GlossIn"
+      },
+      "GlossOut": {
+        "properties": {
+          "translation": {
+            "type": "string",
+            "title": "Translation"
+          },
+          "lemma": {
+            "type": "string",
+            "title": "Lemma"
+          },
+          "pos": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pos"
+          },
+          "gender": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Gender"
+          },
+          "plural": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plural"
+          },
+          "note": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Note"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "lexicon",
+              "llm"
+            ],
+            "title": "Source"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id"
+          },
+          "word_class": {
+            "type": "string",
+            "enum": [
+              "ignore",
+              "known",
+              "presumed_known",
+              "auto_candidate",
+              "optin",
+              "optin_unlisted",
+              "ignore_compound"
+            ],
+            "title": "Word Class"
+          },
+          "can_optin": {
+            "type": "boolean",
+            "title": "Can Optin"
+          }
+        },
+        "type": "object",
+        "required": [
+          "translation",
+          "lemma",
+          "pos",
+          "gender",
+          "plural",
+          "note",
+          "source",
+          "item_id",
+          "word_class",
+          "can_optin"
+        ],
+        "title": "GlossOut"
       },
       "GlossaryEntry": {
         "properties": {
@@ -1813,6 +2357,52 @@
         ],
         "title": "MemoryOut"
       },
+      "NewWordOut": {
+        "properties": {
+          "lemma": {
+            "type": "string",
+            "title": "Lemma"
+          },
+          "translation": {
+            "type": "string",
+            "title": "Translation"
+          }
+        },
+        "type": "object",
+        "required": [
+          "lemma",
+          "translation"
+        ],
+        "title": "NewWordOut"
+      },
+      "OptinOut": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          },
+          "label": {
+            "type": "string",
+            "title": "Label"
+          },
+          "status": {
+            "type": "string",
+            "title": "Status"
+          },
+          "created": {
+            "type": "boolean",
+            "title": "Created"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id",
+          "label",
+          "status",
+          "created"
+        ],
+        "title": "OptinOut"
+      },
       "PreparedCard": {
         "properties": {
           "exercise_id": {
@@ -1873,7 +2463,8 @@
                 "enum": [
                   "translation",
                   "guided",
-                  "transform"
+                  "transform",
+                  "summary"
                 ]
               },
               {
@@ -1979,6 +2570,30 @@
         ],
         "title": "ProductionAnswerOut"
       },
+      "ReadingOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "text_version_id": {
+            "type": "integer",
+            "title": "Text Version Id"
+          },
+          "started_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Started At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "text_version_id",
+          "started_at"
+        ],
+        "title": "ReadingOut"
+      },
       "SessionCard": {
         "properties": {
           "exercise_id": {
@@ -2039,7 +2654,8 @@
                 "enum": [
                   "translation",
                   "guided",
-                  "transform"
+                  "transform",
+                  "summary"
                 ]
               },
               {
@@ -2225,6 +2841,179 @@
         "type": "object",
         "title": "SettingsUpdate"
       },
+      "TextOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "source_title": {
+            "type": "string",
+            "title": "Source Title"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "source_language": {
+            "type": "string",
+            "title": "Source Language"
+          },
+          "original": {
+            "type": "string",
+            "title": "Original"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "version": {
+            "$ref": "#/components/schemas/VersionOut"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "source_title",
+          "source_url",
+          "source_language",
+          "original",
+          "created_at",
+          "version"
+        ],
+        "title": "TextOut"
+      },
+      "TextSummary": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "source_title": {
+            "type": "string",
+            "title": "Source Title"
+          },
+          "source_url": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Source Url"
+          },
+          "level": {
+            "type": "string",
+            "title": "Level"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          },
+          "reading_count": {
+            "type": "integer",
+            "title": "Reading Count"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "source_title",
+          "source_url",
+          "level",
+          "coverage",
+          "created_at",
+          "reading_count"
+        ],
+        "title": "TextSummary"
+      },
+      "TokenOut": {
+        "properties": {
+          "i": {
+            "type": "integer",
+            "title": "I"
+          },
+          "start": {
+            "type": "integer",
+            "title": "Start"
+          },
+          "end": {
+            "type": "integer",
+            "title": "End"
+          },
+          "lemma": {
+            "type": "string",
+            "title": "Lemma"
+          },
+          "is_alpha": {
+            "type": "boolean",
+            "title": "Is Alpha"
+          },
+          "word_class": {
+            "type": "string",
+            "enum": [
+              "ignore",
+              "known",
+              "presumed_known",
+              "auto_candidate",
+              "optin",
+              "optin_unlisted",
+              "ignore_compound"
+            ],
+            "title": "Word Class"
+          },
+          "item_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Item Id"
+          },
+          "parts": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Parts"
+          }
+        },
+        "type": "object",
+        "required": [
+          "i",
+          "start",
+          "end",
+          "lemma",
+          "is_alpha",
+          "word_class",
+          "item_id",
+          "parts"
+        ],
+        "title": "TokenOut"
+      },
       "ValidationError": {
         "properties": {
           "loc": {
@@ -2264,6 +3053,65 @@
           "type"
         ],
         "title": "ValidationError"
+      },
+      "VersionOut": {
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "Id"
+          },
+          "level": {
+            "type": "string",
+            "title": "Level"
+          },
+          "title": {
+            "type": "string",
+            "title": "Title"
+          },
+          "body": {
+            "type": "string",
+            "title": "Body"
+          },
+          "coverage": {
+            "type": "number",
+            "title": "Coverage"
+          },
+          "attempt": {
+            "type": "integer",
+            "title": "Attempt"
+          },
+          "tokens": {
+            "items": {
+              "$ref": "#/components/schemas/TokenOut"
+            },
+            "type": "array",
+            "title": "Tokens"
+          },
+          "new_words": {
+            "items": {
+              "$ref": "#/components/schemas/NewWordOut"
+            },
+            "type": "array",
+            "title": "New Words"
+          },
+          "notes": {
+            "type": "string",
+            "title": "Notes"
+          }
+        },
+        "type": "object",
+        "required": [
+          "id",
+          "level",
+          "title",
+          "body",
+          "coverage",
+          "attempt",
+          "tokens",
+          "new_words",
+          "notes"
+        ],
+        "title": "VersionOut"
       }
     }
   }

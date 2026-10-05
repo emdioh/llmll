@@ -211,6 +211,126 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/texts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Texts */
+        get: operations["listTexts"];
+        put?: never;
+        /** Create Text */
+        post: operations["createText"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/texts/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Generate Text */
+        post: operations["generateText"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/texts/{text_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Text */
+        get: operations["getText"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/texts/{text_id}/reading": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Start Reading */
+        post: operations["startReading"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/reading/{reading_id}/gloss": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Gloss Token */
+        post: operations["glossToken"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/reading/{reading_id}/optin": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Optin Token */
+        post: operations["optinToken"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/reading/{reading_id}/finish": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Finish Reading */
+        post: operations["finishReading"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -323,6 +443,15 @@ export interface components {
             /** Examples */
             examples?: components["schemas"]["CardExample"][] | null;
         };
+        /** CreateTextIn */
+        CreateTextIn: {
+            /** Url */
+            url?: string | null;
+            /** Text */
+            text?: string | null;
+            /** Title */
+            title?: string | null;
+        };
         /** EvaluationExplainIn */
         EvaluationExplainIn: {
             /** Item Id */
@@ -362,6 +491,55 @@ export interface components {
              * @default false
              */
             cached: boolean;
+        };
+        /** FinishOut */
+        FinishOut: {
+            /** Session Id */
+            session_id: string;
+            exercise: components["schemas"]["SessionCard"];
+            /** Implicit Events */
+            implicit_events: number;
+            /** Candidates */
+            candidates: string[];
+        };
+        /** GenerateTextIn */
+        GenerateTextIn: {
+            /** Topic */
+            topic?: string | null;
+        };
+        /** GlossIn */
+        GlossIn: {
+            /** Token Index */
+            token_index: number;
+        };
+        /** GlossOut */
+        GlossOut: {
+            /** Translation */
+            translation: string;
+            /** Lemma */
+            lemma: string;
+            /** Pos */
+            pos: string | null;
+            /** Gender */
+            gender: string | null;
+            /** Plural */
+            plural: string | null;
+            /** Note */
+            note: string | null;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "lexicon" | "llm";
+            /** Item Id */
+            item_id: string | null;
+            /**
+             * Word Class
+             * @enum {string}
+             */
+            word_class: "ignore" | "known" | "presumed_known" | "auto_candidate" | "optin" | "optin_unlisted" | "ignore_compound";
+            /** Can Optin */
+            can_optin: boolean;
         };
         /** GlossaryEntry */
         GlossaryEntry: {
@@ -571,6 +749,24 @@ export interface components {
             /** Mastery */
             mastery: number;
         };
+        /** NewWordOut */
+        NewWordOut: {
+            /** Lemma */
+            lemma: string;
+            /** Translation */
+            translation: string;
+        };
+        /** OptinOut */
+        OptinOut: {
+            /** Item Id */
+            item_id: string;
+            /** Label */
+            label: string;
+            /** Status */
+            status: string;
+            /** Created */
+            created: boolean;
+        };
         /**
          * PreparedCard
          * @description Result of `prepare`; `fallback_cards` are flashcard intros when generation failed.
@@ -595,7 +791,7 @@ export interface components {
              */
             status: "pending" | "ready" | "answered" | "failed";
             /** Subtype */
-            subtype?: ("translation" | "guided" | "transform") | null;
+            subtype?: ("translation" | "guided" | "transform" | "summary") | null;
             /** Instructions */
             instructions?: string | null;
             /** Glossary */
@@ -629,6 +825,18 @@ export interface components {
             /** Evaluation Id */
             evaluation_id: number;
         };
+        /** ReadingOut */
+        ReadingOut: {
+            /** Id */
+            id: number;
+            /** Text Version Id */
+            text_version_id: number;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+        };
         /**
          * SessionCard
          * @description A card of the session.
@@ -657,7 +865,7 @@ export interface components {
              */
             status: "pending" | "ready" | "answered" | "failed";
             /** Subtype */
-            subtype?: ("translation" | "guided" | "transform") | null;
+            subtype?: ("translation" | "guided" | "transform" | "summary") | null;
             /** Instructions */
             instructions?: string | null;
             /** Glossary */
@@ -702,6 +910,69 @@ export interface components {
             /** Production Slots */
             production_slots?: number | null;
         };
+        /** TextOut */
+        TextOut: {
+            /** Id */
+            id: number;
+            /** Source Title */
+            source_title: string;
+            /** Source Url */
+            source_url: string | null;
+            /** Source Language */
+            source_language: string;
+            /** Original */
+            original: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            version: components["schemas"]["VersionOut"];
+        };
+        /** TextSummary */
+        TextSummary: {
+            /** Id */
+            id: number;
+            /** Title */
+            title: string;
+            /** Source Title */
+            source_title: string;
+            /** Source Url */
+            source_url: string | null;
+            /** Level */
+            level: string;
+            /** Coverage */
+            coverage: number;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+            /** Reading Count */
+            reading_count: number;
+        };
+        /** TokenOut */
+        TokenOut: {
+            /** I */
+            i: number;
+            /** Start */
+            start: number;
+            /** End */
+            end: number;
+            /** Lemma */
+            lemma: string;
+            /** Is Alpha */
+            is_alpha: boolean;
+            /**
+             * Word Class
+             * @enum {string}
+             */
+            word_class: "ignore" | "known" | "presumed_known" | "auto_candidate" | "optin" | "optin_unlisted" | "ignore_compound";
+            /** Item Id */
+            item_id: string | null;
+            /** Parts */
+            parts: string[];
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -714,6 +985,27 @@ export interface components {
             input?: unknown;
             /** Context */
             ctx?: Record<string, never>;
+        };
+        /** VersionOut */
+        VersionOut: {
+            /** Id */
+            id: number;
+            /** Level */
+            level: string;
+            /** Title */
+            title: string;
+            /** Body */
+            body: string;
+            /** Coverage */
+            coverage: number;
+            /** Attempt */
+            attempt: number;
+            /** Tokens */
+            tokens: components["schemas"]["TokenOut"][];
+            /** New Words */
+            new_words: components["schemas"]["NewWordOut"][];
+            /** Notes */
+            notes: string;
         };
     };
     responses: never;
@@ -1144,6 +1436,255 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ExplanationOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    listTexts: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TextSummary"][];
+                };
+            };
+        };
+    };
+    createText: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateTextIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TextOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    generateText: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateTextIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TextOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getText: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                text_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TextOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    startReading: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                text_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadingOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    glossToken: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                reading_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GlossIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    optinToken: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                reading_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GlossIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OptinOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    finishReading: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                reading_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FinishOut"];
                 };
             };
             /** @description Validation Error */
