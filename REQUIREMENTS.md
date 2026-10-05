@@ -1,7 +1,7 @@
 # LLMLL — Requisiti
 
 > Documento vivo. Raccoglie le decisioni prese finora e le domande ancora aperte.
-> Stato: bozza v0.2 (ottobre 2026).
+> Stato: bozza v0.3 (ottobre 2026).
 
 ## 1. Visione
 
@@ -87,6 +87,11 @@ Again / Hard / Good / Easy.
 
 La v1 deve anche tenere traccia del **numero di osservazioni**, per distinguere "3 su 3" da "30 su 30".
 
+**Punti grammaticali:** ogni frase in cui il punto compare è un'osservazione per
+quell'item, qualunque sia il contesto. La padronanza si calcola sull'item; in parallelo
+si tiene un **conteggio di errori per tag diagnostico**, che serve a scegliere spiegazioni
+ed esercizi di recupero e a decidere se promuovere un sotto-caso a item (§4.1).
+
 ### 4.3 Dall'esito dell'esercizio al voto FSRS
 Il voto non è un'autovalutazione: lo deriva l'app.
 
@@ -122,6 +127,10 @@ stato "ripassato" usandolo.
   personale, ma un prodotto commerciale richiede un curriculum proprio (§13).
 - Il curriculum si costruisce **offline** (con l'aiuto dell'LLM, con revisione) e
   l'LLM **non** lo inventa durante le sessioni.
+- **Formato:** file YAML nel repo, uno per area (lessico per livello, punti grammaticali,
+  costrutti). Ogni voce: id stabile, livello, prerequisiti, tag di interferenza, e per i
+  punti grammaticali un breve testo di riferimento (§9). Uno script li valida e li importa
+  nel DB. L'LLM scrive bozze, la revisione è umana; la storia è quella di git.
 
 ## 6. Valutazione iniziale
 
@@ -170,8 +179,14 @@ Ogni esercizio dichiara quali item mette alla prova e con quale peso.
   lemmatizzazione (es. spaCy `de`), almeno il 95–98% dei token deve essere già noto.
   Se l'LLM non rispetta la soglia, si rigenera. Le parole nuove sono poche e scelte.
 - **Glossario al tocco:** traduzione nel contesto, lemma, genere, plurale. Toccare una
-  parola è un segnale: per quell'item vale come ripasso fallito o assistito. Le parole
-  nuove si possono aggiungere al corpus.
+  parola è un segnale: per quell'item vale come ripasso fallito o assistito.
+- **Parole nuove nel corpus:**
+  - **automaticamente** se il lemma supera una soglia di frequenza d'uso generale
+    (es. tra i primi ~5000 lemmi; fonte candidata: libreria `wordfreq`), con un tetto
+    per articolo;
+  - **su richiesta** (un tocco) per tutte le altre.
+  - **Esclusi:** nomi propri; **composti trasparenti** (`Klimaschutzgesetz`) se le
+    parti sono già note: si scompongono e si ripassano le parti, non il composto.
 - **Dopo la lettura:** 1–2 domande di comprensione e/o un breve riassunto o commento da
   scrivere. Così la lettura alimenta gli esercizi di produzione.
 - **Testi generati da zero**, con le parole da ripassare, come alternativa quando non c'è
@@ -194,7 +209,18 @@ Ogni esercizio dichiara quali item mette alla prova e con quale peso.
 - **Doppio controllo:** LanguageTool (open source, buone regole per il tedesco) come
   verifica deterministica di morfologia e accordi. Se LanguageTool e l'LLM non sono
   d'accordo, la valutazione è **incerta** e pesa meno sullo stato.
-- **Pulsante "secondo me era giusto":** le contestazioni finiscono in un log per la revisione.
+- **Pulsante "secondo me era giusto" (contestazione):**
+  - la contestazione passa a un **`ContestResolver`**, un punto di estensione con
+    un'interfaccia fissa: riceve la valutazione contestata e restituisce
+    *accettata / respinta / parziale* (con eventuale valutazione corretta);
+  - **v1: implementazione "accetta sempre".** L'aggiornamento di memoria e padronanza
+    dovuto all'errore viene annullato e la risposta conta come uso corretto;
+  - in futuro: rivalutazione con un modello più forte, verifica con LanguageTool,
+    coda di revisione per un madrelingua;
+  - ogni contestazione e la sua risoluzione restano nel log: sono i casi più preziosi
+    per misurare il correttore.
+  - Per poter annullare, lo stato degli item si ricalcola dagli **eventi** (event log),
+    non si sovrascrive soltanto.
 - **Log completo** di ogni valutazione (input, output, versione del prompt e del modello).
   Diventa il dataset per misurare il correttore; da far controllare a campione a un madrelingua.
 
@@ -219,10 +245,11 @@ Con 1–2 ore a settimana in modo irregolare, il problema principale è **l'arre
   - importanza dell'item (frequenza, prerequisito di altri).
 - **Introduzione di item nuovi limitata dal budget di tempo.** Indicativamente 5–8 per
   sessione, meno se c'è arretrato.
-- **Composizione tipica di una sessione:**
-  - ripassi in scadenza (flashcard ed esercizi);
-  - 1–2 esercizi di produzione;
-  - oppure una sessione di lettura.
+- **Due tipi di sessione**, scelti dall'utente:
+  - **Ripasso (~10 minuti):** ripassi in scadenza fino a un tetto (~15), poi 1–2 frasi
+    da produrre, poi 2–3 item nuovi se avanza tempo.
+  - **Lettura (durata libera):** un articolo, con breve riassunto o commento finale.
+- Le proporzioni si tarano con l'uso.
 
 ## 11. Piattaforma e stack
 
@@ -280,7 +307,6 @@ Costo dell'LLM trascurabile per un singolo utente; da rivalutare per il prodotto
 
 ## 15. Domande aperte
 
-- Come stimare la padronanza di un punto grammaticale a partire da prove su item diversi?
-- Fonti di articoli definitive.
-- Formato e strumenti per scrivere il curriculum.
-- Peso relativo di flashcard, produzione e lettura in una sessione.
+- Fonti di articoli definitive: da decidere quando si aggiungono i feed automatici
+  (in v1 si incolla URL o testo).
+- Soglia esatta di frequenza e tetto per articolo per l'aggiunta automatica di parole.
