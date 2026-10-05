@@ -15,6 +15,7 @@ import Feedback from "./cards/Feedback";
 import GrammarIntroCard from "./cards/GrammarIntroCard";
 import ProductionExerciseCard from "./cards/ProductionExerciseCard";
 import ProductionFeedback from "./cards/ProductionFeedback";
+import QueuePanel from "./QueuePanel";
 
 interface Stats {
   reviewed: number;
@@ -107,18 +108,15 @@ export default function SessionView() {
     );
   }
 
+  /** Functional update: prefetch results may have landed since this render. */
   function advance(nextStats: Stats) {
-    if (state.kind !== "running") return;
     setResult(null);
-    if (state.index + 1 >= state.cards.length) {
-      setState({
-        kind: "summary",
-        stats: nextStats,
-        total: state.cards.length,
-      });
-    } else {
-      setState({ ...state, index: state.index + 1 });
-    }
+    setState((prev) => {
+      if (prev.kind !== "running") return prev;
+      return prev.index + 1 >= prev.cards.length
+        ? { kind: "summary", stats: nextStats, total: prev.cards.length }
+        : { ...prev, index: prev.index + 1 };
+    });
   }
 
   async function answer(
@@ -165,6 +163,7 @@ export default function SessionView() {
       <section>
         <h1>Session</h1>
         <p>A short review session: new words and cards that are due.</p>
+        <QueuePanel />
         {error && <p role="alert">{error}</p>}
         <button
           type="button"

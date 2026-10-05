@@ -1,4 +1,4 @@
-import type { MemoryEntry } from "./api/client";
+import type { ContestResult, MemoryEntry } from "./api/client";
 
 export function nextDue(memory: MemoryEntry[]): Date | null {
   const dues = memory
@@ -26,3 +26,10 @@ export const STATUS_LABELS: Record<string, string> = {
   introduced: "Learning",
   suspended: "Suspended",
 };
+
+/** Message shown after a contest was resolved. */
+export function contestMessage(result: ContestResult): string {
+  const { verdict, rationale } = result.contest;
+  if (verdict === "accepted") return "Ok, conteggiato come corretto.";
+  return rationale || "Ok, contestazione registrata.";
+}

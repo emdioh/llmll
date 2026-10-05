@@ -40,6 +40,10 @@ describe("App", () => {
     let created: unknown = null;
     mockApi({
       "GET /api/learner": () => ({ status: 404, body: { detail: "none" } }),
+      "GET /api/queue": {
+        budget: { lemmas_left: 0, grammar_left: 0, backlog: 0 },
+        next: [],
+      },
       "POST /api/learner": ({ body }) => {
         created = body;
         return { status: 201, body: { ...LEARNER, level: "B1" } };
@@ -58,6 +62,12 @@ describe("App", () => {
     await user.selectOptions(screen.getByLabelText("Your German level"), "B1");
     await user.click(screen.getByRole("button", { name: "Start learning" }));
 
+    // The placement test is offered after setup and can be skipped.
+    expect(
+      await screen.findByRole("heading", { name: "Placement test" }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Quick placement test/)).toBeInTheDocument();
+    await user.click(screen.getByRole("button", { name: "Skip" }));
     expect(
       await screen.findByRole("heading", { name: "Session" }),
     ).toBeInTheDocument();

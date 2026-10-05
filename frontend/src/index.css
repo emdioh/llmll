@@ -747,3 +747,35 @@ h1 {
     bottom: 0;
   }
 }
+
+button.link {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: var(--accent, #2563eb);
+  text-decoration: underline;
+  font: inherit;
+  font-size: 0.875rem;
+  cursor: pointer;
+}
+
+.contest {
+  margin-top: 12px;
+}
+
+.queue-summary {
+  margin: 12px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  font-size: 0.75rem;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+}

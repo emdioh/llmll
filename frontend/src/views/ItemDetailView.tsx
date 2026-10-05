@@ -1,6 +1,6 @@
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { Link, useParams } from "react-router";
-import { getItem } from "../api/client";
+import { getItem, optinItem, optoutItem } from "../api/client";
 import { formatDue, STATUS_LABELS } from "../format";
 import { useApi } from "../useApi";
 import MasteryBar from "./MasteryBar";
@@ -12,10 +12,87 @@ function renderValue(v: unknown): string {
   return JSON.stringify(v);
 }
 
+function OptControls({
+  status,
+  source,
+  busy,
+  error,
+  onOptin,
+  onOptout,
+}: {
+  status: string | null;
+  source: string | null;
+  busy: boolean;
+  error: string | null;
+  onOptin: () => void;
+  onOptout: () => void;
+}) {
+  // Items that are already learned or presumed known cannot be opted in or out.
+  if (status === "introduced" || status === "presumed_known") return null;
+  const queuedByYou = status === "candidate" && source === "optin";
+  return (
+    <div className="row">
+      {status === "suspended" && (
+        <p className="muted">You asked not to be taught this.</p>
+      )}
+      {queuedByYou && <p className="muted">Queued: you chose to learn this.</p>}
+      {!queuedByYou && (
+        <button
+          type="button"
+          className="btn primary"
+          disabled={busy}
+          onClick={onOptin}
+        >
+          Learn this
+        </button>
+      )}
+      {status !== "suspended" && (
+        <button
+          type="button"
+          className="btn"
+          disabled={busy}
+          onClick={onOptout}
+        >
+          Don&apos;t teach me this
+        </button>
+      )}
+      {error && <p role="alert">{error}</p>}
+    </div>
+  );
+}
+
 export default function ItemDetailView() {
   const { id = "" } = useParams();
   const load = useCallback(() => getItem(id), [id]);
   const state = useApi(id, load);
+  const [override, setOverride] = useState<{
+    id: string;
+    status: string;
+    source: string | null;
+  } | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [optError, setOptError] = useState<string | null>(null);
+
+  async function opt(action: typeof optinItem) {
+    setBusy(true);
+    setOptError(null);
+    try {
+      const r = await action(id);
+      setOverride({ id, status: r.status, source: r.candidate_source });
+    } catch (err) {
+      setOptError(err instanceof Error ? err.message : String(err));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  const effective =
+    override?.id === id
+      ? { status: override.status, source: override.source }
+      : {
+          status: state.status === "ok" ? state.data.status : null,
+          source: state.status === "ok" ? state.data.candidate_source : null,
+        };
 
   return (
     <section>
@@ -31,9 +108,20 @@ export default function ItemDetailView() {
           <h1 lang="de">{state.data.label}</h1>
           <p>
             {state.data.translation_it} · {state.data.kind} · {state.data.level}{" "}
-            · {state.data.status ? STATUS_LABELS[state.data.status] : "—"}
+            ·{" "}
+            {effective.status
+              ? (STATUS_LABELS[effective.status] ?? effective.status)
+              : "—"}
             {state.data.suspended ? " · suspended" : ""}
           </p>
+          <OptControls
+            status={effective.status}
+            source={effective.source}
+            busy={busy}
+            error={optError}
+            onOptin={() => opt(optinItem)}
+            onOptout={() => opt(optoutItem)}
+          />
           <h2>Memory</h2>
           {state.data.memory.length === 0 ? (
             <p className="muted">Not practised yet.</p>

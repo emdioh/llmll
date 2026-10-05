@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { MemoryRouter } from "react-router";
 import { describe, expect, it, vi } from "vitest";
 import type { Learner } from "../api/client";
 import { LearnerContext } from "../learnerContext";
@@ -13,7 +14,9 @@ function renderView(setLearner = vi.fn()) {
     <LearnerContext.Provider
       value={{ learner: LEARNER as Learner, setLearner }}
     >
-      <SettingsView />
+      <MemoryRouter>
+        <SettingsView />
+      </MemoryRouter>
     </LearnerContext.Provider>,
   );
   return setLearner;

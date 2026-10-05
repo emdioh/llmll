@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import {
   getHealth,
@@ -194,6 +195,11 @@ export default function SettingsView() {
           {saving ? "Saving…" : "Save"}
         </button>
       </form>
+      <h2>Placement test</h2>
+      <p>A short test (≤5 min) to re-estimate your level.</p>
+      <Link to="/placement" className="btn">
+        Re-run placement test
+      </Link>
       <p className="status" role="status">
         {health.kind === "loading" && "Backend: checking…"}
         {health.kind === "ok" &&

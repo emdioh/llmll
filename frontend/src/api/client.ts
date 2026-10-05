@@ -159,3 +159,49 @@ export const optinToken = (readingId: number, tokenIndex: number) =>
   } satisfies Schemas["GlossIn"]);
 export const finishReading = (readingId: number) =>
   request<FinishResult>("POST", `/api/reading/${readingId}/finish`);
+
+export type Queue = Schemas["QueueOut"];
+export type QueueEntry = Schemas["QueueEntry"];
+export type OptStatus = Schemas["OptStatusOut"];
+export type ContestResult = Schemas["ContestResultOut"];
+export type ContestRecord = Schemas["ContestOut"];
+export type ContestItemOutcome = Schemas["ContestItemOutcome"];
+export type Placement = Schemas["PlacementOut"];
+export type PlacementFinish = Schemas["PlacementFinishOut"];
+
+export const getQueue = () => request<Queue>("GET", "/api/queue");
+export const optinItem = (itemId: string) =>
+  request<OptStatus>("POST", `/api/items/${encodeURIComponent(itemId)}/optin`);
+export const optoutItem = (itemId: string) =>
+  request<OptStatus>("POST", `/api/items/${encodeURIComponent(itemId)}/optout`);
+
+/** Contests an evaluation: the whole answer, or only `itemIds` when given. */
+export const contestEvaluation = (
+  evaluationId: number,
+  itemIds: string[] = [],
+  reason?: string,
+) =>
+  request<ContestResult>("POST", `/api/evaluations/${evaluationId}/contest`, {
+    item_ids: itemIds,
+    reason: reason?.trim() ? reason.trim() : null,
+  } satisfies Schemas["ContestIn"]);
+/** Only needed for flashcard attempts recorded before M4 (no evaluation id). */
+export const contestAttempt = (
+  attemptId: number,
+  itemIds: string[] = [],
+  reason?: string,
+) =>
+  request<ContestResult>("POST", `/api/attempts/${attemptId}/contest`, {
+    item_ids: itemIds,
+    reason: reason?.trim() ? reason.trim() : null,
+  } satisfies Schemas["ContestIn"]);
+export const listContests = (limit = 50) =>
+  request<ContestRecord[]>("GET", `/api/contests?limit=${limit}`);
+
+export const startPlacement = () =>
+  request<Placement>("POST", "/api/placement");
+export const finishPlacement = (placementId: string) =>
+  request<PlacementFinish>(
+    "POST",
+    `/api/placement/${encodeURIComponent(placementId)}/finish`,
+  );

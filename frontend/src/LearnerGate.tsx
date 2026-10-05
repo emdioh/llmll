@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactNode } from "react";
+import { useNavigate } from "react-router";
 import { ApiError, getLearner, type Learner } from "./api/client";
 import { LearnerContext } from "./learnerContext";
 import Onboarding from "./views/Onboarding";
@@ -13,6 +14,7 @@ type State =
 export default function LearnerGate({ children }: { children: ReactNode }) {
   const [state, setState] = useState<State>({ kind: "loading" });
   const [attempt, setAttempt] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     let cancelled = false;
@@ -65,7 +67,11 @@ export default function LearnerGate({ children }: { children: ReactNode }) {
     return (
       <main className="content gate">
         <Onboarding
-          onDone={(learner) => setState({ kind: "ready", learner })}
+          onDone={(learner) => {
+            setState({ kind: "ready", learner });
+            // Offer the (skippable) placement test right after setup.
+            navigate("/placement");
+          }}
         />
       </main>
     );

@@ -146,8 +146,7 @@ describe("SessionView production flow", () => {
     const later = screen.getByRole("button", {
       name: /Secondo me era giusto/,
     });
-    expect(later).toBeDisabled();
-    expect(later).toHaveAttribute("title", "Available soon");
+    expect(later).toBeEnabled();
 
     await user.click(screen.getByRole("button", { name: "Finish" }));
     expect(
