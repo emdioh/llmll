@@ -132,6 +132,32 @@ The app has no user accounts; on a public server a single shared access token pr
    (`docker compose stop app && docker compose cp app:/data/llmll.db ./backup.db`).
 4. Check `GET /api/health`: `"auth": "enabled"` confirms that the token is active.
 
+### From GitHub with Railway (works from a phone browser)
+
+The repo has a `railway.json` (Dockerfile build, health check on `/api/health`), and the container
+listens on the `PORT` the platform provides. Sizing: the app needs ~150 MB idle and ~500 MB once
+the reading feature has loaded spaCy, so give it **at least 1 GB of RAM**; LanguageTool is
+optional (grading works without it) and needs ~1 GB more.
+
+1. railway.com → sign in with GitHub → **New Project → Deploy from GitHub repo** → pick this repo.
+   In the service's **Settings → Source**, choose the branch to deploy.
+2. **Variables** — add:
+   - the LLM settings and key, e.g. `LLMLL_LLM_PROVIDER=openrouter`, `LLMLL_LLM_MODEL=<id>`,
+     `OPENROUTER_API_KEY=…` (or `ANTHROPIC_API_KEY=…`);
+   - `LLMLL_ACCESS_TOKEN` = a long random value (a password manager can generate one) —
+     **required**, otherwise anyone with the URL can use your API credits;
+   - `LLMLL_COOKIE_SECURE=true` (Railway serves HTTPS).
+3. **Volume**: right-click/long-press the service → **Attach volume**, mount path **`/data`**
+   (the SQLite database lives there; without a volume every deploy erases your progress).
+4. **Settings → Networking → Generate domain**. Open it, log in with the access token, and
+   "Add to Home screen" to install the app.
+5. Optional LanguageTool: **New → Docker image** `erikvl87/languagetool`, then on the app set
+   `LLMLL_LANGUAGETOOL_URL=http://<languagetool service private domain>:8010`.
+
+Every push to the chosen branch redeploys; migrations and the curriculum import run at start.
+Your data is the single file `/data/llmll.db` on the volume: enable the platform's volume
+backups if available, and keep an occasional copy of that file.
+
 ## Scripts
 
 Common tasks live in [`scripts/`](scripts/) (Bash). They find the repo root and load `.env`

@@ -27,4 +27,4 @@ ENV LLMLL_FRONTEND_DIST=/app/frontend_dist \
     LLMLL_DATABASE_URL=sqlite:////data/llmll.db
 VOLUME /data
 EXPOSE 8000
-CMD ["sh", "-c", "alembic upgrade head && python -m app.cli import-curriculum --path /app/curriculum/de && uvicorn --factory app.main:create_app --host 0.0.0.0 --port 8000"]
+CMD ["sh", "-c", "alembic upgrade head && python -m app.cli import-curriculum --path /app/curriculum/de && uvicorn --factory app.main:create_app --host 0.0.0.0 --port ${PORT:-8000}"]
