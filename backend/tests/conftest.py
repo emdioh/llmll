@@ -72,3 +72,11 @@ def curriculum_client(client: TestClient, migrated_settings: Settings, clock: Cl
     """A client whose database already holds the fixture curriculum."""
     import_fixture(migrated_settings, when=clock.now)
     return client
+
+
+@pytest.fixture(autouse=True)
+def _eval_results_in_tmp(monkeypatch: pytest.MonkeyPatch, tmp_path_factory) -> None:  # type: ignore[no-untyped-def]
+    """eval-grader saves every run by default: keep test runs out of evals/results/."""
+    import app.cli
+
+    monkeypatch.setattr(app.cli, "RESULTS_DIR", tmp_path_factory.mktemp("eval-results"))
