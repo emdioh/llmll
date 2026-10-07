@@ -1,0 +1,152 @@
+{
+  "run": {
+    "started_at": "2026-10-07T07:19:19+00:00",
+    "label": null,
+    "git": {
+      "commit": "a259135",
+      "dirty": true
+    },
+    "cases_fingerprint": "9e482e4c01db",
+    "n_cases": 3
+  },
+  "config": {
+    "cases": 3,
+    "repeat": 1,
+    "llm": "openrouter",
+    "grader": "openrouter/~vendor/model-latest",
+    "models": [
+      "~vendor/model-latest"
+    ],
+    "prompt_versions": [
+      "v1"
+    ],
+    "reconcile_versions": [
+      "r1-6d8d02ea"
+    ],
+    "languagetool": "recorded"
+  },
+  "summary": {
+    "n": 3,
+    "overall_accuracy": 0.3333333333333333,
+    "precision": null,
+    "recall": 0.0,
+    "f1": null,
+    "false_positive_rate": 0.0,
+    "n_correct_cases": 1,
+    "attribution_accuracy": null,
+    "tag_accuracy": null,
+    "correct_use_recall": 1.0,
+    "failed_runs": 0,
+    "aborted": false,
+    "interrupted": false,
+    "completed_runs": 3,
+    "failures": [],
+    "consistency_overall": null,
+    "consistency_error_items": null
+  },
+  "by_category": {
+    "correct_reference": {
+      "n": 1,
+      "overall_accuracy": 1.0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "n_correct_cases": 1,
+      "attribution_accuracy": null,
+      "tag_accuracy": null,
+      "correct_use_recall": 1.0
+    },
+    "italian_error": {
+      "n": 1,
+      "overall_accuracy": 0.0,
+      "precision": null,
+      "recall": 0.0,
+      "f1": null,
+      "false_positive_rate": null,
+      "n_correct_cases": 0,
+      "attribution_accuracy": null,
+      "tag_accuracy": null,
+      "correct_use_recall": null
+    },
+    "off_task": {
+      "n": 1,
+      "overall_accuracy": 0.0,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": null,
+      "n_correct_cases": 0,
+      "attribution_accuracy": null,
+      "tag_accuracy": null,
+      "correct_use_recall": null
+    }
+  },
+  "cost": {
+    "tokens": {
+      "input": 3,
+      "output": 3,
+      "cache_read": 0,
+      "cache_write": 0
+    },
+    "calls": 3,
+    "latency_ms_mean": 0.0,
+    "latency_ms_max": 0
+  },
+  "cases": [
+    {
+      "id": "ref-01",
+      "category": "correct_reference",
+      "expected_overall": "correct",
+      "runs": [
+        {
+          "overall": "correct",
+          "errors": [],
+          "overall_ok": true,
+          "flagged": false,
+          "true_positives": 0,
+          "latency_ms": 0,
+          "input_tokens": 1,
+          "output_tokens": 1
+        }
+      ],
+      "consistency": null
+    },
+    {
+      "id": "ita-10",
+      "category": "italian_error",
+      "expected_overall": "major_errors",
+      "runs": [
+        {
+          "overall": "correct",
+          "errors": [],
+          "overall_ok": false,
+          "flagged": false,
+          "true_positives": 0,
+          "latency_ms": 0,
+          "input_tokens": 1,
+          "output_tokens": 1
+        }
+      ],
+      "consistency": null
+    },
+    {
+      "id": "off-02",
+      "category": "off_task",
+      "expected_overall": "off_task",
+      "runs": [
+        {
+          "overall": "correct",
+          "errors": [],
+          "overall_ok": false,
+          "flagged": false,
+          "true_positives": 0,
+          "latency_ms": 0,
+          "input_tokens": 1,
+          "output_tokens": 1
+        }
+      ],
+      "consistency": null
+    }
+  ]
+}

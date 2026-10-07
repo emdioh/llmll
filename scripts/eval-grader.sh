@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 # Measure the grader on the annotated cases (costs API credits: ~70 calls per run).
-# Loads .env, starts LanguageTool if Docker is available, writes a timestamped JSON report.
+# Loads .env, starts LanguageTool if Docker is available; every run is saved to
+# backend/evals/results/ (compare with scripts/eval-compare.sh). Use --label "note" to tag it.
 #
 #   scripts/eval-grader.sh                                   # configured provider/model
 #   scripts/eval-grader.sh --provider openrouter --model '<vendor>/<model>'
-#   scripts/eval-grader.sh --provider anthropic --model claude-sonnet-5-5 --repeat 2
+#   scripts/eval-grader.sh --provider anthropic --model claude-sonnet-5-5 --label baseline
 #
 # Any extra arguments are passed to `app.cli eval-grader` (see --help).
 source "$(dirname "$0")/_lib.sh"
@@ -20,9 +21,4 @@ if [[ " $* " != *" --no-languagetool "* ]]; then
   fi
 fi
 
-mkdir -p "$ROOT/evals-reports"
-out="$ROOT/evals-reports/grader-$(date +%Y%m%d-%H%M%S).json"
-status=0
-(cd "$BACKEND" && uv run python -m app.cli eval-grader --out "$out" ${extra[@]+"${extra[@]}"} "$@") || status=$?
-[[ -f "$out" ]] && echo "report: $out"
-exit "$status"
+(cd "$BACKEND" && exec uv run python -m app.cli eval-grader ${extra[@]+"${extra[@]}"} "$@")

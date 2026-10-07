@@ -13,7 +13,7 @@ Use `--repeat 1` for routine checks and `--repeat 3` only to measure consistency
 ```sh
 cd backend
 export ANTHROPIC_API_KEY=sk-ant-...        # or the key of the provider you compare; without any key the fake LLM is used: numbers are meaningless
-uv run python -m app.cli eval-grader --out evals/report.json
+uv run python -m app.cli eval-grader --label baseline
 ```
 
 Options:
@@ -26,7 +26,10 @@ Options:
 | `--provider P` | Provider for `grade_sentence` (`anthropic`, `openai`, `google`, `openrouter`), overriding the configuration. Needs that provider's API key and, except for Anthropic, `--model`. |
 | `--model M` | Model for `grade_sentence` (with `--provider`, or for the default provider). |
 | `--repeat N` | Grade every case N times; reports agreement across runs (consistency). |
-| `--out FILE` | Write the full JSON report (summary, per category, per case and run, token cost). |
+| `--label TEXT` | Note saved with the run and in its file name, e.g. `"prompt v2"`. |
+| `--results-dir DIR` | Where every run is saved (default `evals/results`, see below). |
+| `--no-save` | Don't save this run. |
+| `--out FILE` | Also write the full JSON report to FILE. |
 | `--max-fp RATE` | Fail (exit 1) when the false-positive rate on correct answers exceeds RATE (default 0.05). |
 | `--no-languagetool` | Never query LanguageTool; use the matches recorded in the cases (if any). |
 | `--quiet` | No per-case progress lines. |
@@ -47,6 +50,20 @@ known to the evaluated learner. LanguageTool is used when `LLMLL_LANGUAGETOOL_UR
 otherwise the matches recorded in a case (`lt_matches`) stand in for it. As in the app, diagnostic
 tags are offered for the exercise's targets only.
 
+## Saved runs and comparing them
+
+Every run is saved to [`evals/results/`](results/) as one JSON file named
+`<UTC date-time>_<provider-model>[_<label>][_partial].json`, with the git commit, the label and a
+fingerprint of the case set (compare metrics only between runs with the same fingerprint).
+
+```sh
+uv run python -m app.cli eval-compare               # table of the last 20 runs
+uv run python -m app.cli eval-compare baseline v2   # two runs side by side + changed cases
+```
+
+Runs are picked by path or by any unique part of the file name (`scripts/eval-compare.sh` does
+the same from the repo root).
+
 ## Comparing providers
 
 `--provider` and `--model` override the `grade_sentence` route, so the same cases can be run on
@@ -54,10 +71,11 @@ several providers; the report records the result in `config.llm` (provider), `co
 (`provider/model`) and `config.models`:
 
 ```sh
-uv run python -m app.cli eval-grader --provider anthropic --out evals/anthropic.json
-uv run python -m app.cli eval-grader --provider openai --model <model id> --out evals/openai.json
-uv run python -m app.cli eval-grader --provider google --model <gemini model id> --out evals/gemini.json
-uv run python -m app.cli eval-grader --provider openrouter --model <vendor>/<model> --out evals/or.json
+uv run python -m app.cli eval-grader --provider anthropic
+uv run python -m app.cli eval-grader --provider openai --model <model id>
+uv run python -m app.cli eval-grader --provider google --model <gemini model id>
+uv run python -m app.cli eval-grader --provider openrouter --model <vendor>/<model>
+uv run python -m app.cli eval-compare --last 4      # the four runs side by side
 ```
 
 Token counts are those the provider reports (for OpenAI-compatible APIs the input count includes

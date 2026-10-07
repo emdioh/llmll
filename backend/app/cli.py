@@ -14,6 +14,7 @@ from app.config import Settings, get_settings
 from app.curriculum.importer import import_curriculum
 from app.curriculum.loader import CurriculumError, load_curriculum
 from app.evals.cases import DEFAULT_CASES_DIR
+from app.evals.results import RESULTS_DIR
 from app.llm.config import PROVIDERS
 from app.main import create_app
 from app.services.learner import projection_config, settings_of
@@ -160,7 +161,10 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
     except LLMConfigError as exc:
         print(f"error: {exc}", file=sys.stderr)
         return 1
+    from app.evals.results import run_metadata, save_report
+
     languagetool = None if args.no_languagetool else LanguageToolClient(settings.languagetool_url)
+    started_at = datetime.now(UTC)
     report = run_eval(
         cases,
         llm,
@@ -170,12 +174,16 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         repeat=max(args.repeat, 1),
         progress=None if args.quiet else eval_progress_printer(),
     )
+    report = {"run": run_metadata(cases, args.label, started_at), **report}
     print(format_summary(report))
+    if not args.no_save:
+        saved = save_report(report, Path(args.results_dir))
+        print(f"\nsaved: {saved}   (compare runs: python -m app.cli eval-compare)")
     if args.out:
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
         out.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-        print(f"\nwrote {out}")
+        print(f"wrote {out}")
     if report["summary"].get("interrupted"):
         return 130
     if report["summary"]["failed_runs"]:
@@ -185,6 +193,27 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
     if fp is not None and fp > args.max_fp:
         print(f"false-positive rate {fp:.3f} exceeds --max-fp {args.max_fp}", file=sys.stderr)
         return 1
+    return 0
+
+
+def cmd_eval_compare(args: argparse.Namespace) -> int:
+    from app.evals.results import format_case_diff, format_runs_table, load_runs, select_runs
+
+    runs = load_runs(Path(args.results_dir))
+    try:
+        chosen = select_runs(runs, args.runs) if args.runs else runs[-args.last :]
+    except (LookupError, OSError, ValueError) as exc:
+        print(f"error: {exc}", file=sys.stderr)
+        return 1
+    if not chosen:
+        print(f"no saved runs in {args.results_dir} (run eval-grader first)")
+        return 0
+    print(format_runs_table(chosen))
+    if len(chosen) == 2:
+        print()
+        print(format_case_diff(*chosen))
+    elif args.runs is None or len(args.runs) != 2:
+        print("\ntip: name two runs (any unique part of the file name) to see per-case differences")
     return 0
 
 
@@ -397,7 +426,16 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_eval.add_argument("--repeat", type=int, default=1, help="runs per case (consistency)")
     p_eval.add_argument("--quiet", action="store_true", help="no per-case progress lines")
-    p_eval.add_argument("--out", help="write the JSON report here")
+    p_eval.add_argument(
+        "--label", help="short note saved with the run, e.g. 'prompt v2' (also in the file name)"
+    )
+    p_eval.add_argument(
+        "--results-dir",
+        default=str(RESULTS_DIR),
+        help="where every run is saved (default: backend/evals/results)",
+    )
+    p_eval.add_argument("--no-save", action="store_true", help="don't save this run")
+    p_eval.add_argument("--out", help="also write the JSON report to this path")
     p_eval.add_argument(
         "--max-fp", type=float, default=0.05, help="max false-positive rate on correct answers"
     )
@@ -407,6 +445,16 @@ def main(argv: list[str] | None = None) -> int:
         help="do not query LanguageTool; use the matches recorded in the cases",
     )
     p_eval.set_defaults(func=cmd_eval_grader)
+
+    p_cmp = sub.add_parser(
+        "eval-compare", help="compare saved eval-grader runs (table; per-case diff for two runs)"
+    )
+    p_cmp.add_argument(
+        "runs", nargs="*", default=None, help="runs to compare: file paths or unique name parts"
+    )
+    p_cmp.add_argument("--last", type=int, default=20, help="without runs: show the last N")
+    p_cmp.add_argument("--results-dir", default=str(RESULTS_DIR))
+    p_cmp.set_defaults(func=cmd_eval_compare)
 
     p_contests = sub.add_parser(
         "export-contests", help="write resolved contests as draft evaluation cases"

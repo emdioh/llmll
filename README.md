@@ -174,7 +174,8 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/replay.sh` | Rebuild memory projections from the event log |
 | `scripts/languagetool.sh [stop]` | Start/stop a local LanguageTool on :8010 (Docker) |
 | `scripts/check-llm.sh [--call]` | Which provider/model/key each task uses (keys not printed); `--call` makes one test request |
-| `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool and a timestamped report in `evals-reports/` (costs API credits) |
+| `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool; every run is saved to `backend/evals/results/` (`--label` to tag it; costs API credits) |
+| `scripts/eval-compare.sh [runs]` | Compare saved runs: table of recent runs, or two runs side by side with per-case differences |
 | `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
 | `source scripts/env.fish [--force]` | fish shell: load `.env` into the current shell (bash/zsh: `set -a; . ./.env; set +a`) |
 | `scripts/up.sh [logs\|down]` | Full app with Docker Compose on :8000 |
