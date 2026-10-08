@@ -203,7 +203,15 @@ projection config, so changing them changes `projection_version` and triggers a 
 `new_item_budget(events_last_7d, backlog, settings) → {lemmas: n, grammar: n}`.
 Rolling 7-day window with no carry-over, reduced in proportion to the backlog.
 
-### 5.5 Classifying words met while reading (R§7.3)
+### 5.5 Progress (M8, `app/domain/progress.py`)
+Study days and streaks in the learner's time zone (`timezone` setting), activity per day, memory
+states (`learning` < 1 day stability, `young` < 21 days, `mature` ≥ 21), due forecast, progress
+per CEFR level, and the **mastery trajectory** of an item: its non-voided events replayed with
+`projection.apply`, recording the state after each one. Study days come from attempts and
+finished readings (a contest never removes a study day); placement counts for item state only.
+Details: `docs/design/M8-progress.md`.
+
+### 5.6 Classifying words met while reading (R§7.3)
 `classify(lemma, learner_state, current_level) → known | presumed_known | auto_candidate | optin | ignore`.
 Proper nouns and transparent compounds with known parts go to `ignore` (or point to their parts).
 
@@ -261,7 +269,7 @@ Proper nouns and transparent compounds with known parts go to `ignore` (or point
 ### 6.3 Reading
 1. **Ingestion:** URL → extraction with `trafilatura`; if that fails, pasted text.
 2. **Analysis:** spaCy (`de_core_news_md` or similar) for lemmas and POS, compound
-   splitting, word classification (§5.5).
+   splitting, word classification (§5.6).
 3. **Simplification** (`llm.simplify_text`). It receives the text, the target level, the
    list of allowed words (known + candidates) and a reference style. Then:
    - coverage is measured;
@@ -451,8 +459,11 @@ Removed ids become `suspended`; they are not deleted.
 
 ## 10. Frontend
 
-- **Views:** Session (flashcards + exercises), Reading (text with tap-to-gloss),
-  Corpus (item state, filters), Grammar (on-demand explanations), Settings.
+- **Views:** Session (flashcards + exercises), Reading (text with tap-to-gloss), Progress
+  (overview, levels, grammar/words with item history, lessons taken; it replaced the former
+  Corpus view), Grammar (reference + on-demand explanations), Settings. On wide screens only,
+  when the backend runs with `LLMLL_DEBUG=true`: Debug (live LLM exchanges, also as a drawer).
+- **Charts:** small inline-SVG components, no chart library.
 - **PWA:** manifest and service worker so it can be installed on a phone. No offline
   mode in v1, because grading requires the LLM.
 - **Phone first:** 10-minute sessions designed for a small screen.
@@ -495,6 +506,9 @@ All milestones are implemented; designs and deviations are in `docs/design/M*.md
 | **M3** | Reading: ingestion, simplification with coverage, glossary, candidates | Reading articles |
 | **M4** | Candidate queue and weekly budget, contests, initial assessment | Full requirements loop |
 | **M5** | Grader dataset and evaluation script, FSRS optimisation | Quality measurement |
+| **M6** | Multiple LLM providers (Anthropic, OpenAI, Gemini, OpenRouter), per-task routing | Provider choice and comparison |
+| **M7** | LLM observability: per-call timing breakdown, `llm-stats`, live debug pane | Diagnosing slowness |
+| **M8** | Progress review: streaks, activity, levels, item history, lessons taken | Seeing progress |
 
 ## 14. Open decisions
 
