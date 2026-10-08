@@ -73,6 +73,10 @@ async function request<T>(
 export const getHealth = () =>
   request<Schemas["HealthResponse"]>("GET", "/api/health");
 
+export type DebugCallRow = Schemas["DebugCallOut"];
+export const getDebugCalls = (limit = 50) =>
+  request<DebugCallRow[]>("GET", `/api/debug/llm/calls?limit=${limit}`);
+
 export type AuthStatus = Schemas["AuthStatus"];
 export type Stats = Schemas["StatsOut"];
 export const getAuthStatus = () =>
