@@ -8,6 +8,7 @@ import {
   type Settings,
 } from "../api/client";
 import { useAuth } from "../authContext";
+import { browserTimeZone } from "../timezone";
 import { useLearner } from "../learnerContext";
 import StatsSection from "./StatsSection";
 import type { Schemas } from "../api/client";
@@ -91,6 +92,18 @@ function validate(f: Field, raw: string): string | null {
   return null;
 }
 
+/** IANA zone names for the picker; empty when the browser cannot list them. */
+function supportedZones(): string[] {
+  const intl = Intl as typeof Intl & {
+    supportedValuesOf?: (key: string) => string[];
+  };
+  try {
+    return intl.supportedValuesOf?.("timeZone") ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export default function SettingsView() {
   const { learner, setLearner } = useLearner();
   const auth = useAuth();
@@ -100,6 +113,9 @@ export default function SettingsView() {
       FIELDS.map((f) => [f.key, String(learner.settings[f.key])]),
     ),
   );
+  const [timezone, setTimezone] = useState(learner.settings.timezone || "UTC");
+  const zones = supportedZones();
+  const browserZone = browserTimeZone();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -138,9 +154,12 @@ export default function SettingsView() {
 
     setSaving(true);
     try {
-      const body = Object.fromEntries(
-        FIELDS.map((f) => [f.key, Number(values[f.key])]),
-      );
+      const body = {
+        ...Object.fromEntries(
+          FIELDS.map((f) => [f.key, Number(values[f.key])]),
+        ),
+        timezone: timezone.trim() || "UTC",
+      };
       let next = learner;
       if (level !== learner.level) next = await updateLearner({ level });
       const settings = await updateSettings(body);
@@ -192,6 +211,46 @@ export default function SettingsView() {
             )}
           </label>
         ))}
+        <div className="field">
+          <label htmlFor="timezone">Time zone</label>
+          {zones.length > 0 ? (
+            <select
+              id="timezone"
+              value={timezone}
+              onChange={(e) => setTimezone(e.target.value)}
+            >
+              {[...new Set(["UTC", timezone, ...zones])].sort().map((z) => (
+                <option key={z} value={z}>
+                  {z}
+                </option>
+              ))}
+            </select>
+          ) : (
+            <input
+              id="timezone"
+              type="text"
+              value={timezone}
+              placeholder="Europe/Rome"
+              onChange={(e) => setTimezone(e.target.value)}
+            />
+          )}
+          <span className="muted">
+            Days (streaks, calendar) follow this zone.
+            {browserZone && browserZone !== timezone && (
+              <>
+                {" "}
+                Your browser is in {browserZone}.{" "}
+                <button
+                  type="button"
+                  className="link"
+                  onClick={() => setTimezone(browserZone)}
+                >
+                  Use it
+                </button>
+              </>
+            )}
+          </span>
+        </div>
         {saveError && <p role="alert">{saveError}</p>}
         {saved && <p role="status">Settings saved.</p>}
         <button type="submit" className="btn primary" disabled={saving}>

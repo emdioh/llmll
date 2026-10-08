@@ -10,7 +10,14 @@ const LABELS = {
   error: "Incorrect",
 } as const;
 
-export default function Feedback({ result }: { result: FlashcardAnswer }) {
+export default function Feedback({
+  result,
+  readOnly = false,
+}: {
+  result: FlashcardAnswer;
+  /** History view: no contest button. */
+  readOnly?: boolean;
+}) {
   const { expected } = result;
   const [form, setForm] = useState(false);
   const [contest, setContest] = useState<ContestResult | null>(null);
@@ -43,7 +50,8 @@ export default function Feedback({ result }: { result: FlashcardAnswer }) {
           <em>{expected.example.it}</em>
         </p>
       )}
-      {(result.evaluation_id != null || result.attempt_id != null) &&
+      {!readOnly &&
+        (result.evaluation_id != null || result.attempt_id != null) &&
         result.outcome !== "correct" && (
           <div className="contest">
             {contest ? (

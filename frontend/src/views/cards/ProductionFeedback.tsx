@@ -28,9 +28,12 @@ function tone(outcome: ProductionAnswer["outcome"]): string {
 export default function ProductionFeedback({
   answer,
   result,
+  readOnly = false,
 }: {
   answer: string;
   result: ProductionAnswer;
+  /** History view: no contest buttons and no explanation requests. */
+  readOnly?: boolean;
 }) {
   const [open, setOpen] = useState<number | null>(null);
   // null: no form; [] : whole answer; otherwise the contested item.
@@ -112,7 +115,7 @@ export default function ProductionFeedback({
               <p>
                 <strong>{it.label}</strong>:{" "}
                 {ITEM_LABELS[contested.get(it.item_id) ?? it.outcome]}
-                {!contest && it.outcome !== "correct" && (
+                {!readOnly && !contest && it.outcome !== "correct" && (
                   <>
                     {" "}
                     <button
@@ -126,47 +129,55 @@ export default function ProductionFeedback({
                   </>
                 )}
               </p>
-              <ExplanationPanel
-                evaluationId={result.evaluation_id}
-                itemId={it.item_id}
-                auto={it.needs_remediation}
-              />
+              {!readOnly && (
+                <ExplanationPanel
+                  evaluationId={result.evaluation_id}
+                  itemId={it.item_id}
+                  auto={it.needs_remediation}
+                />
+              )}
             </li>
           ))}
         </ul>
       )}
-      <div className="contest">
-        {contest ? (
-          <p role="status">{contestMessage(contest)}</p>
-        ) : target ? (
-          <>
-            {target.length > 0 && (
-              <p className="muted">
-                Contesting:{" "}
-                {result.items
-                  .filter((i) => target.includes(i.item_id))
-                  .map((i) => i.label)
-                  .join(", ")}
-              </p>
-            )}
-            <ContestForm
-              evaluationId={result.evaluation_id}
-              itemIds={target}
-              onResolved={(r) => {
-                setContest(r);
-                setTarget(null);
-              }}
-              onCancel={() => setTarget(null)}
-            />
-          </>
-        ) : (
-          result.outcome !== "correct" && (
-            <button type="button" className="btn" onClick={() => setTarget([])}>
-              Secondo me era giusto
-            </button>
-          )
-        )}
-      </div>
+      {!readOnly && (
+        <div className="contest">
+          {contest ? (
+            <p role="status">{contestMessage(contest)}</p>
+          ) : target ? (
+            <>
+              {target.length > 0 && (
+                <p className="muted">
+                  Contesting:{" "}
+                  {result.items
+                    .filter((i) => target.includes(i.item_id))
+                    .map((i) => i.label)
+                    .join(", ")}
+                </p>
+              )}
+              <ContestForm
+                evaluationId={result.evaluation_id}
+                itemIds={target}
+                onResolved={(r) => {
+                  setContest(r);
+                  setTarget(null);
+                }}
+                onCancel={() => setTarget(null)}
+              />
+            </>
+          ) : (
+            result.outcome !== "correct" && (
+              <button
+                type="button"
+                className="btn"
+                onClick={() => setTarget([])}
+              >
+                Secondo me era giusto
+              </button>
+            )
+          )}
+        </div>
+      )}
     </div>
   );
 }

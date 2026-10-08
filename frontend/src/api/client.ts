@@ -225,3 +225,79 @@ export const finishPlacement = (placementId: string) =>
     "POST",
     `/api/placement/${encodeURIComponent(placementId)}/finish`,
   );
+
+// ---- Progress (M8) ----
+export type ProgressSummary = Schemas["SummaryOut"];
+export type ProgressActivity = Schemas["ActivityOut"];
+export type ActivityDay = Schemas["DayOut"];
+export type WeekAccuracy = Schemas["WeekAccuracyOut"];
+export type LevelProgress = Schemas["LevelProgressOut"];
+export type ForecastDay = Schemas["ForecastDayOut"];
+export type ProgressItemRow = Schemas["ProgressItemRow"];
+export type ProgressItemList = Schemas["ProgressItemList"];
+export type ProgressItemDetail = Schemas["ProgressItemDetail"];
+export type FacetDetail = Schemas["FacetDetailOut"];
+export type TrajectoryPoint = Schemas["TrajectoryPointOut"];
+export type AnswerCard = Schemas["AnswerCardOut"];
+export type HistoryList = Schemas["HistoryList"];
+export type HistoryRow = Schemas["HistoryRow"];
+export type SessionDetail = Schemas["SessionDetailOut"];
+export type ReadingDetail = Schemas["ReadingDetailOut"];
+export type PracticeResult = Schemas["PracticeOut"];
+export type MemoryState = ProgressItemRow["state"];
+export type ProgressSort =
+  "weakest" | "strongest" | "recent" | "due" | "errors";
+
+export interface ProgressItemQuery {
+  kind?: ItemKind;
+  sort?: ProgressSort;
+  q?: string;
+  level?: string;
+  state?: MemoryState | "";
+  limit?: number;
+  offset?: number;
+}
+
+export const getProgressSummary = () =>
+  request<ProgressSummary>("GET", "/api/progress/summary");
+export const getProgressActivity = (days = 140) =>
+  request<ProgressActivity>("GET", `/api/progress/activity?days=${days}`);
+export const getProgressLevels = () =>
+  request<LevelProgress[]>("GET", "/api/progress/levels");
+export const getProgressForecast = (days = 14) =>
+  request<ForecastDay[]>("GET", `/api/progress/forecast?days=${days}`);
+export function listProgressItems(query: ProgressItemQuery) {
+  const params = new URLSearchParams();
+  for (const [key, value] of Object.entries(query)) {
+    if (value !== undefined && value !== "") params.set(key, String(value));
+  }
+  return request<ProgressItemList>(
+    "GET",
+    `/api/progress/items?${params.toString()}`,
+  );
+}
+export const getProgressItem = (id: string) =>
+  request<ProgressItemDetail>(
+    "GET",
+    `/api/progress/items/${encodeURIComponent(id)}`,
+  );
+export const practiceItem = (id: string) =>
+  request<PracticeResult>(
+    "POST",
+    `/api/progress/items/${encodeURIComponent(id)}/practice`,
+  );
+export const getProgressHistory = (limit = 20, offset = 0) =>
+  request<HistoryList>(
+    "GET",
+    `/api/progress/history?limit=${limit}&offset=${offset}`,
+  );
+export const getProgressSession = (id: string) =>
+  request<SessionDetail>(
+    "GET",
+    `/api/progress/history/session/${encodeURIComponent(id)}`,
+  );
+export const getProgressReading = (id: string | number) =>
+  request<ReadingDetail>(
+    "GET",
+    `/api/progress/history/reading/${encodeURIComponent(String(id))}`,
+  );

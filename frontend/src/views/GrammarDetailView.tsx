@@ -77,6 +77,11 @@ export default function GrammarDetailView() {
             {state.data.title_en} · {state.data.level}
           </p>
           {/* The reference text already contains its examples section. */}
+          <p>
+            <Link to={`/progress/items/${encodeURIComponent(id)}`}>
+              Your progress on this point
+            </Link>
+          </p>
           <Markdown>{state.data.reference_it}</Markdown>
           <AskBox id={id} />
         </>

@@ -5,7 +5,8 @@ import { describe, expect, it } from "vitest";
 import type { Learner } from "../api/client";
 import { LearnerContext } from "../learnerContext";
 import { LEARNER, mockApi } from "../test/mockApi";
-import ItemDetailView from "./ItemDetailView";
+import ItemDetail from "./progress/ItemDetail";
+import { progressItem } from "../test/progressFixtures";
 import SessionView from "./SessionView";
 
 const queue = {
@@ -50,29 +51,25 @@ describe("queue summary", () => {
 });
 
 function item(status: string, source: string | null = null) {
-  return {
-    id: "lex:a",
-    kind: "lemma",
-    level: "A2",
-    label: "die Aktie",
-    translation_it: "azione",
-    payload: {},
-    interference: {},
-    requires: [],
-    frequency_zipf: 3,
-    suspended: false,
-    status,
-    candidate_source: source,
-    introduced_at: null,
-    memory: [],
-  };
+  return progressItem(
+    { facets: [], recent_answers: [], tag_errors: [], state: "new" },
+    {
+      id: "lex:a",
+      kind: "lemma",
+      level: "A2",
+      label: "die Aktie",
+      translation_it: "azione",
+      status,
+      candidate_source: source,
+    },
+  );
 }
 
 function renderItem() {
   render(
-    <MemoryRouter initialEntries={["/corpus/lex%3Aa"]}>
+    <MemoryRouter initialEntries={["/progress/items/lex%3Aa"]}>
       <Routes>
-        <Route path="/corpus/:id" element={<ItemDetailView />} />
+        <Route path="/progress/items/:id" element={<ItemDetail />} />
       </Routes>
     </MemoryRouter>,
   );
@@ -81,7 +78,7 @@ function renderItem() {
 describe("opt-in / opt-out", () => {
   it("opts an unseen item out, then back in", async () => {
     mockApi({
-      "GET /api/items/lex%3Aa": item("unseen"),
+      "GET /api/progress/items/lex%3Aa": item("unseen"),
       "POST /api/items/lex%3Aa/optout": {
         item_id: "lex:a",
         status: "suspended",
@@ -114,7 +111,7 @@ describe("opt-in / opt-out", () => {
   });
 
   it("shows no opt buttons for learned items", async () => {
-    mockApi({ "GET /api/items/lex%3Aa": item("introduced") });
+    mockApi({ "GET /api/progress/items/lex%3Aa": item("introduced") });
     renderItem();
     await screen.findByRole("heading", { name: "die Aktie" });
     expect(screen.queryByRole("button", { name: "Learn this" })).toBeNull();
@@ -125,7 +122,7 @@ describe("opt-in / opt-out", () => {
 
   it("shows the server error when opt-out is refused", async () => {
     mockApi({
-      "GET /api/items/lex%3Aa": item("candidate", "wordlist"),
+      "GET /api/progress/items/lex%3Aa": item("candidate", "wordlist"),
       "POST /api/items/lex%3Aa/optout": () => ({
         status: 409,
         body: { detail: "Item is already introduced; it cannot be opted out" },

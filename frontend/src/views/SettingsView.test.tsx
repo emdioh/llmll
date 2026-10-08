@@ -149,6 +149,7 @@ describe("SettingsView", () => {
     const slots = screen.getByLabelText("Written exercises per session");
     await user.clear(slots);
     await user.type(slots, "3");
+    await user.selectOptions(screen.getByLabelText("Time zone"), "Europe/Rome");
     await user.click(screen.getByRole("button", { name: "Save" }));
 
     expect(await screen.findByText("Settings saved.")).toBeInTheDocument();
@@ -160,6 +161,7 @@ describe("SettingsView", () => {
       production_slots: 3,
       review_cap: 15,
       desired_retention: 0.85,
+      timezone: "Europe/Rome",
     });
     expect(setLearner).toHaveBeenCalledWith(
       expect.objectContaining({

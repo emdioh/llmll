@@ -1,17 +1,19 @@
-import { NavLink, Route, Routes } from "react-router";
+import { Navigate, NavLink, Route, Routes, useParams } from "react-router";
 import AuthGate from "./AuthGate";
 import LearnerGate from "./LearnerGate";
 import DebugDrawer, { DebugSpacer } from "./debug/DebugDrawer";
 import { useDebug } from "./debug/debugContext";
 import DebugProvider from "./debug/DebugProvider";
 import LlmBanner from "./LlmBanner";
-import CorpusView from "./views/CorpusView";
+import TimezoneSync from "./TimezoneSync";
 import DebugView from "./views/DebugView";
 import { useMediaQuery, WIDE_SCREEN } from "./useMediaQuery";
 import GrammarDetailView from "./views/GrammarDetailView";
 import GrammarView from "./views/GrammarView";
-import ItemDetailView from "./views/ItemDetailView";
 import PlacementView from "./views/PlacementView";
+import { ReadingDetailView, SessionDetailView } from "./views/progress/History";
+import ItemDetail from "./views/progress/ItemDetail";
+import ProgressView from "./views/progress/ProgressView";
 import ReaderView from "./views/ReaderView";
 import ReadingView from "./views/ReadingView";
 import SessionView from "./views/SessionView";
@@ -20,7 +22,7 @@ import SettingsView from "./views/SettingsView";
 const tabs = [
   { to: "/", label: "Session", end: true },
   { to: "/reading", label: "Reading", end: false },
-  { to: "/corpus", label: "Corpus", end: false },
+  { to: "/progress", label: "Progress", end: false },
   { to: "/grammar", label: "Grammar", end: false },
   { to: "/settings", label: "Settings", end: false },
 ];
@@ -44,6 +46,12 @@ function Nav() {
   );
 }
 
+/** Old corpus links (`/corpus/:id`) now open the progress detail. */
+function CorpusItemRedirect() {
+  const { id = "" } = useParams();
+  return <Navigate to={`/progress/items/${encodeURIComponent(id)}`} replace />;
+}
+
 export default function App() {
   return (
     <div className="shell">
@@ -51,6 +59,7 @@ export default function App() {
       <AuthGate>
         <DebugProvider>
           <LearnerGate>
+            <TimezoneSync />
             <Nav />
             <main className="content">
               <LlmBanner />
@@ -58,8 +67,21 @@ export default function App() {
                 <Route path="/" element={<SessionView />} />
                 <Route path="/reading" element={<ReadingView />} />
                 <Route path="/reading/:textId" element={<ReaderView />} />
-                <Route path="/corpus" element={<CorpusView />} />
-                <Route path="/corpus/:id" element={<ItemDetailView />} />
+                <Route path="/progress" element={<ProgressView />} />
+                <Route path="/progress/items/:id" element={<ItemDetail />} />
+                <Route
+                  path="/progress/history/session/:id"
+                  element={<SessionDetailView />}
+                />
+                <Route
+                  path="/progress/history/reading/:id"
+                  element={<ReadingDetailView />}
+                />
+                <Route
+                  path="/corpus"
+                  element={<Navigate to="/progress?tab=words" replace />}
+                />
+                <Route path="/corpus/:id" element={<CorpusItemRedirect />} />
                 <Route path="/grammar" element={<GrammarView />} />
                 <Route path="/grammar/:id" element={<GrammarDetailView />} />
                 <Route path="/placement" element={<PlacementView />} />

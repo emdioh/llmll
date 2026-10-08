@@ -37,7 +37,7 @@ export default function QueuePanel() {
             <ul id="coming-up" className="list" aria-label="Coming up">
               {next.map((n) => (
                 <li key={n.item_id} className="row-static">
-                  <Link to={`/corpus/${encodeURIComponent(n.item_id)}`}>
+                  <Link to={`/progress/items/${encodeURIComponent(n.item_id)}`}>
                     <span lang="de">{n.label}</span>
                   </Link>{" "}
                   <span className="badge" title="Why it is queued">

@@ -45,6 +45,7 @@ export const LEARNER = {
     review_cap: 15,
     new_per_session: 5,
     production_slots: 2,
+    timezone: "UTC",
   },
 };
 
