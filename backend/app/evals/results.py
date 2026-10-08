@@ -148,6 +148,29 @@ def _pct(value: Any) -> str:
     return "-" if value is None else f"{value * 100:.1f}%"
 
 
+def _sec(ms: Any) -> str:
+    return "-" if ms is None else f"{ms / 1000:.1f}s"
+
+
+def _latency_cells(report: dict[str, Any]) -> list[str]:
+    """p50 / p90 total latency, p50 ttfb, retries, mean reasoning tokens (M7); "-" for runs
+    saved before the latency block existed."""
+    block = report.get("latency")
+    if not block:
+        return ["-"] * 5
+    reasoning = block.get("reasoning_tokens_mean")
+    return [
+        _sec(block["total_ms"]["p50"]),
+        _sec(block["total_ms"]["p90"]),
+        _sec(block["ttfb_ms"]["p50"]),
+        str(block.get("retries", 0)),
+        "-" if reasoning is None else f"{reasoning:.0f}",
+    ]
+
+
+_LATENCY_TITLES = ("lat p50", "lat p90", "ttfb p50", "retries", "reasoning")
+
+
 def _row(run: SavedRun) -> list[str]:
     report = run.report
     cfg, summary, cost = report["config"], report["summary"], report.get("cost", {})
@@ -164,6 +187,7 @@ def _row(run: SavedRun) -> list[str]:
         str(summary.get("failed_runs", 0)),
         f"{tokens.get('input', 0)}/{tokens.get('output', 0)}",
         "-" if latency is None else f"{latency / 1000:.1f}s",
+        *_latency_cells(report),
         meta.get("cases_fingerprint") or "-",
         commit,
     ]
@@ -181,6 +205,7 @@ def format_runs_table(runs: Sequence[SavedRun]) -> str:
         "failed",
         "tokens in/out",
         "latency",
+        *_LATENCY_TITLES,
         "cases",
         "commit",
     ]

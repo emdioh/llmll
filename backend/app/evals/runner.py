@@ -7,13 +7,14 @@ known to the evaluated learner. LanguageTool is used when reachable; otherwise t
 recorded in the case file (when present) stand in for it.
 """
 
+import json
 import logging
 import statistics
 import time
 from collections import defaultdict
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
-from typing import Any, Literal
+from typing import IO, Any, Literal
 
 from app.curriculum.loader import Curriculum
 from app.domain.grader_eval import (
@@ -25,9 +26,10 @@ from app.domain.grader_eval import (
     consistency,
     score_case,
 )
+from app.domain.llm_stats import CallStat, latency_block, tokens_per_s
 from app.domain.reconcile import Evaluation
 from app.evals.cases import GraderCase
-from app.llm.calls import CallRecord
+from app.llm.calls import CallRecord, record_to_dict
 from app.llm.client import LLMClient, LLMError
 from app.llm.types import GradeRequest, TargetContext
 from app.nlp.languagetool import LanguageToolClient
@@ -39,13 +41,22 @@ EXPLANATION_LANGUAGE = "it"
 
 
 class MemoryRecorder:
-    """Collects the records of the LLM calls instead of writing them to the database."""
+    """Collects the records of the LLM calls instead of writing them to the database.
 
-    def __init__(self) -> None:
+    With `trace` (an open text file) every record is also written to it as one JSON line, as it
+    arrives, so an interrupted run keeps what it has (`eval-grader --trace FILE`)."""
+
+    def __init__(self, trace: IO[str] | None = None) -> None:
         self.records: list[CallRecord] = []
+        self._trace = trace
 
     def __call__(self, record: CallRecord) -> int | None:
         self.records.append(record)
+        if self._trace is not None:
+            self._trace.write(
+                json.dumps(record_to_dict(record), ensure_ascii=False, default=str) + "\n"
+            )
+            self._trace.flush()
         return None
 
 
@@ -138,6 +149,8 @@ class Progress:
     error: str | None = None  # the LLM call failed
     latency_ms: int | None = None
     elapsed_s: float = 0.0
+    call: CallRecord | None = None  # the LLM call of this run (timing breakdown, tokens)
+    lt_ms: int | None = None  # LanguageTool time for this case (live LanguageTool only)
 
 
 def run_eval(
@@ -162,6 +175,8 @@ def run_eval(
     scores: list[CaseScore] = []
     scores_by_category: dict[str, list[CaseScore]] = defaultdict(list)
     latencies: list[int] = []
+    call_stats: list[CallStat] = []
+    lt_times: list[int | None] = []
     tokens = {"input": 0, "output": 0, "cache_read": 0, "cache_write": 0}
     versions: set[str] = set()
     models: set[str] = set()
@@ -195,7 +210,11 @@ def run_eval(
     for case in cases:
         if aborted or interrupted:
             break
-        request = grade_request(case, items, _lt_matches(case, languagetool, live_lt))
+        lt_started = time.monotonic()
+        matches = _lt_matches(case, languagetool, live_lt)
+        lt_ms = int((time.monotonic() - lt_started) * 1000) if live_lt else None
+        lt_times.append(lt_ms)
+        request = grade_request(case, items, matches)
         runs: list[dict[str, Any]] = []
         signatures: list[Signature] = []
         for _ in range(repeat):
@@ -218,17 +237,17 @@ def run_eval(
                     logger.exception("unexpected error grading %s", case.id)
                 failures += 1
                 failure_cases[message].append(case.id)
+                failed = _last_record(recorder, before, "grade_sentence")
+                if failed is not None:
+                    call_stats.append(CallStat.of(failed))
                 runs.append({"error": message})
-                emit("done", case, error=message)
+                emit("done", case, error=message, call=failed, lt_ms=lt_ms)
                 if not successes and failures >= abort_after:
                     aborted = True
                     break
                 continue
             successes += 1
-            record = next(
-                (r for r in reversed(recorder.records[before:]) if r.task == "grade_sentence"),
-                None,
-            )
+            record = _last_record(recorder, before, "grade_sentence")
             prediction = prediction_of(evaluation)
             score = score_case(case.answer, case.expectation(), prediction)
             scores.append(score)
@@ -256,7 +275,17 @@ def run_eval(
                     latency_ms=record.latency_ms,
                     input_tokens=record.input_tokens,
                     output_tokens=record.output_tokens,
+                    reasoning_tokens=record.reasoning_tokens,
+                    attempts=record.attempts,
+                    http_statuses=record.http_statuses,
+                    retry_wait_ms=record.retry_wait_ms,
+                    ttfb_ms=record.ttfb_ms,
+                    download_ms=record.download_ms,
+                    overhead_ms=record.overhead_ms,
+                    upstream_provider=record.upstream_provider,
+                    request_chars=record.request_chars,
                 )
+                call_stats.append(CallStat.of(record))
                 latencies.append(record.latency_ms)
                 tokens["input"] += record.input_tokens or 0
                 tokens["output"] += record.output_tokens or 0
@@ -273,6 +302,8 @@ def run_eval(
                 overall_ok=score.overall_ok,
                 n_errors=len(evaluation.errors),
                 latency_ms=record.latency_ms if record is not None else None,
+                call=record,
+                lt_ms=lt_ms,
             )
         agreement = consistency(signatures)
         case_reports.append(
@@ -281,6 +312,7 @@ def run_eval(
                 "category": case.category,
                 "expected_overall": case.expected.overall,
                 "runs": runs,
+                "languagetool_ms": lt_ms,
                 "consistency": (
                     {"overall": agreement[0], "error_items": agreement[1]} if agreement else None
                 ),
@@ -327,8 +359,43 @@ def run_eval(
             "latency_ms_mean": statistics.fmean(latencies) if latencies else None,
             "latency_ms_max": max(latencies) if latencies else None,
         },
+        "latency": latency_block(call_stats, [t for t in lt_times if t is not None]),
         "cases": case_reports,
     }
+
+
+def _last_record(recorder: MemoryRecorder, before: int, task: str) -> CallRecord | None:
+    return next((r for r in reversed(recorder.records[before:]) if r.task == task), None)
+
+
+def _secs(ms: float) -> str:
+    return f"{ms / 1000:.1f}s"
+
+
+def format_breakdown(call: CallRecord, lt_ms: int | None = None) -> str:
+    """Compact timing line of one LLM call, e.g.
+    `llm 12.3s = wait 0.0s + ttfb 12.1s + dl 0.1s | 1 try | out 412 (reasoning 2140) | 34 tok/s
+    | lt 0.2s`. Parts that were not measured are left out."""
+    head = f"llm {_secs(call.latency_ms)}"
+    if call.ttfb_ms is not None and call.retry_wait_ms is not None:
+        head += (
+            f" = wait {_secs(call.retry_wait_ms)} + ttfb {_secs(call.ttfb_ms)}"
+            f" + dl {_secs(call.download_ms or 0)}"
+        )
+    parts = [head]
+    if call.attempts is not None:
+        statuses = ",".join("-" if s is None else str(s) for s in call.http_statuses or [])
+        parts.append("1 try" if call.attempts == 1 else f"{call.attempts} tries ({statuses})")
+    if call.output_tokens is not None:
+        out = f"out {call.output_tokens}"
+        if call.reasoning_tokens:
+            out += f" (reasoning {call.reasoning_tokens})"
+        parts.append(out)
+    if (rate := tokens_per_s(call.output_tokens, call.ttfb_ms)) is not None:
+        parts.append(f"{rate:.0f} tok/s")
+    if lt_ms is not None:
+        parts.append(f"lt {_secs(lt_ms)}")
+    return " | ".join(parts)
 
 
 _HINTS: tuple[tuple[tuple[str, ...], str], ...] = (
@@ -380,6 +447,42 @@ def _pct(value: float | None) -> str:
     return "n/a" if value is None else f"{value * 100:.1f}%"
 
 
+def format_latency_block(block: dict[str, Any] | None) -> list[str]:
+    """The "latency" block of the summary (empty for reports from before M7)."""
+    if not block or not block.get("calls"):
+        return []
+
+    def row(label: str, key: str) -> str:
+        v = block[key]
+        cells = ["-" if v[k] is None else f"{v[k] / 1000:.1f}" for k in ("p50", "p90", "max")]
+        return f"    {label:<14}{cells[0]:>8}{cells[1]:>8}{cells[2]:>8}"
+
+    lines = [
+        "",
+        f"  latency (seconds, {block['calls']} call(s))",
+        f"    {'':<14}{'p50':>8}{'p90':>8}{'max':>8}",
+        row("total", "total_ms"),
+        row("ttfb", "ttfb_ms"),
+        row("retry wait", "retry_wait_ms"),
+    ]
+    if block["languagetool_ms"]["max"] is not None:
+        lines.append(row("languagetool", "languagetool_ms"))
+    statuses = ", ".join(f"{code} x{n}" for code, n in block["retry_statuses"].items())
+    lines.append(f"    retries       {block['retries']}" + (f" ({statuses})" if statuses else ""))
+    tokens = []
+    if block["output_tokens_mean"] is not None:
+        tokens.append(f"mean out {block['output_tokens_mean']:.0f}")
+    if block["reasoning_tokens_mean"] is not None:
+        tokens.append(f"reasoning {block['reasoning_tokens_mean']:.0f}")
+    if block["tokens_per_s_median"] is not None:
+        tokens.append(f"median {block['tokens_per_s_median']:.0f} tok/s")
+    if tokens:
+        lines.append("    tokens        " + ", ".join(tokens))
+    if block["upstream_providers"]:
+        lines.append("    upstream      " + ", ".join(block["upstream_providers"]))
+    return lines
+
+
 def format_summary(report: dict[str, Any]) -> str:
     cfg, s, cost = report["config"], report["summary"], report["cost"]
     lines = [
@@ -405,6 +508,7 @@ def format_summary(report: dict[str, Any]) -> str:
         f"  latency mean/max       "
         f"{'n/a' if cost['latency_ms_mean'] is None else round(cost['latency_ms_mean'])}"
         f"/{cost['latency_ms_max']} ms",
+        *format_latency_block(report.get("latency")),
         "",
         f"  {'category':<18}{'n':>4}{'overall acc':>14}{'FP rate':>10}{'F1':>8}",
     ]

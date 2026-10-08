@@ -6,6 +6,7 @@ from datetime import datetime
 from typing import Any
 
 import anthropic
+import httpx
 import openai
 from google import genai
 from google.genai import types as genai_types
@@ -20,7 +21,9 @@ from app.llm.client import LLMClient
 from app.llm.config import DEFAULT_MODEL, PROVIDERS, TaskConfig, resolve_tasks
 from app.llm.fake import FAKE_MODEL, FakeLLMClient
 from app.llm.google_client import GeminiLLMClient
+from app.llm.live import LiveBroadcaster
 from app.llm.openai_client import OPENROUTER_BASE_URL, OpenAICompatibleLLMClient
+from app.llm.trace import tracing_hooks
 from app.llm.types import (
     ExerciseRequest,
     ExplainRequest,
@@ -36,7 +39,6 @@ from app.llm.types import (
 
 logger = logging.getLogger(__name__)
 
-TIMEOUT_SECONDS = 120.0
 KEY_ENV = {
     "anthropic": "ANTHROPIC_API_KEY",
     "openai": "OPENAI_API_KEY",
@@ -158,9 +160,12 @@ class RoutingLLMClient(TypedTasks):
 
 
 def build_llm_client(
-    settings: Settings, session_factory: sessionmaker[Session], now: Callable[[], datetime]
+    settings: Settings,
+    session_factory: sessionmaker[Session],
+    now: Callable[[], datetime],
+    live: LiveBroadcaster | None = None,
 ) -> LLMClient:
-    return build_llm_client_with_recorder(settings, SqlCallRecorder(session_factory, now))
+    return build_llm_client_with_recorder(settings, SqlCallRecorder(session_factory, now, live))
 
 
 def _build_provider(
@@ -170,9 +175,13 @@ def _build_provider(
     tasks: dict[str, TaskConfig],
     recorder: CallRecorder,
 ) -> Any:
+    timeout = settings.llm_timeout_s
     if provider == "anthropic":
         sdk = anthropic.Anthropic(
-            api_key=key, max_retries=settings.llm_max_retries, timeout=TIMEOUT_SECONDS
+            api_key=key,
+            max_retries=settings.llm_max_retries,
+            timeout=timeout,
+            http_client=anthropic.DefaultHttpxClient(event_hooks=tracing_hooks()),
         )
         return AnthropicLLMClient(
             sdk, tasks, recorder, refusal_fallback=settings.llm_refusal_fallback
@@ -182,7 +191,8 @@ def _build_provider(
             api_key=key,
             base_url=settings.openai_base_url or None,
             max_retries=settings.llm_max_retries,
-            timeout=TIMEOUT_SECONDS,
+            timeout=timeout,
+            http_client=openai.DefaultHttpxClient(event_hooks=tracing_hooks()),
         )
         return OpenAICompatibleLLMClient(sdk, "openai", tasks, recorder)
     if provider == "openrouter":
@@ -196,15 +206,18 @@ def _build_provider(
             base_url=OPENROUTER_BASE_URL,
             default_headers=headers or None,
             max_retries=settings.llm_max_retries,
-            timeout=TIMEOUT_SECONDS,
+            timeout=timeout,
+            http_client=openai.DefaultHttpxClient(event_hooks=tracing_hooks()),
         )
         return OpenAICompatibleLLMClient(sdk, "openrouter", tasks, recorder)
     if provider == "google":
         sdk = genai.Client(
             api_key=key,
             http_options=genai_types.HttpOptions(
-                timeout=int(TIMEOUT_SECONDS * 1000),
+                timeout=int(timeout * 1000),
                 retry_options=genai_types.HttpRetryOptions(attempts=settings.llm_max_retries + 1),
+                # google-genai's sync path uses `httpx` (not `httpx2`): trace through its client.
+                httpx_client=httpx.Client(event_hooks=tracing_hooks(), follow_redirects=True),
             ),
         )
         return GeminiLLMClient(sdk, tasks, recorder)

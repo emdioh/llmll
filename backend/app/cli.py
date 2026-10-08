@@ -2,9 +2,10 @@
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Callable
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -102,9 +103,12 @@ def eval_progress_printer(stream: Any = None) -> Callable[[Any], None]:
             result = f"ok      {p.predicted_overall}"
         else:
             result = f"MISS    expected {p.expected_overall}, got {p.predicted_overall}"
+        from app.evals.runner import format_breakdown
+
+        breakdown = f"  {format_breakdown(p.call, p.lt_ms)}" if p.call is not None else ""
         remaining = (p.elapsed_s / p.run) * (p.total - p.run)
         eta = f"  eta {_duration(remaining)}" if p.run < p.total else ""
-        print(f"{latency}  {result}{eta}", file=out, flush=True)
+        print(f"{latency}  {result}{breakdown}{eta}", file=out, flush=True)
 
     return show
 
@@ -155,7 +159,15 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
     if not cases:
         print(f"no cases in {args.cases}", file=sys.stderr)
         return 1
-    recorder = MemoryRecorder()
+    trace_file = None
+    if args.trace:
+        try:
+            Path(args.trace).parent.mkdir(parents=True, exist_ok=True)
+            trace_file = open(args.trace, "w", encoding="utf-8")  # noqa: SIM115
+        except OSError as exc:
+            print(f"error: cannot write --trace file: {exc}", file=sys.stderr)
+            return 1
+    recorder = MemoryRecorder(trace_file)
     try:
         llm = build_llm_client_with_recorder(settings, recorder, allow_fake_fallback=False)
     except LLMConfigError as exc:
@@ -165,15 +177,21 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
 
     languagetool = None if args.no_languagetool else LanguageToolClient(settings.languagetool_url)
     started_at = datetime.now(UTC)
-    report = run_eval(
-        cases,
-        llm,
-        recorder,
-        items,
-        languagetool=languagetool,
-        repeat=max(args.repeat, 1),
-        progress=None if args.quiet else eval_progress_printer(),
-    )
+    try:
+        report = run_eval(
+            cases,
+            llm,
+            recorder,
+            items,
+            languagetool=languagetool,
+            repeat=max(args.repeat, 1),
+            progress=None if args.quiet else eval_progress_printer(),
+        )
+    finally:
+        if trace_file is not None:
+            trace_file.close()
+    if args.trace:
+        print(f"trace: {len(recorder.records)} call(s) written to {args.trace}", file=sys.stderr)
     report = {"run": run_metadata(cases, args.label, started_at), **report}
     print(format_summary(report))
     if not args.no_save:
@@ -330,7 +348,9 @@ def cmd_check_llm(args: argparse.Namespace) -> int:
     import os
     import time
 
-    from app.evals.runner import failure_hint
+    from app.domain.llm_stats import percentile
+    from app.evals.runner import failure_hint, format_breakdown
+    from app.llm.calls import CallRecord
     from app.llm.client import LLMError
     from app.llm.factory import LLMConfigError, build_llm_client_with_recorder, resolve_routes
     from app.llm.types import GlossRequest
@@ -365,30 +385,82 @@ def cmd_check_llm(args: argparse.Namespace) -> int:
         print("\nrun with --call to make one small real request (costs a fraction of a cent)")
         return 1 if problems else 0
 
-    print("\ntest call (gloss task):")
+    repeat = max(args.repeat, 1)
+    print(f"\ntest call (gloss task){f', {repeat} times' if repeat > 1 else ''}:")
+    records: list[CallRecord] = []
     try:
-        llm = build_llm_client_with_recorder(settings, lambda _r: None, allow_fake_fallback=False)
+        llm = build_llm_client_with_recorder(
+            settings, lambda r: records.append(r), allow_fake_fallback=False
+        )
     except LLMConfigError as exc:
         print(f"  configuration error: {exc}", file=sys.stderr)
         return 1
-    started = time.monotonic()
+    request = GlossRequest(
+        word="Haus",
+        lemma="Haus",
+        sentence="Das Haus ist groß.",
+        level="A2",
+        explanation_language="it",
+    )
+    failed = 0
+    totals: list[int] = []
+    for number in range(1, repeat + 1):
+        before = len(records)
+        started = time.monotonic()
+        try:
+            gloss = llm.gloss(request)
+        except LLMError as exc:
+            failed += 1
+            print(f"  #{number} FAILED: {exc}")
+            if hint := failure_hint(str(exc)):
+                print(f"      hint: {hint}")
+        else:
+            elapsed = int((time.monotonic() - started) * 1000)
+            totals.append(elapsed)
+            print(f"  #{number} OK in {elapsed} ms: Haus = {gloss.translation!r}")
+        if len(records) > before:
+            print(f"      {format_breakdown(records[-1])}")
+            if records[-1].upstream_provider:
+                print(f"      upstream provider: {records[-1].upstream_provider}")
+    if len(totals) > 1:
+        median = percentile(totals, 0.5) or 0.0
+        print(f"  p50 {median / 1000:.2f}s over {len(totals)} successful calls")
+    return 1 if failed else 0
+
+
+_SINCE = re.compile(r"^(\d+)([mhd])$")
+
+
+def parse_since(value: str) -> timedelta:
+    """`30m`, `1h`, `2d` -> timedelta."""
+    match = _SINCE.match(value.strip())
+    if not match:
+        raise ValueError(f"--since must look like 30m, 1h or 2d (got {value!r})")
+    unit = {"m": "minutes", "h": "hours", "d": "days"}[match.group(2)]
+    return timedelta(**{unit: int(match.group(1))})
+
+
+def cmd_llm_stats(args: argparse.Namespace) -> int:
+    """Per task and provider/model: latency, time to first byte, retries and tokens of the
+    calls logged in `llm_calls`."""
+    from app.domain.llm_stats import CallStat, aggregate_calls, format_stats
+    from app.store.models import LLMCall
+
     try:
-        gloss = llm.gloss(
-            GlossRequest(
-                word="Haus",
-                lemma="Haus",
-                sentence="Das Haus ist groß.",
-                level="A2",
-                explanation_language="it",
-            )
-        )
-    except LLMError as exc:
-        print(f"  FAILED: {exc}")
-        if hint := failure_hint(str(exc)):
-            print(f"  hint: {hint}")
+        since = parse_since(args.since) if args.since else None
+    except ValueError as exc:
+        print(f"error: {exc}", file=sys.stderr)
         return 1
-    elapsed = int((time.monotonic() - started) * 1000)
-    print(f"  OK in {elapsed} ms: Haus = {gloss.translation!r}")
+    query = select(LLMCall).order_by(LLMCall.id.desc()).limit(max(args.last, 1))
+    if args.task:
+        query = query.where(LLMCall.task == args.task)
+    if since is not None:
+        query = query.where(LLMCall.ts >= datetime.now(UTC) - since)
+    with create_session_factory(get_settings())() as session:
+        calls = [CallStat.of(row) for row in session.scalars(query)]
+    scope = f"last {args.last} call(s)" + (f" of task {args.task}" if args.task else "")
+    print(f"{scope}{f' in the last {args.since}' if since else ''}: {len(calls)} found\n")
+    print(format_stats(aggregate_calls(calls)))
     return 0
 
 
@@ -437,6 +509,12 @@ def main(argv: list[str] | None = None) -> int:
     p_eval.add_argument("--no-save", action="store_true", help="don't save this run")
     p_eval.add_argument("--out", help="also write the JSON report to this path")
     p_eval.add_argument(
+        "--trace",
+        metavar="FILE",
+        help="write every LLM call (full request and response, timings, tokens) to FILE, one "
+        "JSON object per line (large; for offline inspection)",
+    )
+    p_eval.add_argument(
         "--max-fp", type=float, default=0.05, help="max false-positive rate on correct answers"
     )
     p_eval.add_argument(
@@ -466,7 +544,22 @@ def main(argv: list[str] | None = None) -> int:
         "check-llm", help="show provider/model/key per task; --call makes one test request"
     )
     p_check.add_argument("--call", action="store_true", help="make one small real request")
+    p_check.add_argument(
+        "--repeat",
+        type=int,
+        default=1,
+        help="with --call: repeat the request N times and show the p50 (isolates network and "
+        "queue time from generation time)",
+    )
     p_check.set_defaults(func=cmd_check_llm)
+
+    p_stats = sub.add_parser(
+        "llm-stats", help="latency, retries and tokens per task and model from the llm_calls log"
+    )
+    p_stats.add_argument("--last", type=int, default=200, help="the last N calls (default 200)")
+    p_stats.add_argument("--task", help="only this task, e.g. grade_sentence")
+    p_stats.add_argument("--since", help="only calls newer than this: 30m, 1h, 2d")
+    p_stats.set_defaults(func=cmd_llm_stats)
 
     p_opt = sub.add_parser("optimize-fsrs", help="fit FSRS parameters to the review history")
     p_opt.add_argument("--min-reviews", type=int, default=1000)

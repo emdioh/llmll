@@ -538,6 +538,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/debug/llm/calls": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Recent Calls
+         * @description The most recent LLM calls, newest first (history beyond the process lifetime).
+         */
+        get: operations["recent_calls_api_debug_llm_calls_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/debug/llm/events": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Llm Events
+         * @description Server-Sent Events: the buffered `call_started` / `call_finished` events, then live ones.
+         */
+        get: operations["llm_events_api_debug_llm_events_get"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -768,6 +808,65 @@ export interface components {
             /** Title */
             title?: string | null;
         };
+        /**
+         * DebugCallOut
+         * @description One `llm_calls` row, in full.
+         */
+        DebugCallOut: {
+            /** Id */
+            id: number;
+            /**
+             * Ts
+             * Format: date-time
+             */
+            ts: string;
+            /** Task */
+            task: string;
+            /** Prompt Version */
+            prompt_version: string;
+            /** Provider */
+            provider: string;
+            /** Model */
+            model: string;
+            /** Request */
+            request: {
+                [key: string]: unknown;
+            };
+            /** Response */
+            response: unknown | null;
+            /** Stop Reason */
+            stop_reason: string | null;
+            /** Input Tokens */
+            input_tokens: number | null;
+            /** Output Tokens */
+            output_tokens: number | null;
+            /** Cache Read Tokens */
+            cache_read_tokens: number | null;
+            /** Cache Write Tokens */
+            cache_write_tokens: number | null;
+            /** Reasoning Tokens */
+            reasoning_tokens: number | null;
+            /** Latency Ms */
+            latency_ms: number;
+            /** Error */
+            error: string | null;
+            /** Attempts */
+            attempts: number | null;
+            /** Http Statuses */
+            http_statuses: (number | null)[] | null;
+            /** Retry Wait Ms */
+            retry_wait_ms: number | null;
+            /** Ttfb Ms */
+            ttfb_ms: number | null;
+            /** Download Ms */
+            download_ms: number | null;
+            /** Overhead Ms */
+            overhead_ms: number | null;
+            /** Upstream Provider */
+            upstream_provider: string | null;
+            /** Request Chars */
+            request_chars: number | null;
+        };
         /** EvaluationExplainIn */
         EvaluationExplainIn: {
             /** Item Id */
@@ -935,6 +1034,11 @@ export interface components {
              * @enum {string}
              */
             auth: "enabled" | "disabled";
+            /**
+             * Debug
+             * @default false
+             */
+            debug: boolean;
         };
         /** ItemDetail */
         ItemDetail: {
@@ -2430,6 +2534,57 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["StatsOut"];
+                };
+            };
+        };
+    };
+    recent_calls_api_debug_llm_calls_get: {
+        parameters: {
+            query?: {
+                limit?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["DebugCallOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    llm_events_api_debug_llm_events_get: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/event-stream": string;
                 };
             };
         };

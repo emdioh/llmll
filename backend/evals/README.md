@@ -33,12 +33,31 @@ Options:
 | `--max-fp RATE` | Fail (exit 1) when the false-positive rate on correct answers exceeds RATE (default 0.05). |
 | `--no-languagetool` | Never query LanguageTool; use the matches recorded in the cases (if any). |
 | `--quiet` | No per-case progress lines. |
+| `--trace FILE` | Write every LLM call (full request and response, timings, tokens) to FILE, one JSON object per line, as the run proceeds. Large, so not saved by default; for offline inspection. |
 
 Progress is printed on stderr, one line per graded run: the case id appears before the LLM call
 (so a slow call is visible as such), then latency, `ok` / `MISS expected X, got Y` / `FAILED
 <provider error>`, and the estimated time left. The summary goes to stdout. If the first 3 runs
 all fail the run stops early; failures are grouped by error with a hint in the summary. Ctrl+C
 stops the run and still prints (and writes, with `--out`) the report for the runs completed so far.
+
+Each progress line ends with the timing breakdown of the call, e.g.
+
+```
+[ 3/70] ita-10                       12.3s  ok      correct  llm 12.3s = wait 0.0s + ttfb 12.1s + dl 0.1s | 1 try | out 412 (reasoning 2140) | 34 tok/s | lt 0.2s
+```
+
+`wait` is the time before the final HTTP attempt (failed attempts such as a 429 plus the SDK's
+back-off), `ttfb` the final attempt's time to response headers (queue plus the whole generation:
+calls are not streamed), `dl` the body transfer and parsing, `N tries (statuses)` appears when
+there were retries, `out` are output tokens (with the hidden reasoning tokens when reported),
+`tok/s` is `out / ttfb` and `lt` the LanguageTool time of the case. The summary adds a **latency**
+block (p50 / p90 / max of total, ttfb, retry wait and LanguageTool time, total retries with the
+status codes that caused them, mean output and reasoning tokens, median tok/s, OpenRouter upstream
+providers). The saved report keeps these per run (`runs[].ttfb_ms`, `retry_wait_ms`, `attempts`,
+`http_statuses`, `reasoning_tokens`, ...), per case (`languagetool_ms`) and as the top-level
+`latency` block. Failed calls count in the block. To rule out silent retries while diagnosing, run
+with `LLMLL_LLM_MAX_RETRIES=0`.
 
 Exit codes: `0` ok, `1` false-positive rate above `--max-fp` or invalid cases, `2` some LLM calls
 failed (the metrics are incomplete), `130` interrupted with Ctrl+C.
@@ -61,7 +80,8 @@ uv run python -m app.cli eval-compare               # table of the last 20 runs
 uv run python -m app.cli eval-compare baseline v2   # two runs side by side + changed cases
 ```
 
-Runs are picked by path or by any unique part of the file name (`scripts/eval-compare.sh` does
+The table also shows p50 / p90 total latency, p50 ttfb, retries and mean reasoning tokens
+(`-` for runs saved before the latency block existed). Runs are picked by path or by any unique part of the file name (`scripts/eval-compare.sh` does
 the same from the repo root).
 
 ## Comparing providers

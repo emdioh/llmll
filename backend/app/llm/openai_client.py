@@ -16,6 +16,16 @@ OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 _TOKEN_LIMIT_PARAMS = ("max_tokens", "max_completion_tokens")
 
 
+def _upstream_provider(completion: Any) -> str | None:
+    """OpenRouter names the upstream provider that served the call in a top-level `provider`
+    field, which the SDK keeps as an extra attribute."""
+    value = getattr(completion, "provider", None)
+    if value is None:
+        extra = getattr(completion, "model_extra", None)
+        value = extra.get("provider") if isinstance(extra, dict) else None
+    return value if isinstance(value, str) and value else None
+
+
 class OpenAICompatibleLLMClient(ProviderClient):
     """`client` is an `openai.OpenAI`; `provider_name` is `openai` or `openrouter`."""
 
@@ -70,7 +80,10 @@ class OpenAICompatibleLLMClient(ProviderClient):
     def _normalize(completion: Any) -> Completion:
         usage = getattr(completion, "usage", None)
         details = getattr(usage, "prompt_tokens_details", None)
+        out_details = getattr(usage, "completion_tokens_details", None)
         result = Completion(
+            reasoning_tokens=getattr(out_details, "reasoning_tokens", None),
+            upstream_provider=_upstream_provider(completion),
             input_tokens=getattr(usage, "prompt_tokens", None),
             output_tokens=getattr(usage, "completion_tokens", None),
             cache_read_tokens=getattr(details, "cached_tokens", None),

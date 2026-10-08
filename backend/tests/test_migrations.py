@@ -45,3 +45,37 @@ def test_provider_backfill(settings: Settings) -> None:
     with engine.connect() as connection:
         rows = connection.execute(text("SELECT model, provider FROM llm_calls ORDER BY id"))
         assert rows.all() == [("claude-opus-5-5", "anthropic"), ("fake", "fake")]
+
+
+def test_timing_columns_migration(settings: Settings) -> None:
+    cfg = make_alembic_config(settings.database_url)
+    engine = create_engine(settings.database_url)
+    command.upgrade(cfg, "0007")
+    before = {c["name"] for c in inspect(engine).get_columns("llm_calls")}
+    with engine.begin() as connection:
+        connection.execute(
+            text(
+                "INSERT INTO llm_calls (ts, task, prompt_version, model, request, latency_ms) "
+                "VALUES ('2026-10-05 00:00:00', 'gloss', 'v1', 'm', '{}', 1)"
+            )
+        )
+    command.upgrade(cfg, "head")
+    new = {
+        "attempts",
+        "http_statuses",
+        "retry_wait_ms",
+        "ttfb_ms",
+        "download_ms",
+        "overhead_ms",
+        "reasoning_tokens",
+        "upstream_provider",
+        "request_chars",
+    }
+    columns = {c["name"]: c for c in inspect(engine).get_columns("llm_calls")}
+    assert not new & before and new <= set(columns)
+    assert all(columns[name]["nullable"] for name in new)
+    with engine.connect() as connection:  # existing rows keep working, with nulls
+        row = connection.execute(text("SELECT attempts, http_statuses, ttfb_ms FROM llm_calls"))
+        assert row.one() == (None, None, None)
+    command.downgrade(cfg, "0007")
+    assert not new & {c["name"] for c in inspect(engine).get_columns("llm_calls")}

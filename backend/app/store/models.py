@@ -198,6 +198,17 @@ class LLMCall(Base):
     cache_write_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
     latency_ms: Mapped[int] = mapped_column(Integer, default=0)
     error: Mapped[str | None] = mapped_column(Text, nullable=True)
+    # Timing breakdown and token detail (docs/design/M7-observability.md §1); null when the
+    # call was not traced (fake client, rows written before M7).
+    attempts: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    http_statuses: Mapped[list[int | None] | None] = mapped_column(JSON, nullable=True)
+    retry_wait_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    ttfb_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    download_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    overhead_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    reasoning_tokens: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    upstream_provider: Mapped[str | None] = mapped_column(String, nullable=True)
+    request_chars: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
 
 class Evaluation(Base):

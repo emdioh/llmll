@@ -1,9 +1,10 @@
 """Deterministic `LLMClient` without network access (tests, and runs without an API key)."""
 
+import json
 import re
 import time
 
-from app.llm.calls import CallRecord, CallRecorder
+from app.llm.calls import CallRecord, CallRecorder, announce_start
 from app.llm.client import LLMError
 from app.llm.config import DEFAULT_TASKS
 from app.llm.types import (
@@ -57,22 +58,26 @@ class FakeLLMClient:
     def _log(self, task: str, request: object, response: object, started: float) -> None:
         if self._record is None:
             return
-        self._record(
-            CallRecord(
-                task=task,
-                prompt_version=FAKE_VERSION,
-                provider="fake",
-                model=FAKE_MODEL,
-                request=request.model_dump(mode="json"),  # type: ignore[attr-defined]
-                response=response.model_dump(mode="json"),  # type: ignore[attr-defined]
-                stop_reason="end_turn",
-                input_tokens=0,
-                output_tokens=0,
-                cache_read_tokens=0,
-                cache_write_tokens=0,
-                latency_ms=int((time.monotonic() - started) * 1000),
-            )
+        payload = request.model_dump(mode="json")  # type: ignore[attr-defined]
+        record = CallRecord(
+            task=task,
+            prompt_version=FAKE_VERSION,
+            provider="fake",
+            model=FAKE_MODEL,
+            request=payload,
+            response=response.model_dump(mode="json"),  # type: ignore[attr-defined]
+            stop_reason="end_turn",
+            input_tokens=0,
+            output_tokens=0,
+            cache_read_tokens=0,
+            cache_write_tokens=0,
+            latency_ms=int((time.monotonic() - started) * 1000),
+            request_chars=len(json.dumps(payload, ensure_ascii=False)),
         )
+        # The fake client answers instantly: announce the start right before the result so the
+        # debug pane can be tried without an API key.
+        announce_start(self._record, record)
+        self._record(record)
 
     def generate_exercise(self, req: ExerciseRequest) -> GeneratedExercise:
         started = time.monotonic()

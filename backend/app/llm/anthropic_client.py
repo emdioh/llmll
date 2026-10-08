@@ -8,10 +8,11 @@ import anthropic
 from pydantic import BaseModel, ValidationError
 
 from app.llm.base import TypedTasks
-from app.llm.calls import CallRecord, CallRecorder
+from app.llm.calls import CallRecord, CallRecorder, announce_start, stamp_timing
 from app.llm.client import LLMError, LLMRefusal, LLMUnavailable
 from app.llm.config import TaskConfig
 from app.llm.prompt_loader import load_prompt, render_user
+from app.llm.trace import trace_call
 
 logger = logging.getLogger(__name__)
 
@@ -27,6 +28,15 @@ def _usage(response: Any) -> dict[str, int | None]:
         "cache_read_tokens": getattr(usage, "cache_read_input_tokens", None),
         "cache_write_tokens": getattr(usage, "cache_creation_input_tokens", None),
     }
+
+
+def _request_chars(request: dict[str, Any]) -> int:
+    """Characters of system + user content in a request."""
+    blocks = list(request.get("system") or [])
+    for message in request.get("messages") or []:
+        content = message.get("content")
+        blocks += content if isinstance(content, list) else [{"text": content}]
+    return sum(len(b.get("text") or "") for b in blocks if isinstance(b, dict))
 
 
 def _raw_text(response: Any) -> str | None:
@@ -92,15 +102,24 @@ class AnthropicLLMClient(TypedTasks):
                 "fallbacks": "default" if self._refusal_fallback else None,
             },
         )
+        record.request_chars = _request_chars(request)
+        announce_start(self._record, record)
         started = time.monotonic()
+        trace = None
         try:
-            if self._refusal_fallback:
-                response = self._client.beta.messages.parse(
-                    **request, output_format=output, betas=[FALLBACK_BETA], fallbacks="default"
-                )
-            else:
-                response = self._client.messages.parse(**request, output_format=output)
-            record.latency_ms = int((time.monotonic() - started) * 1000)
+            try:
+                with trace_call() as trace:
+                    if self._refusal_fallback:
+                        response = self._client.beta.messages.parse(
+                            **request,
+                            output_format=output,
+                            betas=[FALLBACK_BETA],
+                            fallbacks="default",
+                        )
+                    else:
+                        response = self._client.messages.parse(**request, output_format=output)
+            finally:
+                stamp_timing(record, trace, started)
             record.stop_reason = getattr(response, "stop_reason", None)
             for key, value in _usage(response).items():
                 setattr(record, key, value)
@@ -116,7 +135,6 @@ class AnthropicLLMClient(TypedTasks):
             raise self._api_failure(record, started, LLMError, exc) from exc
         except (ValidationError, ValueError) as exc:
             record.error = f"invalid structured output: {exc}"
-            record.latency_ms = int((time.monotonic() - started) * 1000)
             raise LLMError(record.error) from exc
         finally:
             self._record(record)
@@ -125,7 +143,6 @@ class AnthropicLLMClient(TypedTasks):
     def _api_failure(
         record: CallRecord, started: float, kind: type[LLMError], exc: Exception
     ) -> LLMError:
-        record.latency_ms = int((time.monotonic() - started) * 1000)
         record.error = f"{type(exc).__name__}: {exc}"
         return kind(record.error)
 

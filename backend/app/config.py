@@ -31,7 +31,12 @@ class Settings(BaseSettings):
     openrouter_app_name: str | None = None
     openrouter_site_url: str | None = None
     llm_refusal_fallback: bool = True
+    # SDK-level retries (with back-off) per call, and the HTTP timeout of one request. Set the
+    # retries to 0 while diagnosing slowness, so a failing call is not retried silently.
     llm_max_retries: int = 2
+    llm_timeout_s: float = 120.0
+    # Live LLM debug pane: exposes full prompts and responses, so it is off by default.
+    debug: bool = False
     # Name in the contest resolver registry (app.services.contests.RESOLVERS).
     contest_resolver: str = "accept_all"
     # Per-task overrides, e.g. LLMLL_LLM_TASKS='{"grade_sentence": {"effort": "max"}}'.

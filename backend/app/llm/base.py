@@ -16,10 +16,11 @@ from typing import Any, TypeVar
 from pydantic import BaseModel, ValidationError
 
 from app.llm import render
-from app.llm.calls import CallRecord, CallRecorder
+from app.llm.calls import CallRecord, CallRecorder, announce_start, stamp_timing
 from app.llm.client import LLMError, LLMRefusal
 from app.llm.config import TaskConfig, route_label
 from app.llm.prompt_loader import load_prompt, render_user
+from app.llm.trace import trace_call
 from app.llm.types import (
     ExerciseRequest,
     ExplainRequest,
@@ -81,6 +82,8 @@ class Completion:
     output_tokens: int | None = None
     cache_read_tokens: int | None = None
     cache_write_tokens: int | None = None
+    reasoning_tokens: int | None = None
+    upstream_provider: str | None = None  # OpenRouter: which upstream provider served the call
 
 
 class InvalidOutput(LLMError):
@@ -190,21 +193,28 @@ class ProviderClient(TypedTasks):
             model=cfg.model,
             request=loggable({**request, "structured_output": cfg.structured_output}),
         )
+        record.request_chars = len(system) + len(stable) + len(variable)
+        announce_start(self._record, record)
         started = time.monotonic()
+        trace = None
         try:
-            completion = self._complete(request, native)
-            record.latency_ms = int((time.monotonic() - started) * 1000)
+            try:
+                with trace_call() as trace:
+                    completion = self._complete(request, native)
+            finally:
+                stamp_timing(record, trace, started)
             record.stop_reason = completion.stop_reason
             record.input_tokens = completion.input_tokens
             record.output_tokens = completion.output_tokens
             record.cache_read_tokens = completion.cache_read_tokens
             record.cache_write_tokens = completion.cache_write_tokens
+            record.reasoning_tokens = completion.reasoning_tokens
+            record.upstream_provider = completion.upstream_provider
             return self._finish(completion, record, output, native)
         except LLMError as exc:
             record.error = f"{type(exc).__name__}: {exc}"
             raise
         except Exception as exc:
-            record.latency_ms = int((time.monotonic() - started) * 1000)
             kind = self._classify(exc)
             record.error = f"{type(exc).__name__}: {exc}"
             if kind is None:

@@ -350,6 +350,28 @@ per provider on its official SDK: `AnthropicLLMClient` (`anthropic`), `OpenAICom
 - **Caching.** Only Anthropic gets explicit `cache_control`; cached prompt tokens are logged when
   the provider reports them.
 
+### 7.1.2 Observability (M7)
+Design: `docs/design/M7-observability.md`.
+- **HTTP tracing.** The SDK clients are built with our own HTTP client carrying request/response
+  event hooks (`app/llm/trace.py`; `httpx2` for `openai` and `anthropic`, `httpx` for
+  `google-genai`). The adapter sets a `ContextVar` trace around the SDK call; the hooks append
+  one entry per HTTP attempt (request time, headers time, status). `derive_timing` (pure) turns
+  it into `attempts`, `http_statuses`, `retry_wait_ms`, `ttfb_ms`, `download_ms` and
+  `overhead_ms`. Hooks never raise; the `LLMClient` protocol is unchanged.
+- **Call record.** `CallRecord` and `llm_calls` also carry `reasoning_tokens`, `upstream_provider`
+  (OpenRouter) and `request_chars`; all new columns are nullable (migration `0008`).
+  `LLMLL_LLM_TIMEOUT_S` and `LLMLL_LLM_MAX_RETRIES` configure the clients.
+- **Reading the numbers.** `eval-grader` prints a breakdown per run and a latency block (kept in
+  the saved report; `eval-compare` shows p50/p90, ttfb, retries, reasoning tokens);
+  `llm-stats` aggregates `llm_calls` (`app/domain/llm_stats.py`, pure); `check-llm --call
+  --repeat N` probes with tiny requests.
+- **Live debug.** With `LLMLL_DEBUG=true`, `SqlCallRecorder` publishes `call_started` /
+  `call_finished` to the in-process `LiveBroadcaster` (`app/llm/live.py`: a 200-event ring buffer
+  and one bounded `asyncio.Queue` per SSE subscriber, handed over with `call_soon_threadsafe`
+  because LLM calls run in worker threads). `GET /api/debug/llm/events` streams them as
+  Server-Sent Events and `GET /api/debug/llm/calls` lists `llm_calls` rows; both are 404 when
+  debug is off, and the access token applies. Nothing is stored or buffered when it is off.
+
 ### 7.2 Claude API implementation
 - **Structured output.** Use `client.messages.parse()` with the Pydantic model as the
   schema, instead of parsing free text.

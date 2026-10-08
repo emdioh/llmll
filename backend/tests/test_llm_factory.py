@@ -46,3 +46,54 @@ def test_failed_calls_are_stored(migrated_settings: Settings) -> None:
         row = db.scalars(select(LLMCall)).one()
         assert row.error == "LLMRefusal: refused" and row.response is None
         assert row.stop_reason == "refusal" and row.ts.tzinfo is not None
+
+
+def test_recorder_stores_timing_and_publishes_live_events(migrated_settings: Settings) -> None:
+    from app.llm.live import LiveBroadcaster
+
+    live = LiveBroadcaster(enabled=True)
+    recorder = SqlCallRecorder(create_session_factory(migrated_settings), now, live)
+    record = CallRecord(
+        task="gloss",
+        prompt_version="v1",
+        provider="openrouter",
+        model="vendor/m",
+        request={"messages": []},
+        response={"translation": "casa"},
+        latency_ms=1300,
+        attempts=2,
+        http_statuses=[429, 200],
+        retry_wait_ms=1000,
+        ttfb_ms=200,
+        download_ms=50,
+        overhead_ms=50,
+        reasoning_tokens=7,
+        upstream_provider="Fireworks",
+        request_chars=321,
+    )
+    recorder.started(record)
+    call_id = recorder(record)
+    with create_session_factory(migrated_settings)() as session:
+        row = session.scalars(select(LLMCall)).one()
+    assert row.id == call_id and row.attempts == 2 and row.http_statuses == [429, 200]
+    assert (row.retry_wait_ms, row.ttfb_ms, row.download_ms, row.overhead_ms) == (1000, 200, 50, 50)
+    assert (row.reasoning_tokens, row.upstream_provider, row.request_chars) == (7, "Fireworks", 321)
+    started, finished = live.snapshot()
+    assert (started.type, finished.type) == ("call_started", "call_finished")
+    assert started.data["id"] == finished.data["id"] == record.uid
+    assert finished.data["db_id"] == call_id and finished.data["http_statuses"] == [429, 200]
+    assert finished.data["started_ts"] == started.data["ts"]
+
+
+def test_recorder_without_live_or_disabled_publishes_nothing(migrated_settings: Settings) -> None:
+    from app.llm.live import LiveBroadcaster
+
+    for live in (None, LiveBroadcaster(enabled=False)):
+        recorder = SqlCallRecorder(create_session_factory(migrated_settings), now, live)
+        record = CallRecord(
+            task="gloss", prompt_version="v1", provider="fake", model="fake", request={}
+        )
+        recorder.started(record)
+        assert recorder(record) is not None
+        if live is not None:
+            assert live.snapshot() == []

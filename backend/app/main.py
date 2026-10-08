@@ -8,6 +8,7 @@ from fastapi import Depends, FastAPI
 from app.api import (
     auth,
     contests,
+    debug,
     explain,
     grammar,
     health,
@@ -25,6 +26,7 @@ from app.api.frontend import SPAStaticFiles
 from app.config import Settings, get_settings
 from app.llm.client import LLMClient
 from app.llm.factory import build_llm_client
+from app.llm.live import LiveBroadcaster
 from app.nlp.analyzer import Analyzer, SpacyAnalyzer
 from app.nlp.extract import ExtractedText, fetch_article
 from app.nlp.languagetool import LanguageToolClient
@@ -46,7 +48,11 @@ def create_app(
     app.state.settings = settings
     app.state.now = now or (lambda: datetime.now(UTC))
     app.state.session_factory = create_session_factory(settings)
-    app.state.llm = llm or build_llm_client(settings, app.state.session_factory, app.state.now)
+    # Holds events only when LLMLL_DEBUG=true (they contain full prompts and responses).
+    app.state.live = LiveBroadcaster(enabled=settings.debug)
+    app.state.llm = llm or build_llm_client(
+        settings, app.state.session_factory, app.state.now, app.state.live
+    )
     app.state.languagetool = languagetool or LanguageToolClient(settings.languagetool_url)
     # The spaCy model is loaded lazily on the first analysis.
     app.state.analyzer = analyzer or SpacyAnalyzer()
@@ -67,6 +73,7 @@ def create_app(
         contests.router,
         placement.router,
         stats.router,
+        debug.router,
     ):
         app.include_router(router, dependencies=[Depends(require_auth)])
     if settings.frontend_dist is not None and settings.frontend_dist.is_dir():

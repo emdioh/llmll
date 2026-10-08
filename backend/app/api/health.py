@@ -21,6 +21,7 @@ class HealthResponse(BaseModel):
     llm: Literal["anthropic", "openai", "google", "openrouter", "fake"]
     llm_tasks: dict[str, str] = Field(default_factory=dict)
     auth: Literal["enabled", "disabled"]
+    debug: bool = False
 
 
 @router.get("/health", response_model=HealthResponse)
@@ -40,4 +41,5 @@ def health(
         llm=request.app.state.llm.name,
         llm_tasks=dict(getattr(request.app.state.llm, "routes", {})),
         auth=auth_mode(request),
+        debug=request.app.state.settings.debug,
     )

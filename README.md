@@ -80,6 +80,41 @@ OpenRouter models without schema support; not available for Anthropic). `GET /ap
 reports the default provider (`llm`) and the routing (`llm_tasks`, `provider/model` per task).
 To compare providers on the grader, see [`backend/evals/README.md`](backend/evals/README.md).
 
+## Diagnosing slow or failing LLM calls
+
+Every call is logged in the `llm_calls` table with a timing breakdown (`eval-grader`,
+`check-llm --call` and the debug pane show the same numbers):
+
+| Number | Meaning |
+|---|---|
+| `total` (`latency_ms`) | The whole SDK call, retries included |
+| `wait` (`retry_wait_ms`) | Time before the final HTTP attempt: failed attempts (e.g. a 429) plus the SDK's back-off. High = rate limiting or provider errors |
+| `ttfb` | Final attempt: request sent to response headers. Calls are not streamed, so this is connection set-up + the provider's queue + the whole generation, including hidden reasoning tokens. High = slow model or a busy provider |
+| `dl` (`download_ms`) | Response headers to the SDK returning: body transfer and parsing (normally tiny) |
+| `overhead_ms` | The rest of our call (prompt rendering, JSON parsing); normally ~0 |
+| `tries` / statuses | HTTP requests made, e.g. `2 tries (429,200)` |
+| `out` / `reasoning` | Output tokens and the hidden reasoning tokens (OpenAI-compatible: included in `out`; Gemini: counted separately; Anthropic: not reported) |
+| `tok/s` | `out / ttfb`, a rough throughput |
+| `upstream` | OpenRouter only: which upstream provider served the call |
+| `lt` | LanguageTool time of the case (`eval-grader` only) |
+
+Rule of thumb: a large `wait` points at rate limits, a large `ttfb` at the model (try a smaller
+or non-reasoning model, lower `reasoning_effort`), a large `overhead` at our code.
+
+- **Settings.** `LLMLL_LLM_TIMEOUT_S` (default 120) is the HTTP timeout of one request and
+  `LLMLL_LLM_MAX_RETRIES` (default 2) the SDK's retries with back-off: set the retries to `0`
+  while diagnosing, so a failing call is not retried silently.
+- **`scripts/llm-stats.sh [--last N] [--task T] [--since 1h|1d]`** summarizes the log per task and
+  provider/model: calls, errors, p50 / p90 / max latency, p50 ttfb, retries, mean tokens and
+  median tok/s.
+- **`scripts/check-llm.sh --call --repeat 3`** makes tiny test requests and prints the breakdown of
+  each and the p50: a small request separates network and queue time from generation time.
+- **`LLMLL_DEBUG=true`** turns on the live debug endpoints (`GET /api/debug/llm/events`, a
+  Server-Sent Events stream, and `GET /api/debug/llm/calls`) that show every LLM exchange with the
+  **full prompts and responses**; they answer 404 otherwise, and the normal access token applies.
+  `/api/health` reports `debug`. Keep it off on a shared server. The fake LLM publishes events
+  too, so it can be tried without an API key.
+
 ## Deploying on a server
 
 The app has no user accounts; on a public server a single shared access token protects the API
@@ -175,6 +210,7 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/languagetool.sh [stop]` | Start/stop a local LanguageTool on :8010 (Docker) |
 | `scripts/check-llm.sh [--call]` | Which provider/model/key each task uses (keys not printed); `--call` makes one test request |
 | `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool; every run is saved to `backend/evals/results/` (`--label` to tag it; costs API credits) |
+| `scripts/llm-stats.sh [--last N] [--task T] [--since 1h]` | Latency, retries and tokens per task and model, from the `llm_calls` log |
 | `scripts/eval-compare.sh [runs]` | Compare saved runs: table of recent runs, or two runs side by side with per-case differences |
 | `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
 | `source scripts/env.fish [--force]` | fish shell: load `.env` into the current shell (bash/zsh: `set -a; . ./.env; set +a`) |
