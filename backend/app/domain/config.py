@@ -51,6 +51,8 @@ class LearnerSettings:
     review_cap: int = 15
     new_per_session: int = 5
     production_slots: int = 2
+    # IANA time zone that defines the learner's calendar days (streaks, activity).
+    timezone: str = "UTC"
     # Fitted by `optimize-fsrs --apply`; not editable through the settings API.
     fsrs_parameters: list[float] | None = None
 

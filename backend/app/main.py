@@ -15,6 +15,7 @@ from app.api import (
     items,
     learner,
     placement,
+    progress,
     queue,
     reading,
     sessions,
@@ -72,6 +73,7 @@ def create_app(
         queue.router,
         contests.router,
         placement.router,
+        progress.router,
         stats.router,
         debug.router,
     ):

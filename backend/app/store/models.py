@@ -121,12 +121,12 @@ class Attempt(Base):
     __tablename__ = "attempts"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    exercise_id: Mapped[str] = mapped_column(ForeignKey("exercises.id"))
+    exercise_id: Mapped[str] = mapped_column(ForeignKey("exercises.id"), index=True)
     answer: Mapped[dict[str, Any]] = mapped_column(JSON)
     used_hint: Mapped[bool] = mapped_column(default=False)
     duration_ms: Mapped[int | None] = mapped_column(Integer, nullable=True)
     outcome: Mapped[str] = mapped_column(String)
-    submitted_at: Mapped[datetime] = mapped_column(UTCDateTime())
+    submitted_at: Mapped[datetime] = mapped_column(UTCDateTime(), index=True)
 
 
 class LearningEvent(Base):
@@ -135,6 +135,7 @@ class LearningEvent(Base):
     __tablename__ = "learning_events"
     __table_args__ = (
         Index("ix_learning_events_lookup", "learner_id", "item_id", "facet", "ts", "id"),
+        Index("ix_learning_events_learner_ts", "learner_id", "ts"),
         {"sqlite_autoincrement": True},
     )
 
@@ -149,7 +150,9 @@ class LearningEvent(Base):
     diagnostic_tags: Mapped[list[str]] = mapped_column(JSON, default=list)
     presumed_known: Mapped[bool] = mapped_column(default=False)
     confidence: Mapped[float] = mapped_column(Float, default=1.0)
-    exercise_id: Mapped[str | None] = mapped_column(ForeignKey("exercises.id"), nullable=True)
+    exercise_id: Mapped[str | None] = mapped_column(
+        ForeignKey("exercises.id"), nullable=True, index=True
+    )
     attempt_id: Mapped[int | None] = mapped_column(ForeignKey("attempts.id"), nullable=True)
     evaluation_id: Mapped[int | None] = mapped_column(Integer, nullable=True)
     voided_by: Mapped[int | None] = mapped_column(Integer, nullable=True)
@@ -215,7 +218,7 @@ class Evaluation(Base):
     __tablename__ = "evaluations"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    attempt_id: Mapped[int] = mapped_column(ForeignKey("attempts.id"))
+    attempt_id: Mapped[int] = mapped_column(ForeignKey("attempts.id"), index=True)
     llm_call_id: Mapped[int | None] = mapped_column(ForeignKey("llm_calls.id"), nullable=True)
     lt_matches: Mapped[list[dict[str, Any]] | None] = mapped_column(JSON, nullable=True)
     result: Mapped[dict[str, Any]] = mapped_column(JSON)

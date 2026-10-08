@@ -61,7 +61,7 @@ def list_items(
         stmt = stmt.where(Item.cefr_level == flt.level)
     if flt.status:
         stmt = stmt.where(LearnerItem.status == flt.status)
-    rows = [(item, status) for item, status in session.execute(stmt) if _matches_query(item, flt.q)]
+    rows = [(item, status) for item, status in session.execute(stmt) if matches_query(item, flt.q)]
     rows.sort(
         key=lambda r: (CEFR_LEVELS.index(r[0].cefr_level), -(r[0].frequency_zipf or 0), r[0].id)
     )
@@ -82,7 +82,7 @@ def list_items(
     return len(rows), items
 
 
-def _matches_query(item: Item, q: str | None) -> bool:
+def matches_query(item: Item, q: str | None) -> bool:
     if not q:
         return True
     needle = q.casefold()

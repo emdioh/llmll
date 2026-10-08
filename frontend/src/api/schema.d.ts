@@ -521,6 +521,176 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/progress/summary": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Summary */
+        get: operations["getProgressSummary"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/activity": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Activity */
+        get: operations["getProgressActivity"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/levels": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Levels */
+        get: operations["getProgressLevels"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/forecast": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Forecast */
+        get: operations["getProgressForecast"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/items": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** List Items */
+        get: operations["listProgressItems"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/items/{item_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Item */
+        get: operations["getProgressItem"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/items/{item_id}/practice": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Practice Item */
+        post: operations["practiceProgressItem"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get History */
+        get: operations["getProgressHistory"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/history/session/{session_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Session Detail */
+        get: operations["getProgressSession"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/progress/history/reading/{reading_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Reading Detail */
+        get: operations["getProgressReading"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/stats": {
         parameters: {
             query?: never;
@@ -582,6 +752,74 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        /** ActivityOut */
+        ActivityOut: {
+            /** Timezone */
+            timezone: string;
+            /**
+             * Today
+             * Format: date
+             */
+            today: string;
+            /** Days */
+            days: components["schemas"]["DayOut"][];
+            /** Weeks */
+            weeks: components["schemas"]["WeekAccuracyOut"][];
+        };
+        /**
+         * AnswerCardOut
+         * @description An answered card or exercise, as it stands now (after any contest).
+         */
+        AnswerCardOut: {
+            /** Exercise Id */
+            exercise_id: string;
+            /** Attempt Id */
+            attempt_id: number;
+            /** Evaluation Id */
+            evaluation_id: number | null;
+            /**
+             * Type
+             * @enum {string}
+             */
+            type: "flashcard_intro" | "flashcard_recognition" | "flashcard_production" | "grammar_intro" | "production";
+            /** Subtype */
+            subtype: ("translation" | "guided" | "transform" | "summary") | null;
+            /**
+             * Answered At
+             * Format: date-time
+             */
+            answered_at: string;
+            /** Outcome */
+            outcome: ("correct" | "assisted" | "error") | null;
+            /** Prompt */
+            prompt: string;
+            /** Instructions */
+            instructions: string | null;
+            /** Options */
+            options: string[] | null;
+            /** Answer */
+            answer: string | null;
+            /** Expected */
+            expected: string | null;
+            /** Feedback */
+            feedback: string | null;
+            /** Used Hint */
+            used_hint: boolean;
+            /** Duration Ms */
+            duration_ms: number | null;
+            /** Errors */
+            errors: components["schemas"]["AnswerErrorOut"][];
+            /** Items */
+            items: components["schemas"]["AnswerItemOut"][];
+            contest: components["schemas"]["ContestInfoOut"] | null;
+            /** Item Outcome */
+            item_outcome?: ("correct" | "assisted" | "error") | null;
+            /**
+             * Item Errors
+             * @default []
+             */
+            item_errors: components["schemas"]["AnswerErrorOut"][];
+        };
         /** AnswerError */
         AnswerError: {
             /** Start */
@@ -606,6 +844,32 @@ export interface components {
             /** Explanation */
             explanation: string;
         };
+        /** AnswerErrorOut */
+        AnswerErrorOut: {
+            /** Start */
+            start: number;
+            /** End */
+            end: number;
+            /** Original */
+            original: string;
+            /** Correction */
+            correction: string;
+            /** Item Id */
+            item_id: string | null;
+            /** Label */
+            label?: string | null;
+            /** Diagnostic Tags */
+            diagnostic_tags: string[];
+            /**
+             * Severity
+             * @enum {string}
+             */
+            severity: "minor" | "major";
+            /** Confidence */
+            confidence: number;
+            /** Explanation */
+            explanation: string;
+        };
         /** AnswerIn */
         AnswerIn: {
             /** Exercise Id */
@@ -618,6 +882,20 @@ export interface components {
             used_hint: boolean;
             /** Duration Ms */
             duration_ms?: number | null;
+        };
+        /** AnswerItemOut */
+        AnswerItemOut: {
+            /** Item Id */
+            item_id: string;
+            /** Label */
+            label: string;
+            /**
+             * Outcome
+             * @enum {string}
+             */
+            outcome: "correct" | "assisted" | "error";
+            /** Diagnostic Tags */
+            diagnostic_tags: string[];
         };
         /** AnswerOut */
         AnswerOut: {
@@ -675,6 +953,20 @@ export interface components {
             grammar_left: number;
             /** Backlog */
             backlog: number;
+        };
+        /** CachedExplanationOut */
+        CachedExplanationOut: {
+            /** Evaluation Id */
+            evaluation_id: number;
+            /** Markdown */
+            markdown: string;
+            /** Examples */
+            examples: components["schemas"]["ExplanationExampleOut"][];
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
         };
         /** CalibrationBucketOut */
         CalibrationBucketOut: {
@@ -746,6 +1038,27 @@ export interface components {
             /** Reason */
             reason?: string | null;
         };
+        /** ContestInfoOut */
+        ContestInfoOut: {
+            /** Id */
+            id: number;
+            /**
+             * Status
+             * @enum {string}
+             */
+            status: "open" | "resolved";
+            /** Verdict */
+            verdict: ("accepted" | "rejected" | "partial") | null;
+            /** Reason */
+            reason: string | null;
+            /** Rationale */
+            rationale: string;
+            /**
+             * Created At
+             * Format: date-time
+             */
+            created_at: string;
+        };
         /** ContestItemOutcome */
         ContestItemOutcome: {
             /** Item Id */
@@ -807,6 +1120,26 @@ export interface components {
             text?: string | null;
             /** Title */
             title?: string | null;
+        };
+        /** DayOut */
+        DayOut: {
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** Reviews */
+            reviews: number;
+            /** Exercises */
+            exercises: number;
+            /** New Items */
+            new_items: number;
+            /** Readings */
+            readings: number;
+            /** Minutes */
+            minutes: number;
+            /** Active */
+            active: boolean;
         };
         /**
          * DebugCallOut
@@ -907,6 +1240,49 @@ export interface components {
              */
             cached: boolean;
         };
+        /** FacetDetailOut */
+        FacetDetailOut: {
+            /** Facet */
+            facet: string;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "new" | "learning" | "young" | "mature" | "presumed_known";
+            /** Mastery */
+            mastery?: number | null;
+            /** Stability */
+            stability?: number | null;
+            /** Due */
+            due?: string | null;
+            /** N Eff */
+            n_eff?: number | null;
+            counts: components["schemas"]["OutcomeCountsOut"];
+            /** Tag Errors */
+            tag_errors: components["schemas"]["TagCountOut"][];
+            /** Trajectory Total */
+            trajectory_total: number;
+            /** Trajectory */
+            trajectory: components["schemas"]["TrajectoryPointOut"][];
+        };
+        /** FacetStateOut */
+        FacetStateOut: {
+            /** Facet */
+            facet: string;
+            /** Mastery */
+            mastery: number;
+            /** Stability */
+            stability: number | null;
+            /** Due */
+            due: string | null;
+            /** N Eff */
+            n_eff: number;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "new" | "learning" | "young" | "mature" | "presumed_known";
+        };
         /** FinishOut */
         FinishOut: {
             /** Session Id */
@@ -916,6 +1292,16 @@ export interface components {
             implicit_events: number;
             /** Candidates */
             candidates: string[];
+        };
+        /** ForecastDayOut */
+        ForecastDayOut: {
+            /**
+             * Date
+             * Format: date
+             */
+            date: string;
+            /** Due */
+            due: number;
         };
         /** GenerateTextIn */
         GenerateTextIn: {
@@ -1040,6 +1426,46 @@ export interface components {
              */
             debug: boolean;
         };
+        /** HistoryList */
+        HistoryList: {
+            /** Total */
+            total: number;
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Items */
+            items: components["schemas"]["HistoryRow"][];
+        };
+        /** HistoryRow */
+        HistoryRow: {
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "session" | "reading";
+            /** Id */
+            id: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Ended At */
+            ended_at: string | null;
+            /** Duration Minutes */
+            duration_minutes: number | null;
+            /** Cards Answered */
+            cards_answered: number;
+            /** Correct Rate */
+            correct_rate: number | null;
+            /** New Items */
+            new_items: number;
+            /** Title */
+            title: string | null;
+            /** Words Looked Up */
+            words_looked_up: number | null;
+        };
         /** ItemDetail */
         ItemDetail: {
             /** Id */
@@ -1158,10 +1584,49 @@ export interface components {
             /** Explanation Language */
             explanation_language?: string | null;
         };
+        /** LevelProgressOut */
+        LevelProgressOut: {
+            /** Level */
+            level: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lemma" | "grammar" | "construction";
+            /** Total */
+            total: number;
+            /** Introduced */
+            introduced: number;
+            /** New */
+            new: number;
+            /** Learning */
+            learning: number;
+            /** Young */
+            young: number;
+            /** Mature */
+            mature: number;
+            /** Presumed Known */
+            presumed_known: number;
+            /** Mean Mastery */
+            mean_mastery: number | null;
+        };
         /** LoginIn */
         LoginIn: {
             /** Token */
             token: string;
+        };
+        /** LookupOut */
+        LookupOut: {
+            /** Token Index */
+            token_index: number | null;
+            /** Word */
+            word: string | null;
+            /** Lemma */
+            lemma: string | null;
+            /** Item Id */
+            item_id: string | null;
+            /** Label */
+            label: string | null;
         };
         /** MemoryEntry */
         MemoryEntry: {
@@ -1210,6 +1675,33 @@ export interface components {
             /** Created */
             created: boolean;
         };
+        /** OutcomeCountsOut */
+        OutcomeCountsOut: {
+            /** Correct */
+            correct: number;
+            /** Assisted */
+            assisted: number;
+            /** Error */
+            error: number;
+        };
+        /**
+         * PeriodOut
+         * @description Totals over 7 local days (`this_week`: the last 7 days including today).
+         */
+        PeriodOut: {
+            /** Study Days */
+            study_days: number;
+            /** Reviews */
+            reviews: number;
+            /** Exercises */
+            exercises: number;
+            /** Readings */
+            readings: number;
+            /** New Items */
+            new_items: number;
+            /** Minutes */
+            minutes: number;
+        };
         /** PlacementFinishOut */
         PlacementFinishOut: {
             /** Placement Id */
@@ -1233,6 +1725,17 @@ export interface components {
             placement_id: string;
             /** Cards */
             cards: components["schemas"]["SessionCard"][];
+        };
+        /** PracticeOut */
+        PracticeOut: {
+            /** Item Id */
+            item_id: string;
+            /** Queued */
+            queued: boolean;
+            /** Already Queued */
+            already_queued: boolean;
+            /** Production Slots */
+            production_slots: number;
         };
         /**
          * PreparedCard
@@ -1294,6 +1797,79 @@ export interface components {
             /** Attempt Id */
             attempt_id?: number | null;
         };
+        /** ProgressItemDetail */
+        ProgressItemDetail: {
+            item: components["schemas"]["ItemDetail"];
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "new" | "learning" | "young" | "mature" | "presumed_known";
+            /** Mastery */
+            mastery: number | null;
+            counts: components["schemas"]["OutcomeCountsOut"];
+            /** Tag Errors */
+            tag_errors: components["schemas"]["TagCountOut"][];
+            /** Facets */
+            facets: components["schemas"]["FacetDetailOut"][];
+            /** Recent Answers */
+            recent_answers: components["schemas"]["AnswerCardOut"][];
+            explanation: components["schemas"]["CachedExplanationOut"] | null;
+            /** Practice Queued */
+            practice_queued: boolean;
+        };
+        /** ProgressItemList */
+        ProgressItemList: {
+            /** Total */
+            total: number;
+            /** Limit */
+            limit: number;
+            /** Offset */
+            offset: number;
+            /** Items */
+            items: components["schemas"]["ProgressItemRow"][];
+        };
+        /** ProgressItemRow */
+        ProgressItemRow: {
+            /** Id */
+            id: string;
+            /**
+             * Kind
+             * @enum {string}
+             */
+            kind: "lemma" | "grammar" | "construction";
+            /** Level */
+            level: string;
+            /** Label */
+            label: string;
+            /** Translation It */
+            translation_it: string | null;
+            /** Status */
+            status: string | null;
+            /**
+             * State
+             * @enum {string}
+             */
+            state: "new" | "learning" | "young" | "mature" | "presumed_known";
+            /** Mastery */
+            mastery: number | null;
+            /** N Eff */
+            n_eff: number;
+            /** Due */
+            due: string | null;
+            /** Last Practiced */
+            last_practiced: string | null;
+            /** Errors */
+            errors: number;
+            /** Answers */
+            answers: number;
+            /** Error Rate */
+            error_rate: number | null;
+            /** Top Tags */
+            top_tags: components["schemas"]["TagCountOut"][];
+            /** Facets */
+            facets: components["schemas"]["FacetStateOut"][];
+        };
         /** QueueEntry */
         QueueEntry: {
             /** Item Id */
@@ -1317,6 +1893,41 @@ export interface components {
             /** Next */
             next: components["schemas"]["QueueEntry"][];
         };
+        /** ReadingDetailOut */
+        ReadingDetailOut: {
+            /**
+             * Kind
+             * @default reading
+             * @constant
+             */
+            kind: "reading";
+            /** Id */
+            id: string;
+            /** Text Id */
+            text_id: number;
+            /** Title */
+            title: string;
+            /** Level */
+            level: string;
+            /** Body */
+            body: string;
+            /** Source Title */
+            source_title: string;
+            /** Source Url */
+            source_url: string | null;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Ended At */
+            ended_at: string | null;
+            /** Duration Minutes */
+            duration_minutes: number | null;
+            /** Lookups */
+            lookups: components["schemas"]["LookupOut"][];
+            summary: components["schemas"]["AnswerCardOut"] | null;
+        };
         /** ReadingOut */
         ReadingOut: {
             /** Id */
@@ -1328,6 +1939,15 @@ export interface components {
              * Format: date-time
              */
             started_at: string;
+        };
+        /** RetentionOut */
+        RetentionOut: {
+            /** Observed */
+            observed: number | null;
+            /** Target */
+            target: number;
+            /** N Reviews */
+            n_reviews: number;
         };
         /**
          * SessionCard
@@ -1365,6 +1985,34 @@ export interface components {
             /** Item Ids */
             item_ids?: string[];
         };
+        /** SessionDetailOut */
+        SessionDetailOut: {
+            /**
+             * Kind
+             * @default session
+             * @constant
+             */
+            kind: "session";
+            /** Id */
+            id: string;
+            /**
+             * Started At
+             * Format: date-time
+             */
+            started_at: string;
+            /** Ended At */
+            ended_at: string | null;
+            /** Duration Minutes */
+            duration_minutes: number | null;
+            /** Cards Answered */
+            cards_answered: number;
+            /** Correct Rate */
+            correct_rate: number | null;
+            /** New Items */
+            new_items: number;
+            /** Cards */
+            cards: components["schemas"]["AnswerCardOut"][];
+        };
         /** SessionOut */
         SessionOut: {
             /** Session Id */
@@ -1386,6 +2034,8 @@ export interface components {
             new_per_session: number;
             /** Production Slots */
             production_slots: number;
+            /** Timezone */
+            timezone: string;
         };
         /** SettingsUpdate */
         SettingsUpdate: {
@@ -1401,6 +2051,21 @@ export interface components {
             new_per_session?: number | null;
             /** Production Slots */
             production_slots?: number | null;
+            /** Timezone */
+            timezone?: string | null;
+        };
+        /** StateCountsOut */
+        StateCountsOut: {
+            /** New */
+            new: number;
+            /** Learning */
+            learning: number;
+            /** Young */
+            young: number;
+            /** Mature */
+            mature: number;
+            /** Presumed Known */
+            presumed_known: number;
         };
         /** StatsOut */
         StatsOut: {
@@ -1422,6 +2087,48 @@ export interface components {
             calibration: components["schemas"]["CalibrationBucketOut"][];
             /** Backlog */
             backlog: number;
+        };
+        /** StreakOut */
+        StreakOut: {
+            /** Current */
+            current: number;
+            /** Longest */
+            longest: number;
+            /** Last Study Day */
+            last_study_day: string | null;
+            /** Studied Today */
+            studied_today: boolean;
+        };
+        /** SummaryOut */
+        SummaryOut: {
+            /** Timezone */
+            timezone: string;
+            /**
+             * Today
+             * Format: date
+             */
+            today: string;
+            streak: components["schemas"]["StreakOut"];
+            /** Study Days Total */
+            study_days_total: number;
+            totals: components["schemas"]["TotalsOut"];
+            this_week: components["schemas"]["PeriodOut"];
+            last_week: components["schemas"]["PeriodOut"];
+            retention: components["schemas"]["RetentionOut"];
+            states: components["schemas"]["StateCountsOut"];
+            states_words: components["schemas"]["StateCountsOut"];
+            states_grammar: components["schemas"]["StateCountsOut"];
+            /** Due Now */
+            due_now: number;
+            /** Due Today */
+            due_today: number;
+        };
+        /** TagCountOut */
+        TagCountOut: {
+            /** Tag */
+            tag: string;
+            /** Count */
+            count: number;
         };
         /** TextOut */
         TextOut: {
@@ -1486,6 +2193,37 @@ export interface components {
             /** Parts */
             parts: string[];
         };
+        /** TotalsOut */
+        TotalsOut: {
+            /** Reviews */
+            reviews: number;
+            /** Exercises */
+            exercises: number;
+            /** Readings */
+            readings: number;
+            /** Items Introduced */
+            items_introduced: number;
+            /** Minutes */
+            minutes: number;
+        };
+        /** TrajectoryPointOut */
+        TrajectoryPointOut: {
+            /** Event Id */
+            event_id: number;
+            /**
+             * Ts
+             * Format: date-time
+             */
+            ts: string;
+            /** Kind */
+            kind: string;
+            /** Outcome */
+            outcome: ("correct" | "assisted" | "error") | null;
+            /** Mastery */
+            mastery: number;
+            /** Stability */
+            stability: number | null;
+        };
         /** ValidationError */
         ValidationError: {
             /** Location */
@@ -1519,6 +2257,24 @@ export interface components {
             new_words: components["schemas"]["NewWordOut"][];
             /** Notes */
             notes: string;
+        };
+        /** WeekAccuracyOut */
+        WeekAccuracyOut: {
+            /**
+             * Week Start
+             * Format: date
+             */
+            week_start: string;
+            /** Flashcards Correct Rate */
+            flashcards_correct_rate: number | null;
+            /** Production Correct Rate */
+            production_correct_rate: number | null;
+            /** Flashcards N */
+            flashcards_n: number;
+            /** Production N */
+            production_n: number;
+            /** N */
+            n: number;
         };
     };
     responses: never;
@@ -2505,6 +3261,301 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlacementFinishOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressSummary: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SummaryOut"];
+                };
+            };
+        };
+    };
+    getProgressActivity: {
+        parameters: {
+            query?: {
+                days?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ActivityOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressLevels: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LevelProgressOut"][];
+                };
+            };
+        };
+    };
+    getProgressForecast: {
+        parameters: {
+            query?: {
+                days?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ForecastDayOut"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    listProgressItems: {
+        parameters: {
+            query?: {
+                kind?: ("lemma" | "grammar" | "construction") | null;
+                sort?: "weakest" | "strongest" | "recent" | "due" | "errors";
+                q?: string | null;
+                level?: string | null;
+                state?: ("new" | "learning" | "young" | "mature" | "presumed_known") | null;
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressItemList"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProgressItemDetail"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    practiceProgressItem: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                item_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PracticeOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressHistory: {
+        parameters: {
+            query?: {
+                limit?: number;
+                offset?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HistoryList"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressSession: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                session_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionDetailOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getProgressReading: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                reading_id: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ReadingDetailOut"];
                 };
             };
             /** @description Validation Error */

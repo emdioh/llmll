@@ -19,6 +19,8 @@ dependencies = [
     "de-core-news-md",
     "openai>=3.24.0",
     "google-genai>=2.28.0",
+    # IANA time zones for the study-day calendar (slim images ship no system zoneinfo).
+    "tzdata",
 ]
 
 [dependency-groups]

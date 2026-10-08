@@ -1,7 +1,9 @@
 """Learner settings endpoints."""
 
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
+
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from sqlalchemy.orm import Session
 
 from app.api.deps import require_learner
@@ -19,6 +21,7 @@ class SettingsOut(BaseModel):
     review_cap: int
     new_per_session: int
     production_slots: int
+    timezone: str
 
 
 class SettingsUpdate(BaseModel):
@@ -28,6 +31,18 @@ class SettingsUpdate(BaseModel):
     review_cap: int | None = Field(default=None, ge=1, le=500)
     new_per_session: int | None = Field(default=None, ge=0, le=20)
     production_slots: int | None = Field(default=None, ge=0, le=5)
+    timezone: str | None = Field(default=None, max_length=64)
+
+    @field_validator("timezone")
+    @classmethod
+    def _known_zone(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        try:
+            ZoneInfo(value)
+        except (ZoneInfoNotFoundError, ValueError, OSError):
+            raise ValueError(f"unknown IANA time zone: {value}") from None
+        return value
 
 
 @router.get("/settings", response_model=SettingsOut, operation_id="getSettings")

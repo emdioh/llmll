@@ -98,3 +98,72 @@ and `attempts(submitted_at)` via migration if missing).
 
 ## Deviations
 _(record any deviation from this spec here, with the reason)_
+
+### Backend (§1, §2, backend tests of §4)
+
+**Pure functions (`app/domain/progress.py`)**
+- `memory_state(memory, presumed_known=False)` has no `now` argument: the thresholds depend only
+  on stability. An item's state (`item_state`) is that of its **least stable facet** (a word is
+  `mature` only when recognition and production both are); an item without a card is
+  `presumed_known` when its learner status says so, else `new`. Level progress, summary counts and
+  item lists all use this.
+- `mastery_trajectory(events, cfg, item_id, facet)` takes the item and facet too (they seed the
+  FSRS card id). Points also carry `event_id` and `n_eff`; `status_change` events advance the fold
+  but produce no point. The API returns at most the last 500 points per facet (`trajectory_total`
+  has the full count); the last point always equals the stored `item_memory` state (tested for every
+  memory row of the seeded database).
+- `activity_by_day(events, tz, start, end)` takes local dates, returns **every** day of the range
+  (empty days included, for the heatmap) and adds `active` (= study day). Events are
+  `ActivityEvent(ts, kind, minutes)`: flashcard attempts are `reviews`, production attempts
+  (including a reading's summary exercise) are `exercises`, intro cards count as study and minutes
+  but as neither; `new_items` come from `learner_items.introduced_at` (null for items first met in
+  the placement) and do not make a study day by themselves.
+- `due_forecast` counts memories, i.e. (item, facet) rows, not items; suspended items are excluded
+  (same rule as the backlog). `level_progress` groups by the real kind (`lemma`, `grammar`,
+  `construction`; the frontend sums grammar + construction) and adds `new`, `learning`, `young`
+  counts for the stacked bars; `introduced` is the learner status `introduced`.
+- Extra pure helpers: `period_totals`, `weekly_accuracy`, `reading_minutes`, `item_state`,
+  `item_mastery`.
+
+**Endpoints**
+- "This week / last week" are rolling 7-day windows ending today (not calendar weeks), so that
+  the comparison is fair on a Monday. The weekly accuracy series uses Monday-based local weeks;
+  its rates are the share of `correct` among non-voided `review` events (so a contest changes
+  them), split into `flashcards_*` and `production_*` with their own `n`.
+- Study days, totals, minutes and streaks come from **attempts** (non-placement sessions) and
+  finished readings, so a contest never removes a study day; only the accuracy curve, error counts,
+  tags and trajectories use non-voided events. Placement events are included in item state, error
+  counts and trajectories, and excluded from streaks, activity, totals and the history.
+- `summary` adds `due_today`, `retention.n_reviews`, `streak.studied_today` and state counts split
+  into `states_words` / `states_grammar` (constructions count as grammar). The all-time study-day
+  set loads one timestamp per attempt (unbounded in principle, cheap in practice); every other
+  query is bounded by a window, a page, or a single item.
+- `items`: default sort is `recent`. `weakest`/`strongest` rank only items with memory and
+  `n_eff >= 2` (all items with memory when none qualifies); `recent`, `due` and `errors` list only
+  items that have a last-practiced time, a due date, or at least one error. Item mastery is the
+  mean over its facets, `n_eff` the sum, `due` the earliest. Counts and tags come from
+  non-voided `review`/`implicit`/`lookup` events (a lookup counts as `assisted`).
+- `history` uses `kind` = `session` | `reading`; details are `GET history/session/{session_id}` and
+  `GET history/reading/{reading_id}` (two routes instead of one `{kind}/{id}` so that each has a
+  precise response model). A reading's summary exercise belongs to the reading entry and is not
+  listed as a session. Outcomes shown are those **after contests** (latest evaluation), with the
+  contest status attached; intro cards have no outcome and are not part of `correct_rate`.
+- **"Practice this"**: `POST /api/progress/items/{id}/practice` adds a `remediation_queue` entry
+  (no tags, no evaluation) so that the next session's production exercise targets the item; it is
+  idempotent while an entry is pending, refused with 409 for items the learner has not met, and has
+  no effect when `production_slots` is 0 (the response reports the slots so the UI can say so). It
+  appends no event and changes no memory row; the detail response has `practice_queued`. Chosen over
+  "marking the item due" because that would have needed a synthetic event or a projection edit.
+- `timezone` is validated against the IANA database (422 otherwise), defaults to `UTC` for new and
+  older learners, and is part of `GET/PUT /api/settings` and the learner's `settings`. The `tzdata`
+  package is now a backend dependency (the slim Docker image has no system zoneinfo).
+
+**Storage**
+- Migration `0009` adds `ix_learning_events_learner_ts`, `ix_learning_events_exercise_id`,
+  `ix_attempts_submitted_at`, `ix_attempts_exercise_id` and `ix_evaluations_attempt_id` (the
+  attempts/evaluations joins of the history had no index); the models declare them, so the
+  autogenerate-diff test stays green.
+- `corpus._matches_query` became the public `corpus.matches_query` (reused by the item search);
+  `tests/test_api_flow.py::test_learner_setup` now expects `timezone` in the settings.
+- `ARCHITECTURE.md` (§4.5/§5/§13) was not touched by the backend work; it still needs an M8
+  entry.
