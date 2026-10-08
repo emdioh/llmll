@@ -2,6 +2,7 @@ import { useLocation } from "react-router";
 import DebugPane from "./DebugPane";
 import { useDebug } from "./debugContext";
 import { totalLabel } from "./debugStore";
+import { useMediaQuery, WIDE_SCREEN } from "../useMediaQuery";
 import { useNow } from "./useNow";
 
 function LastCall() {
@@ -18,11 +19,12 @@ function LastCall() {
   );
 }
 
-/** Floating toggle plus bottom drawer; hidden on the Debug page itself. */
+/** Floating toggle plus bottom drawer; wide screens only, hidden on the Debug page itself. */
 export default function DebugDrawer() {
   const { enabled, drawer, setDrawer } = useDebug();
   const { pathname } = useLocation();
-  if (!enabled || pathname === "/debug") return null;
+  const wide = useMediaQuery(WIDE_SCREEN);
+  if (!enabled || !wide || pathname === "/debug") return null;
   if (drawer === "off")
     return (
       <button
@@ -66,6 +68,8 @@ export default function DebugDrawer() {
 export function DebugSpacer() {
   const { enabled, drawer } = useDebug();
   const { pathname } = useLocation();
-  if (!enabled || pathname === "/debug" || drawer === "off") return null;
+  const wide = useMediaQuery(WIDE_SCREEN);
+  if (!enabled || !wide || pathname === "/debug" || drawer === "off")
+    return null;
   return <div className={`dbg-spacer drawer-${drawer}`} aria-hidden="true" />;
 }

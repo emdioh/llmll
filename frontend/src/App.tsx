@@ -7,6 +7,7 @@ import DebugProvider from "./debug/DebugProvider";
 import LlmBanner from "./LlmBanner";
 import CorpusView from "./views/CorpusView";
 import DebugView from "./views/DebugView";
+import { useMediaQuery, WIDE_SCREEN } from "./useMediaQuery";
 import GrammarDetailView from "./views/GrammarDetailView";
 import GrammarView from "./views/GrammarView";
 import ItemDetailView from "./views/ItemDetailView";
@@ -26,9 +27,12 @@ const tabs = [
 
 function Nav() {
   const { enabled } = useDebug();
-  const all = enabled
-    ? [...tabs, { to: "/debug", label: "Debug", end: false }]
-    : tabs;
+  // Debug is a developer tool: listed on wide screens only (still reachable at /debug).
+  const wide = useMediaQuery(WIDE_SCREEN);
+  const all =
+    enabled && wide
+      ? [...tabs, { to: "/debug", label: "Debug", end: false }]
+      : tabs;
   return (
     <nav className="nav" aria-label="Main">
       {all.map((t) => (

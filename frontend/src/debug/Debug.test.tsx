@@ -401,6 +401,29 @@ describe("debug entry points", () => {
     expect(FakeEventSource.instances).toHaveLength(0);
   });
 
+  it("hides the nav entry and drawer on narrow screens even with debug on", async () => {
+    localStorage.setItem("llmll.debugDrawer", "open");
+    const original = window.matchMedia;
+    window.matchMedia = ((query: string) => ({
+      matches: false,
+      media: query,
+      addEventListener: () => {},
+      removeEventListener: () => {},
+    })) as unknown as typeof window.matchMedia;
+    try {
+      renderApp(true);
+      await screen.findByRole("heading", { name: "Grammar" });
+      await new Promise((r) => setTimeout(r, 20));
+      expect(screen.queryByRole("link", { name: "Debug" })).toBeNull();
+      expect(
+        screen.queryByRole("complementary", { name: "LLM debug" }),
+      ).toBeNull();
+      expect(screen.queryByRole("button", { name: /debug drawer/ })).toBeNull();
+    } finally {
+      window.matchMedia = original;
+    }
+  });
+
   it("shows the nav entry and a toggle that opens a persistent drawer", async () => {
     renderApp(true);
     expect(await screen.findByRole("link", { name: "Debug" })).toBeVisible();
