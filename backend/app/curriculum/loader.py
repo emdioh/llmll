@@ -1,7 +1,8 @@
-"""Load and validate a curriculum directory. All errors are reported at once."""
+"""Load and validate a curriculum directory (plus optional extra ones). All errors at once."""
 
 import hashlib
 import json
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any
@@ -143,18 +144,17 @@ def _validate_graph(items: list[LoadedItem], errors: list[str]) -> None:
         errors.append("prerequisite cycle: " + " -> ".join(cycle))
 
 
-def load_curriculum(root: Path) -> Curriculum:
-    """Load `root` (e.g. `curriculum/de`); raise `CurriculumError` listing every problem."""
-    errors: list[str] = []
-    items: list[LoadedItem] = []
+def _load_root(root: Path, prefix: str, items: list[LoadedItem], errors: list[str]) -> None:
+    """Load one curriculum directory, appending to `items`/`errors`; `prefix` goes before paths."""
     if not root.is_dir():
-        raise CurriculumError([f"{root}: curriculum directory not found"])
+        errors.append(f"{root}: curriculum directory not found")
+        return
 
     for path in sorted((root / "lexicon").glob("*.yaml")):
-        _load_list(path, f"lexicon/{path.name}", LexiconEntry, "lemma", items, errors)
+        _load_list(path, f"{prefix}lexicon/{path.name}", LexiconEntry, "lemma", items, errors)
 
     for path in sorted((root / "grammar").glob("*.yaml")):
-        rel = f"grammar/{path.name}"
+        rel = f"{prefix}grammar/{path.name}"
         data = _read_yaml(path, errors, rel)
         if data is None:
             continue
@@ -170,8 +170,29 @@ def load_curriculum(root: Path) -> Curriculum:
     constructions = root / "constructions.yaml"
     if constructions.is_file():
         _load_list(
-            constructions, "constructions.yaml", ConstructionEntry, "construction", items, errors
+            constructions,
+            f"{prefix}constructions.yaml",
+            ConstructionEntry,
+            "construction",
+            items,
+            errors,
         )
+
+
+def load_curriculum(root: Path, extra_roots: Sequence[Path] = ()) -> Curriculum:
+    """Load `root` (e.g. `curriculum/de`) and merge any `extra_roots` (same layout, e.g. a
+    private folder); raise `CurriculumError` listing every problem.
+
+    Main-root `source_file`s are relative to `root`; extra-root ones are prefixed with the
+    extra root's path. The graph is validated once over the merged items.
+    """
+    errors: list[str] = []
+    items: list[LoadedItem] = []
+    if not root.is_dir():
+        raise CurriculumError([f"{root}: curriculum directory not found"])
+    _load_root(root, "", items, errors)
+    for extra in extra_roots:
+        _load_root(extra, f"{extra}/", items, errors)
 
     _validate_graph(items, errors)
     if errors:

@@ -113,3 +113,45 @@ def test_real_curriculum_validates() -> None:
         pytest.skip("curriculum/de does not exist yet")
     curriculum = load_curriculum(REAL)
     assert curriculum.items
+
+
+def test_extra_root_merged_with_prefixed_source_files() -> None:
+    extra = FIXTURES / "curriculum_extra"
+    items = load_curriculum(FIXTURES / "curriculum", [extra]).items
+    by_id = {i.id: i for i in items}
+    assert len(items) == 19
+    assert by_id["lex:tisch"].source_file == "lexicon/a1.yaml"
+    assert by_id["lex:sofa"].source_file == f"{extra}/lexicon/a1.yaml"
+    assert by_id["gram:private"].source_file == f"{extra}/grammar/private.yaml"
+    # private items may require main items
+    assert by_id["lex:sofa"].requires == ["lex:tisch"]
+    assert by_id["gram:private"].requires == ["gram:cases"]
+
+
+def test_duplicate_id_across_roots_rejected() -> None:
+    extra = FIXTURES / "curriculum_extra_dup"
+    with pytest.raises(CurriculumError) as exc:
+        load_curriculum(FIXTURES / "curriculum", [extra])
+    assert any(
+        e.startswith(f"{extra}/lexicon/a1.yaml:0:") and "duplicate id lex:tisch" in e
+        for e in exc.value.errors
+    )
+
+
+def test_missing_extra_root_rejected() -> None:
+    with pytest.raises(CurriculumError) as exc:
+        load_curriculum(FIXTURES / "curriculum", [FIXTURES / "does-not-exist"])
+    assert any("curriculum directory not found" in e for e in exc.value.errors)
+
+
+def test_import_without_extra_root_suspends_only_extra_items(migrated_settings: Settings) -> None:
+    with create_session_factory(migrated_settings)() as session:
+        merged = load_curriculum(FIXTURES / "curriculum", [FIXTURES / "curriculum_extra"])
+        report = import_curriculum(session, merged, datetime_now())
+        session.commit()
+    assert report.added == 19
+    report = import_fixture(migrated_settings)
+    assert (report.added, report.suspended, report.unchanged) == (0, 2, 17)
+    with create_session_factory(migrated_settings)() as session:
+        suspended = {i.id for i in session.scalars(select(Item)) if i.suspended}
+    assert suspended == {"lex:sofa", "gram:private"}

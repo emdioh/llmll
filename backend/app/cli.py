@@ -69,7 +69,7 @@ def _stored_llm_overrides() -> dict[str, Any]:
 
 def cmd_import_curriculum(args: argparse.Namespace) -> int:
     try:
-        curriculum = load_curriculum(Path(args.path))
+        curriculum = load_curriculum(Path(args.path), [Path(p) for p in args.extra])
     except CurriculumError as exc:
         for error in exc.errors:
             print(error, file=sys.stderr)
@@ -538,6 +538,13 @@ def main(argv: list[str] | None = None) -> int:
 
     p_import = sub.add_parser("import-curriculum", help="validate and import the curriculum")
     p_import.add_argument("--path", default="../curriculum/de")
+    p_import.add_argument(
+        "--extra",
+        action="append",
+        default=[],
+        metavar="PATH",
+        help="additional curriculum folder merged with --path (repeatable)",
+    )
     p_import.set_defaults(func=cmd_import_curriculum)
 
     p_replay = sub.add_parser("replay", help="rebuild item_memory from the event log")

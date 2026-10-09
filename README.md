@@ -215,7 +215,7 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/dev.sh` | Backend (:8000, auto-reload) + frontend dev server (:5173); Ctrl+C stops both |
 | `scripts/check.sh [backend\|frontend]` | The same checks as CI, plus the API-schema sync check |
 | `scripts/gen-api.sh` | Regenerate the OpenAPI schema and TypeScript types after API changes |
-| `scripts/import-curriculum.sh` | Validate and import `curriculum/de` after editing the YAML |
+| `scripts/import-curriculum.sh` | Validate and import `curriculum/de` (plus the gitignored `curriculum-private/de` when present) after editing the YAML |
 | `scripts/replay.sh` | Rebuild memory projections from the event log |
 | `scripts/languagetool.sh [stop]` | Start/stop a local LanguageTool on :8010 (Docker) |
 | `scripts/check-llm.sh [--call]` | Which provider/model/key each task uses (keys not printed); `--call` makes one test request |

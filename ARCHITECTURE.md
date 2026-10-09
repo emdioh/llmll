@@ -55,6 +55,7 @@ llmll/
 │   ├── lexicon/a1.yaml a2.yaml b1.yaml
 │   ├── grammar/*.yaml          # one file per grammar point, with reference text
 │   └── constructions.yaml
+├── curriculum-private/de/      # gitignored, personal use only, never committed (AUTHORING §10)
 ├── backend/
 │   ├── pyproject.toml
 │   ├── app/{api,services,domain,llm,nlp,store,curriculum,evals}/

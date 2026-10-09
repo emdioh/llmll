@@ -32,7 +32,8 @@ Every file is UTF-8 YAML. Lexicon and constructions files are **lists**; a gramm
 4. **Accuracy first.** Learners memorize this. Check every gender, plural, auxiliary, participle,
    case and table. When unsure, leave the field out rather than guess.
 5. **Original content only.** Choosing common words is fine; copying a published list or
-   textbook (Goethe-Institut word lists, Profile Deutsch, …) is not.
+   textbook (Goethe-Institut word lists, Profile Deutsch, …) is not. Close-to-source personal
+   content (e.g. a grammar book you own) goes in the private folder, see §10.
 6. **Learner-facing explanations are in Italian** (`*_it` fields), examples are German with an
    Italian translation. The YAML keys, ids and these docs are English.
 
@@ -187,3 +188,18 @@ each table cell, and make sure every word in an example is at or below the entry
       meaningful `diagnostic_tags`, `requires` only lists existing ids.
 - [ ] Nothing copied from a published list or textbook.
 - [ ] `scripts/import-curriculum.sh` passes; list anything you were unsure about for human review.
+
+## 10. Private content (`curriculum-private/de/`)
+
+For personal use only: material closely derived from a book you own can go in
+`curriculum-private/de/`, with the same layout and schema as `curriculum/de/`.
+
+- The folder is gitignored. Never commit, push or publish it, and never paste its content into
+  public files. The Docker image copies only `curriculum/`, so it is not deployed.
+- The same rules as §2 apply, and ids share one namespace with the public folder: use a distinctive
+  slug prefix (e.g. `gram:book-...`) and do not duplicate an entry already in `curriculum/de/`.
+- Private entries may `requires` public ids. Public entries must never reference private ids: CI
+  validates `curriculum/de/` alone.
+- `scripts/import-curriculum.sh` and `scripts/setup.sh` include the private folder automatically when
+  it exists. Both folders are imported in one run, because importing one alone marks the other's ids
+  as suspended.

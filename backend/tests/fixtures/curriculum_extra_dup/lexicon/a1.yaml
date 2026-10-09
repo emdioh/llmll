@@ -1,0 +1,12 @@
+- id: lex:tisch
+  lemma: Tisch
+  pos: noun
+  gender: m
+  plural: Tische
+  level: A1
+  translations:
+    it: tavolo
+    en: table
+  example:
+    de: Der Tisch ist groß.
+    it: Il tavolo è grande.

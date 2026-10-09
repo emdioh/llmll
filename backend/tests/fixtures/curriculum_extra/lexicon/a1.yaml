@@ -1,0 +1,16 @@
+- id: lex:sofa
+  lemma: Sofa
+  pos: noun
+  gender: n
+  plural: Sofas
+  level: A1
+  requires:
+  - lex:tisch
+  translations:
+    it: divano
+    en: sofa
+  example:
+    de: Das Sofa ist hier.
+    it: Il divano è qui.
+  interference:
+    it_gender: m

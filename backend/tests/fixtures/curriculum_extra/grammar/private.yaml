@@ -1,0 +1,15 @@
+id: gram:private
+title_it: Privato
+title_en: Private
+level: A2
+requires:
+- gram:cases
+diagnostic_tags:
+  gender:
+  - m
+reference_it: '## Privato'
+examples:
+- de: Der Tisch.
+  it: Il tavolo.
+- de: Die Katze.
+  it: Il gatto.

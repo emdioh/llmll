@@ -15,7 +15,8 @@ step "Database migrations"
 (cd "$BACKEND" && uv run alembic upgrade head)
 
 step "Curriculum import"
-(cd "$BACKEND" && uv run python -m app.cli import-curriculum --path "$CURRICULUM")
+curriculum_args
+(cd "$BACKEND" && uv run python -m app.cli import-curriculum "${CURRICULUM_ARGS[@]}")
 
 [[ -f "$ROOT/.env" ]] || echo -e "\nTip: cp .env.example .env and add an API key (without one the LLM is simulated)."
 echo -e "\nDone. Start developing with: scripts/dev.sh"

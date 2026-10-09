@@ -1,3 +1,6 @@
 .env
 .DS_Store
 backups/
+
+# Personal curriculum derived from owned books: never commit (see curriculum/AUTHORING.md §10)
+curriculum-private/

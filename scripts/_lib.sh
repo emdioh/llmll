@@ -5,6 +5,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 BACKEND="$ROOT/backend"
 FRONTEND="$ROOT/frontend"
 CURRICULUM="$ROOT/curriculum/de"
+CURRICULUM_PRIVATE="$ROOT/curriculum-private/de"  # optional, gitignored, personal use only
 
 # Load $ROOT/.env into the environment, so API keys and settings reach the backend (which
 # itself only reads environment variables). Variables already set in the calling shell win
@@ -31,6 +32,16 @@ require() {
 # Bring the local database to the schema this code expects (no-op when already current).
 migrate_db() {
   (cd "$BACKEND" && uv run alembic upgrade head >/dev/null)
+}
+
+# Sets the global array CURRICULUM_ARGS to the import options: the public curriculum, plus the
+# private one when it exists. Both must be imported in the same run (see AUTHORING §10).
+# Use as: curriculum_args; cmd "${CURRICULUM_ARGS[@]}"
+curriculum_args() {
+  CURRICULUM_ARGS=(--path "$CURRICULUM")
+  if [[ -d "$CURRICULUM_PRIVATE" ]]; then
+    CURRICULUM_ARGS+=(--extra "$CURRICULUM_PRIVATE")
+  fi
 }
 
 step() { printf '\n\033[1m==> %s\033[0m\n' "$*"; }
