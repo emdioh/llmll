@@ -14,7 +14,7 @@ speakers.
 |---|---|
 | `backend/` | Python + FastAPI, SQLAlchemy, Alembic — see [`backend/README.md`](backend/README.md) |
 | `frontend/` | React + TypeScript (Vite), PWA — see [`frontend/README.md`](frontend/README.md) |
-| `curriculum/` | Curriculum content as YAML (from milestone M1) |
+| `curriculum/` | Curriculum content as YAML — how to write it: [`curriculum/AUTHORING.md`](curriculum/AUTHORING.md) |
 
 ## Running everything with Docker
 

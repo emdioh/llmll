@@ -11,7 +11,7 @@ Guidance for AI assistants working in this repo.
   - The LLM is reached only through the typed `LLMClient` interface in `app/llm/`; prompts
     are versioned files and every call is logged.
   - Curriculum content lives in `curriculum/` YAML, never in code. Item ids are stable and
-    never reused.
+    never reused. Follow `curriculum/AUTHORING.md` when adding or editing content.
 - Before committing, run the same checks as CI (`scripts/check.sh` does all of this):
   - backend: `cd backend && uv run ruff check . && uv run ruff format --check . && uv run pytest -q`
   - frontend: `cd frontend && npm run lint && npm run typecheck && npm run format:check && npm test && npm run build`
