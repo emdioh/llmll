@@ -1,7 +1,7 @@
 id: gram:modal-clauses
 title_it: "Subordinate modali e strumentali: indem, dadurch dass, wie"
 title_en: "Clauses of means and manner: indem, dadurch dass, wie"
-level: B2
+level: B1
 requires: ["gram:verb-final-subordinate"]
 diagnostic_tags:
   connector: [indem, dadurch-dass, wie]
