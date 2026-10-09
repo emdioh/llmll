@@ -1,4 +1,4 @@
-# LLMLL backend
+# LLMLL (LLM Language Learning) backend
 
 FastAPI + SQLAlchemy (SQLite) + Alembic. See `../ARCHITECTURE.md`.
 

@@ -1,4 +1,4 @@
-# LLMLL — Architecture
+# LLMLL (LLM Language Learning) — Architecture
 
 > Living document, companion to [`REQUIREMENTS.md`](REQUIREMENTS.md): references of the
 > form `R§n` point to sections of the requirements.

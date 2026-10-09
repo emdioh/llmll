@@ -1,4 +1,4 @@
-# LLMLL — Requirements
+# LLMLL (LLM Language Learning) — Requirements
 
 > Living document. It records the decisions made so far and the questions still open.
 > Status: draft v0.5 (October 2026).

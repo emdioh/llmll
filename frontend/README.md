@@ -1,4 +1,4 @@
-# LLMLL frontend
+# LLMLL (LLM Language Learning) frontend
 
 React + TypeScript + Vite PWA (mobile-first).
 

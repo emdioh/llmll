@@ -1,6 +1,6 @@
-# LLMLL
+# LLMLL — LLM Language Learning
 
-A language-learning app that combines a structured curriculum, spaced repetition (FSRS)
+LLMLL (*LLM Language Learning*) is a language-learning app that combines a structured curriculum, spaced repetition (FSRS)
 over everything the learner studies, and an LLM that generates exercises and texts,
 grades free-form sentences and explains grammar. First target: German for Italian/English
 speakers.
@@ -15,6 +15,47 @@ speakers.
 | `backend/` | Python + FastAPI, SQLAlchemy, Alembic — see [`backend/README.md`](backend/README.md) |
 | `frontend/` | React + TypeScript (Vite), PWA — see [`frontend/README.md`](frontend/README.md) |
 | `curriculum/` | Curriculum content as YAML — how to write it: [`curriculum/AUTHORING.md`](curriculum/AUTHORING.md) |
+
+## Quick start (local)
+
+Prerequisites: [uv](https://docs.astral.sh/uv/) (it installs Python 3.11+ for you) and Node.js 22
+with npm. An LLM API key is optional: without one the app runs against a built-in fake LLM, which
+is enough to click around but not to learn from.
+
+```sh
+cp .env.example .env     # add the API key of your LLM provider (see "Choosing the LLM")
+scripts/setup.sh         # once: install dependencies, create the database, import the curriculum
+scripts/dev.sh           # backend + frontend; open http://localhost:5173
+```
+
+On first launch the app asks for a short learner setup and then offers a skippable placement test; after
+that it offers what is due. Your progress lives in the SQLite file `backend/data/llmll.db`.
+
+## Importing the curriculum
+
+The lessons are YAML files in [`curriculum/de/`](curriculum/de/) and reach the app only through an
+import into the database. **Starting the app does not import them** (`scripts/dev.sh` only applies
+database migrations), so run the import after the first setup and every time the YAML changes,
+for example after a `git pull`:
+
+```sh
+scripts/import-curriculum.sh
+```
+
+- It validates everything first and lists all errors as `file:index: message`; nothing is imported
+  if anything is invalid.
+- It is idempotent and never touches your learning history: new entries are added, edited ones
+  are updated in place, and entries that disappeared are marked *suspended* (no longer taught,
+  history kept). The summary shows added / updated / unchanged / suspended counts.
+- If a folder `curriculum-private/de/` exists, it is imported together with the public one. It is
+  gitignored, meant for personal material you must not publish (see
+  [`curriculum/AUTHORING.md`](curriculum/AUTHORING.md) §10). Always import both together: importing
+  only one suspends the other's entries.
+- With Docker or Railway the import runs automatically at every container start, but only for the
+  public `curriculum/` folder (the image does not contain the private one).
+- Without the helper script: `cd backend && uv run python -m app.cli import-curriculum --path ../curriculum/de [--extra ../curriculum-private/de]`.
+
+To write or change lessons, follow [`curriculum/AUTHORING.md`](curriculum/AUTHORING.md).
 
 ## Running everything with Docker
 
