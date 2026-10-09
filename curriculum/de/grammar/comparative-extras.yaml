@@ -1,0 +1,85 @@
+id: gram:comparative-extras
+title_it: "Confronto: weniger, rafforzativi, caso del secondo termine, superlativi particolari"
+title_en: "Comparison extras: weniger, intensifiers, case of the second term, special superlatives"
+level: B1
+requires: ["gram:comparative-superlative", "gram:adjective-endings"]
+diagnostic_tags:
+  form: [weniger-als, nicht-so-wie, intensifier, superlative-ending, superlative-adverb, absolute-superlative, aller-form]
+  irregular_pair: [bald-eher, gern-lieber, wohl-besser, viel-mehr, wenig-weniger]
+  error_type: [wrong-case-second-term, mehr-instead-of-comparative, wrong-intensifier, missing-e-in-superlative, wrong-als-wie, misplaced-als-phrase]
+reference_it: |
+  ## Regola
+  Questo punto completa *Comparativo e superlativo*: copre il confronto "in meno", i rafforzativi,
+  il caso del secondo termine e alcuni superlativi particolari.
+
+  **1. Confronto di minoranza** (due modi, stesso significato):
+
+  | costruzione | esempio |
+  |---|---|
+  | **weniger** + aggettivo (invariato) + **als** | *Der Zug ist weniger voll als der Bus.* |
+  | **nicht so** + aggettivo + **wie** | *Der Zug ist nicht so voll wie der Bus.* |
+
+  **2. Rafforzare il comparativo**: *molto più* si dice **viel** (anche **weit** = di gran lunga,
+  **bedeutend**, **entschieden**); *un po' più* **etwas**; *ancora più* **noch**.
+  Non si usa *sehr* davanti al comparativo: *viel größer*, *noch teurer*, *etwas kälter*.
+
+  **3. Stesso caso nei due termini**: dopo *als* e *wie* il secondo termine ha lo **stesso caso** del primo.
+  *Ich mag ihn mehr als **dich*** (= mi piace più di te: accusativo come *ihn*), ma
+  *Ich helfe ihm öfter als **dir*** (dativo come *ihm*). Se il secondo termine è un soggetto: *Er ist größer als **ich**.*
+
+  **4. Posizione di *als*-frase**: nelle frasi con prefisso separabile, participio o infinito, questi
+  stanno **prima** del secondo termine: *Er steht früher auf **als** ich.* / *Sie hat besser gespielt **als** wir.*
+  Nelle subordinate il verbo coniugato precede *als*: *Ich glaube, dass er klüger ist **als** sie.*
+
+  **5. Forme irregolari da ricordare**
+
+  | positivo | comparativo | superlativo |
+  |---|---|---|
+  | bald | eher | am ehesten |
+  | gern | lieber | am liebsten |
+  | wohl | besser | am besten |
+  | viel | mehr | am meisten |
+  | wenig | weniger | am wenigsten |
+
+  *mehr* e *weniger* non prendono desinenza davanti a un sostantivo senza articolo (*mehr Zeit*, *weniger Geld*).
+  *mehr … als* con due aggettivi serve a confrontare due qualità: *Das Hemd ist mehr grau als blau.*
+
+  **6. Superlativo con -esten**: l'aggettivo che termina in **-d, -t, -s, -ß, -sch, -x, -z** o in vocale prende
+  **-esten**: *am nettesten*, *am heißesten*, *am frischesten*, *am neuesten*. **Eccezioni** (solo **-sten**):
+  *groß → am größten*, gli aggettivi in **-isch** (*am komischsten*) e i participi presenti in **-end** (*am spannendsten*).
+
+  **7. Superlativo con articolo**: si usa **von** o **unter** + dativo, oppure il genitivo o *in* + dativo per i luoghi:
+  *der Jüngste von den Geschwistern*, *das höchste Haus der Stadt* / *in der Stadt*.
+  Il superlativo relativo si rinforza con **aller-** ("il migliore in assoluto"): *das allerbeste Essen*, *am allerliebsten*.
+
+  **8. Avverbi in -(e)ns**: *bestens* (al meglio), *meistens* (per lo più), *höchstens* (al massimo),
+  *wenigstens / mindestens* (almeno), *spätestens* (al più tardi), *frühestens* (non prima di).
+
+  **9. Superlativo assoluto** (senza confronto, = "molto"): *sehr*, *ganz* o più forte **äußerst**, **höchst**,
+  **besonders**, **unheimlich**, **total** + aggettivo di grado positivo: *Er ist äußerst höflich.*
+
+  ## Esempi
+  - *Mein Handy ist weniger teuer als deins.* — Il mio cellulare costa meno del tuo.
+  - *Der Test war nicht so schwer wie der letzte.* — Il test non era difficile come l'ultimo.
+  - *Heute ist es viel kälter als gestern.* — Oggi fa molto più freddo di ieri.
+  - *Ich finde meinen Chef netter als dich.* — Trovo il mio capo più simpatico di te.
+  - *Spätestens um acht bin ich zu Hause.* — Al più tardi alle otto sono a casa.
+  - *Das ist das allerbeste Eis der Stadt.* — È il gelato migliore in assoluto della città.
+
+  ## Errori tipici di chi parla italiano
+  - Il secondo termine di *als/wie* ha lo stesso caso del termine confrontato: **\*Er ist größer als mich** → *Er ist größer als **ich***.
+    Attenzione al significato: *Ich mag ihn mehr als **dich*** = mi piace più di quanto piaccia a me te; *Ich mag ihn mehr als **du*** = lo apprezzo più di quanto lo apprezzi tu. Entrambe sono corrette, ma dicono cose diverse.
+  - **\*mehr interessant** o **\*mehr schnell** → *interessanter*, *schneller*. *mehr … als* serve solo a confrontare due qualità (*mehr grau als blau*).
+  - **\*sehr größer** → *viel größer* (o *weit größer*, *noch größer*): *sehr* non si usa col comparativo.
+  - **\*am größesten** → *am größten*; **\*am heißten** → *am heißesten*; **\*am spannendesten** → *am spannendsten*.
+  - **\*Er ist weniger groß wie ich** → *weniger groß **als** ich*, ma *nicht so groß **wie** ich*.
+  - **\*Er steht als ich früher auf** → *Er steht früher auf als ich*: il secondo termine va dopo il prefisso separabile.
+  - Confondere *gern* e *lieber*: *Ich trinke gern Tee, aber lieber Kaffee, am liebsten Wasser.* Non esiste **\*mehr gern**.
+examples:
+  - {de: "Mein Handy ist weniger teuer als deins.", it: "Il mio cellulare costa meno del tuo."}
+  - {de: "Der Test war nicht so schwer wie der letzte.", it: "Il test non era difficile come l'ultimo."}
+  - {de: "Heute ist es viel kälter als gestern.", it: "Oggi fa molto più freddo di ieri."}
+  - {de: "Ich finde meinen Chef netter als dich.", it: "Trovo il mio capo più simpatico di te."}
+  - {de: "Spätestens um acht bin ich zu Hause.", it: "Al più tardi alle otto sono a casa."}
+  - {de: "Das ist das allerbeste Eis der Stadt.", it: "È il gelato migliore in assoluto della città."}
+  - {de: "Er steht früher auf als ich.", it: "Lui si alza prima di me."}

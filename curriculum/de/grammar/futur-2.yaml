@@ -1,0 +1,48 @@
+id: gram:futur-2
+title_it: "Futuro anteriore (Futur II): werden + participio II + haben/sein"
+title_en: "Future perfect (Futur II)"
+level: B1
+requires: ["gram:futur-1", "gram:perfekt"]
+diagnostic_tags:
+  function: [completed-by-future-time, assumption-past]
+  auxiliary: [haben, sein]
+  error_type: [wrong-auxiliary, wrong-word-order, futur-1-instead-of-futur-2, missing-wohl]
+reference_it: |
+  ## Regola
+  Il **Futur II** si forma con **werden** (presente) + **participio II** + **haben** o **sein** all'infinito (in fondo):
+  *Er wird es gelesen **haben**. Sie wird angekommen **sein**.* L'ausiliare è quello che il verbo ha nel Perfekt.
+
+  | | haben | sein |
+  |---|---|---|
+  | ich | werde gemacht haben | werde gekommen sein |
+  | du | wirst gemacht haben | wirst gekommen sein |
+  | er/sie/es | wird gemacht haben | wird gekommen sein |
+  | wir | werden gemacht haben | werden gekommen sein |
+  | ihr | werdet gemacht haben | werdet gekommen sein |
+  | sie/Sie | werden gemacht haben | werden gekommen sein |
+
+  - **Azione conclusa entro un momento futuro**: *Bis morgen Abend werde ich den Bericht geschrieben haben.* (Entro domani sera avrò scritto il rapporto.)
+  - **Supposizione sul passato**, quasi sempre con *wohl, sicher, bestimmt, schon*: *Er wird den Zug verpasst haben.* (Avrà perso il treno.)
+  - Nella lingua di tutti i giorni è raro: per il futuro si usa spesso il **Perfekt** con un'indicazione di tempo (*Bis morgen habe ich das gemacht.*),
+    per la supposizione il **Perfekt** con *wohl / bestimmt* (*Er hat den Zug wohl verpasst.*).
+  - Nella frase subordinata *werden* va dopo i due infiniti: *Ich hoffe, dass sie bis dahin angekommen sein **wird**.*
+
+  ## Esempi
+  - *In einem Jahr werde ich mein Studium beendet haben.* — Tra un anno avrò finito gli studi.
+  - *Bis Freitag wirst du die Antwort bekommen haben.* — Entro venerdì avrai ricevuto la risposta.
+  - *Sie wird wohl schon abgereist sein.* — Sarà già partita.
+  - *Es hat geklingelt. Das werden die Nachbarn gewesen sein.* — Hanno suonato. Saranno stati i vicini.
+  - *Wir werden bis dahin alles erledigt haben.* — Fino ad allora avremo sbrigato tutto.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa il **futuro anteriore** (*sarà partita*, *avrò finito*) anche per le supposizioni: il tedesco lo conosce, ma lo usa meno.
+    Per le supposizioni è normale il **Perfekt + wohl**: *È già partita → Sie ist schon abgereist; sarà partita → Sie ist wohl abgereist.*
+  - Sbagliare l'**ausiliare**: **\*Sie wird abgereist haben** → *Sie wird abgereist sein.* Vale la stessa regola del Perfekt.
+  - Ordine delle parole: **\*Ich werde haben gemacht** → *Ich werde gemacht haben*. Il participio viene prima dell'infinito *haben/sein*.
+  - **\*Ich würde gemacht haben** non è un futuro (è un Konjunktiv II): per il futuro si usa *werde*.
+  - Dopo *quando / appena* l'italiano ha il futuro anteriore, il tedesco ha di solito il **Perfekt/Präsens**: *Quando avrò finito, ti chiamerò → Wenn ich fertig bin, rufe ich dich an.*
+examples:
+  - {de: "In einem Jahr werde ich mein Studium beendet haben.", it: "Tra un anno avrò finito gli studi."}
+  - {de: "Bis Freitag wirst du die Antwort bekommen haben.", it: "Entro venerdì avrai ricevuto la risposta."}
+  - {de: "Sie wird wohl schon abgereist sein.", it: "Sarà già partita."}
+  - {de: "Das werden die Nachbarn gewesen sein.", it: "Saranno stati i vicini."}

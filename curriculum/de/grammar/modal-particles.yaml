@@ -1,0 +1,52 @@
+id: gram:modal-particles
+title_it: "Particelle modali: doch, mal, ja, denn, eben, halt, aber, eigentlich…"
+title_en: "Modal particles: doch, mal, ja, denn, eben, halt, aber, eigentlich…"
+level: B1
+requires: ["gram:inversion-v2"]
+diagnostic_tags:
+  particle: [doch, mal, ja, denn, eben-halt, aber, eigentlich, schon, wohl, bloss-nur, vielleicht]
+  function: [softening-request, surprise, reminder, resignation, interest-in-question, probability, reinforcement]
+  error_type: [particle-omitted, particle-in-wrong-position, particle-confused-with-conjunction, literal-translation, particle-stressed]
+reference_it: |
+  ## Regola
+  Le **particelle modali** sono piccole parole (*doch, mal, ja, denn…*) tipiche del parlato che non cambiano il contenuto della frase ma ne esprimono
+  l'**atteggiamento** di chi parla: sorpresa, cortesia, insistenza, rassegnazione, interesse. Non hanno una traduzione fissa e spesso in italiano si
+  rendono con il tono o con un'espressione (*ma*, *mica*, *dai*, *pure*, *mai*…).
+
+  - Stanno **dentro la frase**, nel campo centrale (di norma dopo il verbo e dopo i pronomi): *Komm **doch** mal her! Das ist **ja** schön!*
+  - **Non** si trovano al primo posto, non si possono negare e di solito sono **non accentate**.
+  - Molte coincidono con altre parole (*aber, denn, doch, schon, eben*): come particelle hanno però un altro significato e non cambiano l'ordine delle parole.
+
+  | Particella | Uso tipico | Esempio |
+  |---|---|---|
+  | **mal** | rende la richiesta o l'invito più leggero | *Gib mir **mal** den Stift.* |
+  | **doch** | invito insistente, o contraddizione di ciò che si pensava | *Komm **doch** herein! / Du kannst **doch** schwimmen!* |
+  | **ja** | qualcosa di noto o evidente; sorpresa | *Das weißt du **ja**. / Das ist **ja** toll!* |
+  | **denn** | interesse nelle domande | *Wie heißt du **denn**?* |
+  | **aber** | sorpresa, ammirazione nelle esclamazioni | *Du spielst **aber** gut!* |
+  | **eben / halt** | constatazione rassegnata ("è così") | *Das ist **eben** so.* |
+  | **eigentlich** | "in realtà", domanda più ampia o cambio di tema | *Wie spät ist es **eigentlich**?* |
+  | **schon** | rassicurazione o conferma | *Es wird **schon** klappen.* |
+  | **wohl** | probabilità, supposizione | *Er ist **wohl** krank.* |
+  | **bloß / nur** | avvertimento o raccomandazione energica (di solito con imperativo negativo) | *Komm **bloß** nicht zu spät!* |
+  | **vielleicht** | domanda cortese (*per caso*) o forte sorpresa | *Hast du **vielleicht** einen Euro?* |
+
+  ## Esempi
+  - *Setz dich doch!* — Siediti pure!
+  - *Kannst du mal die Tür zumachen?* — Puoi chiudere la porta, per favore?
+  - *Wo wohnst du denn?* — Dove abiti, di preciso?
+  - *Das Wetter ist aber schön heute!* — Ma che bel tempo oggi!
+  - *Er hat wohl den Bus verpasst.* — Avrà perso l'autobus.
+  - *Das ist eben so.* — È così e basta.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano queste sfumature si esprimono con intonazione o gesti; nel tedesco parlato mancano se si omettono: **\*Komm her!** suona duro, *Komm doch mal her!* è più gentile. Non vanno però messe ovunque.
+  - **Non tradurle parola per parola**: *doch* non è sempre "ma/però", *denn* nella domanda non significa "perché" (*Wo bist du denn?* = *Ma dove sei?*).
+  - *denn* e *aber* come **congiunzioni** stanno in posizione 0 e collegano frasi; come particelle sono dentro la frase: *Er ist müde, denn er arbeitet viel* (congiunzione) / *Was machst du denn da?* (particella).
+  - Le particelle non vanno all'inizio della frase e non si accentano: **\*Doch komm herein, bitte** (come particella) → *Komm doch herein.*
+examples:
+  - {de: "Setz dich doch!", it: "Siediti pure!"}
+  - {de: "Kannst du mal die Tür zumachen?", it: "Puoi chiudere la porta, per favore?"}
+  - {de: "Wo wohnst du denn?", it: "Dove abiti, di preciso?"}
+  - {de: "Das Wetter ist aber schön heute!", it: "Ma che bel tempo oggi!"}
+  - {de: "Er hat wohl den Bus verpasst.", it: "Avrà perso l'autobus."}

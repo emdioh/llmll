@@ -1,0 +1,87 @@
+id: gram:konjunktiv-ii-extras
+title_it: "Konjunktiv II: verbi forti e misti, passato, modali e passivo"
+title_en: "Subjunctive II: strong and mixed verbs, past, modals and passive"
+level: B2
+requires: ["gram:konjunktiv-ii", "gram:perfekt", "gram:modal-verbs", "gram:passive-werden"]
+diagnostic_tags:
+  form: [strong-verb-k2, mixed-verb-k2, past-k2, modal-past-k2, passive-k2, wenn-less-inversion]
+  function: [unreal-past, regret, wish, criticism, missed-possibility]
+  error_type: [missing-umlaut, wuerde-in-wenn-clause, wrong-auxiliary, modal-participle-instead-of-infinitive, missing-worden, indicative-instead-of-konjunktiv]
+reference_it: |
+  ## Regola
+  Questo punto completa il **Konjunktiv II** di base (*würde, hätte, wäre, könnte*).
+
+  **1. Verbi forti: Präteritum + umlaut + desinenze.** Si parte dal Präteritum (1a persona) e si aggiungono
+  **-e, -est, -e, -en, -et, -en**; la vocale **a, o, u** prende l'**umlaut**.
+
+  | infinito | Präteritum | Konjunktiv II (ich) |
+  |---|---|---|
+  | kommen | kam | **käme** |
+  | geben | gab | **gäbe** |
+  | fahren | fuhr | **führe** |
+  | gehen | ging | **ginge** (nessun umlaut: *i*) |
+  | bleiben | blieb | **bliebe** |
+  | laufen | lief | **liefe** |
+  | tun | tat | **täte** |
+
+  Per tutte le persone: *du käm**est**, er käme, wir käm**en**, ihr käm**et**, sie käm**en***.
+  I verbi **deboli** non hanno umlaut e la forma coincide con il Präteritum (*ich machte*): per questo si preferisce **würde + infinito**.
+
+  **2. Verbi misti** (*bringen, denken, wissen*): vocale del Präteritum con umlaut, desinenza debole.
+
+  | infinito | Präteritum | Konjunktiv II |
+  |---|---|---|
+  | bringen | brachte | **brächte** |
+  | denken | dachte | **dächte** |
+  | wissen | wusste | **wüsste** |
+
+  Alcune forme forti sono rare o antiquate (*hülfe, stünde*): al loro posto si usa *würde helfen*, *würde stehen*.
+  Le forme correnti sono soprattutto *wäre, hätte, käme, ginge, gäbe, wüsste, bräuchte* e i modali.
+
+  **3. Passato: hätte / wäre + participio II.** Si usa per ciò che **non è accaduto**. Ausiliare come nel Perfekt:
+  *haben* → **hätte**, verbi di moto o cambiamento di stato (*sein*) → **wäre**.
+
+  | | Perfekt (reale) | Konjunktiv II (irreale) |
+  |---|---|---|
+  | haben | ich habe gelernt | ich **hätte** gelernt |
+  | sein | ich bin gefahren | ich **wäre** gefahren |
+
+  Nella condizione irreale si usa il passato in **entrambe** le frasi: *Wenn ich gelernt **hätte**, **hätte** ich bestanden.*
+  Senza *wenn* il verbo ausiliare va **all'inizio** e *wenn* cade: *Hätte ich gelernt, hätte ich bestanden.*
+  Desideri irrealizzabili: *Wenn ich nur mehr gelernt **hätte**! / Hätte ich doch mehr gelernt!*
+
+  **4. Modali nel passato: hätte + doppio infinito.** Il participio del modale viene sostituito dall'**infinito** (*können*, non *gekonnt*);
+  *hätte* sta in seconda posizione, nella frase secondaria è **prima** dei due infiniti:
+  *Ich **hätte** kommen **können**. Wenn ich **hätte** kommen **können**, …*
+  Con modale + verbo: *Du **hättest** mich anrufen **sollen**.* (rimprovero), *Er **hätte** das wissen **müssen**.*
+
+  **5. Passivo.**
+  - Presente: **würde + participio II**: *Wenn das Haus jetzt gebaut würde, …*.
+  - Passato: **wäre + participio II + worden**: *Das Haus **wäre** gebaut **worden**.*
+  - Con modale: *Das Haus **hätte** gebaut **werden müssen**.*
+  Nella frase secondaria: *Wenn das Haus früher gebaut **worden wäre**, …*
+
+  ## Esempi
+  - *Wenn du früher gekommen wärest, hättest du ihn gesehen.* — Se fossi venuto prima, l'avresti visto.
+  - *Hätte ich das gewusst, wäre ich zu Hause geblieben.* — Se l'avessi saputo, sarei rimasto a casa.
+  - *Wir hätten länger bleiben können.* — Avremmo potuto restare più a lungo.
+  - *Du hättest mir das sagen sollen!* — Avresti dovuto dirmelo!
+  - *Wenn ich es wüsste, würde ich es dir sagen.* — Se lo sapessi, te lo direi.
+  - *Der Fehler wäre vermieden worden, wenn jemand aufgepasst hätte.* — L'errore sarebbe stato evitato, se qualcuno avesse fatto attenzione.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il **condizionale composto** (*sarei venuto*) corrisponde a *wäre gekommen*, ma il tedesco usa il passato anche nella frase con *se*:
+    **\*Wenn ich hätte Zeit gehabt, …** → *Wenn ich Zeit gehabt **hätte**, …*; non si dice **\*Wenn ich würde gekommen sein**.
+  - **\*Ich würde gekommen sein** / **\*Ich würde gegangen** non esistono: il passato è *ich wäre gekommen*.
+  - Ausiliare sbagliato: **\*Ich hätte gefahren** per un viaggio → *Ich **wäre** gefahren*; come nel Perfekt (*ich bin gefahren*).
+  - Modale con participio: **\*Ich hätte kommen gekonnt** → *Ich hätte kommen **können***. L'italiano *avrei potuto venire* invece si traduce con *hätte kommen können*.
+  - Dimenticare l'umlaut: **\*ich kame, \*ich fuhre** → *käme, führe*; senza umlaut sarebbe il Präteritum (*kam*, *fuhr*).
+  - Nel passivo dimenticare *worden*: **\*Es wäre gebaut** → *Es wäre gebaut **worden***.
+  - *würde* nella frase con *wenn* (*Wenn ich kommen würde, …*) è frequente nel parlato, ma nello scritto formale si preferisce la forma semplice (*Wenn ich käme, …*) o, con verbi deboli, *wenn* + Präteritum.
+examples:
+  - {de: "Wenn du früher gekommen wärest, hättest du ihn gesehen.", it: "Se fossi venuto prima, l'avresti visto."}
+  - {de: "Hätte ich das gewusst, wäre ich zu Hause geblieben.", it: "Se l'avessi saputo, sarei rimasto a casa."}
+  - {de: "Wir hätten länger bleiben können.", it: "Avremmo potuto restare più a lungo."}
+  - {de: "Du hättest mir das sagen sollen!", it: "Avresti dovuto dirmelo!"}
+  - {de: "Wenn es mehr Zeit gäbe, blieben wir länger.", it: "Se ci fosse più tempo, resteremmo più a lungo."}
+  - {de: "Der Fehler wäre vermieden worden, wenn jemand aufgepasst hätte.", it: "L'errore sarebbe stato evitato, se qualcuno avesse fatto attenzione."}

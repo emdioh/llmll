@@ -1,0 +1,51 @@
+id: gram:futur-1
+title_it: "Futuro (Futur I): werden + infinito"
+title_en: "Future tense (Futur I)"
+level: A2
+requires: ["gram:praesens", "gram:modal-verbs"]
+diagnostic_tags:
+  function: [prediction, intention-promise, assumption-present, command]
+  form: [werden-conjugation, infinitive-at-end]
+  error_type: [wurde-instead-of-werde, zu-before-infinitive, missing-infinitive-at-end, futur-with-time-adverb]
+reference_it: |
+  ## Regola
+  Il **Futur I** si forma con **werden** (al presente) + **infinito**, che va **in fondo** alla frase.
+
+  | | werden | esempio |
+  |---|---|---|
+  | ich | werde | Ich werde kommen. |
+  | du | wirst | Du wirst kommen. |
+  | er/sie/es | wird | Er wird kommen. |
+  | wir | werden | Wir werden kommen. |
+  | ihr | werdet | Ihr werdet kommen. |
+  | sie/Sie | werden | Sie werden kommen. |
+
+  - Usi principali: **previsione** (*Morgen wird es regnen.*), **intenzione o promessa** (*Ich werde dir helfen.*),
+    **supposizione sul presente**, di solito con *wohl, sicher, bestimmt* (*Sie wird wohl noch im Büro sein.* = sarà ancora in ufficio),
+    **ordine energico** (*Du wirst jetzt sofort ins Bett gehen!*).
+  - Nel tedesco di tutti i giorni, per un fatto futuro si usa quasi sempre il **Präsens** con un'indicazione di tempo:
+    *Morgen fahre ich nach Berlin.* Il Futur I è necessario soprattutto per previsioni, promesse e supposizioni.
+  - Nella frase subordinata *werden* va in fondo, dopo l'infinito: *Ich glaube, dass er kommen **wird**.*
+  - Con un modale: *Er wird nicht kommen können.* (infinito + infinito del modale, poi *werden*).
+  - Dopo *werden* l'infinito **non ha zu**; con un verbo separabile resta unito: *Er wird früh aufstehen.*
+
+  ## Esempi
+  - *Nächste Woche wird es kälter werden.* — La prossima settimana farà più freddo.
+  - *Ich werde dich nie vergessen.* — Non ti dimenticherò mai.
+  - *Das wird er nicht schaffen.* — Non ce la farà.
+  - *Wo ist Anna? – Sie wird wohl noch arbeiten.* — Dov'è Anna? – Starà ancora lavorando.
+  - *Wirst du morgen auch dabei sein?* — Ci sarai anche domani?
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa il **futuro semplice** (*verrò*, *sarà*) anche per le supposizioni: in tedesco la supposizione si fa con **werden + wohl** o con *vermutlich*:
+    *Sarà in ufficio → Er wird wohl im Büro sein.*
+  - Confondere **werden** (futuro) con **wurde** (Präteritum di *werden*): **\*Ich wurde kommen** non è un futuro → *Ich werde kommen.*
+  - **\*Ich werde zu kommen**: dopo *werden* l'infinito è **senza zu**.
+  - L'infinito va **in fondo**: **\*Ich werde kommen morgen** → *Ich werde morgen kommen.*
+  - Usare il Futur I dove il tedesco vuole il Präsens con un avverbio: *Domani partirò → Morgen fahre ich ab* (più naturale di *werde abfahren*).
+  - Non si traduce con **werden** il *futuro in subordinate temporali* in cui l'italiano ha il futuro: *Quando verrai, ti vedrò* → *Wenn du kommst, sehe ich dich* (Präsens).
+examples:
+  - {de: "Nächste Woche wird es kälter werden.", it: "La prossima settimana farà più freddo."}
+  - {de: "Ich werde dich nie vergessen.", it: "Non ti dimenticherò mai."}
+  - {de: "Sie wird wohl noch arbeiten.", it: "Starà ancora lavorando."}
+  - {de: "Wirst du morgen auch dabei sein?", it: "Ci sarai anche domani?"}

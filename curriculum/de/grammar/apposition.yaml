@@ -1,0 +1,43 @@
+id: gram:apposition
+title_it: "Apposizione: stesso caso del nome e virgole"
+title_en: "Apposition"
+level: B1
+requires: ["gram:genitive-case"]
+diagnostic_tags:
+  case: [nom, akk, dat, gen]
+  apposition_type: [simple-title-name, with-comma, date]
+  error_type: [nominative-instead-of-agreeing-case, missing-comma, wrong-case-after-prep, genitive-apposition-error]
+reference_it: |
+  ## Regola
+  L'**apposizione** è un sostantivo (o un gruppo nominale) che aggiunge informazioni su un altro sostantivo. Va **sempre nello stesso caso** del nome a cui si riferisce, anche dopo una preposizione.
+
+  | Caso | Esempio |
+  |---|---|
+  | Nominativo | *Das ist Anna, **meine Kollegin**.* |
+  | Accusativo | *Ich kenne Anna, **meine Kollegin**.* / *Ich besuche Herrn Roth, **den Direktor**.* |
+  | Dativo | *Ich spreche mit Anna, **meiner Kollegin**.* |
+  | Genitivo | *Das ist das Auto meines Onkels, **des Arztes**.* |
+
+  - L'apposizione **lunga** (con articolo o possessivo) è separata da **virgole**: *Herr Roth, der neue Chef, kommt morgen.* La virgola chiude l'apposizione anche nel mezzo della frase.
+  - Un'apposizione **breve** con titolo o parentela non ha virgole e spesso non ha articolo: *Frau Doktor Roth*, *Onkel Karl*.
+  - Le **date** hanno l'apposizione nel caso richiesto dalla frase: *Heute ist Montag, **der** 5. Mai* (nominativo); *Ich komme am Montag, **dem** 5. Mai* (dativo, perché *am* regge il dativo). Nell'uso si trova anche l'accusativo (*am Montag, den 5. Mai*, *Heute ist Montag, den 5. Mai*): è molto diffuso e accettato, il caso concordato col nome è però *dem* / *der*.
+  - L'apposizione viene dopo il nome. Con i nomi di città si usa l'apposizione senza preposizione: *die Stadt Köln*, non *die Stadt von Köln*.
+
+  ## Esempi
+  - *Ich telefoniere mit Maria, meiner besten Freundin.* — Telefono con Maria, la mia migliore amica.
+  - *Kennst du Herrn Weber, den neuen Lehrer?* — Conosci il signor Weber, il nuovo insegnante?
+  - *Wir wohnen in der Stadt Hamburg.* — Abitiamo nella città di Amburgo.
+  - *Die Tochter von Frau Ernst, unserer Nachbarin, spielt Geige.* — La figlia della signora Ernst, la nostra vicina, suona il violino.
+  - *Am Freitag, dem 13., habe ich Geburtstag.* — Venerdì 13 è il mio compleanno.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano non ha casi, quindi l'apposizione resta uguale: *telefono a Maria, la mia amica*. In tedesco va concordata: **\*Ich telefoniere mit Maria, meine beste Freundin** → *meiner besten Freundin*.
+  - Si dimentica la virgola: **\*Ich kenne Anna meine Kollegin** → *Ich kenne Anna, meine Kollegin.*
+  - Si traduce *di* davanti all'apposizione: *la città di Roma* si dice *die Stadt Rom*, non **\*die Stadt von Rom**.
+  - Con la data si scrive spesso il nominativo anche dopo *am*: **\*am Montag, der 5. Mai** → *am Montag, dem 5. Mai* (il dativo è la forma più rigorosa; l'accusativo *den* è molto diffuso).
+examples:
+  - {de: "Ich telefoniere mit Maria, meiner besten Freundin.", it: "Telefono con Maria, la mia migliore amica."}
+  - {de: "Kennst du Herrn Weber, den neuen Lehrer?", it: "Conosci il signor Weber, il nuovo insegnante?"}
+  - {de: "Wir wohnen in der Stadt Hamburg.", it: "Abitiamo nella città di Amburgo."}
+  - {de: "Die Tochter von Frau Ernst, unserer Nachbarin, spielt Geige.", it: "La figlia della signora Ernst, la nostra vicina, suona il violino."}
+  - {de: "Am Freitag, dem 13., habe ich Geburtstag.", it: "Venerdì 13 è il mio compleanno."}

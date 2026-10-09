@@ -1,0 +1,47 @@
+id: gram:indirect-questions
+title_it: "Domande indirette: parola interrogativa e ob"
+title_en: "Indirect questions: question words and ob"
+level: A2
+requires: ["gram:question-words", "gram:verb-final-subordinate"]
+diagnostic_tags:
+  question_type: [w-question, yes-no-question, preposition-question]
+  trigger: [wissen, fragen, sagen, verstehen, wollen-wissen, polite-request]
+  error_type: [verb-not-final, ob-missing, wenn-instead-of-ob, pronoun-not-adapted, question-mark-wrong, was-vs-dass]
+reference_it: |
+  ## Regola
+  Una **domanda indiretta** è una domanda inserita in un'altra frase (*Ich weiß nicht, …*, *Weißt du, …?*, *Er fragt, …*).
+  Diventa una **subordinata**: il verbo coniugato va **in fondo**, preceduta da virgola, e **non c'è inversione**.
+
+  | domanda diretta | domanda indiretta |
+  |---|---|
+  | Wo wohnt er? | Ich weiß nicht, **wo** er **wohnt**. |
+  | Wann fährt der Zug ab? | Sie fragt, **wann** der Zug **abfährt**. |
+  | Mit wem sprichst du? | Er will wissen, **mit wem** du **sprichst**. |
+  | Kommt sie heute? (sì/no) | Ich weiß nicht, **ob** sie heute **kommt**. |
+
+  - Con una **parola interrogativa** (*wer, was, wo, wann, warum, wie, welcher, wohin, woher, wie viel…*) la parola stessa introduce la subordinata.
+  - Se la domanda diretta **non ha parola interrogativa** (risposta sì/no), si inserisce **ob**.
+  - La preposizione resta unita alla parola interrogativa: *an wen, mit wem, wofür, worauf.*
+  - I pronomi e le persone si adattano al punto di vista: *Er fragt: „Wo wohnst **du**?“* → *Er fragt, wo **ich** wohne.*
+  - Il punto interrogativo dipende dalla frase principale: *Weißt du, wie spät es ist?* (domanda) / *Ich weiß nicht, wie spät es ist.* (affermazione).
+  - Verbi tipici: *fragen, wissen, sagen, erklären, verstehen, sich fragen*; formule di cortesia: *Können Sie mir sagen, …? Darf ich fragen, …?*
+
+  ## Esempi
+  - *Ich möchte wissen, wann das Konzert beginnt.* — Vorrei sapere quando comincia il concerto.
+  - *Weißt du, wie viel das kostet?* — Sai quanto costa?
+  - *Kannst du mir sagen, ob das Museum heute offen ist?* — Puoi dirmi se il museo oggi è aperto?
+  - *Er fragt, mit wem ich ins Kino gehe.* — Chiede con chi vado al cinema.
+  - *Ich verstehe nicht, warum sie nicht anruft.* — Non capisco perché non telefona.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano l'ordine non cambia (*mi chiedo dove abita*). In tedesco il verbo va in fondo:
+    **\*Ich weiß nicht, wo wohnt er** → *Ich weiß nicht, wo er wohnt.*
+  - **se** (domanda sì/no) = **ob**, non *wenn*: **\*Ich frage, wenn er kommt** → *Ich frage, ob er kommt*. E non si omette: **\*Ich weiß nicht, er kommt**.
+  - Non usare **dass** per le domande: **\*Ich weiß nicht, dass er wohnt** significa un'altra cosa (*Non so che abita…*).
+  - Non dimenticare di cambiare **persona**: **\*Er fragt, wo wohnst du** → *Er fragt, wo ich wohne*.
+examples:
+  - {de: "Ich möchte wissen, wann das Konzert beginnt.", it: "Vorrei sapere quando comincia il concerto."}
+  - {de: "Weißt du, wie viel das kostet?", it: "Sai quanto costa?"}
+  - {de: "Kannst du mir sagen, ob das Museum heute offen ist?", it: "Puoi dirmi se il museo oggi è aperto?"}
+  - {de: "Er fragt, mit wem ich ins Kino gehe.", it: "Chiede con chi vado al cinema."}
+  - {de: "Ich verstehe nicht, warum sie nicht anruft.", it: "Non capisco perché non telefona."}

@@ -1,0 +1,45 @@
+id: gram:infinitive-um-ohne-statt
+title_it: "Infinitive con um … zu, ohne … zu, (an)statt … zu"
+title_en: "Infinitive clauses with um … zu, ohne … zu, (an)statt … zu"
+level: B1
+requires: ["gram:infinitive-zu"]
+diagnostic_tags:
+  construction: [um-zu, ohne-zu, statt-zu, ohne-dass, statt-dass, zu-um-zu]
+  error_type: [different-subject, negation-in-ohne-zu, zu-position-separable, zu-position-reflexive, missing-comma, preposition-for-um-zu, ohne-vs-ohne-dass]
+reference_it: |
+  ## Regola
+  Tre congiunzioni introducono un **infinito con zu** (comma obbligatoria prima di esse). L'infinito sta in fondo, *zu* subito prima, e il soggetto è quello della principale.
+
+  | struttura | senso | esempio |
+  |---|---|---|
+  | **um … zu** | scopo ("per") | *Er spart, **um** ein Auto **zu** kaufen.* |
+  | **ohne … zu** | mancanza ("senza") | *Sie ging, **ohne** sich **zu** verabschieden.* |
+  | **(an)statt … zu** | alternativa ("invece di") | *Statt zu lernen, schläft er.* |
+  | **zu / genug … , um … zu** | "troppo/abbastanza … per" | *Es ist zu laut, um zu schlafen.* |
+
+  - **Verbi separabili**: *zu* si inserisce tra prefisso e verbo (*um aufzuräumen, ohne anzurufen*). **Verbi riflessivi**: il pronome precede (*um sich zu erholen*).
+  - **Un solo soggetto**. Se il soggetto della subordinata è diverso, si usa una frase con congiunzione: *damit* (al posto di *um … zu*), **ohne dass**, **(an)statt dass** + verbo in fondo.
+    *Sie ging, ohne dass jemand es merkte.* / *Er schaut Fernsehen, statt dass er lernt.*
+  - **ohne … zu** non contiene di norma *nicht, nichts* o *kein*, perché *ohne* è già negativo: *ohne etwas zu sagen / ohne ein Wort zu sagen* (non **\*ohne nichts zu sagen**).
+  - Con un sostantivo al posto dell'infinito: **ohne** + accusativo (*ohne Hilfe*), **statt** + genitivo (*statt des Autos*), **für** + accusativo per lo scopo (*für den Urlaub*).
+
+  ## Esempi
+  - *Ich gehe früh ins Bett, um morgen fit zu sein.* — Vado a letto presto per essere in forma domani.
+  - *Er hat das Fenster geöffnet, um frische Luft hereinzulassen.* — Ha aperto la finestra per far entrare aria fresca.
+  - *Sie verließ den Raum, ohne ein Wort zu sagen.* — Lasciò la stanza senza dire una parola.
+  - *Statt mit dem Zug zu fahren, nehmen wir das Auto.* — Invece di andare in treno, prendiamo la macchina.
+  - *Er ist zu müde, um noch Auto zu fahren.* — È troppo stanco per guidare ancora.
+
+  ## Errori tipici di chi parla italiano
+  - **per + infinito** = *um … zu* (con **zu**); **\*für lernen**, **\*um lernen**, **\*für zu lernen** → *um zu lernen*.
+  - **senza + infinito** = *ohne … zu*: **\*ohne sagen** → *ohne zu sagen*. **\*ohne nichts zu sagen** → *ohne etwas zu sagen* (anche se in italiano si direbbe "senza dire nulla").
+  - Soggetto diverso: **\*Ich öffne die Tür, um du gehen kannst** → *damit du gehen kannst*; **\*ohne die anderen es merken** → *ohne dass die anderen es merken*.
+  - Con i separabili: **\*um zu aufräumen** → *um aufzuräumen*; con i riflessivi: **\*um zu sich entspannen** → *um sich zu entspannen*.
+  - **invece di + sostantivo** non è *statt zu*: *invece del treno* = *statt des Zuges*.
+  - La virgola prima di *um / ohne / statt* è obbligatoria in tedesco: **\*Er ging ohne ein Wort zu sagen**.
+examples:
+  - {de: "Ich gehe früh ins Bett, um morgen fit zu sein.", it: "Vado a letto presto per essere in forma domani."}
+  - {de: "Er hat das Fenster geöffnet, um frische Luft hereinzulassen.", it: "Ha aperto la finestra per far entrare aria fresca."}
+  - {de: "Sie verließ den Raum, ohne ein Wort zu sagen.", it: "Lasciò la stanza senza dire una parola."}
+  - {de: "Statt mit dem Zug zu fahren, nehmen wir das Auto.", it: "Invece di andare in treno, prendiamo la macchina."}
+  - {de: "Er ist zu müde, um noch Auto zu fahren.", it: "È troppo stanco per guidare ancora."}

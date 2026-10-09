@@ -1,0 +1,54 @@
+id: gram:indefinite-pronouns
+title_it: "Pronomi indefiniti: man, jemand, niemand, etwas, nichts, einer, welcher, irgend-"
+title_en: "Indefinite pronouns: man, jemand, niemand, etwas, nichts, einer, welcher, irgend-"
+level: A2
+requires: ["gram:personal-pronouns"]
+diagnostic_tags:
+  pronoun: [man, jemand-niemand, etwas-nichts, alles, einer-keiner, welcher, irgend-compounds]
+  case: [nom, akk, dat]
+  error_type: [man-with-plural-verb, man-as-object, missing-ending-einen, kein-instead-of-keinen, welche-for-quantity, jemand-case]
+reference_it: |
+  ## Regola
+  Gli indefiniti indicano persone o cose non precisate.
+
+  | forma | significato | note |
+  |---|---|---|
+  | **man** | si, uno, la gente | solo **nominativo**; verbo alla **3a persona singolare** |
+  | **jemand** / **niemand** | qualcuno / nessuno | acc. *jemanden, niemanden*; dat. *jemandem, niemandem* |
+  | **etwas** / **nichts** | qualcosa / niente | invariabili |
+  | **alles** | tutto | verbo singolare |
+  | **irgend-** | rafforza l'indeterminatezza ("un qualunque") | *irgendjemand, irgendetwas, irgendwo, irgendwann, irgendwie* |
+
+  - *man* sostituisce il "si" impersonale: *Hier spricht man Deutsch.* Per l'accusativo e il dativo si usano le forme di *einer*: *Das kann **einem** passieren. Das macht **einen** müde.*
+  - **einer / keiner** stanno al posto di un sostantivo già noto ("uno", "nessuno") e hanno le desinenze dell'articolo determinativo:
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | einer / keiner | eine / keine | ein(e)s / kein(e)s | keine |
+  | Akk. | einen / keinen | eine / keine | ein(e)s / kein(e)s | keine |
+  | Dat. | einem / keinem | einer / keiner | einem / keinem | keinen |
+
+  *Hast du einen Bleistift? — Nein, ich habe keinen.*
+  - **welche / welches / welcher** = "alcuni, un po' di" (plurale o non numerabile, senza quantità precisa): *Brauchst du Eier? — Ich habe welche. Möchtest du Brot? — Ja, ich nehme welches.*
+
+  ## Esempi
+  - *In Italien isst man spät zu Abend.* — In Italia si cena tardi.
+  - *Ist jemand da? — Nein, niemand.* — C'è qualcuno? — No, nessuno.
+  - *Ich möchte etwas trinken, aber ich habe nichts dabei.* — Vorrei bere qualcosa, ma non ho niente con me.
+  - *Brauchst du einen Stift? — Danke, ich habe schon einen.* — Ti serve una penna? — Grazie, ne ho già una.
+  - *Wir haben kein Brot mehr. Ich kaufe welches.* — Non abbiamo più pane. Ne compro.
+  - *Hast du irgendetwas gehört?* — Hai sentito qualcosa?
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *si mangiano* concorda con l'oggetto; in tedesco *man* vuole sempre il **singolare**: **\*Man essen viele Kartoffeln** → *Man isst viele Kartoffeln.*
+  - *Man* esiste solo al nominativo: **\*Das macht man müde** → *Das macht **einen** müde.*
+  - Il "ne" italiano con un numero (*ne ho uno*) si rende con *einer/keiner* e la **desinenza è obbligatoria**, secondo il genere del sostantivo sottinteso: **\*Ich habe ein** (riferito a *Stift*, m.) → *Ich habe einen.* **\*Ich habe kein** → *Ich habe keinen / keine / keins.*
+  - Il "ne" che indica una quantità non precisata si rende con **welche / welches**, non con un pronome personale: **\*Ich habe sie Äpfel** → *Ich habe welche.*
+  - *Nessuno/niente* in una frase con verbo: il tedesco non ha negazione doppia: **\*Niemand non ist da** → *Niemand ist da.* **\*Ich sehe nicht niemanden** → *Ich sehe niemanden.*
+  - *Jemand* con accusativo/dativo: **\*Ich sehe jemand** è colloquiale; standard *jemanden*, *mit jemandem*.
+examples:
+  - {de: "In Italien isst man spät zu Abend.", it: "In Italia si cena tardi."}
+  - {de: "Ist jemand da? Nein, niemand.", it: "C'è qualcuno? No, nessuno."}
+  - {de: "Ich möchte etwas trinken, aber ich habe nichts dabei.", it: "Vorrei bere qualcosa, ma non ho niente con me."}
+  - {de: "Brauchst du einen Stift? Danke, ich habe schon einen.", it: "Ti serve una penna? Grazie, ne ho già una."}
+  - {de: "Wir haben kein Brot mehr. Ich kaufe welches.", it: "Non abbiamo più pane. Ne compro."}

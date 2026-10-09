@@ -1,0 +1,46 @@
+id: gram:concessive-clauses
+title_it: "Subordinate concessive: obwohl, auch wenn, trotzdem"
+title_en: "Concessive clauses: obwohl, auch wenn, trotzdem"
+level: B1
+requires: ["gram:verb-final-subordinate"]
+diagnostic_tags:
+  connector: [obwohl, obgleich, auch-wenn, selbst-wenn, trotzdem, trotz]
+  error_type: [obwohl-with-v2, trotzdem-with-verb-final, obwohl-vs-trotzdem, aber-after-obwohl, auch-wenn-vs-obwohl, trotz-with-clause]
+reference_it: |
+  ## Regola
+  Una concessiva indica un fatto che **non impedisce** quello della principale ("nonostante…"). Il tedesco ha tre strutture diverse
+  che in italiano si traducono con parole simili.
+
+  | struttura | ordine delle parole | esempio |
+  |---|---|---|
+  | **obwohl** (+ *obgleich, obschon*, più formali) | **subordinata**: verbo in fondo | *Obwohl er müde ist, arbeitet er weiter.* |
+  | **trotzdem** (avverbio, "ciononostante") | **principale**: verbo in 2ª posizione dopo *trotzdem* | *Er ist müde. **Trotzdem arbeitet** er weiter.* |
+  | **trotz** + genitivo (preposizione) | nessuna frase, solo un gruppo nominale | *Trotz der Müdigkeit arbeitet er weiter.* |
+
+  - **obwohl** introduce un fatto **reale** ("sebbene sia vero che…"). Per un fatto solo **ipotetico** si usa **auch wenn / selbst wenn** ("anche se, ammesso che"):
+    *Auch wenn es regnet, gehen wir spazieren.* (non sappiamo se pioverà).
+  - Quando la subordinata apre la frase, la principale comincia con il verbo: *Obwohl es regnet, gehen wir spazieren.*
+  - Dopo **obwohl** non si mette *aber* o *trotzdem* nella principale, perché l'idea di contrasto c'è già.
+  - **trotz** regge il genitivo (nel parlato spesso il dativo: *trotz dem Regen*, da evitare nello scritto).
+  - **trotzdem** può stare in posizione 1 (con il verbo subito dopo) o più avanti nella principale: *Wir gehen trotzdem spazieren.*
+
+  ## Esempi
+  - *Obwohl das Essen teuer war, haben wir es genossen.* — Sebbene il cibo fosse caro, ce lo siamo goduti.
+  - *Sie fährt Rad, obwohl es regnet.* — Va in bici, benché piova.
+  - *Auch wenn du mich bittest, sage ich nichts.* — Anche se me lo chiedi, non dico niente.
+  - *Es regnet. Trotzdem gehen wir spazieren.* — Piove. Ciononostante andiamo a passeggiare.
+  - *Trotz des Regens gehen wir spazieren.* — Nonostante la pioggia andiamo a passeggiare.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa **anche se / sebbene / nonostante / però** per tutto. Il tedesco distingue la funzione:
+    **\*Obwohl es regnet, trotzdem gehen wir** → *Obwohl es regnet, gehen wir*. (due connettori insieme: ne basta uno)
+  - **\*Er ist müde, trotzdem er arbeitet** → *Er ist müde, trotzdem arbeitet er* (dopo *trotzdem* il verbo è subito secondo).
+  - **\*Obwohl er ist müde, …** → *Obwohl er müde ist, …* (verbo in fondo).
+  - **\*Trotz es regnet** → *Trotz des Regens* o *Obwohl es regnet*: *trotz* regge un sostantivo, mai una frase.
+  - **\*Obwohl es regnet, aber wir gehen** → senza *aber*.
+examples:
+  - {de: "Obwohl das Essen teuer war, haben wir es genossen.", it: "Sebbene il cibo fosse caro, ce lo siamo goduti."}
+  - {de: "Sie fährt Rad, obwohl es regnet.", it: "Va in bici, benché piova."}
+  - {de: "Auch wenn du mich bittest, sage ich nichts.", it: "Anche se me lo chiedi, non dico niente."}
+  - {de: "Es regnet. Trotzdem gehen wir spazieren.", it: "Piove. Ciononostante andiamo a passeggiare."}
+  - {de: "Trotz des Regens gehen wir spazieren.", it: "Nonostante la pioggia andiamo a passeggiare."}

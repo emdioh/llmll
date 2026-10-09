@@ -1,0 +1,55 @@
+id: gram:time-date-prices
+title_it: "Ora, data, anni e prezzi"
+title_en: "Telling time, dates, years and prices"
+level: A1
+requires: ["gram:numbers"]
+diagnostic_tags:
+  topic: [clock-time, date, year, weekday-month, price]
+  register: [official, colloquial]
+  error_type: [halb-misread, wrong-preposition-time, ordinal-not-declined, year-with-preposition, wrong-price-form]
+reference_it: |
+  ## Regola
+  **L'ora.** Si chiede *Wie spät ist es?* o *Wie viel Uhr ist es?*; per l'orario di un evento *Um wie viel Uhr …?* / *Wann …?* Si risponde con **um** + ora.
+
+  | ora | uso colloquiale | uso ufficiale (24 ore) |
+  |---|---|---|
+  | 8:00 | acht Uhr | acht Uhr |
+  | 8:15 | Viertel nach acht | acht Uhr fünfzehn |
+  | 8:30 | **halb neun** | acht Uhr dreißig |
+  | 8:45 | Viertel vor neun | acht Uhr fünfundvierzig |
+  | 8:10 | zehn nach acht | acht Uhr zehn |
+  | 8:20 | zwanzig nach acht | acht Uhr zwanzig |
+  | 15:05 | fünf nach drei | fünfzehn Uhr fünf |
+
+  - **halb** indica la mezz'ora che **precede** l'ora indicata: *halb neun* = 8:30 (mezz'ora verso le nove). Per 8:25 e 8:35 si dice *fünf vor halb neun* e *fünf nach halb neun*.
+  - Per gli orari ufficiali (treni, televisione, appuntamenti) si usano le 24 ore: *Der Zug fährt um 17 Uhr 40 ab.*
+
+  **La data.** Si chiede *Der Wievielte ist heute?* o *Welches Datum haben wir heute?* Il giorno è un **ordinale** (con il punto in cifre):
+  - Gli ordinali fino al 19° hanno **-te** (*der zweite, vierte, fünfte*; irregolari: *erste, dritte, siebte*), dal 20° **-ste** (*der zwanzigste*). Declinano come aggettivi: *der fünfte Mai* (nom.), *am fünften Mai* (dat.).
+  - *Heute ist **der** 5. Mai* (nominativo). Con *am* + dativo: *Am **fünften** Mai habe ich Geburtstag.* L'ordinale prende **-n** dopo *am*.
+  - Giorni della settimana e parti del giorno: **am** *Montag, am Morgen, am Abend*; ma *in der Nacht*; con **-s** valore ripetuto: *montags, morgens, abends.*
+  - Mesi e stagioni: **im** *Mai, im Winter.*
+  - Anni: da soli, **senza preposizione**: *1980 sind wir umgezogen* oppure **im Jahr** *1980*. Gli anni fino al 1999 si leggono a centinaia: *1985 = neunzehnhundertfünfundachtzig*; dal 2000 come numero normale: *2024 = zweitausendvierundzwanzig*.
+  - I secoli usano l'ordinale: *im 19. Jahrhundert.*
+
+  **I prezzi.** *Was kostet das? / Wie viel kostet das? / Wie teuer ist das?* Risposta: *Das kostet 3,50 €* = *drei Euro fünfzig.* Dopo un numero, **Euro** e **Cent** restano invariati al plurale: *zwei Euro, fünf Cent.* Con la virgola decimale si dice il numero dei centesimi, senza *e*.
+
+  ## Esempi
+  - *Der Film beginnt um Viertel nach acht.* — Il film inizia alle otto e un quarto.
+  - *Wir treffen uns um halb eins.* — Ci vediamo alle dodici e mezza (12:30).
+  - *Mein Geburtstag ist am zweiten März.* — Il mio compleanno è il due marzo.
+  - *Er ist 1998 nach Berlin gezogen.* — Si è trasferito a Berlino nel 1998.
+  - *Wie teuer ist die Jacke? — Sie kostet neunundvierzig Euro neunzig.* — Quanto costa la giacca? — Costa quarantanove euro e novanta.
+
+  ## Errori tipici di chi parla italiano
+  - **halb** va letto in avanti: *halb neun* **non** è le 9:30 (come "le nove e mezza") ma le **8:30**. **\*halb neun = 9:30** è l'errore più comune.
+  - In italiano si dice *nel 1980*; in tedesco **\*in 1980** è sbagliato: *1980* da solo, oppure *im Jahr 1980.*
+  - Data con *am*: **\*am fünfte Mai** → *am fünften Mai* (dativo, quindi -n); non confondere con *Heute ist der fünfte Mai.*
+  - Per i giorni si usa **am**, non *in*: **\*in Montag** → *am Montag*; per i mesi *im* (**\*am Mai**).
+  - **\*zwei Euros** non è standard: *zwei Euro*; nei prezzi si legge *Euro* e *Cent* senza congiunzione (*ein Euro zwanzig*, non "un euro e venti").
+examples:
+  - {de: "Der Film beginnt um Viertel nach acht.", it: "Il film inizia alle otto e un quarto."}
+  - {de: "Wir treffen uns um halb eins.", it: "Ci vediamo alle dodici e mezza."}
+  - {de: "Mein Geburtstag ist am zweiten März.", it: "Il mio compleanno è il due marzo."}
+  - {de: "Er ist 1998 nach Berlin gezogen.", it: "Si è trasferito a Berlino nel 1998."}
+  - {de: "Wie teuer ist die Jacke? — Sie kostet neunundvierzig Euro neunzig.", it: "Quanto costa la giacca? — Costa quarantanove euro e novanta."}

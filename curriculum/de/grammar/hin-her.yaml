@@ -1,0 +1,51 @@
+id: gram:hin-her
+title_it: "hin e her: direzione del movimento (hinein, heraus, rauf, runter...)"
+title_en: "hin and her: direction of movement (hinein, heraus, rauf, runter...)"
+level: A2
+requires: ["gram:adverbs-time-place-manner"]
+diagnostic_tags:
+  direction: [hin, her, wohin, woher, wo]
+  form: [full, colloquial-short, compound-with-verb]
+  error_type: [wo-instead-of-wohin, hin-her-confused, missing-hin-her, wrong-position]
+reference_it: |
+  ## Regola
+  Tre domande di luogo: **Wo?** (stato in luogo), **Wohin?** (verso dove?), **Woher?** (da dove?). Per il movimento il tedesco aggiunge ad avverbi e verbi **hin** o **her**, secondo la direzione vista da chi parla (o dal punto di riferimento).
+
+  | | direzione | domanda | esempio |
+  |---|---|---|---|
+  | **hin** | **allontanamento**, "là" | Wohin? | Wohin gehst du? — Ich gehe **dorthin**. |
+  | **her** | **avvicinamento**, "qui" | Woher? | Woher kommst du? — Komm **her**! |
+
+  - Avverbi semplici: **hier** (qui), **da / dort** (là), **dorthin** (là, moto verso), **hierher** (qui, moto verso), **dorther** (da là), **woher** (da dove), **wohin** (verso dove).
+  - Con le preposizioni si formano le coppie di direzione:
+
+  | verso/da | allontanamento (hin-) | avvicinamento (her-) | forma parlata |
+  |---|---|---|---|
+  | dentro | hinein | herein | **rein** |
+  | fuori | hinaus | heraus | **raus** |
+  | su | hinauf | herauf | **rauf** |
+  | giù | hinunter | herunter | **runter** |
+  | oltre/di là | hinüber | herüber | **rüber** |
+
+  - Nel parlato si usano soprattutto le forme brevi (*rein, raus, rauf, runter, rüber*), uguali per hin- e her-.
+  - Questi elementi formano verbi **separabili**: *hineingehen, herauskommen, hinaufsteigen*; la parte separata va in fondo alla frase: *Komm bitte herein! Sie geht in die Küche hinein.*
+  - Frasi fisse: *hin und zurück* (andata e ritorno), *hin und her* (avanti e indietro), *hin und wieder* (ogni tanto).
+
+  ## Esempi
+  - *Wohin fährst du im Urlaub? — Nach Spanien.* — Dove vai in vacanza? — In Spagna.
+  - *Woher kommt dein Freund? — Aus Kanada.* — Di dove è il tuo amico? — Del Canada.
+  - *Es regnet! Komm schnell herein!* — Piove! Vieni dentro in fretta!
+  - *Die Katze springt aus dem Fenster hinaus.* — Il gatto salta fuori dalla finestra.
+  - *Der Aufzug ist kaputt, wir müssen zu Fuß hinaufgehen.* — L'ascensore è rotto, dobbiamo salire a piedi.
+  - *Eine Fahrkarte nach Hamburg, hin und zurück, bitte.* — Un biglietto per Amburgo, andata e ritorno, per favore.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano dice "dove" per stato e moto (*dove sei? / dove vai?*): in tedesco **wo** (stato) ≠ **wohin** (moto) ≠ **woher** (provenienza): **\*Wo gehst du?** → *Wohin gehst du?* Nel parlato *Wo gehst du hin?* è corretto, con **hin** alla fine.
+  - Anche **hier** ≠ **hierher** e **dort** ≠ **dorthin**: **\*Komm hier!** → *Komm hierher!* (o *Komm her!*); **\*Ich gehe dort** (come "vado là") → *Ich gehe dorthin.* (*Ich gehe dort* indica solo il luogo in cui cammino)
+  - **hin** e **her** non sono intercambiabili: chi è dentro la stanza e invita qualcuno a entrare dice *Komm herein!* (verso di me); *Geh hinein!* manda qualcuno dentro, lontano da chi parla. Nel parlato *Komm rein!* risolve il problema.
+examples:
+  - {de: "Wohin fährst du im Urlaub?", it: "Dove vai in vacanza?"}
+  - {de: "Woher kommt dein Freund?", it: "Di dove è il tuo amico?"}
+  - {de: "Es regnet! Komm schnell herein!", it: "Piove! Vieni dentro in fretta!"}
+  - {de: "Die Katze springt aus dem Fenster hinaus.", it: "Il gatto salta fuori dalla finestra."}
+  - {de: "Eine Fahrkarte nach Hamburg, hin und zurück, bitte.", it: "Un biglietto per Amburgo, andata e ritorno, per favore."}

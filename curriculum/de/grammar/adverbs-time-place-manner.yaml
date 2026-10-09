@@ -1,0 +1,48 @@
+id: gram:adverbs-time-place-manner
+title_it: "Avverbi di tempo, luogo e modo"
+title_en: "Adverbs of time, place and manner"
+level: A1
+requires: ["gram:svo-word-order", "gram:adverb-fronting"]
+diagnostic_tags:
+  adverb_type: [time, place, manner, degree, frequency]
+  error_type: [adjective-ending-on-adverb, sehr-vs-viel, zu-vs-zu-viel, gern-lieber-confusion, erst-vs-nur, wrong-word-order]
+reference_it: |
+  ## Regola
+  Gli **avverbi** non si declinano. Rispondono a **Wann? / Wie oft?** (tempo), **Wo?** (luogo), **Wie?** (modo).
+
+  | tipo | esempi |
+  |---|---|
+  | tempo (*Wann?*) | heute, gestern, morgen, jetzt, bald, später, schon, noch |
+  | frequenza (*Wie oft?*) | immer, oft, manchmal, selten, nie; *montags, morgens, abends* |
+  | luogo (*Wo?*) | hier, da, dort, oben, unten, links, rechts, vorne, hinten, draußen, überall |
+  | modo (*Wie?*) | gern, schnell, langsam, gut, leider, vielleicht, zusammen, allein |
+  | grado | sehr, ziemlich, ganz, zu, fast, besonders |
+
+  - **Aggettivo e avverbio hanno la stessa forma**: *Der Zug ist schnell. Der Zug fährt schnell.* L'aggettivo usato come avverbio **non prende desinenze** (diversamente dall'italiano *veloce / velocemente*).
+  - **gern** esprime che qualcosa piace: *Ich esse gern Pizza.* Comparativo **lieber** (preferisco) e superlativo **am liebsten** (preferisco di tutto): *Ich trinke gern Tee, lieber Kaffee, am liebsten Wasser.*
+  - **sehr** (molto) con aggettivi, avverbi e verbi di intensità; **viel** con verbi di quantità e davanti a sostantivi: *Es ist sehr kalt. Er arbeitet viel. Sie hat viel Arbeit.* **zu** (troppo) davanti ad aggettivi/avverbi; **zu viel** davanti a un sostantivo o da solo.
+  - **ziemlich** (abbastanza) davanti ad aggettivi; **genug** (abbastanza, a sufficienza) dopo l'aggettivo o con un sostantivo: *Er ist alt genug. Wir haben genug Zeit.*
+  - **erst** = solo/non prima di (l'orario è presto): *Es ist erst acht Uhr.* **nur** = solo (limitazione): *Ich habe nur einen Bruder.*
+  - Gli avverbi possono aprire la frase; il verbo resta sempre in **seconda posizione**: *Morgen fahre ich nach Wien.*
+
+  ## Esempi
+  - *Ich fahre morgens immer mit dem Rad.* — La mattina vado sempre in bicicletta.
+  - *Die Kinder spielen draußen.* — I bambini giocano fuori.
+  - *Du sprichst sehr schnell.* — Parli molto velocemente.
+  - *Ich lerne gern Deutsch, aber ich lese lieber Krimis.* — Mi piace studiare il tedesco, ma preferisco leggere gialli.
+  - *Es ist erst sieben Uhr, wir haben noch Zeit.* — Sono solo le sette, abbiamo ancora tempo.
+  - *Leider ist unser Nachbar heute nicht zu Hause.* — Purtroppo il nostro vicino oggi non è a casa.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha forme diverse per aggettivo e avverbio (*veloce / velocemente*, *buono / bene*): il tedesco no, e l'avverbio non prende desinenze. **\*Er spricht langsame** → *Er spricht langsam.* Per "bene" si usa *gut* (*Er spricht gut Deutsch*), non *\*gute*.
+  - "Mi piace + verbo" si rende con **gern**, non con un verbo "piacere": **\*Es gefällt mir Fußball zu spielen** suona innaturale → *Ich spiele gern Fußball.* Per "preferisco": **lieber** (**\*Ich trinke mehr gern Tee** → *Ich trinke lieber Tee*).
+  - **molto**: davanti a un sostantivo è *viel*, non *sehr*: **\*Er hat sehr Geld** → *Er hat viel Geld.* Con un aggettivo è *sehr*: **\*viel kalt** → *sehr kalt.*
+  - **troppo**: **\*Es ist zu viel kalt** → *Es ist zu kalt.* Con un sostantivo: *zu viel Lärm.*
+  - **solo**: l'italiano usa *solo* sia per *erst* sia per *nur*, ma in tedesco hanno senso diverso: *Er ist nur 20 Minuten hier* (non di più) e *Er ist erst 20 Minuten hier* (è appena arrivato).
+examples:
+  - {de: "Ich fahre morgens immer mit dem Rad.", it: "La mattina vado sempre in bicicletta."}
+  - {de: "Die Kinder spielen draußen.", it: "I bambini giocano fuori."}
+  - {de: "Du sprichst sehr schnell.", it: "Parli molto velocemente."}
+  - {de: "Ich lerne gern Deutsch, aber ich lese lieber Krimis.", it: "Mi piace studiare il tedesco, ma preferisco leggere gialli."}
+  - {de: "Es ist erst sieben Uhr, wir haben noch Zeit.", it: "Sono solo le sette, abbiamo ancora tempo."}
+  - {de: "Leider ist unser Nachbar heute nicht zu Hause.", it: "Purtroppo il nostro vicino oggi non è a casa."}

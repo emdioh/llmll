@@ -1,0 +1,46 @@
+id: gram:comparative-clauses
+title_it: "Subordinate comparative: so … wie, als, als ob, je … desto"
+title_en: "Comparative clauses: so … wie, als, als ob, je … desto"
+level: B2
+requires: ["gram:konjunktiv-ii", "gram:comparative-superlative", "gram:verb-final-subordinate"]
+diagnostic_tags:
+  construction: [so-wie-clause, als-clause, als-ob, als-inversion, je-desto]
+  error_type: [wie-vs-als, indicative-after-als-ob, verb-not-final, desto-without-comparative, no-inversion-after-desto, je-without-comparative, als-ob-tense]
+reference_it: |
+  ## Regola
+  Il confronto può essere sviluppato in una frase intera. Il verbo coniugato va in fondo, tranne dove indicato.
+
+  | struttura | senso | esempio |
+  |---|---|---|
+  | **so + agg. … wie** + frase | uguaglianza | *Es war so warm, **wie** wir gehofft hatten.* |
+  | **comparativo … als** + frase | disuguaglianza | *Es war wärmer, **als** wir gehofft hatten.* |
+  | **als ob / als wenn** + Konjunktiv II | "come se" (irreale) | *Er tut so, **als ob** er Zeit **hätte**.* |
+  | **als** + verbo (senza *ob*) | come sopra, ma verbo in 2ª posizione | *Er tut so, **als hätte** er Zeit.* |
+  | **je + comparativo …, desto/umso + comparativo** | proporzione ("più… più…") | *Je mehr du übst, **desto** besser **wirst** du.* |
+
+  - Dopo **wie** e **als** nel confronto il verbo è all'**indicativo** (a differenza dell'italiano *di quanto avessimo sperato*).
+  - **als ob** esprime una situazione presentata come irreale: nello standard Konjunktiv II (nel parlato si sente anche l'indicativo, ma è meglio evitarlo) presente (*hätte, wäre, könnte*) o passato (*hätte/wäre + Partizip II*: *als ob er geschlafen hätte*).
+    Spesso dopo *so tun / aussehen / sich fühlen / klingen*.
+  - **je … desto/umso**: *je* e il comparativo aprono la prima frase (verbo in fondo); la seconda frase comincia con *desto/umso + comparativo* seguito **subito dal verbo** (inversione).
+    Anche *je mehr … desto mehr…* funziona con *mehr, weniger*.
+
+  ## Esempi
+  - *Das Buch ist spannender, als ich gedacht hatte.* — Il libro è più avvincente di quanto pensassi.
+  - *Die Suppe ist nicht so heiß, wie sie aussieht.* — La zuppa non è così calda come sembra.
+  - *Sie sieht aus, als ob sie nicht geschlafen hätte.* — Ha l'aria di non aver dormito.
+  - *Er redet, als wäre er der Chef.* — Parla come se fosse il capo.
+  - *Je länger ich warte, desto nervöser werde ich.* — Più aspetto, più divento nervoso.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa **di quanto / come** con il congiuntivo; in tedesco **wie** (uguaglianza) e **als** (disuguaglianza) con l'**indicativo**:
+    **\*schöner wie ich dachte** → *schöner **als** ich dachte*; **\*so schön als ich dachte** → *so schön **wie** …*.
+  - **come se** richiede il Konjunktiv II: **\*Er tut so, als ob er hat Zeit** → *als ob er Zeit **hätte***.
+    Con *als ob* il verbo va in fondo (*als ob er Zeit hätte*); con *als* da solo il verbo segue subito (*als hätte er Zeit*).
+  - **quanto più … tanto più**: dopo *desto/umso* si inverte (**\*desto du wirst besser**) e serve un comparativo (**\*je viel, desto gut**).
+  - Non si usa *mehr* da solo con l'aggettivo: **\*mehr gut** → *besser*.
+examples:
+  - {de: "Das Buch ist spannender, als ich gedacht hatte.", it: "Il libro è più avvincente di quanto pensassi."}
+  - {de: "Die Suppe ist nicht so heiß, wie sie aussieht.", it: "La zuppa non è così calda come sembra."}
+  - {de: "Sie sieht aus, als ob sie nicht geschlafen hätte.", it: "Ha l'aria di non aver dormito."}
+  - {de: "Er redet, als wäre er der Chef.", it: "Parla come se fosse il capo."}
+  - {de: "Je länger ich warte, desto nervöser werde ich.", it: "Più aspetto, più divento nervoso."}

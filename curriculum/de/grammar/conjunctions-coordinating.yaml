@@ -1,0 +1,52 @@
+id: gram:conjunctions-coordinating
+title_it: "Congiunzioni coordinanti: und, aber, oder, denn, sondern"
+title_en: "Coordinating conjunctions: und, aber, oder, denn, sondern"
+level: A1
+requires: ["gram:svo-word-order"]
+diagnostic_tags:
+  conjunction: [und, aber, oder, denn, sondern, paired]
+  error_type: [verb-position-after-conjunction, aber-instead-of-sondern, missing-comma, missing-subject, sondern-without-negation]
+  clause_type: [main-clause, ellipsis-same-subject]
+reference_it: |
+  ## Regola
+  Le congiunzioni **coordinanti** collegano due frasi principali (o due parole) di pari rango. Stanno **in "posizione 0"**: non contano come
+  primo elemento della frase, quindi dopo di loro la frase prosegue con il normale ordine *soggetto – verbo* (o con un altro elemento
+  in prima posizione, ma sempre con il **verbo coniugato al secondo posto** della seconda frase). Il verbo **non** va in fondo.
+
+  | Congiunzione | Valore | Virgola davanti? | Esempio |
+  |---|---|---|---|
+  | **und** | e | di solito no | *Ich koche und mein Bruder deckt den Tisch.* |
+  | **oder** | o, oppure | di solito no | *Fahren wir mit dem Bus oder gehen wir zu Fuß?* |
+  | **aber** | ma, però (contrasto) | sì | *Der Pulli ist schön, aber er ist zu teuer.* |
+  | **denn** | perché (motivo) | sì | *Ich bleibe zu Hause, denn ich bin krank.* |
+  | **sondern** | ma, bensì (dopo una negazione) | sì | *Das ist nicht Anna, sondern ihre Schwester.* |
+
+  - **aber** vs **sondern**: *aber* aggiunge un contrasto e funziona anche dopo una frase affermativa; *sondern* corregge e sostituisce, e richiede
+    che la prima parte sia **negata** (*nicht, kein, nie*): *Ich trinke keinen Kaffee, sondern Tee.* Se la negazione non sostituisce nulla, si usa *aber*: *Ich trinke keinen Kaffee, aber ich trinke gern Tee.*
+  - **denn** introduce sempre una frase con il verbo al secondo posto e il soggetto espresso; non può stare all'inizio del periodo.
+  - Se il soggetto è lo stesso nelle due frasi, dopo *und*, *oder* e *sondern* si può omettere: *Wir essen und (wir) trinken.* / *Er arbeitet nicht, sondern (er) schläft.*
+  - Dopo *und* o *oder* la seconda frase può iniziare con un altro elemento, ma il verbo resta secondo: *Heute lerne ich, und morgen habe ich frei.*
+  - Coppie di congiunzioni: *entweder … oder …* (o … o …), *sowohl … als auch …* (sia … sia …), *weder … noch …* (né … né …), *nicht nur … sondern auch …* (non solo … ma anche …).
+    *Sie spricht sowohl Deutsch als auch Italienisch.* — *Er hat weder Zeit noch Lust.*
+
+  ## Esempi
+  - *Ich lerne Deutsch, denn ich arbeite bald in Wien.* — Imparo il tedesco perché presto lavorerò a Vienna.
+  - *Wir gehen ins Kino, aber Paul hat keine Zeit.* — Andiamo al cinema, ma Paul non ha tempo.
+  - *Das ist kein Hund, sondern eine Katze.* — Non è un cane, ma un gatto.
+  - *Möchtest du Wasser oder trinkst du lieber Saft?* — Vuoi dell'acqua o preferisci bere del succo?
+  - *Ich lese ein Buch und meine Schwester sieht fern.* — Io leggo un libro e mia sorella guarda la TV.
+  - *Heute regnet es, und morgen scheint die Sonne.* — Oggi piove e domani c'è il sole.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *ma* traduce sia *aber* sia *sondern*. Dopo una negazione che **sostituisce** qualcosa serve *sondern*:
+    **\*Das ist nicht Anna, aber ihre Schwester** → *Das ist nicht Anna, sondern ihre Schwester.*
+  - Italiano *perché* può essere *denn* (frase principale, verbo secondo) o *weil* (subordinata, verbo in fondo). Dopo *denn* il verbo non va in fondo: **\*Ich bleibe zu Hause, denn ich krank bin** → *…denn ich bin krank.*
+  - Il soggetto italiano spesso è sottinteso; dopo *denn* in tedesco va sempre espresso: **\*Er ist müde, denn muss früh aufstehen** → *…denn er muss früh aufstehen.*
+  - Il verbo non va in fondo dopo *und, aber, oder, denn, sondern*: **\*Ich koche, und mein Bruder den Tisch deckt** → *…und mein Bruder deckt den Tisch.*
+  - La virgola davanti a *aber, denn, sondern* è obbligatoria; davanti a *und, oder* tra due frasi principali di solito non si mette.
+examples:
+  - {de: "Ich lerne Deutsch, denn ich arbeite bald in Wien.", it: "Imparo il tedesco perché presto lavorerò a Vienna."}
+  - {de: "Wir gehen ins Kino, aber Paul hat keine Zeit.", it: "Andiamo al cinema, ma Paul non ha tempo."}
+  - {de: "Das ist kein Hund, sondern eine Katze.", it: "Non è un cane, ma un gatto."}
+  - {de: "Möchtest du Wasser oder trinkst du lieber Saft?", it: "Vuoi dell'acqua o preferisci bere del succo?"}
+  - {de: "Ich lese ein Buch und meine Schwester sieht fern.", it: "Io leggo un libro e mia sorella guarda la TV."}

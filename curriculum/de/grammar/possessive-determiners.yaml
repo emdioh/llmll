@@ -1,0 +1,56 @@
+id: gram:possessive-determiners
+title_it: "Aggettivi possessivi: mein, dein, sein, ihr, unser, euer"
+title_en: "Possessive determiners: mein, dein, sein, ihr, unser, euer"
+level: A1
+requires: ["gram:articles-nom-akk", "gram:dative-case"]
+diagnostic_tags:
+  possessor: [ich, du, er-es, sie-sg, wir, ihr-pl, sie-pl, Sie]
+  gender_number: [m, f, n, pl]
+  case: [nom, akk, dat]
+  error_type: [wrong-possessor, no-ending-agreement, euer-ending, sein-vs-ihr, ending-with-noun-gender-wrong]
+reference_it: |
+  ## Regola
+  Il possessivo ha **due scelte** indipendenti:
+  1. la **radice** dipende dal **possessore** (chi possiede);
+  2. la **desinenza** dipende dalla **cosa posseduta** (genere, numero e caso del sostantivo che segue).
+
+  | possessore | radice | possessore | radice |
+  |---|---|---|---|
+  | ich | **mein** | wir | **unser** |
+  | du | **dein** | ihr (voi) | **euer** |
+  | er / es | **sein** | sie (loro) | **ihr** |
+  | sie (lei) | **ihr** | Sie (cortesia) | **Ihr** (maiuscolo) |
+
+  Le desinenze sono quelle di *ein* / *kein* (nessuna desinenza al nominativo maschile e al nominativo/accusativo neutro):
+
+  | | maschile | femminile | neutro | plurale |
+  |---|---|---|---|---|
+  | Nom. | mein Vater | meine Mutter | mein Kind | meine Eltern |
+  | Akk. | meinen Vater | meine Mutter | mein Kind | meine Eltern |
+  | Dat. | meinem Vater | meiner Mutter | meinem Kind | meinen Eltern |
+
+  - Con *unser* e *euer* la desinenza si aggiunge così: *unsere Lehrerin, unseren Hund*; *euer* perde la *-e-* davanti alla desinenza: *eure Lehrerin, euren Hund, eurem Haus*.
+  - Al dativo plurale il sostantivo prende anche la **-n**: *mit meinen Freunden*.
+  - Il possessivo sostituisce l'articolo: **non si usa insieme all'articolo** (*mein Bruder*, non *der mein Bruder*), ma serve quasi sempre davanti ai familiari e alle parti del corpo (*Ich wasche meine Hände*).
+
+  ## Esempi
+  - *Das ist mein Bruder, und das ist seine Frau.* — Questo è mio fratello e questa è sua moglie.
+  - *Wir besuchen unsere Großeltern.* — Andiamo a trovare i nostri nonni.
+  - *Kennst du ihren Namen?* — Conosci il suo nome (di lei)?
+  - *Wo ist euer Auto? — Es steht vor unserem Haus.* — Dov'è la vostra macchina? — È davanti a casa nostra.
+  - *Herr Braun, ist das Ihre Tasche?* — Signor Braun, è sua questa borsa?
+  - *Die Kinder spielen mit ihren Freunden.* — I bambini giocano con i loro amici.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *il mio libro* ha l'articolo, in tedesco no: **\*das mein Buch** → *mein Buch*.
+  - In italiano *suo* vale per lui e per lei; in tedesco la radice dice **chi possiede**: *Peter und sein Hund* (di lui), *Anna und ihr Hund* (di lei). Non confondere *sein* e *ihr*: **\*Anna und sein Hund** (vorrebbe dire: il cane di un altro uomo).
+  - La desinenza segue la cosa posseduta, non il possessore: *Anna liebt ihren Mann* (Mann è maschile, accusativo), *Peter liebt seine Frau*.
+  - Nominativo maschile e neutro: nessuna desinenza (*mein Hund*, *mein Haus*); aggiungere una desinenza è un errore: **\*meiner Hund**.
+  - *euer* perde la *-e-* davanti alla desinenza: al plurale serve la desinenza: **\*euer Eltern** → *eure Eltern*.
+  - Il Lei di cortesia è **Ihr** con la maiuscola: *Ist das Ihr Schlüssel?*
+examples:
+  - {de: "Das ist mein Bruder, und das ist seine Frau.", it: "Questo è mio fratello e questa è sua moglie."}
+  - {de: "Wir besuchen unsere Großeltern.", it: "Andiamo a trovare i nostri nonni."}
+  - {de: "Die Kinder spielen mit ihren Freunden.", it: "I bambini giocano con i loro amici."}
+  - {de: "Herr Braun, ist das Ihre Tasche?", it: "Signor Braun, è sua questa borsa?"}
+  - {de: "Wo ist euer Auto?", it: "Dov'è la vostra macchina?"}

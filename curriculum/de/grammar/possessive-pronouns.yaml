@@ -1,0 +1,46 @@
+id: gram:possessive-pronouns
+title_it: "Pronomi possessivi: meiner, deiner, seiner... (il mio, il tuo)"
+title_en: "Possessive pronouns: meiner, deiner, seiner..."
+level: B1
+requires: ["gram:possessive-determiners"]
+diagnostic_tags:
+  possessor: [ich, du, er-es, sie-sg, wir, ihr-pl, sie-pl, Sie]
+  gender_number: [m, f, n, pl]
+  case: [nom, akk, dat]
+  error_type: [missing-ending-nom-m, missing-ending-nom-akk-n, determiner-instead-of-pronoun, wrong-gender-of-referent]
+reference_it: |
+  ## Regola
+  Quando il sostantivo è già noto e non viene ripetuto, il possessivo sta **da solo** (*il mio, il tuo...*). Ha la **stessa radice** dell'aggettivo possessivo
+  (*mein-, dein-, sein-, ihr-, unser-, euer-, Ihr-*), ma prende sempre le **desinenze dell'articolo determinativo**, anche dove l'aggettivo non le ha.
+  Il genere e il numero sono quelli del sostantivo sottinteso.
+
+  | | maschile | femminile | neutro | plurale |
+  |---|---|---|---|---|
+  | Nom. | mein**er** | mein**e** | mein**s** (o mein**es**) | mein**e** |
+  | Akk. | mein**en** | mein**e** | mein**s** (o mein**es**) | mein**e** |
+  | Dat. | mein**em** | mein**er** | mein**em** | mein**en** |
+
+  - Differenza con l'aggettivo: *Das ist **mein** Hund* ma *Der Hund ist **meiner***; *Das ist **mein** Auto* ma *Das Auto ist **meins***.
+  - Con *unser* e *euer* si dice *unserer, unsere, unser(e)s* e *eurer, eure, eures*.
+  - Il pronome prende il **genere del sostantivo di cui si parla**, non quello del possessore: *Mein Rock ist neu, **deiner** (m.) ist alt.*
+  - Si usa spesso nel confronto (*mio / tuo*) e come risposta a una domanda: *Wem gehört das? — Das ist meins.*
+
+  ## Esempi
+  - *Ist das dein Schirm? — Nein, meiner ist schwarz.* — È il tuo ombrello? — No, il mio è nero.
+  - *Mein Zimmer ist klein, ihres ist viel größer.* — La mia camera è piccola, la sua (di lei) è molto più grande.
+  - *Ich habe meinen Schlüssel verloren. Kannst du mir deinen leihen?* — Ho perso la mia chiave. Mi presti la tua?
+  - *Deine Idee ist gut, aber unsere ist besser.* — La tua idea è buona, ma la nostra è migliore.
+  - *Das ist nicht mein Handy, das ist seins.* — Non è il mio cellulare, è il suo.
+  - *Er hilft seinen Freunden, und ich helfe meinen.* — Lui aiuta i suoi amici e io aiuto i miei.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *il mio* ha sempre un articolo davanti; in tedesco il pronome possessivo è **senza articolo** (*meiner*, non **\*der meiner**) nell'uso normale.
+  - Al nominativo maschile e al nominativo/accusativo neutro **la desinenza è obbligatoria**: **\*Der Hund ist mein** e **\*Das Auto ist mein** sono errori → *Der Hund ist meiner. Das Auto ist meins.*
+  - Non si può lasciare la forma dell'aggettivo (*mein, dein, sein*) quando manca il sostantivo: **\*Ich nehme meinen Stift und du nimmst dein** → *…und du nimmst deinen.*
+  - Il genere segue la cosa, non la persona: *Dein Auto ist alt, **seins** ist neu* (Auto è neutro; *seins* = di lui).
+examples:
+  - {de: "Ist das dein Schirm? Nein, meiner ist schwarz.", it: "È il tuo ombrello? No, il mio è nero."}
+  - {de: "Mein Zimmer ist klein, ihres ist viel größer.", it: "La mia camera è piccola, la sua è molto più grande."}
+  - {de: "Kannst du mir deinen leihen?", it: "Mi presti il tuo?"}
+  - {de: "Das ist nicht mein Handy, das ist seins.", it: "Non è il mio cellulare, è il suo."}
+  - {de: "Er hilft seinen Freunden, und ich helfe meinen.", it: "Lui aiuta i suoi amici e io aiuto i miei."}

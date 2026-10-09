@@ -1,0 +1,44 @@
+id: gram:pronominal-adverbs
+title_it: "Avverbi pronominali: da(r)- e wo(r)- + preposizione (darauf, worüber...)"
+title_en: "Pronominal adverbs: da(r)- and wo(r)- + preposition (darauf, worüber...)"
+level: B1
+requires: ["gram:prepositions-akk", "gram:prepositions-dat", "gram:question-words"]
+diagnostic_tags:
+  form: [da-compound, wo-compound, r-insertion, anticipatory-da, prep-plus-pronoun-for-persons]
+  referent: [thing, person, clause]
+  error_type: [prep-plus-es-for-thing, wrong-wo-for-person, missing-r-before-vowel, missing-anticipatory-da, da-with-impossible-preposition]
+reference_it: |
+  ## Regola
+  Quando una preposizione riguarda una **cosa** o un'idea, non si usa *preposizione + pronome personale* (come per le persone), ma un **avverbio pronominale**:
+
+  | riferimento | domanda | risposta |
+  |---|---|---|
+  | **persona** | *An **wen** denkst du?* (preposizione + pronome) | *Ich denke an **ihn**.* |
+  | **cosa / idea** | ***Woran** denkst du?* (**wo(r)-** + prep.) | *Ich denke **daran**.* |
+
+  - **wo(r)-** + preposizione è la domanda, **da(r)-** + preposizione è la risposta o il rimando.
+  - Quando la preposizione comincia per **vocale**, tra *da-/wo-* e la preposizione compare una **-r-**: *an → woran / daran, auf → worauf / darauf, über → worüber / darüber, in → worin / darin, um → worum / darum, aus → woraus / daraus*. Con le altre preposizioni no: *mit → womit / damit, für → wofür / dafür, von → wovon / davon, zu → wozu / dazu, nach → wonach / danach, bei → wobei / dabei, gegen → wogegen / dagegen*.
+  - **da-** rende l'italiano **ci / ne** riferito a cose: *Ich denke daran* (ci penso), *Wir sprechen davon* (ne parliamo).
+  - **Rimando a una frase**: se un verbo regge una preposizione, spesso c'è un *da(r)-* che annuncia la subordinata con *dass* o l'infinito con *zu*: *Ich warte **darauf**, dass er anruft. Sie freut sich **darauf**, dich zu sehen.*
+  - Non si formano con tutte le preposizioni (non con *ohne, seit, bis, außer*): lì si usa il pronome (*ohne es, außer dem*).
+
+  ## Esempi
+  - *Worüber sprecht ihr? — Über den Urlaub.* — Di che cosa parlate? — Delle vacanze.
+  - *Ich habe darüber nachgedacht.* — Ci ho riflettuto.
+  - *Wofür interessierst du dich? — Für Geschichte.* — Per che cosa ti interessi? — Per la storia.
+  - *Womit fährst du zur Arbeit? — Mit dem Zug.* — Con che cosa vai al lavoro? — Con il treno.
+  - *Ich ärgere mich darüber, dass er nie pünktlich ist.* — Mi arrabbio perché non è mai puntuale.
+  - *Hast du Angst vor Spinnen? — Ja, ich habe Angst davor.* — Hai paura dei ragni? — Sì, ne ho paura.
+
+  ## Errori tipici di chi parla italiano
+  - Per le **cose** non si usa preposizione + *es*: **\*Ich denke an es**, **\*Wir sprechen von es** → *Ich denke daran. Wir sprechen davon.* Per le persone invece sì: *Ich denke an ihn.*
+  - Nella domanda sulle cose non si usa *wen / wem* (solo per persone); nello standard si dice *Woran denkst du?* (**\*An was denkst du?** è colloquiale); per le persone *An wen denkst du?*
+  - Davanti a vocale serve la **-r-**: **\*woan / \*daan** → *woran / daran*; **\*dauf** → *darauf*.
+  - Un verbo con preposizione richiede il *da(r)-* davanti alla subordinata: **\*Ich warte, dass er anruft** → *Ich warte **darauf**, dass er anruft.* In italiano la preposizione si può omettere (*aspetto che chiami*).
+  - La preposizione resta quella richiesta dal verbo: *warten **auf***, *sich freuen **auf/über***, *Angst **vor***: *darauf, davor...* Non si traduce dall'italiano.
+examples:
+  - {de: "Worüber sprecht ihr? Über den Urlaub.", it: "Di che cosa parlate? Delle vacanze."}
+  - {de: "Ich habe lange darüber nachgedacht.", it: "Ci ho riflettuto a lungo."}
+  - {de: "Wofür interessierst du dich? Für Geschichte.", it: "Per che cosa ti interessi? Per la storia."}
+  - {de: "Ich warte darauf, dass er anruft.", it: "Aspetto che telefoni."}
+  - {de: "Hast du Angst vor Spinnen? Ja, ich habe Angst davor.", it: "Hai paura dei ragni? Sì, ne ho paura."}

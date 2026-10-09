@@ -1,0 +1,60 @@
+id: gram:geographic-names-nationalities
+title_it: "Nomi geografici, preposizioni di luogo, nazionalità e lingue"
+title_en: "Geographic names, nationalities and languages"
+level: A2
+requires: ["gram:prepositions-dat", "gram:prepositions-two-way"]
+diagnostic_tags:
+  name_type: [country-neuter, country-with-article, city, continent, river-sea-mountain, island]
+  question: [wo, wohin, woher]
+  nationality: [er-ending, e-ending, adjectival-deutsch, feminine-in, language]
+  error_type: [in-instead-of-nach, article-missing-with-die-land, article-added-to-neuter-country, nationality-lowercase, wrong-nationality-form, wrong-language-form]
+reference_it: |
+  ## Regola
+  La maggior parte dei **paesi, città e continenti** è **neutra e senza articolo** (*Italien, Wien, Europa*). Alcuni nomi hanno invece un genere e **vogliono sempre l'articolo**: *die Schweiz, die Türkei, die Slowakei, der Iran, der Irak, die USA* (plurale), *die Niederlande* (plurale).
+
+  | | senza articolo (neutri) | con articolo |
+  |---|---|---|
+  | **Wo?** (dove) | **in** + nome: *in Italien, in Wien* | **in** + dat.: *in der Schweiz, im Iran, in den USA* |
+  | **Wohin?** (verso dove) | **nach** + nome: *nach Italien, nach Wien* | **in** + acc.: *in die Schweiz, in den Iran, in die USA* |
+  | **Woher?** (da dove) | **aus** + nome: *aus Italien* | **aus** + dat.: *aus der Schweiz, aus dem Iran, aus den USA* |
+
+  - Fiumi, laghi, mari: **an** (*am Rhein, am Bodensee, an der Nordsee*); per andarci: *an den Rhein, an den Bodensee, an die Nordsee*. Isole: *auf Mallorca, auf Rügen*; verso: *nach Mallorca*, *auf die Insel Rügen*. Montagne: *auf dem Brocken*; catene montuose plurali: *in den Alpen*.
+  - Se c'è un **aggettivo** il nome vuole l'articolo: *das schöne Italien*.
+
+  **Nazionalità e lingue**
+
+  | Paese | uomo | donna | lingua |
+  |---|---|---|---|
+  | Italien | der Italiener | die Italienerin | Italienisch |
+  | Spanien | der Spanier | die Spanierin | Spanisch |
+  | Frankreich | der Franzose | die Französin | Französisch |
+  | die Türkei | der Türke | die Türkin | Türkisch |
+  | Polen | der Pole | die Polin | Polnisch |
+  | Deutschland | der Deutsche | die Deutsche | Deutsch |
+
+  - Le nazionalità maschili in **-er** (*Italiener, Amerikaner*) non cambiano al plurale; il femminile si fa con **-in** (plurale *-innen*). Le nazionalità in **-e** (*Franzose, Türke*) prendono **-n** nel plurale e in tutti i casi singolari tranne il nominativo (declinazione debole: *der Franzose, den Franzosen, dem Franzosen*).
+  - *Deutsche* si declina come un aggettivo: *ein Deutscher, eine Deutsche, die Deutschen*.
+  - Le nazionalità e le lingue si scrivono con la **maiuscola** (nomi), gli aggettivi con la minuscola: *Er ist Italiener. Das Essen ist italienisch.* La lingua non ha articolo: *Sie spricht Französisch*; *auf Deutsch*.
+  - Dai nomi di città si forma un aggettivo invariabile in **-er**, con la maiuscola: *der Kölner Dom, das Münchner Bier*.
+
+  ## Esempi
+  - *Ich wohne in Bologna, aber ich komme aus Neapel.* — Abito a Bologna, ma vengo da Napoli.
+  - *Nächste Woche fliege ich nach Spanien.* — La settimana prossima volo in Spagna.
+  - *Sie arbeitet in der Schweiz und spricht Deutsch und Italienisch.* — Lavora in Svizzera e parla tedesco e italiano.
+  - *Im Sommer fahren wir in die Türkei.* — In estate andiamo in Turchia.
+  - *Mein Nachbar ist Franzose, seine Frau ist Polin.* — Il mio vicino è francese, sua moglie è polacca.
+  - *Im Herbst fahren wir an den Bodensee.* — In autunno andiamo al lago di Costanza.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano si dice *vado **in** Francia, in Italia*: in tedesco con i paesi neutri senza articolo si usa **nach** (**\*Ich fahre in Frankreich / in Italien** → *nach Frankreich*). *In* + accusativo vale solo per i nomi con articolo: *in die Schweiz*.
+  - L'articolo manca con i nomi che lo vogliono: **\*Ich wohne in Schweiz**, **\*Ich fahre nach Türkei** → *in der Schweiz*, *in die Türkei*.
+  - L'articolo c'è dove non serve: **\*Ich fahre nach der Italien** → *nach Italien* (in italiano: *l'Italia*, *la Francia*).
+  - Nazionalità e lingue vanno con la maiuscola e hanno forme maschile e femminile: **\*Er ist italiener**, **\*Sie ist Franzose** → *Er ist Italiener*, *Sie ist Französin*.
+  - Non si dice **\*Ich spreche il Deutsch**, **\*Ich spreche das Deutsch** → *Ich spreche Deutsch*.
+examples:
+  - {de: "Ich wohne in Bologna, aber ich komme aus Neapel.", it: "Abito a Bologna, ma vengo da Napoli."}
+  - {de: "Nächste Woche fliege ich nach Spanien.", it: "La settimana prossima volo in Spagna."}
+  - {de: "Sie arbeitet in der Schweiz und spricht Deutsch und Italienisch.", it: "Lavora in Svizzera e parla tedesco e italiano."}
+  - {de: "Im Sommer fahren wir in die Türkei.", it: "In estate andiamo in Turchia."}
+  - {de: "Mein Nachbar ist Franzose, seine Frau ist Polin.", it: "Il mio vicino è francese, sua moglie è polacca."}
+  - {de: "Im Herbst fahren wir an den Bodensee.", it: "In autunno andiamo al lago di Costanza."}

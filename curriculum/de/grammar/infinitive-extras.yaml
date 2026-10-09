@@ -1,0 +1,55 @@
+id: gram:infinitive-extras
+title_it: "Infinito: senza zu, sein/haben + zu, infinito sostantivato, doppio infinito"
+title_en: "Infinitive: bare infinitive, sein/haben + zu, nominalised infinitive, double infinitive"
+level: B1
+requires: ["gram:infinitive-zu", "gram:modal-verbs"]
+diagnostic_tags:
+  construction: [bare-infinitive, sein-zu, haben-zu, nominalised-infinitive, double-infinitive, scheinen-zu, brauchen-zu]
+  verb_group: [modal, lassen, perception, motion, bleiben-lernen]
+  error_type: [zu-added-wrongly, zu-missing, lowercase-nominalised-infinitive, participle-instead-of-double-infinitive, wrong-position-of-auxiliary]
+reference_it: |
+  ## Regola
+  **1. Infinito senza zu.** Non si mette *zu* dopo:
+  - i **modali** (*müssen, können, wollen, dürfen, sollen, mögen*), *werden*, e *lassen*: *Ich lasse mein Auto reparieren.*
+  - i verbi di **percezione** *sehen, hören, fühlen*: *Ich höre ihn singen.*
+  - i verbi di **moto** e di stato *gehen, fahren, kommen* e *bleiben*: *Wir gehen schwimmen. Sie bleibt sitzen.*
+  - alcuni verbi come *lernen* e *helfen*: *Er lernt schwimmen. Ich helfe dir kochen.* (con complementi più lunghi si usa spesso *zu*: *Er lernt, Auto zu fahren. Sie hilft ihm, das Auto zu reparieren.*)
+
+  **2. sein / haben + zu.**
+  | costruzione | significato | esempio |
+  |---|---|---|
+  | **sein + zu + Inf.** | si può / si deve (passivo con modale) | Das Problem **ist** leicht **zu lösen**. = Das Problem kann leicht gelöst werden. |
+  | **haben + zu + Inf.** | si deve (attivo) | Ich **habe** noch viel **zu tun**. = Ich muss noch viel tun. |
+  - Con verbo separabile *zu* sta nel mezzo: *Das Fenster ist **aufzumachen**.*
+  - Altri: **scheinen + zu** (*Er scheint müde zu sein*), **brauchen + zu** solo in frasi negative o limitate da *nur / erst* (*Du brauchst nicht zu kommen. Du brauchst nur anzurufen.*).
+
+  **3. Infinito sostantivato.** Ogni infinito può diventare un sostantivo **neutro** con l'iniziale maiuscola: *lesen → das Lesen, essen → das Essen.*
+  - Sta spesso con le preposizioni: **beim** + Inf. (mentre), **zum** + Inf. (scopo o attività), **im / am / vom / zum** + Inf.: *Beim Kochen höre ich Musik. Das Wasser ist zum Trinken geeignet.*
+  - L'infinito sostantivato di norma non ha plurale: *das Lesen*, *das Schwimmen*.
+
+  **4. Doppio infinito (Ersatzinfinitiv).** Nel Perfekt, **modali, lassen e verbi di percezione** + infinito non usano il participio II ma l'**infinito**: ausiliare *haben* + **due infiniti in fondo**.
+  - *Ich habe gehen **müssen**.* (non **\*gemusst**) — *Er hat mich kommen **hören**.* — *Sie hat das Auto reparieren **lassen**.*
+  - Nelle subordinate **haben va prima dei due infiniti**: *..., weil ich habe gehen müssen.* (non **\*gehen müssen habe**)
+
+  ## Esempi
+  - *Ich sehe die Kinder im Garten spielen.* — Vedo i bambini giocare in giardino.
+  - *Wir gehen morgen schwimmen.* — Domani andiamo a nuotare.
+  - *Die Aufgabe ist in zehn Minuten zu schaffen.* — Il compito si può fare in dieci minuti.
+  - *Beim Kochen höre ich gern Radio.* — Mentre cucino ascolto volentieri la radio.
+  - *Sie hat ihre Tasche zu Hause lassen müssen.* — Ha dovuto lasciare la borsa a casa.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha sempre un'unica forma di infinito (anche con preposizioni *di / a / da*): in tedesco **non mettere zu dopo modali, lassen, gehen, bleiben, sehen/hören**:
+    **\*Ich gehe zu schwimmen** → *Ich gehe schwimmen.*
+  - L'italiano usa il **gerundio** per un'azione contemporanea (*mentre cucino / cucinando*): in tedesco **beim + Inf. sostantivato**: *Beim Kochen*, non **\*kochend**.
+  - L'infinito sostantivato è **neutro e maiuscolo**: **\*das lesen** → *das Lesen*; **\*zum schwimmen** → *zum Schwimmen*.
+  - Nel Perfekt dei modali l'italiano ha il participio (*ho dovuto, ho voluto*): in tedesco di norma l'**infinito** quando c'è un altro infinito: **\*Ich habe gehen gemusst** → *Ich habe gehen müssen.* Il participio *gemusst, gewollt, gekonnt* si usa solo da soli (*Ich habe es nicht gewollt.*)
+  - Nella frase subordinata *haben* va **prima** dei due infiniti: **\*weil ich gehen müssen habe** → *weil ich habe gehen müssen.*
+  - Il passivo con modale in italiano (*si deve / si può fare*) → *ist zu* + Inf., non **\*ist zu gemacht**.
+examples:
+  - {de: "Ich sehe die Kinder im Garten spielen.", it: "Vedo i bambini giocare in giardino."}
+  - {de: "Wir gehen morgen schwimmen.", it: "Domani andiamo a nuotare."}
+  - {de: "Die Aufgabe ist in zehn Minuten zu schaffen.", it: "Il compito si può fare in dieci minuti."}
+  - {de: "Ich habe noch viel zu tun.", it: "Ho ancora molto da fare."}
+  - {de: "Beim Kochen höre ich gern Radio.", it: "Mentre cucino ascolto volentieri la radio."}
+  - {de: "Sie hat ihre Tasche zu Hause lassen müssen.", it: "Ha dovuto lasciare la borsa a casa."}

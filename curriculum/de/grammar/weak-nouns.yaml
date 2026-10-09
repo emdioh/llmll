@@ -1,0 +1,49 @@
+id: gram:weak-nouns
+title_it: "Sostantivi maschili deboli (n-Deklination)"
+title_en: "Weak masculine nouns (n-declension)"
+level: B1
+requires: ["gram:genitive-case"]
+diagnostic_tags:
+  case: [akk, dat, gen]
+  noun_group: [e-ending, foreign-ent-ant-ist, short-herr-mensch, name-herz-special]
+  error_type: [missing-n-ending, n-ending-on-nominative, strong-genitive-instead-of-n, wrong-special-form]
+reference_it: |
+  ## Regola
+  Un piccolo gruppo di sostantivi **maschili** (persone e animali) prende **-n / -en in tutti i casi tranne il nominativo singolare**. Gli altri maschili invece non cambiano all'accusativo e al dativo singolare.
+
+  | | normale (*der Lehrer*) | debole (*der Student*) | debole (*der Junge*) |
+  |---|---|---|---|
+  | Nom. sing. | der Lehrer | der Student | der Junge |
+  | Acc. sing. | den Lehrer | den **Studenten** | den **Jungen** |
+  | Dat. sing. | dem Lehrer | dem **Studenten** | dem **Jungen** |
+  | Gen. sing. | des Lehrers | des **Studenten** | des **Jungen** |
+  | Plurale | die Lehrer | die Studenten | die Jungen |
+
+  **Chi appartiene al gruppo?**
+  - molti maschili in **-e** che indicano persone o animali: *der Junge, der Kollege, der Kunde, der Neffe, der Franzose, der Löwe, der Affe*;
+  - molti nomi stranieri con accento finale in **-ent, -ant, -ist, -at, -graf, -loge**: *der Student, der Praktikant, der Tourist, der Soldat, der Fotograf, der Biologe*;
+  - alcune parole brevi: *der Mensch, der Herr, der Bär, der Held, der Nachbar*.
+
+  **Particolarità**
+  - *der Herr*: sing. *den / dem / des Herrn*, plurale *die Herren*; *der Nachbar*: *den Nachbarn*, plurale *die Nachbarn*.
+  - *der Name* (e pochi altri come *der Buchstabe, der Gedanke*) si declina come un debole ma ha anche **-s** al genitivo: *den Namen, dem Namen, des Namens*; *das Herz* è **neutro** e non è del tutto debole: nom./acc. *das Herz*, dativo *dem Herzen*, genitivo *des Herzens*.
+  - **Non** sono deboli i maschili in -e che indicano cose: *der Käse* (*den Käse, des Käses*); né nomi come *der Professor, der Direktor* (*den Professor*).
+
+  ## Esempi
+  - *Ich kenne den Studenten aus Wien.* — Conosco lo studente di Vienna.
+  - *Die Frau fragt den Kollegen.* — La donna chiede al collega.
+  - *Das ist die Meinung meines Nachbarn.* — Questa è l'opinione del mio vicino.
+  - *Wir helfen dem Kunden.* — Aiutiamo il cliente.
+  - *Der Name des Jungen ist Paul.* — Il nome del ragazzo è Paul.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano non cambia mai il nome in base al caso: perciò si dimentica la desinenza e si dice **\*Ich sehe den Student**, **\*Ich helfe dem Kollege** → *den Studenten*, *dem Kollegen*.
+  - Si estende la desinenza al nominativo: **\*Der Studenten kommt** → *Der Student kommt*.
+  - Al genitivo non si aggiunge il -s dei maschili normali: **\*des Kollegens** → *des Kollegen* (eccezioni: *des Namens, des Herzens*).
+  - Si confondono i nomi "normali" con quelli deboli: *der Professor* e *der Direktor* **non** sono deboli (*den Professor*).
+examples:
+  - {de: "Ich kenne den Studenten aus Wien.", it: "Conosco lo studente di Vienna."}
+  - {de: "Die Frau fragt den Kollegen.", it: "La donna chiede al collega."}
+  - {de: "Das ist die Meinung meines Nachbarn.", it: "Questa è l'opinione del mio vicino."}
+  - {de: "Wir helfen dem Kunden.", it: "Aiutiamo il cliente."}
+  - {de: "Der Name des Jungen ist Paul.", it: "Il nome del ragazzo è Paul."}

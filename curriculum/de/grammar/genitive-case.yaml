@@ -1,0 +1,51 @@
+id: gram:genitive-case
+title_it: "Genitivo: articoli, desinenze del nome e complemento di specificazione"
+title_en: "Genitive case: articles, noun endings and possession"
+level: A2
+requires: ["gram:articles-nom-akk", "gram:dative-case"]
+diagnostic_tags:
+  gender_number: [m, f, n, pl]
+  function: [possession, specification, after-preposition, wessen-question]
+  noun_ending: [s, es, none]
+  error_type: [missing-genitive-s, wrong-article-form, genitive-before-noun, dative-instead-of-genitive, von-vs-genitive]
+reference_it: |
+  ## Regola
+  Il **genitivo** indica a **chi appartiene** qualcosa o **di chi/che cosa** si parla (complemento di specificazione). Il sostantivo al genitivo **segue** quello a cui si riferisce: *das Auto **des Lehrers***. La domanda è **Wessen?** (di chi?).
+
+  | | maschile | femminile | neutro | plurale |
+  |---|---|---|---|---|
+  | determ. | des Mannes | der Frau | des Kindes | der Kinder |
+  | indeterm. | eines Mannes | einer Frau | eines Kindes | — |
+  | negativo | keines Mannes | keiner Frau | keines Kindes | keiner Kinder |
+  | possessivo | meines Mannes | meiner Frau | meines Kindes | meiner Kinder |
+
+  **Desinenza del nome** (solo maschile e neutro singolare):
+  - nomi di **più sillabe**: **-s** (*des Lehrers, des Computers, des Fensters*);
+  - nomi **monosillabici**: di solito **-es** (*des Tages, des Buches, des Kindes*; anche *des Tags*);
+  - nomi che finiscono in **-s, -ß, -x, -z, -tz, -sch**: obbligatorio **-es** (*des Hauses, des Fußes, des Tisches*);
+  - nomi in *-nis*: *des Ergebnisses*;
+  - **femminili e plurali**: nessuna desinenza sul nome (*der Frau, der Lehrerinnen, der Autos*).
+
+  **Alternativa**: nel parlato si usa spesso **von + dativo**: *das Auto von meinem Vater*. Si preferisce *von* anche per evitare due genitivi di fila (*das Auto von der Frau meines Bruders*), e con nomi plurali senza articolo (*die Meinung von Experten*).
+
+  Il genitivo si usa anche con preposizioni come *wegen* e *während* e in espressioni fisse come *eines Tages* (un giorno).
+
+  ## Esempi
+  - *Das ist das Fahrrad meiner Schwester.* — Questa è la bicicletta di mia sorella.
+  - *Der Name des Hotels ist mir entfallen.* — Mi è sfuggito il nome dell'hotel.
+  - *Die Fenster des Hauses sind neu.* — Le finestre della casa sono nuove.
+  - *Wessen Handy ist das? — Das ist das Handy des Lehrers.* — Di chi è questo cellulare? — È il cellulare del professore.
+  - *Eines Tages ruft sie an.* — Un giorno telefonerà.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano **"di"** serve per tutto (*il libro di Marco, una tazza di tè, la fine del film*). In tedesco *di* è genitivo **solo** per possesso e specificazione; per la quantità non si usa: *eine Tasse Tee*, non **\*eine Tasse des Tees**.
+  - L'ordine è l'opposto dell'inglese e uguale all'italiano: il possessore **segue** il nome. **\*Des Lehrers das Auto** → *Das Auto des Lehrers*.
+  - Si dimentica la **-s / -es** sul nome maschile e neutro: **\*das Auto des Lehrer** → *des Lehrers*; **\*die Farbe des Haus** → *des Hauses*.
+  - Con il femminile e il plurale non c'è desinenza sul nome, ma cambia l'articolo: **\*die Mutter der Kinders** → *die Mutter der Kinder*.
+  - Non usare il dativo al posto del genitivo: **\*das Auto dem Lehrer** → *das Auto des Lehrers* (o *das Auto vom Lehrer*).
+examples:
+  - {de: "Das ist das Fahrrad meiner Schwester.", it: "Questa è la bicicletta di mia sorella."}
+  - {de: "Der Name des Hotels ist mir entfallen.", it: "Mi è sfuggito il nome dell'hotel."}
+  - {de: "Die Fenster des Hauses sind neu.", it: "Le finestre della casa sono nuove."}
+  - {de: "Wessen Handy ist das? – Das ist das Handy des Lehrers.", it: "Di chi è questo cellulare? – È il cellulare del professore."}
+  - {de: "Eines Tages ruft sie an.", it: "Un giorno telefonerà."}

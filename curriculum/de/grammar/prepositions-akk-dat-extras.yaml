@@ -1,0 +1,59 @@
+id: gram:prepositions-akk-dat-extras
+title_it: "Altre preposizioni con accusativo e dativo (entlang, je, ab, außer, gemäß, gegenüber...)"
+title_en: "More prepositions with the accusative and dative (entlang, je, ab, außer, gemäß, gegenüber...)"
+level: B1
+requires: ["gram:prepositions-akk", "gram:prepositions-dat"]
+diagnostic_tags:
+  preposition: [entlang, wider, je, pro, bis-auf, ab, ausser, entgegen, entsprechend, gemaess, gegenueber]
+  position: [entlang-postposed, gegenueber-after-pronoun, postposed-formal]
+  error_type: [wrong-case-after-prep, wrong-preposition-position, dative-instead-of-accusative, accusative-instead-of-dative, ausser-vs-ausserhalb]
+reference_it: |
+  ## Regola
+  Oltre alle preposizioni di base, ne esistono altre meno frequenti, che reggono comunque un caso fisso.
+
+  **Con l'accusativo**
+
+  | preposizione | significato | esempio |
+  |---|---|---|
+  | **entlang** | lungo (di solito *dopo* il nome) | Wir gehen **den Fluss entlang**. |
+  | **wider** | contro (formale, in espressioni fisse) | **wider Erwarten**, **wider Willen** |
+  | **je**, **pro** | per, a (distributivo) | **pro Person** 10 Euro; **je Stunde** |
+  | **bis auf** | tranne, eccetto | Alle sind da, **bis auf einen** Kollegen. |
+
+  **Con il dativo**
+
+  | preposizione | significato | esempio |
+  |---|---|---|
+  | **ab** | a partire da | **Ab nächstem** Monat arbeite ich weniger. |
+  | **außer** | tranne, oltre a | Alle kommen **außer meinem** Bruder. |
+  | **entgegen** | contrariamente a; incontro a | **Entgegen der** Vorhersage regnet es nicht. |
+  | **entsprechend**, **gemäß** | secondo, in conformità a | **Dem Gesetz gemäß** ist das verboten. |
+  | **gegenüber** | di fronte a; nei confronti di | Das Café ist **dem Bahnhof gegenüber**. |
+
+  - **entlang** con l'accusativo segue il nome: *die Straße entlang*. Se precede il nome, regge in genere il genitivo o il dativo (*entlang der Straße*): meglio usare la forma posposta con l'accusativo.
+  - **gegenüber** con i pronomi personali sta **sempre dopo**: *mir gegenüber*, *ihm gegenüber*. Con i nomi può stare prima o dopo: *gegenüber dem Haus* / *dem Haus gegenüber*.
+  - **entsprechend** e **gemäß** sono tipici della lingua formale e possono stare dopo o prima del nome: *den Regeln entsprechend*, *gemäß den Regeln*.
+  - **je** e **pro** non hanno articolo: *einmal pro Woche*, *zwei Euro je Stück*.
+  - **ab** indica un inizio (tempo, prezzo, età): *ab Montag*, *ab 18 Jahren*, *ab zehn Euro*.
+
+  ## Esempi
+  - *Wir spazieren das Ufer entlang.* — Passeggiamo lungo la riva.
+  - *Der Eintritt kostet fünf Euro pro Person.* — L'ingresso costa cinque euro a persona.
+  - *Alle haben bestanden, bis auf zwei Studenten.* — Hanno superato l'esame tutti, tranne due studenti.
+  - *Ab Dienstag ist das Büro wieder geöffnet.* — Da martedì l'ufficio è di nuovo aperto.
+  - *Außer dir kenne ich hier niemanden.* — A parte te, qui non conosco nessuno.
+  - *Er war mir gegenüber immer freundlich.* — Con me è sempre stato gentile.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano *lungo il fiume* mette la preposizione prima del nome; in tedesco *entlang* + accusativo di solito sta dopo: **\*entlang den Fluss** → *den Fluss entlang*.
+  - *tranne / a parte* si rende con *außer* + dativo (**\*außer meinen Bruder** → *außer meinem Bruder*); non confonderlo con *außerhalb* (« fuori da », genitivo).
+  - *gegenüber* con un pronome va dopo: **\*gegenüber mir** → *mir gegenüber*.
+  - *a persona / all'ora* si dice *pro Person / pro Stunde* (senza articolo): **\*pro die Person**.
+  - *da lunedì* (inizio) è *ab Montag*; *seit Montag* indica un'azione già iniziata nel passato che continua.
+examples:
+  - {de: "Wir gehen die Straße entlang bis zur Kirche.", it: "Camminiamo lungo la strada fino alla chiesa."}
+  - {de: "Das Zimmer kostet vierzig Euro pro Nacht.", it: "La camera costa quaranta euro a notte."}
+  - {de: "Alle sind gekommen außer meiner Tante.", it: "Sono venuti tutti tranne mia zia."}
+  - {de: "Ab nächster Woche fahre ich mit dem Rad zur Arbeit.", it: "Dalla settimana prossima vado al lavoro in bicicletta."}
+  - {de: "Meinem Chef gegenüber bin ich immer höflich.", it: "Con il mio capo sono sempre cortese."}
+  - {de: "Entgegen unserer Erwartung war der Test leicht.", it: "Contrariamente alle nostre aspettative il test era facile."}

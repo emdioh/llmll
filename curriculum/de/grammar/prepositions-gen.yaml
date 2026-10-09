@@ -1,0 +1,54 @@
+id: gram:prepositions-gen
+title_it: "Preposizioni con il genitivo (wegen, trotz, während, statt...)"
+title_en: "Prepositions with the genitive (wegen, trotz, während, statt...)"
+level: B1
+requires: ["gram:genitive-case"]
+diagnostic_tags:
+  preposition: [wegen, trotz, waehrend, statt, innerhalb, ausserhalb, aufgrund, dank]
+  case_form: [genitive-masc-neut-s, genitive-fem-plural, dative-colloquial]
+  error_type: [dative-instead-of-genitive, missing-genitive-s, preposition-vs-conjunction, wrong-pronoun-form]
+reference_it: |
+  ## Regola
+  Alcune preposizioni, tipiche della lingua scritta e formale, reggono il **genitivo**. Le più frequenti:
+
+  | preposizione | significato | esempio |
+  |---|---|---|
+  | **wegen** | a causa di | Wegen des Regens bleiben wir zu Hause. |
+  | **trotz** | nonostante | Trotz der Kälte gehen wir spazieren. |
+  | **während** | durante | Während des Films hat er geschlafen. |
+  | **(an)statt** | invece di | Statt eines Autos kauft sie ein Fahrrad. |
+  | **innerhalb** | entro, all'interno di | Innerhalb einer Woche bekommen Sie Antwort. |
+  | **außerhalb** | fuori da | Außerhalb der Stadt ist es ruhiger. |
+  | **aufgrund** | in base a, a causa di | Aufgrund des Wetters fällt das Fest aus. |
+  | **dank** | grazie a | Dank deiner Hilfe bin ich fertig. |
+
+  Il genitivo:
+  - maschile e neutro: articolo **des** e sostantivo + **-(e)s** (*des Tages, des Kindes, des Hauses, des Autos*);
+  - femminile e plurale: articolo **der**, sostantivo invariato (*der Frau, der Kinder*).
+
+  **Pronomi personali.** Con i pronomi si usano forme composte: *meinetwegen, deinetwegen, seinetwegen* (a causa mia, tua, sua). Per il resto si usa *deswegen / deshalb* ("per questo") e *trotzdem* ("nonostante ciò").
+
+  **Nel parlato** wegen, trotz, während e dank sono molto spesso usati con il **dativo** (*wegen dem Wetter, trotz dem Regen*): è diffuso, ma nello scritto e in esami si usa il genitivo.
+
+  **Attenzione:** *während* è anche una congiunzione (*Während ich koche, liest er.*, verbo in fondo) e *trotz* ha la congiunzione corrispondente *obwohl*. Le preposizioni vogliono un sostantivo, le congiunzioni una frase.
+
+  ## Esempi
+  - *Wegen des Staus kam er zu spät.* — A causa del traffico è arrivato tardi.
+  - *Trotz seiner Erkältung geht er zur Arbeit.* — Nonostante il raffreddore va al lavoro.
+  - *Während der Ferien arbeitet sie in einem Café.* — Durante le vacanze lavora in un caffè.
+  - *Statt eines Kuchens bringen wir Blumen mit.* — Invece di una torta portiamo dei fiori.
+  - *Innerhalb des Gebäudes darf man nicht rauchen.* — All'interno dell'edificio non si può fumare.
+  - *Dank der neuen Straße sind wir schneller da.* — Grazie alla nuova strada arriviamo prima.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano non c'è un caso: dopo "a causa di / nonostante" si mette solo l'articolo. In tedesco serve il **genitivo**: **\*wegen das Wetter**, **\*trotz der Regen** (con *der* maschile) → *wegen des Wetters*, *trotz des Regens.*
+  - Si dimentica la **-s / -es** del maschile e del neutro: **\*während des Film** → *während des Films.*
+  - Si confonde la preposizione con la congiunzione: **\*Wegen er krank war, …** → *Weil er krank war, …* oppure *Wegen seiner Krankheit, …*; **\*Trotz es regnet** → *Obwohl es regnet* / *Trotz des Regens.*
+  - Con i pronomi non si dice **\*wegen mir** nello scritto: *meinetwegen* (a causa mia / per me va bene).
+examples:
+  - {de: "Wegen des Staus kam er zu spät.", it: "A causa del traffico è arrivato tardi."}
+  - {de: "Trotz seiner Erkältung geht er zur Arbeit.", it: "Nonostante il raffreddore va al lavoro."}
+  - {de: "Während der Ferien arbeitet sie in einem Café.", it: "Durante le vacanze lavora in un caffè."}
+  - {de: "Statt eines Kuchens bringen wir Blumen mit.", it: "Invece di una torta portiamo dei fiori."}
+  - {de: "Innerhalb des Gebäudes darf man nicht rauchen.", it: "All'interno dell'edificio non si può fumare."}
+  - {de: "Dank der neuen Straße sind wir schneller da.", it: "Grazie alla nuova strada arriviamo prima."}

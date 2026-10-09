@@ -1,0 +1,52 @@
+id: gram:article-omission
+title_it: "Quando in tedesco manca l'articolo"
+title_en: "Omission of the article"
+level: A2
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  noun_type: [person-name, kinship-title, profession, nationality, language, mass-noun, plural-generic, illness, country]
+  context: [after-sein-werden, fixed-verb-phrase, generic-meaning, time-expression]
+  error_type: [article-added-wrongly, article-missing-wrongly, article-with-possessive, article-with-adjective-missing]
+reference_it: |
+  ## Regola
+  In tedesco l'articolo **non si mette** quando il sostantivo non indica un oggetto preciso e contabile, o quando è già "determinato" da un'altra parola.
+
+  | Situazione | Senza articolo | Con articolo (cambia il senso) |
+  |---|---|---|
+  | davanti a un **possessivo** (*mein, dein, unser* …) | *Mein Bruder wohnt hier.* | — (mai *der mein Bruder*) |
+  | **nomi di persona** | *Lena kommt später.* | *die nette Lena* (con aggettivo) |
+  | **parentela / titolo + nome** | *Tante Eva, Herr Braun, Doktor Roth* | *der alte Herr Braun* (con aggettivo) |
+  | **professione, nazionalità, religione** dopo *sein* / *werden* | *Sie ist Ärztin. Er wird Pilot.* | *Sie ist eine gute Ärztin.* (con aggettivo) |
+  | **sostanze e cibi in senso generale** (singolare) | *Ich trinke gern Tee.* | *Der Tee ist heiß.* (quello preciso) |
+  | **plurale generico** | *Katzen schlafen viel.* | *Die Katzen sind im Garten.* |
+  | **malattie** | *Ich habe Fieber.* | *Ich habe ein hohes Fieber.* |
+  | **lingue** | *Sie spricht Spanisch.* | — |
+  | **paesi e città** (neutri) | *Er wohnt in Wien.* | *das schöne Wien* (con aggettivo) |
+
+  Altri casi frequenti:
+  - **Verbo + sostantivo fisso**: *Fußball spielen, Zeitung lesen, Auto fahren, Klavier spielen, Hunger haben.*
+  - **Dopo *alle* e in certe espressioni di tempo**: *alle Kinder*, *Ende Mai*, *Anfang Juni*.
+  - **Plurale dell'articolo indeterminativo**: *ein Freund* → *Freunde* (non esiste un plurale di *ein*): *Ich habe Freunde in Berlin.*
+  - **Elenchi, titoli, avvisi, vocativi**: *Mit Milch und Zucker*, *Lieber Jan,*.
+
+  ## Esempi
+  - *Meine Schwester ist Lehrerin.* — Mia sorella è insegnante.
+  - *Zum Frühstück trinke ich Kaffee.* — A colazione bevo caffè.
+  - *Onkel Karl spielt jeden Abend Gitarre.* — Lo zio Karl suona la chitarra ogni sera.
+  - *Gestern hatte ich Kopfschmerzen.* — Ieri avevo mal di testa.
+  - *Mein Mann ist ein sehr guter Koch.* — Mio marito è un ottimo cuoco.
+  - *Ende Juli fahren wir nach Spanien.* — Alla fine di luglio andiamo in Spagna.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il possessivo di solito ha l'articolo (*la mia casa*, *il tuo libro*): in tedesco **mai insieme**. **\*Das meine Haus** → *Mein Haus*.
+  - In italiano i nomi propri e i sostantivi generici hanno spesso l'articolo (*la Giulia*, *il caffè mi piace*, *i gatti dormono*): in tedesco **\*Die Lena ist da** (nel tedesco parlato, soprattutto del sud, si sente, ma nello standard non si usa), **\*Ich mag den Kaffee** (se si parla in generale) → *Lena ist da*, *Ich mag Kaffee*.
+  - Dopo *sein* e *werden* con la professione l'italiano non ha l'articolo, ma con un aggettivo lo mette (*è un bravo medico*). Il tedesco fa lo stesso: di norma si dice *Er ist Arzt*, non **\*Er ist ein Arzt** (che suona innaturale senza aggettivo); con aggettivo: *Er ist ein guter Arzt*.
+  - Con le malattie l'articolo spesso manca (*Ich habe Fieber*, *Ich habe Husten*); non si traduce meccanicamente *ho il raffreddore*: con alcune malattie l'articolo c'è (*Ich habe eine Erkältung*, *Ich habe die Grippe*), da imparare con la parola. Non dire **\*Ich habe das Fieber**.
+  - Si dimentica l'articolo dove il tedesco lo vuole: se il sostantivo è preciso e noto, serve (*Der Tee ist kalt*).
+examples:
+  - {de: "Meine Schwester ist Lehrerin.", it: "Mia sorella è insegnante."}
+  - {de: "Zum Frühstück trinke ich Kaffee.", it: "A colazione bevo caffè."}
+  - {de: "Onkel Karl spielt jeden Abend Gitarre.", it: "Lo zio Karl suona la chitarra ogni sera."}
+  - {de: "Gestern hatte ich Kopfschmerzen.", it: "Ieri avevo mal di testa."}
+  - {de: "Mein Mann ist ein sehr guter Koch.", it: "Mio marito è un ottimo cuoco."}
+  - {de: "Ende Juli fahren wir nach Spanien.", it: "Alla fine di luglio andiamo in Spagna."}

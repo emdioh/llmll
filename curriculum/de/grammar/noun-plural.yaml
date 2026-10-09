@@ -1,0 +1,50 @@
+id: gram:noun-plural
+title_it: "Il plurale dei sostantivi"
+title_en: "Noun plural"
+level: A1
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  plural_type: [unchanged, umlaut-only, e, umlaut-e, er, umlaut-er, n-en, s, nen]
+  noun_type: [masculine, feminine, neuter, foreign-word, profession-in]
+  error_type: [wrong-plural-ending, missing-umlaut, s-overgeneralized, article-not-changed]
+reference_it: |
+  ## Regola
+  Al plurale l'articolo determinativo è sempre **die**, qualunque sia il genere (*der Tisch → die Tische*, *die Frau → die Frauen*, *das Kind → die Kinder*). Il sostantivo ha **cinque modi** di formare il plurale (non c'è una regola unica: nel vocabolario si impara *Singolare, Plurale*).
+
+  | Tipo | Formazione | Esempi |
+  |---|---|---|
+  | invariato (± Umlaut) | niente / ¨ | *der Lehrer → die Lehrer*, *der Vater → die Väter*, *der Apfel → die Äpfel* |
+  | **-e** (± Umlaut) | *+e* / *¨+e* | *der Tag → die Tage*, *die Stadt → die Städte*, *der Sohn → die Söhne* |
+  | **-er** (± Umlaut) | *+er* / *¨+er* | *das Kind → die Kinder*, *das Haus → die Häuser*, *das Buch → die Bücher* |
+  | **-n / -en** | *+n* / *+en* | *die Tasche → die Taschen*, *die Frau → die Frauen*, *der Student → die Studenten* |
+  | **-s** | *+s* | *das Auto → die Autos*, *das Handy → die Handys* |
+
+  Tendenze utili:
+  - **femminili in -e** → *-n* (*die Blume → die Blumen*); **femminili in -ung, -heit, -keit, -schaft, -ion** → *-en* (*die Zeitung → die Zeitungen*, *die Nation → die Nationen*).
+  - **femminili in -in** → *-innen* (*die Lehrerin → die Lehrerinnen*).
+  - **maschili e neutri in -er, -el, -en** → invariati (*der Computer*, *der Löffel*, *der Kuchen*), a volte con Umlaut (*der Bruder → die Brüder*, *der Garten → die Gärten*).
+  - **diminutivi** in *-chen, -lein* → invariati (*das Mädchen → die Mädchen*).
+  - **neutri monosillabici**: spesso *-e* (*das Jahr → die Jahre*, *das Heft → die Hefte*) oppure *-er*, con Umlaut quando possibile (*das Dorf → die Dörfer*, *das Bild → die Bilder*).
+  - **parole straniere recenti e sigle** → spesso *-s* (*das Hotel → die Hotels*, *das Foto → die Fotos*).
+  - *-nis* → *-nisse* (*das Ergebnis → die Ergebnisse*).
+  - Alcuni nomi esistono **solo al plurale**: *die Eltern, die Leute, die Ferien*; altri di norma **non hanno plurale**: *die Milch, das Obst*.
+
+  ## Esempi
+  - *Die Kinder spielen im Park.* — I bambini giocano nel parco.
+  - *Wir haben drei Zimmer und zwei Balkone.* — Abbiamo tre stanze e due balconi.
+  - *In der Stadt gibt es viele Restaurants.* — In città ci sono molti ristoranti.
+  - *Meine Eltern wohnen in Bologna.* — I miei genitori abitano a Bologna.
+  - *Die Äpfel sind rot.* — Le mele sono rosse.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano cambia la vocale finale (*libro → libri*). Il tedesco ha varie desinenze **e** spesso l'Umlaut: **\*die Bruder** → *die Brüder*; **\*die Haus** → *die Häuser*.
+  - Non estendere il **-s** inglese a tutte le parole: **\*die Kinders**, **\*die Autoes** → *die Kinder*, *die Autos*.
+  - Il plurale non si deduce dal genere in italiano: *la mano → le mani* ma *die Hand → die Hände*.
+  - Alcuni nomi hanno numero diverso dall'italiano: *die Leute* (la gente) è sempre plurale, mentre *die Brille* (gli occhiali) e *die Hose* (i pantaloni) sono singolari (per un solo paio): *Meine Hose ist neu.*
+  - Si dimentica di cambiare l'articolo: **\*Der Kinder spielen** (nominativo plurale) → *Die Kinder spielen*.
+examples:
+  - {de: "Die Kinder spielen im Park.", it: "I bambini giocano nel parco."}
+  - {de: "Wir haben drei Zimmer und zwei Balkone.", it: "Abbiamo tre stanze e due balconi."}
+  - {de: "In der Stadt gibt es viele Restaurants.", it: "In città ci sono molti ristoranti."}
+  - {de: "Meine Eltern wohnen in Bologna.", it: "I miei genitori abitano a Bologna."}
+  - {de: "Die Äpfel sind rot.", it: "Le mele sono rosse."}

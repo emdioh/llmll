@@ -1,0 +1,53 @@
+id: gram:praeteritum-regular-irregular
+title_it: "Präteritum: verbi deboli, forti e misti"
+title_en: "Simple past (Präteritum) of weak, strong and mixed verbs"
+level: A2
+requires: ["gram:praeteritum-sein-haben-modals", "gram:verb-classes-weak-strong-mixed"]
+diagnostic_tags:
+  verb_class: [weak, strong, mixed, separable]
+  person: [ich, du, er-sie-es, wir, ihr, sie-Sie]
+  error_type: [te-added-to-strong-verb, ending-on-ich-er-strong, wrong-ablaut, missing-e-after-t-d, perfekt-instead-of-praeteritum]
+reference_it: |
+  ## Regola
+  I **verbi deboli** aggiungono **-te** alla radice, i **verbi forti** cambiano la vocale della radice (Ablaut) e prendono desinenze diverse, i **misti** cambiano vocale **e** prendono -te.
+
+  | | machen (debole) | arbeiten (radice in -t) | gehen (forte) | nehmen (forte) | bringen (misto) |
+  |---|---|---|---|---|---|
+  | ich | machte | arbeitete | ging | nahm | brachte |
+  | du | machtest | arbeitetest | gingst | nahmst | brachtest |
+  | er/sie/es | machte | arbeitete | ging | nahm | brachte |
+  | wir | machten | arbeiteten | gingen | nahmen | brachten |
+  | ihr | machtet | arbeitetet | gingt | nahmt | brachtet |
+  | sie/Sie | machten | arbeiteten | gingen | nahmen | brachten |
+
+  - **ich** e **er/sie/es** hanno **sempre la stessa forma**: *ich machte, er machte; ich ging, er ging.* Nei forti non c'è nessuna desinenza.
+  - Verbi deboli: **-te, -test, -te, -ten, -tet, -ten**. Se la radice finisce in **-t, -d** o in consonante (diversa da *l, r, h*) + **-m/-n** (*arbeiten, öffnen, baden, atmen*; ma *lernte, wohnte, filmte*) si inserisce una **-e-**: *arbeitete, öffnete, badete.*
+  - Verbi forti: nessuna desinenza per *ich* e *er*, poi **-st, -en, -t, -en**. Anche qui, con radice in **-t/-d** si inserisce -e-: *du fandest, ihr fandet* (da *finden – fand*).
+  - Il cambio di vocale non si prevede: *kommen – kam, geben – gab, sehen – sah, fahren – fuhr, schreiben – schrieb, essen – aß.* Si impara in terna (vedi la classe dei verbi).
+  - Misti: *denken – dachte, kennen – kannte, nennen – nannte, wissen – wusste.*
+  - Verbi separabili: il prefisso va in fondo, come al presente: *Ich stand um sieben Uhr auf.*
+  - Nei verbi con prefisso inseparabile la forma è normale: *Er besuchte mich. Sie verstand nichts.*
+  - **Uso**: il Präteritum è il tempo della **narrazione scritta** (racconti, giornali, favole). Nel parlato si usa il **Perfekt**, tranne con *sein, haben* e i modali (*war, hatte, konnte…*), che usano quasi sempre il Präteritum.
+
+  ## Esempi
+  - *Gestern ging ich früh ins Bett.* — Ieri sono andato a letto presto.
+  - *Er nahm den Bus und kam zu spät.* — Prese l'autobus e arrivò in ritardo.
+  - *Wir arbeiteten den ganzen Tag im Garten.* — Abbiamo lavorato tutto il giorno in giardino.
+  - *Sie wusste nicht, wo er war.* — Non sapeva dove fosse.
+  - *Ich stand um sieben Uhr auf und frühstückte.* — Mi alzai alle sette e feci colazione.
+  - *Du fandest das Buch langweilig.* — Trovasti il libro noioso.
+
+  ## Errori tipici di chi parla italiano
+  - Si aggiunge **-te** a un verbo forte (come se fosse regolare): **\*ich gehte, \*er kommte, \*sie nehmte** → *ging, kam, nahm.*
+  - Si aggiunge una desinenza alla 1ª e 3ª persona singolare dei forti: **\*er gingt, \*ich gingte** → *er ging, ich ging.* Le forme *ich* e *er* **coincidono**, in italiano *io facevo / egli faceva* sono diverse.
+  - Si parte dal presente invece che dalla terna: **\*er gibte** (da *er gibt*) → *er gab.*
+  - Si dimentica la **-e-** dopo -t/-d: **\*ich arbeitte, \*du arbeittest, \*du fandst** → *ich arbeitete, du arbeitetest, du fandest.*
+  - Si traduce il Präteritum con l'italiano **imperfetto** o **passato remoto** in modo meccanico: la scelta tra Präteritum e Perfekt dipende dallo **scritto / parlato**, non dall'aspetto (durata o conclusione).
+    Nel parlato quotidiano *Ich ging gestern ins Kino* suona piuttosto scritto (soprattutto al sud): si preferisce *Ich bin gestern ins Kino gegangen.*
+  - Verbo misto: il Präteritum è debole nelle desinenze, forte nella vocale: **\*er denkte, \*sie bringte** → *dachte, brachte.*
+examples:
+  - {de: "Gestern ging ich früh ins Bett.", it: "Ieri sono andato a letto presto."}
+  - {de: "Er nahm den Bus und kam zu spät.", it: "Prese l'autobus e arrivò in ritardo."}
+  - {de: "Wir arbeiteten den ganzen Tag im Garten.", it: "Abbiamo lavorato tutto il giorno in giardino."}
+  - {de: "Sie wusste nicht, wo er war.", it: "Non sapeva dove fosse."}
+  - {de: "Ich stand um sieben Uhr auf und frühstückte.", it: "Mi alzai alle sette e feci colazione."}

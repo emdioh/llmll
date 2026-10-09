@@ -1,0 +1,50 @@
+id: gram:inseparable-verbs
+title_it: "Verbi con prefisso inseparabile"
+title_en: "Inseparable-prefix verbs"
+level: A2
+requires: ["gram:separable-verbs"]
+diagnostic_tags:
+  prefix: [be, emp, ent, er, ge, miss, ver, zer, double-prefix]
+  form: [praesens, perfekt, infinitive-zu]
+  error_type: [prefix-separated, extra-ge-in-participle, separable-confused-with-inseparable, wrong-stress]
+reference_it: |
+  ## Regola
+  Alcuni prefissi sono **inseparabili**: restano sempre attaccati al verbo e **non portano l'accento** (l'accento cade sulla radice).
+  I prefissi sempre inseparabili sono **be-, emp-, ent-, er-, ge-, miss-, ver-, zer-**.
+
+  | verbo | presente | Partizip II | con *zu* |
+  |---|---|---|---|
+  | besuchen | Ich besuche dich. | besucht | zu besuchen |
+  | verstehen | Er versteht mich nicht. | verstanden | zu verstehen |
+  | erzählen | Sie erzählt eine Geschichte. | erzählt | zu erzählen |
+  | entscheiden | Wir entscheiden heute. | entschieden | zu entscheiden |
+
+  - Nella frase principale il verbo coniugato **non perde il prefisso**: *Ich verstehe das nicht* (non si manda in fondo alla frase).
+  - Il **Partizip II non prende *ge-***: *besucht, verstanden, erzählt* (a differenza di *abgeholt, aufgestanden*).
+  - Con *zu* + infinito si scrive **in due parole separate**: *zu verstehen* (a differenza di *aufzustehen*).
+  - Per questi verbi vale la solita ausiliare: *haben* per la maggior parte (*Ich habe ihn besucht*).
+  - Il significato cambia spesso rispetto al verbo semplice: *kaufen* → *verkaufen* (vendere), *suchen* → *besuchen* (andare a trovare), *stehen* → *verstehen* (capire), *fallen* → *gefallen* (piacere).
+  - Alcuni prefissi possono essere **separabili o inseparabili** a seconda del significato: **durch-, über-, um-, unter-, wider-, wieder-**.
+    Se l'accento è sul prefisso, il verbo è separabile; se è sulla radice, è inseparabile.
+    *umfahren*: **ˈumfahren** (travolgere): *Er fährt den Pfosten um* – Partizip *umgefahren*; **umˈfahren** (aggirare): *Er umfährt den Stau* – Partizip *umfahren*.
+    *wiederholen*: **wiederˈholen** (ripetere): *Ich wiederhole den Satz* – *wiederholt*.
+
+  ## Esempi
+  - *Ich besuche morgen meine Großeltern.* — Domani vado a trovare i miei nonni.
+  - *Hast du den Film verstanden?* — Hai capito il film?
+  - *Sie hat uns die ganze Geschichte erzählt.* — Ci ha raccontato tutta la storia.
+  - *Der Lehrer wiederholt die Regel noch einmal.* — L'insegnante ripete ancora la regola.
+  - *Es ist schwer, so schnell zu entscheiden.* — È difficile decidere così in fretta.
+
+  ## Errori tipici di chi parla italiano
+  - Si cerca di separare il prefisso come in *aufstehen*: **\*Ich stehe das nicht ver** → *Ich verstehe das nicht.*
+  - Si mette *ge-* nel participio per analogia con l'italiano (regolare): **\*Ich habe ihn geversucht**, **\*gebesucht** → *versucht, besucht*.
+  - Con *zu* si scrive tutto attaccato per analogia con i separabili: **\*verstehenzu** o **\*zuverstehen** → *zu verstehen*.
+  - Con i prefissi doppi si tratta *wiederholen* (ripetere) come un separabile: **\*Ich hole den Satz wieder** → *Ich wiederhole den Satz.*
+  - L'accento: *besuchen* si pronuncia con l'accento sulla radice (*beˈsuchen*), non sul prefisso.
+examples:
+  - {de: "Ich besuche morgen meine Großeltern.", it: "Domani vado a trovare i miei nonni."}
+  - {de: "Hast du den Film verstanden?", it: "Hai capito il film?"}
+  - {de: "Sie hat uns die ganze Geschichte erzählt.", it: "Ci ha raccontato tutta la storia."}
+  - {de: "Der Lehrer wiederholt die Regel noch einmal.", it: "L'insegnante ripete ancora la regola."}
+  - {de: "Es ist schwer, so schnell zu entscheiden.", it: "È difficile decidere così in fretta."}

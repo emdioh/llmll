@@ -1,0 +1,47 @@
+id: gram:consecutive-clauses
+title_it: "Subordinate consecutive: so … dass, sodass, zu … als dass"
+title_en: "Consecutive clauses: so … dass, sodass, zu … als dass"
+level: B2
+requires: ["gram:verb-final-subordinate", "gram:konjunktiv-ii"]
+diagnostic_tags:
+  construction: [so-dass, sodass, solch-dass, zu-als-dass, derart-dass]
+  error_type: [so-missing-in-main, dass-vs-wie, verb-not-final, indicative-after-zu-als-dass, wrong-so-position, solch-declension, deshalb-vs-sodass]
+reference_it: |
+  ## Regola
+  Una consecutiva esprime il **risultato** di quanto detto nella principale. Il verbo coniugato va in fondo, virgola davanti.
+  La subordinata **segue** sempre la principale.
+
+  | struttura | quando | esempio |
+  |---|---|---|
+  | **so + aggettivo/avverbio …, dass** | risultato di una qualità o di un grado | *Es war so kalt, **dass** der See gefror.* |
+  | **so viel / so wenig …, dass** | quantità | *Er hat so viel gegessen, dass ihm schlecht wurde.* |
+  | **sodass** (anche *so dass*) | risultato di un'azione intera, senza aggettivo | *Er sprach leise, **sodass** wir ihn kaum verstanden.* |
+  | **solch-** / **so ein …, dass** | davanti a un sostantivo | *Es war ein so schlechter Film, dass wir gingen.* |
+  | **zu … , als dass** + Konjunktiv II | "troppo … perché" (conseguenza impossibile) | *Es ist zu spät, als dass wir noch anrufen könnten.* |
+
+  - In *so … dass* l'intensificatore **so** sta nella principale davanti all'aggettivo, *dass* apre la subordinata.
+  - Davanti a un sostantivo con articolo indeterminativo: *ein **so** guter Film* oppure *so **ein** guter Film*; in alternativa *ein solcher Film / solch ein Film* ("un tale film").
+  - Rinforzi più formali di *so*: **derart, dermaßen** (*Er war derart müde, dass …*).
+  - **zu … als dass** richiede il **Konjunktiv II** (spesso un modale: *könnten, würden*), non l'indicativo. Con lo stesso soggetto si preferisce *zu … um … zu*: *Er ist zu müde, um zu arbeiten.*
+  - Attenzione: *deshalb / daher / deswegen* (connettori, principale con inversione) esprimono la conseguenza in una frase **separata**: *Es war kalt, deshalb blieben wir zu Hause.*
+
+  ## Esempi
+  - *Der Kaffee war so heiß, dass ich ihn nicht trinken konnte.* — Il caffè era così caldo che non potevo berlo.
+  - *Sie hat so viel gearbeitet, dass sie krank wurde.* — Ha lavorato così tanto che si è ammalata.
+  - *Wir haben früh gepackt, sodass wir pünktlich losfahren konnten.* — Abbiamo fatto le valigie presto così da poter partire in orario.
+  - *Es war ein so schöner Abend, dass wir noch lange draußen saßen.* — Era una serata così bella che restammo fuori a lungo.
+  - *Das Zimmer ist zu klein, als dass wir dort schlafen könnten.* — La stanza è troppo piccola perché possiamo dormirci.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha **così … che / tanto … che**: *così* = *so* nella principale, *che* = **dass** (non *wie*, che serve per i paragoni):
+    **\*Es war so kalt wie der See gefror** → *Es war so kalt, dass der See gefror*.
+  - Si dimentica *so*: **\*Es war kalt, dass der See gefror** → *Es war **so** kalt, dass …*.
+  - Verbo in fondo: **\*so müde, dass er ging schlafen** → *…, dass er schlafen ging*.
+  - Dopo **zu … als dass** l'italiano userebbe il congiuntivo presente (*perché possiamo*): in tedesco **Konjunktiv II**, non **\*als dass wir können** → *als dass wir könnten*.
+  - Non mescolare *sodass* e i connettori: **\*Es war kalt, sodass deshalb …** → *Es war kalt, sodass …* oppure *Es war kalt, deshalb …*.
+examples:
+  - {de: "Der Kaffee war so heiß, dass ich ihn nicht trinken konnte.", it: "Il caffè era così caldo che non potevo berlo."}
+  - {de: "Sie hat so viel gearbeitet, dass sie krank wurde.", it: "Ha lavorato così tanto che si è ammalata."}
+  - {de: "Wir haben früh gepackt, sodass wir pünktlich losfahren konnten.", it: "Abbiamo fatto le valigie presto così da poter partire in orario."}
+  - {de: "Es war ein so schöner Abend, dass wir noch lange draußen saßen.", it: "Era una serata così bella che restammo fuori a lungo."}
+  - {de: "Das Zimmer ist zu klein, als dass wir dort schlafen könnten.", it: "La stanza è troppo piccola perché possiamo dormirci."}

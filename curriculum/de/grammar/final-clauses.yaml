@@ -1,0 +1,45 @@
+id: gram:final-clauses
+title_it: "Subordinate finali: damit e um … zu"
+title_en: "Purpose clauses: damit and um … zu"
+level: B1
+requires: ["gram:verb-final-subordinate", "gram:infinitive-zu"]
+diagnostic_tags:
+  construction: [damit, um-zu, fuer-noun, damit-vs-dass]
+  subject_relation: [same-subject, different-subject]
+  error_type: [damit-same-subject, um-zu-different-subject, fuer-instead-of-um-zu, modal-sollen-in-damit, verb-not-final, damit-vs-dass, missing-comma]
+reference_it: |
+  ## Regola
+  Una finale risponde a **wozu? / wofür?** ("a quale scopo?"). Ci sono due costruzioni, la scelta dipende dal **soggetto**.
+
+  | situazione | costruzione | esempio |
+  |---|---|---|
+  | **soggetti diversi** | **damit** + frase (verbo in fondo, indicativo) | *Ich erkläre es dir, **damit** du es **verstehst**.* |
+  | **stesso soggetto** | **um … zu** + infinito | *Ich lerne, **um** die Prüfung **zu** bestehen.* |
+  | scopo espresso con un sostantivo | **für** + accusativo, o *zum* + sostantivo | *Ich spare **für** den Urlaub.* |
+
+  - **damit** introduce una subordinata: virgola, verbo coniugato **in fondo**, indicativo (di solito presente): *Ich rufe an, damit er nicht wartet.*
+  - **um … zu**: *um* apre la parte finale, *zu* sta **prima dell'infinito**, in fondo; con verbi separabili *zu* va tra prefisso e verbo (*um aufzuräumen*).
+    Il soggetto non si ripete: è quello della principale.
+  - Se i soggetti coincidono, si preferisce *um … zu*; *damit* con lo stesso soggetto è possibile ma suona pesante.
+  - Nelle finali di solito **non servono** *sollen / wollen*: lo scopo è già nel senso di *damit* e *um … zu*.
+  - **damit** (affinché) ≠ **dass** (che): *Ich sage dir, dass …* introduce un contenuto, *damit* uno scopo.
+
+  ## Esempi
+  - *Ich schreibe es auf, damit ich es nicht vergesse.* — Lo scrivo per non dimenticarlo.
+  - *Sie spricht langsam, damit wir sie verstehen.* — Parla piano affinché la capiamo.
+  - *Er geht früh ins Bett, um fit zu sein.* — Va a letto presto per essere in forma.
+  - *Wir fahren nach Wien, um die Oper zu besuchen.* — Andiamo a Vienna per visitare l'opera.
+  - *Ich nehme das Rad, um schneller anzukommen.* — Prendo la bici per arrivare prima.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa **per + infinito** anche con soggetti diversi o con un congiuntivo (*affinché capisca*). In tedesco:
+    **\*Ich erkläre es, um du es verstehst** → *damit du es verstehst* (soggetti diversi → *damit*).
+  - Con lo stesso soggetto *damit* è raro: meglio *Ich lerne, um zu bestehen* che *Ich lerne, damit ich bestehe*.
+  - **per** + sostantivo/pronome = **für**, non *um zu*: **\*Ich spare, um den Urlaub** → *Ich spare für den Urlaub*; **\*für zu bestehen** è sempre errato.
+  - Dopo *damit* il verbo è all'**indicativo**, non al congiuntivo: **\*damit er komme**.
+  - Verbo in fondo e virgola: **\*Ich rufe an, damit er wartet nicht**.
+examples:
+  - {de: "Ich schreibe es auf, damit ich es nicht vergesse.", it: "Lo scrivo per non dimenticarlo."}
+  - {de: "Sie spricht langsam, damit wir sie verstehen.", it: "Parla piano affinché la capiamo."}
+  - {de: "Er geht früh ins Bett, um fit zu sein.", it: "Va a letto presto per essere in forma."}
+  - {de: "Wir fahren nach Wien, um die Oper zu besuchen.", it: "Andiamo a Vienna per visitare l'opera."}

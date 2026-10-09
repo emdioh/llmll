@@ -1,0 +1,53 @@
+id: gram:verb-classes-weak-strong-mixed
+title_it: "Verbi deboli, forti e misti"
+title_en: "Weak, strong and mixed verbs"
+level: A2
+requires: ["gram:praesens", "gram:perfekt"]
+diagnostic_tags:
+  verb_class: [weak, strong, mixed]
+  form: [infinitive, praeteritum, partizip-ii]
+  error_type: [ge-added-wrongly, regularized-strong-verb, wrong-ablaut, wrong-participle-ending, mixed-verb-wrong-vowel]
+reference_it: |
+  ## Regola
+  I verbi tedeschi si dividono in tre classi in base a come formano il **Präteritum** e il **Partizip II**.
+  Per ogni verbo si impara la "terna": infinito – Präteritum (3ª sing.) – Partizip II.
+
+  | classe | come si forma | vocale della radice | Partizip II | esempio |
+  |---|---|---|---|---|
+  | **debole** (regolare) | radice + **-te** | non cambia | **ge-** + radice + **-t** | machen – machte – gemacht |
+  | **forte** | radice con **Ablaut** | cambia (a volte anche le consonanti) | **ge-** + radice + **-en** | singen – sang – gesungen |
+  | **mista** | radice con Ablaut + **-te** | cambia | **ge-** + radice + **-t** | denken – dachte – gedacht |
+
+  - I verbi **deboli** sono la grande maggioranza e anche i verbi nuovi sono deboli (*mailen – mailte – gemailt*).
+  - I verbi **forti** sono pochi ma frequentissimi. Non c'è una regola per prevedere la nuova vocale: vanno imparati in terna.
+    Alcuni schemi aiutano: *schreiben – schrieb – geschrieben*, *bleiben – blieb – geblieben*; *finden – fand – gefunden*, *trinken – trank – getrunken*.
+  - I verbi **misti** sono pochi, da imparare a memoria: *bringen – brachte – gebracht*, *denken – dachte – gedacht*, *kennen – kannte – gekannt*,
+    *nennen – nannte – genannt*, *rennen – rannte – gerannt*, *wissen – wusste – gewusst*.
+  - Il **cambio vocalico del presente** (*sprechen – du sprichst*) è un'altra cosa: riguarda solo alcuni verbi forti e solo *du* e *er/sie/es*.
+    Non fa prevedere il Präteritum: *sprechen – sprach – gesprochen*.
+  - I verbi forti e misti si segnalano nei dizionari con la terna; i verbi senza terna sono deboli.
+  - **Senza ge-**: i verbi in **-ieren** e quelli con prefisso inseparabile (**be-, ge-, er-, ver-, zer-, ent-, emp-, miss-**) formano il Partizip II **senza ge-**: *studieren – studierte – studiert*, *besuchen – besuchte – besucht*, *verstehen – verstand – verstanden*, *erzählen – erzählte – erzählt*. Nei verbi separabili *ge-* va in mezzo: *aufmachen – aufgemacht*.
+  - Al Perfekt la terna va completata con l'ausiliare *haben* o *sein* (*gehen – ging – ist gegangen*).
+
+  ## Esempi
+  - *Ich habe gestern zwei Stunden Deutsch gelernt.* — Ieri ho studiato tedesco per due ore (verbo debole: *lernen – lernte – gelernt*).
+  - *Wir haben gestern lange gesungen.* — Ieri abbiamo cantato a lungo (forte: *singen – sang – gesungen*).
+  - *Er hat mir ein Geschenk gebracht.* — Mi ha portato un regalo (misto: *brachte – gebracht*).
+  - *Sie hat an dich gedacht.* — Ha pensato a te (misto: *dachte – gedacht*).
+  - *Ich habe den Mann nicht gekannt.* — Non conoscevo quell'uomo (misto: *kannte – gekannt*).
+
+  ## Errori tipici di chi parla italiano
+  - In italiano chi sbaglia un verbo irregolare lo rende regolare (*"vinsi" → "vincei"*) e ci si fa capire; in tedesco il Präteritum dei verbi forti si impara in terna.
+    **Non si può "regolarizzare"** un verbo forte: **\*Ich habe gesingt**, **\*er schreibte**, **\*sie hat geschreibt** → *gesungen, schrieb, geschrieben*.
+  - Il Partizip II forte termina in **-en**, quello debole in **-t**: **\*gegangt**, **\*gefindet** sono errori (→ *gegangen, gefunden*).
+  - Con i verbi **misti** si mescola: la vocale cambia come nei forti, ma la desinenza è quella dei deboli.
+    **\*Er hat gedenkt**, **\*sie hat gebringt**, **\*gekennt** → *gedacht, gebracht, gekannt*.
+  - Non si deve generalizzare da *denken* a *schenken*: *schenken* è debole (*schenkte – geschenkt*).
+  - Il Partizip II dei verbi in -ieren e con prefisso inseparabile non ha *ge-*: **\*gestudiert**, **\*gebesucht**, **\*geverstanden** → *studiert, besucht, verstanden*.
+  - La vocale del presente (*ich gebe, du gibst*) non è la vocale del Präteritum (*gab*): non confondere i due.
+examples:
+  - {de: "Ich habe gestern zwei Stunden Deutsch gelernt.", it: "Ieri ho studiato tedesco per due ore."}
+  - {de: "Wir haben gestern lange gesungen.", it: "Ieri abbiamo cantato a lungo."}
+  - {de: "Er hat mir ein Geschenk gebracht.", it: "Mi ha portato un regalo."}
+  - {de: "Sie hat an dich gedacht.", it: "Ha pensato a te."}
+  - {de: "Ich habe den Mann nicht gekannt.", it: "Non conoscevo quell'uomo."}

@@ -1,0 +1,45 @@
+id: gram:adjectives-as-nouns
+title_it: "Aggettivi sostantivati: der Kranke, ein Deutscher, etwas Neues"
+title_en: "Adjectives used as nouns: der Kranke, ein Deutscher, etwas Neues"
+level: B1
+requires: ["gram:adjective-endings"]
+diagnostic_tags:
+  type: [person-masculine, person-feminine, plural, neuter-abstract, participle-noun]
+  declension: [weak, strong]
+  error_type: [wrong-ending-after-ein, lowercase, weak-noun-confusion, neuter-ending-after-etwas, wrong-gender]
+reference_it: |
+  ## Regola
+  Molti aggettivi (e participi) possono essere usati **come sostantivi**: si scrivono con l'**iniziale maiuscola**, ma **conservano le desinenze dell'aggettivo**, che cambiano secondo l'articolo (come nella declinazione dell'aggettivo).
+
+  | | m (con *der* / *ein*) | f | pl |
+  |---|---|---|---|
+  | Nom. | der Kranke / ein Kranker | die Kranke / eine Kranke | die Kranken / Kranke |
+  | Akk. | den Kranken / einen Kranken | die Kranke / eine Kranke | die Kranken / Kranke |
+  | Dat. | dem Kranken / einem Kranken | der Kranken / einer Kranken | den Kranken / Kranken |
+  | Gen. | des Kranken / eines Kranken | der Kranken / einer Kranken | der Kranken / Kranker |
+
+  - **Persone**: il genere si legge dall'articolo: *der Deutsche* (uomo), *die Deutsche* (donna), *die Deutschen* (i tedeschi). Altri esempi: *der/die Bekannte, Verwandte, Angestellte, Arbeitslose, Reisende, Jugendliche, Erwachsene.*
+  - Dopo *ein* il nominativo maschile è **-er** (*ein Kranker, ein Bekannter*), non *-e*: la desinenza è quella dell'aggettivo.
+  - **Neutro astratto**: *das Gute, das Schöne, das Neue* (= "ciò che è buono/nuovo...").
+  - Dopo **etwas, nichts, viel, wenig** l'aggettivo sostantivato è neutro e prende **-es** (nominativo/accusativo): *etwas Neues, nichts Wichtiges, viel Interessantes, wenig Gutes.* Dopo **alles**: *alles Gute, alles Schöne*.
+  - Participi: *angestellt → der Angestellte; reisend → der Reisende; verwandt → der Verwandte.*
+
+  ## Esempi
+  - *Der Kranke braucht Ruhe.* — Il malato ha bisogno di riposo.
+  - *Ich kenne einen Deutschen aus Hamburg.* — Conosco un tedesco di Amburgo.
+  - *Die Angestellten warten auf den Chef.* — Gli impiegati aspettano il capo.
+  - *Hast du etwas Neues gehört?* — Hai sentito qualcosa di nuovo?
+  - *Ich wünsche dir alles Gute.* — Ti auguro ogni bene.
+  - *Sie ist eine alte Bekannte von mir.* — È una mia vecchia conoscente.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *il malato* o *un malato* sono nomi con desinenza fissa; in tedesco l'aggettivo sostantivato **cambia**: **\*ein Kranke** → *ein Kranker*; **\*der Kranker** → *der Kranke*.
+  - La forma plurale senza articolo è **-e**: *Kranke, Arbeitslose*; con l'articolo determinativo **-en**: *die Kranken*.
+  - Dopo *etwas / nichts / viel / wenig* l'iniziale è maiuscola e la desinenza **-es**: **\*etwas neu** / **\*etwas Neue** → *etwas Neues*.
+  - Non vanno confusi con i **sostantivi deboli** (*der Junge, den Jungen*): questi hanno una declinazione propria (-n in tutti i casi tranne il nominativo singolare), gli aggettivi sostantivati cambiano con l'articolo (*ein Deutscher* / *der Deutsche*).
+examples:
+  - {de: "Der Kranke braucht Ruhe.", it: "Il malato ha bisogno di riposo."}
+  - {de: "Ich kenne einen Deutschen aus Hamburg.", it: "Conosco un tedesco di Amburgo."}
+  - {de: "Die Angestellten warten auf den Chef.", it: "Gli impiegati aspettano il capo."}
+  - {de: "Hast du etwas Neues gehört?", it: "Hai sentito qualcosa di nuovo?"}
+  - {de: "Ich wünsche dir alles Gute.", it: "Ti auguro ogni bene."}

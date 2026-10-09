@@ -1,0 +1,52 @@
+id: gram:numbers-advanced
+title_it: "Calcoli, frazioni, percentuali, misure e numerali derivati"
+title_en: "Calculations, fractions, percentages, measures and derived numerals"
+level: B1
+requires: ["gram:numbers"]
+diagnostic_tags:
+  topic: [calculation, fraction, percentage, measure, derived-numeral, decimal]
+  error_type: [preposition-after-measure, plural-after-measure, fraction-gender, wrong-derived-suffix, comma-vs-point]
+reference_it: |
+  ## Regola
+  **Calcoli.** *plus / und* (+), *minus / weniger* (−), *mal* (×), *(geteilt) durch* (÷), *ist / gleich* (=): *Drei mal vier ist zwölf. Zehn minus sieben ist drei.* Il verbo è *rechnen*. In tedesco la **virgola** è il separatore decimale e il **punto** separa le migliaia: *3,5 = drei Komma fünf; 1.200 = tausendzweihundert.*
+
+  **Frazioni.** Il numeratore è un cardinale; il denominatore si forma con l'ordinale (*vierte → Viertel, fünfte → Fünftel*) con la desinenza **-el** e si scrive maiuscolo come sostantivo **neutro**: *ein Drittel, drei Viertel, zwei Fünftel, ein Zehntel.* Eccezioni: **ein halb** (1/2, aggettivo: *ein halbes Kilo*) e **eineinhalb / anderthalb** (1½). *die Hälfte* è "la metà" (sostantivo). Dopo un numero *Viertel* è invariato come unità: *ein Viertel Liter* (non *Viertels*).
+
+  **Percentuali.** *Prozent* resta invariato dopo il numero e **non vuole l'articolo** davanti al numero: *20 Prozent der Studenten sind krank.* Il verbo di norma concorda con la percentuale (*Ein Prozent … ist, zehn Prozent … sind*); con *Prozent der* + plurale si usa il plurale (*Zehn Prozent der Kinder sind krank*). Con *ein Prozent der* + plurale si trovano sia *ist* sia *sind*.
+
+  **Misure e quantità.** Dopo l'unità di misura **non si usa nessuna preposizione** (niente *di*): *ein Kilo Äpfel, zwei Liter Milch, eine Tasse Tee.*
+  - Maschili e neutri restano **al singolare** dopo il numero: *zwei Kilo, drei Meter, vier Glas Wasser, zwei Paar Schuhe.*
+  - I femminili in **-e** vanno al plurale: *zwei Flaschen Wasser, drei Tassen Kaffee.*
+  - Temperatura: *fünf Grad, minus drei Grad.* Si approssima con *etwa, ungefähr, ca., rund, knapp (poco meno), gut (poco più)*: *knapp zehn Euro, gut zwei Stunden.*
+
+  **Numerali derivati dal cardinale.**
+
+  | tipo | formazione | esempi |
+  |---|---|---|
+  | in elenco | ordinale (radice) + **-ens** | erstens, zweitens, drittens |
+  | volte | cardinale + **-mal** | einmal, zweimal, dreimal; *zum ersten Mal* |
+  | multiplo | cardinale + **-fach** | einfach, zweifach, dreifach; *doppelt* = doppio |
+  | tipi | cardinale + **-erlei** (invariabile) | zweierlei, dreierlei, allerlei |
+  | decenni | decina + **-er** | die Achtziger, in den 90er Jahren |
+
+  ## Esempi
+  - *Vier mal fünf ist zwanzig.* — Quattro per cinque fa venti.
+  - *Ich brauche ein halbes Kilo Tomaten und zwei Liter Milch.* — Mi serve mezzo chilo di pomodori e due litri di latte.
+  - *Zwei Drittel der Klasse haben die Prüfung bestanden.* — Due terzi della classe hanno superato l'esame.
+  - *Fünfzig Prozent der Gäste sind schon da.* — Il cinquanta per cento degli ospiti è già arrivato.
+  - *Er war schon dreimal in Wien, zum ersten Mal vor zehn Jahren.* — È già stato a Vienna tre volte, la prima dieci anni fa.
+  - *Wir haben zweierlei Käse gekauft.* — Abbiamo comprato due tipi di formaggio.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano mette **di** dopo le misure (*un chilo di mele*, *un litro di latte*); in tedesco **nessuna preposizione**: **\*ein Kilo von Äpfeln**, **\*eine Flasche von Wein** → *ein Kilo Äpfel*, *eine Flasche Wein.*
+  - Dopo i numeri maschili e neutri di misura il plurale è sbagliato: **\*zwei Kilos**, **\*drei Meters** → *zwei Kilo, drei Meter.* Solo i femminili in -e (*Flasche*) hanno il plurale.
+  - In italiano "il 20 per cento" ha di solito l'articolo; in tedesco, in una frase generica, davanti al numero non si mette: **\*Die 20 Prozent der Leute sind krank** → *20 Prozent der Leute sind krank.* (L'articolo c'è solo se la quota è già nota: *die 20 Prozent, von denen wir sprachen*.)
+  - Virgola e punto decimali sono invertiti rispetto agli usi inglesi: *3,5* si legge *drei Komma fünf*; **\*drei Punkt fünf** è sbagliato.
+  - "Un terzo" non è un aggettivo: *ein Drittel* (neutro, maiuscolo); il "mezzo" è **halb** (*ein halber Liter*, *eine halbe Stunde*), ma "uno e mezzo" è *eineinhalb Stunden.*
+examples:
+  - {de: "Vier mal fünf ist zwanzig.", it: "Quattro per cinque fa venti."}
+  - {de: "Ich brauche ein halbes Kilo Tomaten und zwei Liter Milch.", it: "Mi serve mezzo chilo di pomodori e due litri di latte."}
+  - {de: "Zwei Drittel der Klasse haben die Prüfung bestanden.", it: "Due terzi della classe hanno superato l'esame."}
+  - {de: "Fünfzig Prozent der Gäste sind schon da.", it: "Il cinquanta per cento degli ospiti è già arrivato."}
+  - {de: "Er war schon dreimal in Wien, zum ersten Mal vor zehn Jahren.", it: "È già stato a Vienna tre volte, la prima dieci anni fa."}
+  - {de: "Wir haben zweierlei Käse gekauft.", it: "Abbiamo comprato due tipi di formaggio."}

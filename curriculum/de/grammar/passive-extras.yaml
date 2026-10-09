@@ -1,0 +1,54 @@
+id: gram:passive-extras
+title_it: "Passivo: dativo, passivo impersonale, Zustandspassiv e alternative"
+title_en: "Passive: dative objects, impersonal passive, stative passive and alternatives"
+level: B2
+requires: ["gram:passive-werden", "gram:modal-verbs"]
+diagnostic_tags:
+  construction: [dative-passive-object, impersonal-passive, zustandspassiv, modal-passive, sein-zu, sich-lassen, bekommen-passiv, bar-adjective]
+  error_type: [dative-turned-nominative, es-with-inversion, sein-instead-of-werden, passive-of-stative-verb, wrong-modal-passive-order]
+reference_it: |
+  ## Regola
+  **1. Verbi con dativo.** L'oggetto al **dativo** resta al dativo; la frase non ha soggetto (o ha *es*):
+  *Ich helfe dem Kind.* → *Dem Kind **wird** geholfen.* (non **\*Das Kind wird geholfen**).
+
+  **2. Passivo impersonale.** Anche i verbi senza oggetto formano il passivo, senza soggetto. *Es* sta solo al primo posto:
+  *Hier wird getanzt. = Es wird hier getanzt.* — *Heute wird nicht gearbeitet.* — Perfekt: *Gestern ist viel gelacht worden.*
+
+  **3. Passivo con modale.** modale + participio II + **werden**: *Das Problem muss gelöst **werden**. Der Brief kann morgen geschrieben **werden**.*
+  Passato: *Das Haus musste verkauft werden.*
+
+  **4. Zustandspassiv** (stato risultante) = **sein + participio II**. Descrive il risultato di un'azione:
+  | Vorgangspassiv (azione) | Zustandspassiv (stato) |
+  |---|---|
+  | Das Fenster wird geöffnet. | Das Fenster ist geöffnet. |
+  | Die Rechnung wurde bezahlt. | Die Rechnung war bezahlt. |
+  Si forma solo da verbi transitivi che indicano un risultato (*schließen, ausschalten, reservieren, bezahlen*).
+
+  **5. Altri modi per esprimere il passivo.**
+  - **man + attivo**: *Man darf hier nicht parken.*
+  - **sein + zu + Inf.** (possibilità/dovere): *Das Problem ist schnell zu lösen.*
+  - **sich lassen + Inf.** (possibilità): *Das lässt sich leicht erklären.*
+  - **aggettivi in -bar / -lich**: *lesbar* (leggibile), *machbar*, *verständlich*.
+  - **bekommen / kriegen + participio II** (colloquiale, chi riceve diventa soggetto): *Ich bekomme das Buch geschenkt.* (= mi viene regalato il libro).
+  - **Nessun passivo** con verbi di stato o di possesso: *haben, besitzen, kennen, wissen, kosten, bekommen* e con i verbi riflessivi.
+
+  ## Esempi
+  - *Dem Kind wird bei den Hausaufgaben geholfen.* — Al bambino viene dato aiuto per i compiti.
+  - *In diesem Restaurant wird nicht geraucht.* — In questo ristorante non si fuma.
+  - *Der Vertrag muss bis Freitag unterschrieben werden.* — Il contratto deve essere firmato entro venerdì.
+  - *Das Geschäft ist sonntags geschlossen.* — Il negozio la domenica è chiuso.
+  - *Das lässt sich nicht so einfach sagen.* — Non è facile da dire.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *aiutare* è transitivo (*Il bambino viene aiutato*), quindi l'oggetto diventa soggetto; in tedesco i verbi con dativo (*helfen, danken, gefallen*) **mantengono il dativo**:
+    **\*Das Kind wird geholfen** → *Dem Kind wird geholfen.*
+  - Il **si passivante** italiano (*non si fuma qui*) → passivo impersonale o *man*: **\*Hier raucht sich nicht** → *Hier wird nicht geraucht.*
+  - **essere + participio** in italiano vale sia azione sia stato: *la porta è aperta / è stata aperta*. In tedesco: **werden** per l'azione, **sein** per lo stato (*Die Tür wird geöffnet* ≠ *Die Tür ist geöffnet*).
+  - Con il modale in italiano l'ordine è *deve essere fatto*; in tedesco il verbo finito è alla fine: **\*Das muss werden gemacht** → *Das muss gemacht werden.*
+  - *Es* come soggetto fittizio solo al primo posto: **\*Heute es wird getanzt** → *Heute wird getanzt.*
+examples:
+  - {de: "Dem Kind wird bei den Hausaufgaben geholfen.", it: "Al bambino viene dato aiuto per i compiti."}
+  - {de: "In diesem Restaurant wird nicht geraucht.", it: "In questo ristorante non si fuma."}
+  - {de: "Der Vertrag muss bis Freitag unterschrieben werden.", it: "Il contratto deve essere firmato entro venerdì."}
+  - {de: "Das Geschäft ist sonntags geschlossen.", it: "Il negozio la domenica è chiuso."}
+  - {de: "Das lässt sich nicht so einfach sagen.", it: "Non è facile da dire."}

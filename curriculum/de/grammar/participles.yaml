@@ -1,0 +1,53 @@
+id: gram:participles
+title_it: "Participio presente e participio passato come aggettivo"
+title_en: "Present and past participles as adjectives"
+level: B1
+requires: ["gram:perfekt", "gram:adjective-endings"]
+diagnostic_tags:
+  participle: [partizip-1, partizip-2, zu-partizip-1]
+  function: [attributive, adverbial, predicative]
+  error_type: [partizip-2-from-intransitive-haben, missing-adjective-ending, partizip-1-for-progressive, wrong-voice-meaning, d-missing]
+reference_it: |
+  ## Regola
+  **Partizip I** = **infinito + d**: *lachen → lachend, schlafen → schlafend, spielen → spielend.* (eccezioni: *sein → seiend, tun → tuend*).
+  Ha significato **attivo e contemporaneo**: *das schlafende Kind* = il bambino che dorme.
+
+  **Partizip II** = il participio del Perfekt (*gemacht, geschrieben, gekommen*). Ha significato:
+  - **passivo** per i verbi transitivi: *der gelesene Brief* = la lettera che è stata letta;
+  - **attivo e concluso** per i verbi di moto/cambio con *sein*: *der angekommene Zug* = il treno che è arrivato; *die gestiegenen Preise*.
+  - I verbi intransitivi con *haben* **non** formano questo uso: **\*das geschlafene Kind**.
+
+  Come aggettivo il participio prende le **desinenze dell'aggettivo** (dopo articolo, *-e* / *-en*; senza articolo *-er, -es, -e*…):
+
+  | | Partizip I | Partizip II |
+  |---|---|---|
+  | der / das / die | der lachende Mann | das gekochte Ei |
+  | ein- | ein lachender Mann | ein gekochtes Ei |
+  | senza articolo | lachende Kinder | gekochte Eier |
+  | dativo plurale | mit lachenden Kindern | mit gekochten Eiern |
+
+  - **Uso avverbiale** (senza desinenza): *Sie kam lachend herein. Er stand erschöpft an der Tür.*
+  - **Participio presente con zu** = passivo con possibilità o obbligo: *die zu lösende Aufgabe* = il compito che deve/può essere risolto.
+  - Molti participi sono diventati veri aggettivi: *interessant, spannend, überraschend, bekannt, verheiratet, gelungen*.
+  - Il participio presente non si usa per l'azione in corso come il **gerundio italiano** (*sto leggendo*): in tedesco *Ich lese gerade*, o *Ich bin am Lesen* (colloquiale).
+
+  ## Esempi
+  - *Der schlafende Hund liegt vor der Tür.* — Il cane che dorme è davanti alla porta.
+  - *Ich esse gern gekochte Eier.* — Mangio volentieri uova sode.
+  - *Wir wohnen in einem renovierten Haus.* — Abitiamo in una casa ristrutturata.
+  - *Die steigenden Preise machen mir Sorgen.* — I prezzi che salgono mi preoccupano.
+  - *Er kam singend in die Küche.* — Entrò in cucina cantando.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha participi presenti in **-ante / -ente** (*dormiente, sorridente*) usati poco e un **gerundio** (*dormendo*) molto frequente. In tedesco il Partizip I (-end) copre
+    entrambi gli usi, ma **non** per le azioni in corso: **\*Ich bin lesend** → *Ich lese gerade.*
+  - Il Partizip I è sempre **attivo**: **\*das essende Brot** (il pane che si mangia) è errato; si dice *das Brot, das man isst*.
+  - **\*das geschlafene Kind**: il Partizip II dei verbi intransitivi con *haben* non si usa come attributo. Dei verbi con *sein* sì: *die gefallenen Blätter* (le foglie cadute).
+  - Dimenticare la **desinenza**: **\*der lachend Mann**, **\*ein gekocht Ei** → *der lachende Mann, ein gekochtes Ei*. Come avverbio invece **non** si mette: **\*Sie kam lachende herein**.
+  - Dimenticare la **-d** del Partizip I: **\*lachen Kinder** → *lachende Kinder.*
+examples:
+  - {de: "Der schlafende Hund liegt vor der Tür.", it: "Il cane che dorme è davanti alla porta."}
+  - {de: "Ich esse gern gekochte Eier.", it: "Mangio volentieri uova sode."}
+  - {de: "Wir wohnen in einem renovierten Haus.", it: "Abitiamo in una casa ristrutturata."}
+  - {de: "Die steigenden Preise machen mir Sorgen.", it: "I prezzi che salgono mi preoccupano."}
+  - {de: "Er kam singend in die Küche.", it: "Entrò in cucina cantando."}

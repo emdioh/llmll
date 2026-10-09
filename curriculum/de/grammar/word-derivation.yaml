@@ -1,0 +1,55 @@
+id: gram:word-derivation
+title_it: "Derivazione: prefissi, suffissi e genere dei nomi derivati"
+title_en: "Word derivation: prefixes, suffixes and gender of derived nouns"
+level: B1
+requires: ["gram:compound-words"]
+diagnostic_tags:
+  affix_type: [noun-suffix, adjective-suffix, noun-prefix, feminine-in, diminutive]
+  gender_by_suffix: [f-ung-heit-keit-schaft, n-chen-lein, m-er-ling, other]
+  error_type: [wrong-gender-of-derived-noun, missing-umlaut, wrong-plural-of-in, wrong-suffix]
+reference_it: |
+  ## Regola
+  Oltre a unire parole (composti), il tedesco forma parole nuove con **suffissi** (dopo la radice) e **prefissi** (prima). Per i **nomi** il suffisso decide **genere e plurale**: se conosci il suffisso, conosci l'articolo.
+
+  | Suffisso | Genere | Da cosa deriva | Esempio | Plurale |
+  |---|---|---|---|---|
+  | **-ung** | f | verbo | die Wohnung (< wohnen), die Zeitung | die Wohnungen |
+  | **-heit / -keit / -igkeit** | f | aggettivo | die Freiheit, die Möglichkeit | -en |
+  | **-schaft** | f | nome / aggettivo | die Freundschaft, die Mannschaft | -en |
+  | **-ei** | f | nome / verbo | die Bäckerei | -en |
+  | **-ion, -tät, -ik** (parole straniere) | f | | die Nation, die Universität, die Technik | -en |
+  | **-in** | f | persona maschile | die Lehrerin, die Ärztin | die Lehrerin**nen** |
+  | **-er** | m | verbo / luogo | der Lehrer, der Fahrer, der Berliner | invariato |
+  | **-ling** | m | verbo / aggettivo | der Lehrling, der Liebling | -e |
+  | **-chen, -lein** (diminutivi) | n | nome | das Mädchen, das Brötchen, das Büchlein | invariato |
+  | **-tum** | n (ma *der Reichtum, der Irrtum*) | nome / aggettivo | das Eigentum, das Christentum | quando esiste: -tümer (*die Irrtümer*) |
+  | **-nis** | n o f | verbo / aggettivo | das Ergebnis, die Kenntnis | -se |
+
+  - **-chen / -lein**: il nome diventa **neutro** qualunque fosse il genere (*die Frau → das Frauchen*) e le vocali a, o, u prendono l'Umlaut: *das Haus → das Häuschen*, *das Buch → das Büchlein*.
+  - **-in**: forma il femminile delle professioni e nazionalità; a volte con Umlaut (*der Arzt → die Ärztin*, *der Koch → die Köchin*). Plurale con **-nen** (*die Lehrerinnen*).
+  - **-er** da verbo indica chi fa l'azione: *lehren → der Lehrer*, *fahren → der Fahrer*.
+  - Dalla radice del verbo senza suffisso: *besuchen → der Besuch*, *anfangen → der Anfang*, *antworten → die Antwort*; con **-e**: *lieben → die Liebe*, *fragen → die Frage* (genere da imparare, spesso f). Anche l'infinito diventa nome neutro: *essen → das Essen*, *leben → das Leben*.
+  - **Aggettivi derivati**: *-lich* (*freundlich, täglich*), *-ig* (*ruhig, sonnig*), *-isch* (*typisch, italienisch*), *-bar* (*essbar, sichtbar*), *-los* (*arbeitslos* = senza lavoro), *-voll* (*sinnvoll*), *-reich* (*erfolgreich*), *-sam* (*langsam*).
+  - **Prefissi**: *un-* nega (*unfreundlich, das Unglück*), *ur-* indica origine (*der Urwald*), *miss-* (*das Missverständnis*), *mit-*, *vor-*, *nach-* (*der Vorname, die Nachspeise*). Prefissi dei verbi (*be-, ge-, ver-, zer-, ent-, er-, ab-, an-, auf-…*) formano verbi nuovi con altro significato (*kaufen → verkaufen*).
+
+  ## Esempi
+  - *Die Wohnung ist klein, aber die Lage ist ideal.* — L'appartamento è piccolo, ma la posizione è ideale.
+  - *Meine Lehrerin heißt Frau Wagner.* — La mia insegnante si chiama signora Wagner.
+  - *Freundschaft ist mir wichtig.* — L'amicizia è importante per me.
+  - *Das Mädchen kauft ein Brötchen.* — La ragazza compra un panino.
+  - *Er ist arbeitslos, aber nicht hoffnungslos.* — È disoccupato, ma non senza speranza.
+  - *Das Essen war unglaublich gut.* — Il cibo era incredibilmente buono.
+
+  ## Errori tipici di chi parla italiano
+  - **Genere preso dall'italiano**: *la città* è f ma *das Mädchen* (-chen) è neutro; *la libertà* → **die** Freiheit (f), *il lavoratore* → **der** Arbeiter, *l'amicizia* → **die** Freundschaft. Basta il suffisso: **\*das Zeitung**, **\*das Freiheit** sono errori di genere.
+  - **Plurale di -in**: **\*die Lehrerinen**, **\*die Lehrerins** → *die Lehrerinnen* (raddoppio della -n).
+  - **Umlaut dimenticato nel diminutivo**: **\*das Hauschen**, **\*das Buchlein** → *das Häuschen*, *das Büchlein*.
+  - **-chen è sempre neutro**: **\*die Mädchen** o **\*eine Mädchen** al singolare è un errore classico → *das Mädchen, ein Mädchen*, anche se si riferisce a una ragazza (*die Mädchen* è solo il plurale).
+  - **Suffisso sbagliato**: non tutti gli aggettivi usano lo stesso suffisso (**\*möglig** → *möglich*; **\*ruhlich** → *ruhig*). Impara l'aggettivo intero.
+examples:
+  - {de: "Meine Lehrerin heißt Frau Wagner.", it: "La mia insegnante si chiama signora Wagner."}
+  - {de: "Die Wohnung ist klein, aber die Lage ist ideal.", it: "L'appartamento è piccolo, ma la posizione è ideale."}
+  - {de: "Freundschaft ist mir wichtig.", it: "L'amicizia è importante per me."}
+  - {de: "Das Mädchen kauft ein Brötchen.", it: "La ragazza compra un panino."}
+  - {de: "Er ist arbeitslos, aber nicht hoffnungslos.", it: "È disoccupato, ma non senza speranza."}
+  - {de: "Das Essen war unglaublich gut.", it: "Il cibo era incredibilmente buono."}

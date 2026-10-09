@@ -1,0 +1,57 @@
+id: gram:demonstratives
+title_it: "Dimostrativi: dieser, jener, der/die/das, derselbe, solcher"
+title_en: "Demonstratives: dieser, jener, der/die/das, derselbe, solcher"
+level: A2
+requires: ["gram:articles-nom-akk", "gram:dative-case", "gram:adjective-endings"]
+diagnostic_tags:
+  demonstrative: [dieser, jener, der-die-das-pronoun, derselbe, der-gleiche, solcher, das-identifying]
+  case: [nom, akk, dat]
+  gender_number: [m, f, n, pl]
+  error_type: [wrong-ending, dative-plural-denen, das-with-plural-verb, derselbe-vs-der-gleiche]
+reference_it: |
+  ## Regola
+  I dimostrativi indicano una persona o cosa precisa. Possono stare **davanti a un sostantivo** (aggettivo dimostrativo) o **da soli** (pronome).
+
+  **dieser** (questo) e **jener** (quello, più formale) prendono le desinenze dell'articolo determinativo:
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | dieser Mann | diese Frau | dieses Kind | diese Leute |
+  | Akk. | diesen Mann | diese Frau | dieses Kind | diese Leute |
+  | Dat. | diesem Mann | dieser Frau | diesem Kind | diesen Leuten |
+
+  Il nome dopo *dieser* + aggettivo segue la declinazione debole: *dieser große Mann, mit diesem großen Mann*.
+
+  **der / die / das come pronome** (accentato, nel parlato "quello/quella", "lui/lei"): ha le forme dell'articolo, ma al **dativo plurale** è *denen* (non *den*):
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | der | die | das | die |
+  | Akk. | den | die | das | die |
+  | Dat. | dem | der | dem | **denen** |
+
+  - **Identificare** una persona o cosa: *das* resta invariato, anche con plurale e con qualsiasi genere: *Das ist Peter. Das sind meine Eltern. Das war ein Fehler.*
+  - **derselbe / dieselbe / dasselbe** = "lo stesso (identico)": *Wir fahren mit demselben Bus.* **der gleiche** = "dello stesso tipo, uguale ma non identico": *Wir haben die gleiche Jacke* (due giacche uguali).
+  - **solcher, solche, solches** = "tale": *Solche Fehler passieren oft.* Con l'articolo indeterminativo: *so ein Mann* = *un tale uomo*.
+  - Nel parlato *dieser* indica ciò che è vicino, *jener* ciò che è lontano; oggi *jener* è raro e si preferisce *der da / dort*.
+
+  ## Esempi
+  - *Dieses Hemd gefällt mir, aber diese Hose ist zu teuer.* — Questa camicia mi piace, ma questi pantaloni sono troppo cari.
+  - *Kennst du Anna? — Die kenne ich nicht.* — Conosci Anna? — Quella non la conosco.
+  - *Ich brauche einen Stuhl. — Nimm den hier!* — Mi serve una sedia. — Prendi questa qui!
+  - *Die Kinder sind laut. — Ich spiele nicht mit denen.* — I bambini sono rumorosi. — Non gioco con loro.
+  - *Das sind meine Kollegen.* — Questi sono i miei colleghi.
+  - *Wir wohnen im selben Haus.* — Abitiamo nello stesso palazzo.
+
+  ## Errori tipici di chi parla italiano
+  - *Questo* davanti al sostantivo **concorda** con genere e caso: **\*dieses Mann** → *dieser Mann*; **\*mit diese Frau** → *mit dieser Frau*.
+  - Al dativo plurale del pronome: **\*Ich spiele nicht mit den** (riferito a persone, plurale) → *mit denen*.
+  - Per presentare si usa *das* anche col plurale: **\*Diese sind meine Eltern** (come presentazione, innaturale) → *Das sind meine Eltern.* Il verbo concorda col predicato (*sind*).
+  - L'italiano *lo stesso* ha due traduzioni: **derselbe** (identico, una sola cosa) e **der gleiche** (due cose uguali). *Wir haben dasselbe Auto* = la stessa macchina; *das gleiche Auto* = una macchina uguale.
+  - Il pronome dimostrativo si mette in prima posizione per enfasi (*Den kenne ich nicht*), cosa che in italiano si rende con ripetizione (*Quello non lo conosco*).
+examples:
+  - {de: "Dieses Hemd gefällt mir, aber diese Hose ist zu teuer.", it: "Questa camicia mi piace, ma questi pantaloni sono troppo cari."}
+  - {de: "Kennst du Anna? Die kenne ich nicht.", it: "Conosci Anna? Quella non la conosco."}
+  - {de: "Die Kinder sind laut. Ich spiele nicht mit denen.", it: "I bambini sono rumorosi. Non gioco con loro."}
+  - {de: "Das sind meine Kollegen.", it: "Questi sono i miei colleghi."}
+  - {de: "Wir fahren mit demselben Bus.", it: "Andiamo con lo stesso autobus."}

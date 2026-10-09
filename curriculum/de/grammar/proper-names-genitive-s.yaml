@@ -1,0 +1,46 @@
+id: gram:proper-names-genitive-s
+title_it: "Nomi propri: genitivo con -s, titoli e plurale dei cognomi"
+title_en: "Proper names: genitive -s, titles and surname plurals"
+level: A2
+requires: ["gram:genitive-case"]
+diagnostic_tags:
+  name_type: [first-name, surname, title-plus-name, family-plural, country-city]
+  position: [before-noun, after-noun, with-von]
+  error_type: [apostrophe-before-s, missing-s, article-with-name, s-after-sibilant, wrong-position]
+reference_it: |
+  ## Regola
+  Con i **nomi propri di persona** il genitivo si forma con **-s** (senza articolo) e il nome **precede** il sostantivo: *Annas Buch* (il libro di Anna). Non si usa l'apostrofo.
+
+  | Caso | Forma | Esempio |
+  |---|---|---|
+  | nome normale | nome + **-s**, prima del nome | *Pauls Fahrrad*, *Annas Schwester* |
+  | nome in **-s, -ß, -x, -z, -tz** | solo **apostrofo** (nello scritto) | *Max' Hund*, *Hans' Auto* |
+  | nome + cognome | **-s** solo sul cognome | *Thomas Manns Romane* |
+  | **Frau / Herr** + cognome | **-s** sul cognome, *Herr* diventa *Herrn* | *Frau Meiers Büro*, *Herrn Meiers Büro* |
+  | paesi e città neutri | nome + **-s**, prima del nome | *Deutschlands Hauptstadt*, *Roms Straßen* |
+  | **plurale** di una famiglia | cognome + **-s**, senza articolo | *Die Müllers wohnen hier.* |
+
+  - **Dopo il sostantivo** il nome ha l'articolo sul sostantivo e prende ancora -s, ma suona letterario: *das Auto Annas*. Nel parlato si dice **von + nome**: *das Auto von Anna*.
+  - Se il nome è preceduto da un **aggettivo** o un **articolo**, non si usa il -s sul nome: *das Haus des alten Herrn Meier*.
+
+  ## Esempi
+  - *Annas Schwester studiert in Berlin.* — La sorella di Anna studia a Berlino.
+  - *Das ist Max' Fahrrad.* — Questa è la bicicletta di Max.
+  - *Wir lesen Thomas Manns Romane.* — Leggiamo i romanzi di Thomas Mann.
+  - *Deutschlands Hauptstadt ist Berlin.* — La capitale della Germania è Berlino.
+  - *Die Müllers sind unsere Nachbarn.* — I Müller sono i nostri vicini.
+  - *Kennst du das Auto von Peter?* — Conosci la macchina di Peter?
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il possessore viene dopo (*il libro di Anna*): con il genitivo in -s il nome va **davanti**. **\*Das Buch Annas** è letterario; **\*Das Buch von Annas** è sbagliato → *Annas Buch* o *das Buch von Anna*.
+  - L'apostrofo inglese (*Anna's*) non esiste in tedesco: **\*Anna's Buch** → *Annas Buch*. Si usa l'apostrofo solo dopo *-s, -ß, -x, -z*: *Max' Auto*.
+  - L'articolo davanti al nome proprio è dialettale: **\*das Buch der Anna** → *Annas Buch*.
+  - In italiano i cognomi al plurale restano invariati (*i Rossi*): in tedesco si aggiunge **-s** (**\*die Müller** → *die Müllers*).
+  - Con nome e cognome il **-s** va solo sul secondo: **\*Peters Müllers Haus** → *Peter Müllers Haus*.
+examples:
+  - {de: "Annas Schwester studiert in Berlin.", it: "La sorella di Anna studia a Berlino."}
+  - {de: "Das ist Max' Fahrrad.", it: "Questa è la bicicletta di Max."}
+  - {de: "Wir lesen Thomas Manns Romane.", it: "Leggiamo i romanzi di Thomas Mann."}
+  - {de: "Deutschlands Hauptstadt ist Berlin.", it: "La capitale della Germania è Berlino."}
+  - {de: "Die Müllers sind unsere Nachbarn.", it: "I Müller sono i nostri vicini."}
+  - {de: "Kennst du das Auto von Peter?", it: "Conosci la macchina di Peter?"}

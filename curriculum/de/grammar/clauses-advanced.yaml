@@ -1,0 +1,49 @@
+id: gram:clauses-advanced
+title_it: "Altre subordinate: je nachdem, wohingegen, soweit, sofern, desideri irreali"
+title_en: "Further clauses: je nachdem, wohingegen, soweit, sofern, wishes"
+level: B2
+requires: ["gram:verb-final-subordinate", "gram:konjunktiv-ii"]
+diagnostic_tags:
+  construction: [je-nachdem, adversative, limitative, optative-wish]
+  connector: [je-nachdem, waehrend, wohingegen, soweit, soviel, sofern, ausser-dass]
+  error_type: [je-nachdem-no-question-word, verb-not-final, wish-indicative, wish-missing-particle, soweit-vs-sofern, waehrend-temporal-vs-adversative]
+reference_it: |
+  ## Regola
+  Piccoli tipi di subordinata che completano il quadro. Il verbo coniugato va in fondo, tranne nel desiderio senza *wenn*.
+
+  | tipo | connettore | esempio |
+  |---|---|---|
+  | **dipendenza** | **je nachdem** + parola interrogativa o *ob* | *Ich komme früher oder später, **je nachdem, wie** viel zu tun ist.* |
+  | **contrasto** (avversativa) | **während, wohingegen** | *Er liest gern, **wohingegen** sie lieber Sport treibt.* |
+  | **limite** (limitativa) | **soweit / soviel**, **sofern**, **außer dass** | ***Soweit** ich weiß, ist er verreist.* |
+  | **desiderio irreale** | **wenn** + Konjunktiv II + *doch/nur/bloß* | ***Wenn** er **doch** hier **wäre**!* |
+
+  - **je nachdem** ("dipende da, a seconda di"): dopo di esso c'è una **parola interrogativa** (*wie, was, wo, wer, ob*) e il verbo in fondo.
+  - **während** come contrasto significa "mentre invece" (non c'è simultaneità); **wohingegen** è più formale.
+  - **soweit / soviel** = "per quanto": *soviel ich weiß* ("per quanto ne so"), *soweit ich sehe*. **sofern** = "a condizione che / purché": *Wir fahren, sofern das Wetter hält.*
+  - **außer dass** = "tranne il fatto che, salvo che", **außer wenn** = "tranne quando".
+  - **Desiderio irreale** (presente e passato): *wenn* + Konjunktiv II con una particella (*doch, nur, bloß*). Si può omettere *wenn*: il verbo va allora **al primo posto**:
+    *Wäre er doch hier!* / *Hätte ich das nur gewusst!* Passato: *wäre/hätte + Partizip II*.
+
+  ## Esempi
+  - *Wir gehen schwimmen oder wandern, je nachdem, ob es regnet.* — Andiamo a nuotare o a camminare, a seconda che piova.
+  - *Er ist ordentlich, wohingegen seine Schwester sehr chaotisch ist.* — Lui è ordinato, mentre sua sorella è molto caotica.
+  - *Soviel ich weiß, fährt der Zug um acht.* — Per quanto ne so, il treno parte alle otto.
+  - *Du darfst mitkommen, sofern du pünktlich bist.* — Puoi venire, purché tu sia puntuale.
+  - *Wenn ich doch mehr Zeit hätte!* — Se solo avessi più tempo!
+  - *Wäre ich nur früher aufgestanden!* — Se solo mi fossi alzato prima!
+
+  ## Errori tipici di chi parla italiano
+  - **a seconda di** = *je nachdem* + frase con **parola interrogativa**: **\*je nachdem es regnet** → *je nachdem, ob es regnet*.
+  - **mentre** di contrasto: **\*Er liest, während sie spielt Sport** → *während sie Sport treibt* (verbo in fondo, sia con *während* sia con *wohingegen*).
+  - I desideri irreali richiedono il **Konjunktiv II**: **\*Wenn er doch hier ist!** (indicativo: cambia il senso, non è più un desiderio irreale) → *Wenn er doch hier **wäre**!* (come l'italiano *Se fosse qui!*).
+    Senza *doch / nur / bloß* la frase suona come un'ipotesi e non come un desiderio: il rafforzativo è tipico.
+  - **\*Wenn ich hätte doch** → *Wenn ich doch … hätte* (il verbo in fondo).
+  - *soviel / soweit* sono congiunzioni: **\*Soviel ich weiß ist** → *Soviel ich weiß, ist …* (virgola, poi principale con inversione).
+examples:
+  - {de: "Wir gehen schwimmen oder wandern, je nachdem, ob es regnet.", it: "Andiamo a nuotare o a camminare, a seconda che piova."}
+  - {de: "Er ist ordentlich, wohingegen seine Schwester sehr chaotisch ist.", it: "Lui è ordinato, mentre sua sorella è molto caotica."}
+  - {de: "Soviel ich weiß, fährt der Zug um acht.", it: "Per quanto ne so, il treno parte alle otto."}
+  - {de: "Du darfst mitkommen, sofern du pünktlich bist.", it: "Puoi venire, purché tu sia puntuale."}
+  - {de: "Wenn ich doch mehr Zeit hätte!", it: "Se solo avessi più tempo!"}
+  - {de: "Wäre ich nur früher aufgestanden!", it: "Se solo mi fossi alzato prima!"}

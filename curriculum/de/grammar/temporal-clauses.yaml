@@ -1,0 +1,58 @@
+id: gram:temporal-clauses
+title_it: "Subordinate temporali: als/wenn, bis, solange, während, seitdem, sobald, bevor, nachdem"
+title_en: "Temporal clauses: als/wenn, bis, solange, während, seitdem, sobald, bevor, nachdem"
+level: A2
+requires: ["gram:verb-final-subordinate", "gram:conjunctions-subordinating", "gram:perfekt"]
+diagnostic_tags:
+  conjunction: [als, wenn, bis, solange, waehrend, seitdem, sobald, bevor, nachdem]
+  time_relation: [simultaneous, before, after, duration, starting-point, end-point]
+  error_type: [als-vs-wenn, bis-vs-solange, bevor-nachdem-swapped, wrong-tense-after-nachdem, future-tense-in-subclause, conjunction-vs-preposition, verb-not-final]
+reference_it: |
+  ## Regola
+  Una subordinata temporale dice **quando** accade qualcosa rispetto alla principale. Il verbo coniugato va **in fondo**
+  e si usa la virgola. Se la subordinata apre la frase, la principale comincia con il verbo (*Als ich angekommen bin, hat es geregnet.*).
+
+  | congiunzione | idea | esempio |
+  |---|---|---|
+  | **als** | un evento unico nel passato | *Als ich angekommen bin, war niemand da.* |
+  | **wenn** | presente/futuro, oppure passato ripetuto ("ogni volta che") | *Wenn ich ankomme, rufe ich dich an.* |
+  | **solange** | per tutto il tempo che | *Solange es regnet, bleiben wir hier.* |
+  | **bis** | fino al momento in cui | *Wir warten, bis er kommt.* |
+  | **während** | nello stesso tempo | *Während ich koche, liest er.* |
+  | **seitdem / seit** | da quando (inizio nel passato, vale ancora) | *Seitdem ich hier wohne, schlafe ich besser.* |
+  | **sobald** | appena | *Sobald ich Zeit habe, schreibe ich dir.* |
+  | **bevor** | prima che / prima di | *Bevor du gehst, mach das Licht aus.* |
+  | **nachdem** | dopo che / dopo | *Nachdem wir gegessen haben, gehen wir spazieren.* |
+
+  - **als / wenn**: nel passato *als* = una volta sola, *wenn* = ripetizione (*Wenn es geschneit hat, sind wir Ski gefahren* = ogni volta che nevicava).
+    Per il presente e il futuro si usa sempre *wenn*.
+  - **Tempo**: dopo *wenn, sobald, bis* il **futuro si esprime con il presente**: *Sobald er **kommt**, essen wir.* (non *kommen wird*).
+  - **nachdem** indica un'azione **già conclusa** prima di quella della principale: principale al presente → subordinata al **Perfekt**
+    (*Nachdem ich gegessen **habe**, gehe ich*). Con la principale al passato (Präteritum) si usa di solito il Plusquamperfekt (*hatte gegessen*, vedi la scheda dedicata, livello B1).
+  - **bevor** non vuole un tempo anteriore: ha lo stesso tempo della principale (*Ich esse, bevor ich gehe*), e di norma senza *nicht*.
+  - **während** e **seit** sono anche **preposizioni** (*während des Films*, genitivo; *seit einem Jahr*, dativo): davanti a una frase con verbo sono congiunzioni.
+
+  ## Esempi
+  - *Als ich ein Kind war, haben wir am Meer gewohnt.* — Quando ero bambino abitavamo al mare.
+  - *Wenn er nach Hamburg fährt, besucht er seine Tante.* — Quando va ad Amburgo, va a trovare sua zia.
+  - *Ich warte hier, bis der Bus kommt.* — Aspetto qui finché arriva l'autobus.
+  - *Nachdem sie gefrühstückt haben, fahren sie los.* — Dopo aver fatto colazione, partono.
+  - *Seitdem er Sport macht, fühlt er sich besser.* — Da quando fa sport, si sente meglio.
+  - *Bevor wir essen, waschen wir uns die Hände.* — Prima di mangiare ci laviamo le mani.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha un solo **quando**: in tedesco serve scegliere. **\*Wenn ich Kind war** → *Als ich Kind war*. **\*Als ich nach Rom fahre** → *Wenn ich nach Rom fahre*.
+    Per la domanda diretta o indiretta si usa invece *wann* (*Wann kommst du?*).
+  - Dopo *quando* l'italiano usa il futuro (*quando arriverò*): in tedesco **presente** (*Wenn ich ankomme*), non **\*wenn ich ankommen werde**.
+  - **finché** italiano = *bis* (fino a quando) o *solange* (per tutto il tempo che): **\*Ich bleibe, solange er kommt** → *Ich bleibe, bis er kommt*.
+  - **prima che / dopo che**: l'italiano usa il congiuntivo (*prima che parta*) o l'infinito (*dopo aver mangiato*); il tedesco usa sempre una frase con verbo finito all'**indicativo**
+    (*Bevor du gehst*; *Nachdem ich gegessen habe*). **\*Nachdem ich esse, gehe ich** → *Nachdem ich gegessen habe, gehe ich*.
+  - Non scambiare *bevor* (prima) e *nachdem* (dopo).
+  - Verbo in fondo: **\*Als ich war in Berlin** → *Als ich in Berlin war*.
+examples:
+  - {de: "Als ich ein Kind war, haben wir am Meer gewohnt.", it: "Quando ero bambino abitavamo al mare."}
+  - {de: "Wenn er nach Hamburg fährt, besucht er seine Tante.", it: "Quando va ad Amburgo, va a trovare sua zia."}
+  - {de: "Ich warte hier, bis der Bus kommt.", it: "Aspetto qui finché arriva l'autobus."}
+  - {de: "Nachdem sie gefrühstückt haben, fahren sie los.", it: "Dopo aver fatto colazione, partono."}
+  - {de: "Seitdem er Sport macht, fühlt er sich besser.", it: "Da quando fa sport, si sente meglio."}
+  - {de: "Bevor wir essen, waschen wir uns die Hände.", it: "Prima di mangiare ci laviamo le mani."}

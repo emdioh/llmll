@@ -1,0 +1,59 @@
+id: gram:konjunktiv-i-indirect-speech
+title_it: "Konjunktiv I e discorso indiretto"
+title_en: "Subjunctive I and reported speech"
+level: B1
+requires: ["gram:konjunktiv-ii", "gram:perfekt"]
+diagnostic_tags:
+  form: [present-k1, past-k1, sein-forms, modal-k1, fallback-k2, future-k1]
+  sentence_type: [statement, yes-no-question, wh-question, command]
+  error_type: [indicative-instead-of-konjunktiv, k1-identical-to-indicative, wrong-tense-in-reported-speech, wrong-person-shift, dass-with-verb-second]
+reference_it: |
+  ## Regola
+  Il **Konjunktiv I** si usa soprattutto nella lingua scritta (giornali, relazioni) per riferire ciò che ha detto qualcun altro, **senza garantirne la verità**.
+  Il tempo del verbo introduttivo non conta: la forma indica solo che si tratta di un discorso riferito.
+
+  **Formazione**: radice dell'infinito + **-e, -est, -e, -en, -et, -en**.
+
+  | | kommen | haben | sein | können |
+  |---|---|---|---|---|
+  | ich | komme | habe | sei | könne |
+  | du | kommest | habest | seiest / seist | könnest |
+  | er/sie/es | komme | habe | sei | könne |
+  | wir | kommen | haben | seien | können |
+  | ihr | kommet | habet | seiet | könnet |
+  | sie/Sie | kommen | haben | seien | können |
+
+  - Le forme per **du** e **ihr** (*kommest, kommet, habest*) sono corrette ma rare e di tono molto formale; si incontrano quasi solo le forme di 3a persona (*er/sie/es*), cioè *sei, habe, komme, könne, werde*.
+  - **Tempi**: il **presente** esprime ciò che per chi parla era contemporaneo (*Er sagt/sagte, er **komme** morgen / sei müde*);
+    il **passato** si forma con **habe / sei + participio II** (*Sie sagte, sie **habe** das Buch **gelesen** / sei nach Rom **gefahren***);
+    il **futuro** con **werde + infinito** (*Er sagte, er **werde** bald **anrufen***).
+  - **Verbi introduttivi** tipici: *sagen, behaupten, berichten, erklären, meinen, fragen, antworten.*
+  - **Frase indiretta**: con il Konjunktiv I si può omettere *dass*, e allora il verbo sta in **seconda posizione**; con *dass* il verbo va in fondo:
+    *Er sagte, er **sei** krank. = Er sagte, dass er krank **sei**.*
+  - **Domande**: *ob* (sì/no) o parola interrogativa, verbo in fondo: *Sie fragte, **ob** er Zeit **habe**. Er fragte, **wann** der Zug **fahre**.*
+  - **Ordini**: con **sollen**: *"Warte hier!" → Er sagte, ich **solle** hier warten.*
+  - **Sostituzione con il Konjunktiv II**: se la forma del Konjunktiv I è **uguale all'indicativo** (di solito *ich*, *wir* e *sie* plurale: *ich habe, wir haben, sie kommen*), si usa il **Konjunktiv II** o *würde + infinito*:
+    *Sie sagten, sie **hätten** Zeit. Sie sagte, ich **käme** zu spät. Sie sagten, sie **würden** morgen **kommen**.*
+    Anche il Konjunktiv II dei verbi deboli coincide con il Präteritum (*sie machten*): per essere chiari si usa *würde + infinito* (*Sie sagten, sie **würden** das **machen***).
+  - **Pronomi e riferimenti** cambiano come in italiano: *"Ich bin müde." → Er sagt, er sei müde.* (*hier → dort*, *heute → an diesem Tag / an dem Tag*).
+  - Nel parlato si usa quasi sempre l'**indicativo** o il Konjunktiv II: *Er sagt, er ist krank.*
+
+  ## Esempi
+  - *Der Minister sagte, er habe keine Zeit.* — Il ministro disse di non avere tempo.
+  - *Sie erklärte, sie sei gestern in Wien gewesen.* — Spiegò di essere stata ieri a Vienna.
+  - *Die Zeitung berichtet, es gebe viele Verletzte.* — Il giornale riferisce che ci sono molti feriti.
+  - *Er fragte mich, ob ich ihm helfen könne.* — Mi chiese se potevo aiutarlo.
+  - *Die Kinder sagten, sie hätten Hunger.* — I bambini dissero di avere fame.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il discorso indiretto usa di norma l'**indicativo** (*Disse che era malato*), con il tempo che si sposta all'indietro (imperfetto, trapassato).
+    In tedesco scritto il **modo** segnala il discorso riferito, e il tempo non si sposta: *Er sagte, er **sei** krank.*
+  - **\*Er sagte, er ist krank** è comprensibile e frequente nel parlato, ma nello scritto formale si usa il Konjunktiv I.
+  - Se il Konjunktiv I coincide con l'indicativo non si nota come discorso riferito, quindi si passa al Konjunktiv II: **\*Sie sagten, sie haben Zeit** → *Sie sagten, sie **hätten** Zeit.*
+  - Il tempo dipende dal discorso originale, non dal verbo introduttivo: *"Ich habe gelesen" → Er sagte, er **habe** gelesen* (anche se *sagte* è al passato). Nello scritto formale non si dice **\*Er sagte, er hatte gelesen**.
+  - Con *dass* il verbo va in fondo; senza *dass* in seconda posizione: **\*Er sagte, er krank sei** → *Er sagte, er sei krank* / *dass er krank sei.*
+examples:
+  - {de: "Der Minister sagte, er habe keine Zeit.", it: "Il ministro disse di non avere tempo."}
+  - {de: "Sie erklärte, sie sei gestern in Wien gewesen.", it: "Spiegò di essere stata ieri a Vienna."}
+  - {de: "Er fragte mich, ob ich ihm helfen könne.", it: "Mi chiese se potevo aiutarlo."}
+  - {de: "Die Kinder sagten, sie hätten Hunger.", it: "I bambini dissero di avere fame."}

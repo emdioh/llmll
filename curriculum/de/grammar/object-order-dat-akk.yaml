@@ -1,0 +1,47 @@
+id: gram:object-order-dat-akk
+title_it: "Ordine di dativo e accusativo (sostantivi e pronomi)"
+title_en: "Order of dative and accusative objects (nouns and pronouns)"
+level: A2
+requires: ["gram:dative-case", "gram:personal-pronouns"]
+diagnostic_tags:
+  object_type: [noun-noun, pronoun-pronoun, pronoun-noun]
+  error_type: [akk-before-dat-nouns, dat-before-akk-pronouns, noun-before-pronoun, pronoun-after-subject-noun]
+  sentence_type: [main-clause, inverted, subordinate]
+reference_it: |
+  ## Regola
+  Con verbi che hanno due complementi (*geben, schenken, zeigen, schicken, kaufen, erklären…*) l'ordine di **dativo (D)** e **accusativo (A)** dipende
+  da cosa sono:
+
+  | Complementi | Ordine | Esempio |
+  |---|---|---|
+  | due sostantivi | **D – A** | *Ich schenke **meiner Mutter** **einen Schal**.* |
+  | due pronomi | **A – D** | *Ich schenke **ihn** **ihr**.* |
+  | pronome + sostantivo | **il pronome per primo** | *Ich schenke **ihr** den Schal. / Ich schenke **ihn** meiner Mutter.* |
+
+  - Regola pratica: **i pronomi precedono i sostantivi**; se ci sono solo pronomi, prima l'accusativo (*es, ihn, sie*) e poi il dativo (*mir, ihm, ihr*).
+  - Anche *es* e gli altri pronomi seguono questa regola: *Er gibt **es mir**. Ich zeige **sie dir**.*
+  - Nelle frasi con **inversione** e nelle **subordinate** un pronome complemento va davanti al soggetto quando il soggetto è un sostantivo (non un pronome):
+    *Gestern hat **ihn** der Chef angerufen. Ich weiß, dass **dir** Anna das Buch geschickt hat.*
+  - Se il soggetto è un pronome, resta davanti: *Ich weiß, dass **er es dir** gegeben hat.*
+  - Nella frase principale tutti questi complementi stanno nel campo centrale, prima di eventuali altri complementi e prima della parte finale del verbo.
+
+  ## Esempi
+  - *Ich gebe dem Lehrer das Heft.* — Do il quaderno all'insegnante.
+  - *Ich gebe es ihm.* — Glielo do.
+  - *Sie zeigt ihrer Freundin das neue Kleid. / Sie zeigt ihr das neue Kleid.* — Mostra alla sua amica il vestito nuovo. / Le mostra il vestito nuovo.
+  - *Er schickt es seinem Bruder.* — Lo manda a suo fratello.
+  - *Ich weiß, dass dir Paul das Buch gebracht hat.* — So che Paul ti ha portato il libro.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il pronome e il sostantivo si mettono in un ordine più libero (*do il libro a Marco* / *do a Marco il libro*) e *glielo* contiene già i due pronomi.
+    In tedesco con due sostantivi si mette di norma **prima il dativo**: **\*Ich gebe das Buch dem Mann** (non è l'ordine normale) → *Ich gebe dem Mann das Buch.*
+  - Con due pronomi l'ordine è l'opposto: **\*Ich gebe ihm es** → *Ich gebe es ihm.*
+  - Con un pronome e un sostantivo si dimentica che il pronome va prima: **\*Ich gebe das Buch ihm** → *Ich gebe ihm das Buch.*
+  - Non usare una preposizione al posto del dativo (**\*Ich gebe das Buch zu ihm**) → *Ich gebe ihm das Buch.*
+  - Nelle frasi con inversione o subordinate non mettere il pronome dopo un soggetto nominale: **\*Gestern hat der Chef ihn angerufen** (ordine non abituale) → *Gestern hat ihn der Chef angerufen.*
+examples:
+  - {de: "Ich gebe dem Lehrer das Heft.", it: "Do il quaderno all'insegnante."}
+  - {de: "Ich gebe es ihm.", it: "Glielo do."}
+  - {de: "Sie zeigt ihr das neue Kleid.", it: "Le mostra il vestito nuovo."}
+  - {de: "Er schickt es seinem Bruder.", it: "Lo manda a suo fratello."}
+  - {de: "Gestern hat ihn der Chef angerufen.", it: "Ieri lo ha chiamato il capo."}

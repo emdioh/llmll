@@ -1,0 +1,54 @@
+id: gram:modal-verbs-subjective
+title_it: "Verbi modali con valore soggettivo (supposizione, ipotesi, notizia riferita)"
+title_en: "Modal verbs with subjective meaning (assumption, hearsay)"
+level: B2
+requires: ["gram:modal-verbs", "gram:perfekt", "gram:infinitive-zu"]
+diagnostic_tags:
+  modal: [muessen, koennen, duerfte, moegen, sollen, wollen]
+  meaning: [certainty, possibility, probability, concession, hearsay, claim]
+  time: [present, past]
+  error_type: [muss-nicht-instead-of-kann-nicht, wrong-infinitive-perfect, objective-instead-of-subjective, sollen-wollen-confusion, wrong-auxiliary-in-infinitive-perfect]
+reference_it: |
+  ## Regola
+  I modali, oltre al significato **oggettivo** (obbligo, permesso, capacità), possono esprimere la **valutazione di chi parla** su un fatto (certezza, ipotesi, notizia di seconda mano).
+  Questo uso si riconosce dal contesto: spesso l'infinito è *sein*, *haben* o un verbo di stato, e il soggetto non "deve" davvero fare qualcosa.
+
+  | modale | significato soggettivo | esempio |
+  |---|---|---|
+  | **müssen** | quasi certo (deve essere) | Er **muss** krank sein. |
+  | **dürfte** (Konj. II) | probabile (dovrebbe, presumibilmente) | Er **dürfte** bald hier sein. |
+  | **können / könnte** | possibile (può darsi) | Das **kann** stimmen. |
+  | **mögen** | concessione (può anche essere…) | Er **mag** recht haben, aber … |
+  | **sollen** | si dice, pare (fonte esterna) | Sie **soll** sehr reich sein. |
+  | **wollen** | sostiene di (ma può non essere vero) | Er **will** es nicht gewusst haben. |
+
+  - **Passato**: modale al presente + **infinito perfetto** (participio II + *haben / sein*): *Er **muss** krank **gewesen sein**. Sie **soll** gestern **angekommen sein**. Er **will** das **gesehen haben**.*
+    Per il passato si cambia l'infinito, non il modale (nel parlato di tutti i giorni il modale resta al presente).
+  - **Negazione**: la forma opposta di *muss krank sein* (= sicuramente è malato) è **kann nicht krank sein** (= non può essere malato), **non** *muss nicht*:
+    *Das kann nicht stimmen.* — *Er muss nicht krank sein* significa "non è detto che sia malato".
+  - **sollen** riporta ciò che dicono altri; **wollen** riporta ciò che il soggetto stesso afferma di sé.
+  - *dürfte* (non *darf*) è la forma per "è probabile". *Darf* è solo permesso.
+  - **mögen** soggettivo è raro e formale; si usa con *wohl* o in frasi concessive.
+
+  ## Esempi
+  - *Das Licht ist an. Er muss zu Hause sein.* — La luce è accesa. Deve essere a casa.
+  - *Es dürfte morgen regnen.* — Domani dovrebbe piovere.
+  - *Das kann nicht stimmen!* — Non può essere vero!
+  - *Der Zug soll Verspätung haben.* — Pare che il treno abbia ritardo.
+  - *Sie will den Autor persönlich gekannt haben.* — Sostiene di aver conosciuto personalmente l'autore.
+  - *Er muss den Bus verpasst haben.* — Deve aver perso l'autobus.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa il **futuro** per le supposizioni (*sarà malato*), il **condizionale** per le notizie non verificate (*il treno avrebbe ritardo*) o *dovere / potere*.
+    In tedesco la distinzione è tra *müssen / dürfte / können* (ipotesi) e *sollen / wollen* (fonte esterna / affermazione del soggetto).
+  - Confondere **sollen** e **wollen**: *Er will reich sein* = lui sostiene di essere ricco; *Er soll reich sein* = si dice che sia ricco.
+  - **\*Er muss nicht krank sein** per "non può essere malato" → *Er kann nicht krank sein.* (*Nicht müssen* = non è necessario.)
+  - Passato: **\*Er hat krank sein müssen** (grammaticale, ma significa "ha dovuto essere malato", non "deve essere stato malato") → *Er muss krank gewesen sein.* Il modale resta al presente.
+  - Attenzione all'**ausiliare nell'infinito perfetto**: *Er muss gekommen **sein*** / *Er muss gegessen **haben***, come nel Perfekt.
+examples:
+  - {de: "Das Licht ist an. Er muss zu Hause sein.", it: "La luce è accesa. Deve essere a casa."}
+  - {de: "Es dürfte morgen regnen.", it: "Domani dovrebbe piovere."}
+  - {de: "Das kann nicht stimmen!", it: "Non può essere vero!"}
+  - {de: "Der Zug soll Verspätung haben.", it: "Pare che il treno abbia ritardo."}
+  - {de: "Sie will den Autor persönlich gekannt haben.", it: "Sostiene di aver conosciuto personalmente l'autore."}
+  - {de: "Er muss den Bus verpasst haben.", it: "Deve aver perso l'autobus."}

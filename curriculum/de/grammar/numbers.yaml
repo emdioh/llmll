@@ -1,0 +1,56 @@
+id: gram:numbers
+title_it: "Numeri cardinali e ordinali"
+title_en: "Cardinal and ordinal numbers"
+level: A1
+requires: []
+diagnostic_tags:
+  number_type: [cardinal, ordinal]
+  range: [0-20, tens, compound, hundreds-thousands, large-numbers]
+  error_type: [reversed-tens-units, eins-vs-ein, wrong-ordinal-suffix, missing-ordinal-dot, wrong-spelling]
+reference_it: |
+  ## Regola
+  **Numeri cardinali.** Da 0 a 12 sono forme da imparare; da 13 a 19 si aggiunge **-zehn**.
+
+  | | | | |
+  |---|---|---|---|
+  | 0 null | 1 eins | 2 zwei | 3 drei |
+  | 4 vier | 5 fünf | 6 sechs | 7 sieben |
+  | 8 acht | 9 neun | 10 zehn | 11 elf |
+  | 12 zwölf | 13 dreizehn | 16 sechzehn | 17 siebzehn |
+
+  - Le decine: *zwanzig, **drei**ßig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig*. Attenzione a **dreißig** (con *ß*, non *-zig*), a **sechzehn / sechzig** (cade la *-s*) e a **siebzehn / siebzig** (cade *-en*).
+  - Dopo il 20 si dice **prima l'unità, poi la decina**, scritto in una parola sola e unito da **und**: *21 einundzwanzig, 48 achtundvierzig, 99 neunundneunzig.*
+  - Centinaia e migliaia: *100 (ein)hundert, 250 zweihundertfünfzig, 1000 (ein)tausend, 3400 dreitausendvierhundert.* Dopo *hundert* e *tausend* **non** si mette *und*: *101 hunderteins, 1001 tausendeins.*
+  - **Milioni**: *die Million* è un sostantivo femminile, si scrive separato e ha il plurale: *eine Million, zwei Millionen, zwei Millionen dreihunderttausend.*
+  - **eins** si usa quando si conta o si dice il numero da solo; davanti a un sostantivo diventa **ein-** e si declina come l'articolo indeterminativo: *Ich habe eine Schwester. Er hat einen Bruder. Es ist ein Uhr.* (ma *Es ist eins* se si dice l'ora senza *Uhr*).
+
+  **Numeri ordinali.** Si formano con **-te** fino a 19 e con **-ste** da 20 in poi. Sono irregolari: **erste** (1.), **dritte** (3.), **siebte** (7.), **achte** (8.).
+
+  | 1. der erste | 2. der zweite | 3. der dritte | 4. der vierte |
+  |---|---|---|---|
+  | 7. der siebte | 8. der achte | 19. der neunzehnte | 20. der zwanzigste |
+  | 21. der einundzwanzigste | 100. der hundertste | 1000. der tausendste | |
+
+  - In cifre l'ordinale si scrive con un **punto**: *der 3. Tag, das 5. Mal.*
+  - L'ordinale si comporta come un aggettivo e prende le desinenze: *der zweite Film, am dritten Tag, im ersten Stock.*
+  - Altri usi dei cardinali: età (*Ich bin 25 / 25 Jahre alt*), numeri di telefono (si leggono a cifre o a coppie), *die Nummer* (numero d'ordine, di telefono) e *die Zahl* (numero come quantità).
+
+  ## Esempi
+  - *Mein Bruder ist siebzehn Jahre alt.* — Mio fratello ha diciassette anni.
+  - *Das Zimmer kostet vierundachtzig Euro.* — La camera costa ottantaquattro euro.
+  - *Wir wohnen im dritten Stock.* — Abitiamo al terzo piano.
+  - *In dieser Stadt leben zwei Millionen Menschen.* — In questa città vivono due milioni di persone.
+  - *Heute ist mein einundzwanzigster Geburtstag.* — Oggi è il mio ventunesimo compleanno.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano si dice la decina prima dell'unità (*ventuno, trentacinque*); in tedesco l'**unità viene prima**: 35 = *fünfunddreißig* (letteralmente "cinque e trenta"). Errore frequente: **\*dreißigfünf**.
+  - 16 e 17 non sono regolari come in italiano: **\*sechszehn**, **\*siebenzehn** sono errori → *sechzehn, siebzehn*; così anche **\*dreizig** → *dreißig*.
+  - *eins* non va usato davanti al sostantivo: **\*eins Euro**, **\*Ich habe eins Bruder** → *ein Euro*, *einen Bruder*.
+  - In italiano l'ordinale si scrive spesso con il numero e l'apice (*3°*): in tedesco si usa il **punto** (*3.*) e l'ordinale va declinato; **\*am dritte Mai** → *am dritten Mai.*
+  - *1., 3., 8.* non seguono la regola: **\*einste**, **\*dreite**, **\*achtte** → *erste, dritte, achte* (e *siebte* per il 7.).
+examples:
+  - {de: "Mein Bruder ist siebzehn Jahre alt.", it: "Mio fratello ha diciassette anni."}
+  - {de: "Das Zimmer kostet vierundachtzig Euro.", it: "La camera costa ottantaquattro euro."}
+  - {de: "Wir wohnen im dritten Stock.", it: "Abitiamo al terzo piano."}
+  - {de: "In dieser Stadt leben zwei Millionen Menschen.", it: "In questa città vivono due milioni di persone."}
+  - {de: "Heute ist mein einundzwanzigster Geburtstag.", it: "Oggi è il mio ventunesimo compleanno."}

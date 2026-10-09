@@ -1,0 +1,65 @@
+id: gram:question-words
+title_it: "Parole interrogative (W-Fragen): wer, was, wo, wann, wie, welcher..."
+title_en: "Question words (W-questions): wer, was, wo, wann, wie, welcher..."
+level: A1
+requires: ["gram:svo-word-order"]
+diagnostic_tags:
+  question_word: [wer-wen-wem, was, wo-wohin-woher, wann, warum, wie, welcher, was-fuer-ein, wie-viel-viele, wessen]
+  case: [nom, akk, dat, gen]
+  error_type: [wrong-word-order-after-question-word, wrong-case-of-wer, wo-instead-of-wohin, welcher-ending, was-fuer-ein-case]
+reference_it: |
+  ## Regola
+  Le **domande aperte** iniziano con una parola interrogativa, seguita dal **verbo coniugato** in seconda posizione; il soggetto viene dopo il verbo (se non è lui la parola interrogativa).
+  Le domande **sì/no** iniziano invece con il verbo: *Kommst du morgen?*
+
+  | domanda su | parola | esempio |
+  |---|---|---|
+  | persona (soggetto) | **wer** | *Wer wohnt hier?* |
+  | persona (accusativo) | **wen** | *Wen siehst du?* |
+  | persona (dativo) | **wem** | *Wem gehört das Buch?* |
+  | possessore | **wessen** | *Wessen Tasche ist das?* |
+  | cosa | **was** | *Was machst du?* |
+  | luogo (stato) | **wo** | *Wo bist du?* |
+  | luogo (moto verso) | **wohin** | *Wohin gehst du?* |
+  | luogo (provenienza) | **woher** | *Woher kommst du?* |
+  | tempo | **wann** | *Wann beginnt der Kurs?* |
+  | motivo | **warum** (anche *wieso, weshalb*) | *Warum lernst du Deutsch?* |
+  | modo | **wie** | *Wie heißt du?* |
+  | quantità | **wie viel** (singolare), **wie viele** (plurale) | *Wie viel Zeit hast du? Wie viele Kinder hast du?* |
+  | durata, frequenza | **wie lange**, **wie oft** | *Wie lange bleibst du?* |
+
+  - **wer / wen / wem** si declinano come un pronome: il caso dipende dalla funzione nella frase (*Wen* rufst du an? → verbo + accusativo; *Wem* hilfst du? → dativo).
+  - Con una **preposizione**, questa sta davanti: *Mit wem sprichst du? Für wen ist das?* (Per le cose si usa *wo(r)-*, vedi gli avverbi pronominali.)
+  - **welcher / welche / welches** ("quale") accompagna un sostantivo e prende le desinenze dell'articolo determinativo:
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | welcher Tisch | welche Tasche | welches Buch | welche Bücher |
+  | Akk. | welchen Tisch | welche Tasche | welches Buch | welche Bücher |
+  | Dat. | welchem Tisch | welcher Tasche | welchem Buch | welchen Büchern |
+
+  - **was für ein-** chiede il *tipo* ("che genere di"): *Was für ein Auto hast du?* Il caso di *ein* dipende dalla funzione nella frase, non da *für*: *Mit was für einem Auto fährst du?*
+
+  ## Esempi
+  - *Wo wohnst du? — In Mailand.* — Dove abiti? — A Milano.
+  - *Woher kommt sie? — Aus Spanien.* — Di dove è lei? — Dalla Spagna.
+  - *Wen besuchst du am Wochenende?* — Chi vai a trovare nel fine settimana?
+  - *Mit wem hast du gesprochen?* — Con chi hai parlato?
+  - *Welchen Mantel nimmst du?* — Quale cappotto prendi?
+  - *Wie viele Geschwister hast du?* — Quanti fratelli hai?
+
+  ## Errori tipici di chi parla italiano
+  - Il verbo resta in **seconda posizione**, non dopo il soggetto: **\*Wann du kommst?** → *Wann kommst du?*.
+  - In italiano *dove* vale per stato e moto; in tedesco **wo** (stato) ≠ **wohin** (moto) ≠ **woher** (provenienza): **\*Wo gehst du?** → *Wohin gehst du?*
+  - *Chi* ha tre forme: **\*Wer siehst du?** → *Wen siehst du?*; **\*Wer hilfst du?** → *Wem hilfst du?*
+  - Non confondere *wann* ("quando", domanda) con *wenn*, che introduce una subordinata: **\*Wenn kommst du?** → *Wann kommst du?*
+  - *Quale* richiede la desinenza: **\*Welcher Buch** → *Welches Buch*; il tedesco distingue genere e caso, l'italiano *quale* no.
+  - *Quanto/quanti*: **wie viel** + singolare/non numerabile (*wie viel Geld*), **wie viele** + plurale (*wie viele Euro*): **\*wie viel Leute** → *wie viele Leute*.
+  - Il verbo concorda con il soggetto: *Wer* è singolare: **\*Wer kommen?** → *Wer kommt?*
+examples:
+  - {de: "Wo wohnst du?", it: "Dove abiti?"}
+  - {de: "Woher kommt sie?", it: "Di dove è lei?"}
+  - {de: "Wen besuchst du am Wochenende?", it: "Chi vai a trovare nel fine settimana?"}
+  - {de: "Mit wem hast du gesprochen?", it: "Con chi hai parlato?"}
+  - {de: "Welchen Mantel nimmst du?", it: "Quale cappotto prendi?"}
+  - {de: "Wie viele Geschwister hast du?", it: "Quanti fratelli hai?"}

@@ -1,0 +1,52 @@
+id: gram:perception-lassen-infinitive
+title_it: "helfen, hören, sehen, lassen + infinito senza zu"
+title_en: "helfen, hören, sehen, lassen + bare infinitive"
+level: B1
+requires: ["gram:modal-verbs", "gram:infinitive-zu", "gram:perfekt"]
+diagnostic_tags:
+  verb: [helfen, hoeren, sehen, lassen]
+  tense: [praesens, praeteritum, perfekt]
+  error_type: [zu-added, participle-instead-of-double-infinitive, wrong-position-of-haben, lassen-meaning-confused, wrong-case-of-object]
+reference_it: |
+  ## Regola
+  I verbi **hören** e **sehen** (percezione), **lassen** (far fare, lasciare) e **helfen** (aiutare) si comportano come i modali:
+  davanti a un altro verbo all'infinito **non vogliono *zu***, e l'infinito va **in fondo alla frase**.
+
+  | verbo | significato con infinito | esempio |
+  |---|---|---|
+  | **sehen** | vedere qualcuno fare qualcosa | *Ich sehe ihn kommen.* |
+  | **hören** | sentire qualcuno fare qualcosa | *Wir hören sie singen.* |
+  | **lassen** | far fare, permettere, lasciare che | *Er lässt das Auto reparieren.* |
+  | **helfen** | aiutare a fare | *Sie hilft mir kochen.* |
+
+  - **lassen** ha tre sensi principali: *far fare* (*Ich lasse mir die Haare schneiden*), *permettere* (*Er lässt uns gehen*) e *lasciare* come verbo pieno (*Lass mich in Ruhe!*).
+  - L'accusativo (la persona o cosa che fa l'azione) segue il verbo: *Ich höre **ihn** singen.* Dopo **helfen** la persona è invece al **dativo**: *Sie hilft **mir** kochen.*
+  - Presente (e Präteritum): *Ich sehe ihn kommen. – Ich sah ihn kommen.*
+  - **Perfekt**: se c'è un infinito, non si usa il participio ma l'**infinito** (doppio infinito); l'ausiliare è sempre *haben*:
+    *Ich habe ihn **kommen sehen**.* (non **\*gesehen**) – *Wir haben sie **singen hören**.* – *Er hat das Auto **reparieren lassen**.*
+  - In una **subordinata** *haben* va davanti ai due infiniti: *…, weil ich ihn **habe kommen sehen**.*
+  - Con **helfen** + infinito il doppio infinito (*Er hat mir tragen helfen*) è possibile, ma di solito si preferisce la frase con *zu* (*Er hat mir geholfen, die Tasche zu tragen*).
+  - Senza infinito si usa il participio normale: *Ich habe ihn gesehen.* – *Er hat das Buch gelassen.*
+  - Con **helfen** e frasi lunghe si usa spesso la frase con *zu*, ma l'infinito breve senza *zu* è normale: *Er hilft mir tragen / Er hilft mir, die Tasche zu tragen.*
+
+  ## Esempi
+  - *Ich höre die Kinder im Garten spielen.* — Sento i bambini giocare in giardino.
+  - *Wir sehen den Zug einfahren.* — Vediamo il treno entrare in stazione.
+  - *Sie lässt sich die Haare schneiden.* — Si fa tagliare i capelli.
+  - *Hast du das Fenster reparieren lassen?* — Hai fatto riparare la finestra?
+  - *Mein Bruder hilft mir beim Umzug packen.* — Mio fratello mi aiuta a fare gli scatoloni nel trasloco.
+  - *Ich habe den Hund bellen hören.* — Ho sentito abbaiare il cane.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa *a / di* o un gerundio (*lo vedo arrivare*, *ti aiuto a cucinare*): in tedesco **niente *zu*** → **\*Ich sehe ihn zu kommen** → *Ich sehe ihn kommen.*
+  - Al Perfekt si usa l'infinito, non il participio: **\*Ich habe ihn kommen gesehen** → *Ich habe ihn kommen sehen.*
+  - Il significato di **lassen** è spesso "far fare" (italiano: *far riparare*): **\*Ich repariere das Auto** non esprime che lo fa fare un altro → *Ich lasse das Auto reparieren.*
+  - Quando il beneficiario è il soggetto stesso si usa il dativo del pronome: *Ich lasse **mir** die Haare schneiden* (mi faccio tagliare i capelli), non **\*Ich lasse die Haare mir schneiden**.
+  - Dopo **helfen** si mette il dativo, non l'accusativo: **\*Sie hilft mich kochen** → *Sie hilft mir kochen.*
+  - Nella subordinata l'ausiliare non va in fondo: **\*…, weil ich ihn kommen sehen habe** → *…, weil ich ihn habe kommen sehen.*
+examples:
+  - {de: "Ich höre die Kinder im Garten spielen.", it: "Sento i bambini giocare in giardino."}
+  - {de: "Wir sehen den Zug einfahren.", it: "Vediamo il treno entrare in stazione."}
+  - {de: "Sie lässt sich die Haare schneiden.", it: "Si fa tagliare i capelli."}
+  - {de: "Hast du das Fenster reparieren lassen?", it: "Hai fatto riparare la finestra?"}
+  - {de: "Ich habe den Hund bellen hören.", it: "Ho sentito abbaiare il cane."}

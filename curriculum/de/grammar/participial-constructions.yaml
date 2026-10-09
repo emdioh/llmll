@@ -1,0 +1,50 @@
+id: gram:participial-constructions
+title_it: "Costruzioni participiali (attributo esteso) e uso avverbiale del participio"
+title_en: "Extended participial attributes and adverbial participles"
+level: B2
+requires: ["gram:participles", "gram:relative-clauses"]
+diagnostic_tags:
+  construction: [extended-attribute-partizip-1, extended-attribute-partizip-2, zu-partizip-1-attribute, adverbial-participle]
+  error_type: [missing-adjective-ending, wrong-word-order, comma-before-attribute, partizip-1-for-cause, passive-active-confusion]
+reference_it: |
+  ## Regola
+  Un participio può reggere dei complementi e stare **tra articolo e sostantivo**: è un **attributo esteso**, tipico dello scritto formale.
+  Equivale a una **frase relativa**:
+
+  | relativa | attributo esteso |
+  |---|---|
+  | die Frau, die seit Jahren in Berlin **lebt** | die seit Jahren in Berlin **lebende** Frau |
+  | das Heft, das vom Lehrer **korrigiert wurde** | das vom Lehrer **korrigierte** Heft |
+  | die Aufgabe, die bis morgen **erledigt werden muss** | die bis morgen **zu erledigende** Aufgabe |
+
+  - **Ordine**: articolo → complementi → participio (con desinenza) → sostantivo. Il participio sta sempre **subito prima del sostantivo**.
+  - **Partizip I** = relativa **attiva e contemporanea**; **Partizip II** = relativa **passiva** (o attiva conclusa con i verbi di moto con *sein*: *der gestern angekommene Zug*);
+    **zu + Partizip I** = relativa con *müssen / können + passivo*.
+  - Il participio ha la **desinenza dell'aggettivo** richiesta da articolo, caso e numero: *Ich helfe dem seit Jahren in Berlin lebenden Mann.*
+  - **Nessuna virgola** tra articolo e sostantivo.
+  - **Uso avverbiale** (all'inizio o dopo il verbo): senza desinenza, equivale a un'azione contemporanea o a una circostanza: *Den Koffer in der Hand haltend, ging er zum Bahnhof.* (con la valigia in mano)
+    Il soggetto è lo stesso della frase principale.
+  - Il Partizip II avverbiale esprime l'**aspetto passivo o concluso**: *Erschöpft setzte sie sich hin.* (stanca / dopo essersi stancata)
+
+  ## Esempi
+  - *Die auf dem Tisch liegende Zeitung ist von gestern.* — Il giornale che è sul tavolo è di ieri.
+  - *Der von allen Kollegen geschätzte Chef geht in Rente.* — Il capo, stimato da tutti i colleghi, va in pensione.
+  - *Wir besprechen die bis Freitag zu lösenden Probleme.* — Discutiamo i problemi da risolvere entro venerdì.
+  - *Lachend verließ sie den Raum.* — Uscì dalla stanza ridendo.
+  - *Müde von der Arbeit, schlief er sofort ein.* — Stanco per il lavoro, si addormentò subito.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa il **gerundio** per causa, tempo e modo (*essendo stanco, andai a letto*): in tedesco il Partizip I indica di norma **contemporaneità** o modo; per la causa serve una frase con *weil / da* o un participio II:
+    **\*Müde seiend ging ich ins Bett** → *Weil ich müde war, ging ich ins Bett.*
+  - Il gerundio italiano può avere un altro soggetto (*Piovendo, restammo a casa*): in tedesco no, il soggetto è quello della principale.
+  - L'italiano pone la relativa **dopo** il sostantivo (*la signora che vive a Berlino*): in tedesco l'attributo esteso va **prima**:
+    **\*die Frau seit Jahren in Berlin lebend** → *die seit Jahren in Berlin lebende Frau.*
+  - Dimenticare la **desinenza** nell'attributo: **\*die seit Jahren in Berlin lebend Frau** → *lebende*.
+  - **Partizip I per il passivo**: *das korrigierende Heft* significa "il quaderno che corregge" (attivo), non "corretto" → per il passivo *das korrigierte Heft*.
+  - Nella lingua parlata si evitano: si preferisce la **frase relativa**.
+examples:
+  - {de: "Die auf dem Tisch liegende Zeitung ist von gestern.", it: "Il giornale che è sul tavolo è di ieri."}
+  - {de: "Der von allen Kollegen geschätzte Chef geht in Rente.", it: "Il capo, stimato da tutti i colleghi, va in pensione."}
+  - {de: "Wir besprechen die bis Freitag zu lösenden Probleme.", it: "Discutiamo i problemi da risolvere entro venerdì."}
+  - {de: "Lachend verließ sie den Raum.", it: "Uscì dalla stanza ridendo."}
+  - {de: "Müde von der Arbeit, schlief er sofort ein.", it: "Stanco per il lavoro, si addormentò subito."}

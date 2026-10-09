@@ -1,0 +1,63 @@
+id: gram:compound-words
+title_it: "Parole composte: genere, plurale e elementi di giunzione"
+title_en: "Compound words: gender, plural and linking elements"
+level: B1
+requires: ["gram:noun-gender", "gram:noun-plural"]
+diagnostic_tags:
+  element: [first-part, last-part]
+  linking: [fugen-s, fugen-n, fugen-e, no-linking, dropped-e]
+  error_type: [gender-from-first-element, plural-from-first-element, wrong-linking-element, reversed-order, wrong-hyphen-use]
+reference_it: |
+  ## Regola
+  In tedesco si creano nuove parole **unendo due o più parole** in una sola, scritta senza spazi. L'ultimo elemento è la **parola base** (dice che cosa è la cosa); i precedenti la precisano.
+
+  | Parte 1 (determinante) | Parte 2 (base) | Composto |
+  |---|---|---|
+  | das Haus | die Tür | **die** Haustür |
+  | der Kaffee | die Tasse | **die** Kaffeetasse |
+  | die Küche | das Fenster | **das** Küchenfenster |
+  | der Winter | der Mantel | **der** Wintermantel |
+
+  - **Genere e plurale vengono sempre dall'ULTIMO elemento**: *die Tür → die Haustür, die Haustüren*; *das Buch → das Kochbuch, die Kochbücher*. Solo l'ultimo elemento si declina.
+  - L'ordine è **inverso rispetto all'italiano**: prima il dettaglio, poi la base (*la porta di casa* = *die Haustür*; *il succo d'arancia* = *der Orangensaft*).
+  - Il primo elemento può essere un sostantivo (*Schulbus*), un aggettivo (*Großstadt*, *Neujahr*), un verbo (radice: *Schlafzimmer*, *Lesebuch*) o una preposizione/avverbio (*Vorname*, *Nachteil*).
+  - Se l'ultimo elemento è un aggettivo, il composto è un aggettivo (*eiskalt*, *weltbekannt*, *hellblau*).
+
+  **Elementi di giunzione (Fugenelemente)** — tra i due elementi a volte compare una lettera. Non esiste una regola infallibile, vanno imparati con la parola. Orientamento:
+
+  | Giunzione | Quando è frequente | Esempi |
+  |---|---|---|
+  | nessuna | molti composti con parola semplice | Haustür, Handtuch, Tischlampe |
+  | **-s-** | dopo sostantivi in *-ung, -heit, -keit, -schaft, -ling* (e spesso *-ion, -ität*); dopo molti maschili/neutri col genitivo in -(e)s | Wohnungstür, Freiheitsstatue, Wirtschaftskrise, Jahresbericht; per tradizione anche Geburtstag, Liebesbrief |
+  | **-(e)n-** | dopo femminili in -e e maschili deboli; molti plurali in -(e)n | Blumentopf, Sonnenbrille, Studentenheim, Frauenarzt |
+  | **-e-** | alcuni sostantivi e molte radici verbali | Hundehütte, Tagebuch, Lesebuch (ma *Schreibtisch*, senza -e-) |
+  | **-er-** | alcuni plurali in -er (con possibile Umlaut) | Kinderzimmer, Bilderbuch |
+  | Umlaut | alcuni plurali con Umlaut | Gästezimmer, Händedruck |
+
+  - Cade la **-e finale** del primo elemento in certi casi: *die Schule → das Schulbuch*, *die Sprache → der Sprachkurs*; con i verbi cade la desinenza *-en*: *schlafen → Schlafzimmer*.
+  - Se si incontrano **tre consonanti uguali**, nella grafia attuale restano tutte: *die Schifffahrt*, *die Balletttänzerin*. Per leggibilità si può usare il **trattino** (*Schiff-Fahrt*), e si usa con sigle, cifre o parole straniere: *die E-Mail*, *der 10-Euro-Schein*, *die USB-Buchse*.
+  - Composti lunghi si formano a catena: *die Geburtstagsparty*, *das Schreibwarengeschäft*; si legge il significato **da destra a sinistra**.
+  - Coordinazione: *die Sommer- und Winterkleidung*, *Schulbücher und -hefte* (il trattino sostituisce la parte comune).
+
+  ## Esempi
+  - *Die Haustür ist offen.* — La porta di casa è aperta.
+  - *Wir haben zwei Kinderzimmer.* — Abbiamo due camerette per bambini.
+  - *Der Bahnhof liegt neben dem Busbahnhof.* — La stazione ferroviaria è accanto alla stazione degli autobus.
+  - *Ich suche meine Kaffeetasse.* — Cerco la mia tazza da caffè.
+  - *Der Geburtstag meiner Oma ist im Sommer.* — Il compleanno di mia nonna è d'estate.
+  - *Die Wirtschaftskrise hat viele Jobs gekostet.* — La crisi economica è costata molti posti di lavoro.
+
+  ## Errori tipici di chi parla italiano
+  - **Genere preso dal primo elemento**: *der Tisch + die Lampe* = **die** Tischlampe, non *\*der Tischlampe*; *das Haus + der Schlüssel* = **der** Hausschlüssel. Chiedi sempre: qual è l'ultima parola?
+  - **Ordine invertito** come in italiano: **\*die Marmeladeorange** per *marmellata d'arance*. In tedesco la base è in fondo: *die Orangenmarmelade*.
+  - **Preposizione al posto del composto**: *il succo di mela* → *der Apfelsaft* (non *\*der Saft von Apfel*); *la sala da pranzo* → *das Esszimmer*.
+  - **Plurale sul primo elemento**: **\*die Häusertüren** per *le porte di casa*; corretto *die Haustüren*. Un plurale nel primo elemento è ammesso solo come giunzione fissa (*Kinderzimmer*, *Bilderbuch*).
+  - **Giunzione dimenticata o aggiunta a caso**: **\*Wohnungtür** → *Wohnungstür*; **\*Arbeitzeit** → *Arbeitszeit*; **\*Hundshütte** → *Hundehütte*. Meglio imparare il composto intero.
+  - **Spazio al posto dell'unione**: **\*Kaffee Tasse**, **\*Geburtstag Party** — in tedesco i composti si scrivono uniti (o con trattino).
+examples:
+  - {de: "Die Haustür ist offen.", it: "La porta di casa è aperta."}
+  - {de: "Wir haben zwei Kinderzimmer.", it: "Abbiamo due camerette per bambini."}
+  - {de: "Ich suche meine Kaffeetasse.", it: "Cerco la mia tazza da caffè."}
+  - {de: "Der Geburtstag meiner Oma ist im Sommer.", it: "Il compleanno di mia nonna è d'estate."}
+  - {de: "Die Wirtschaftskrise hat viele Jobs gekostet.", it: "La crisi economica è costata molti posti di lavoro."}
+  - {de: "Die Tischlampe steht auf dem Schreibtisch.", it: "La lampada da tavolo sta sulla scrivania."}

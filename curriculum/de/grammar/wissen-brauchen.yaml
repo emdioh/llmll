@@ -1,0 +1,58 @@
+id: gram:wissen-brauchen
+title_it: "wissen, kennen, können e il verbo brauchen"
+title_en: "wissen, kennen, können and the verb brauchen"
+level: A2
+requires: ["gram:modal-verbs"]
+diagnostic_tags:
+  verb: [wissen, kennen, koennen, brauchen]
+  error_type: [wissen-kennen-confusion, wissen-instead-of-koennen, wrong-wissen-form, brauchen-with-zu-missing, brauchen-modal-vs-main]
+reference_it: |
+  ## Regola
+  **Wissen** (sapere) è un verbo irregolare con il presente simile ai modali: *ich* e *er/sie/es* sono uguali e senza desinenza.
+
+  | | wissen |
+  |---|---|
+  | ich | weiß |
+  | du | weißt |
+  | er/sie/es | weiß |
+  | wir | wissen |
+  | ihr | wisst |
+  | sie/Sie | wissen |
+
+  Terna: *wissen – wusste – hat gewusst* (verbo misto).
+
+  Italiano *sapere* e *conoscere* si dividono in tedesco in tre verbi:
+
+  | verbo | uso | esempio |
+  |---|---|---|
+  | **wissen** | sapere un fatto, un'informazione | *Ich weiß, wo er wohnt.* |
+  | **kennen** | conoscere una persona, un luogo, un'opera | *Ich kenne Berlin.* |
+  | **können** | sapere fare / sapere una lingua (capacità) | *Ich kann Spanisch.* / *Er kann schwimmen.* |
+
+  **Brauchen** (aver bisogno di) è un verbo regolare: *brauchen – brauchte – hat gebraucht*.
+  - Con un **oggetto** (accusativo): *Ich brauche einen Stift.* — Ho bisogno di una penna.
+  - Con un **infinito con zu** ha il senso di *dover*, ma quasi sempre **con negazione o con *nur***:
+    *Du brauchst nicht zu kommen.* — Non è necessario che tu venga. *Du brauchst nur anzurufen.* — Ti basta telefonare.
+  - *nicht brauchen zu* equivale alla negazione di *müssen* (non essere obbligato). *Du musst nicht kommen* e *Du brauchst nicht zu kommen* significano la stessa cosa.
+  - Nella lingua parlata *zu* spesso cade: *Du brauchst nicht kommen.* Nello scritto standard si mette *zu* (con i verbi separabili: *anzurufen*).
+
+  ## Esempi
+  - *Ich weiß die Antwort nicht.* — Non so la risposta.
+  - *Kennst du meine Schwester?* — Conosci mia sorella?
+  - *Meine Tochter kann schon schwimmen.* — Mia figlia sa già nuotare.
+  - *Wir brauchen mehr Zeit.* — Abbiamo bisogno di più tempo.
+  - *Du brauchst heute nicht zu kochen.* — Oggi non devi cucinare.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha un solo verbo, *sapere*, per fatti e capacità: **\*Ich weiß Deutsch** / **\*Ich weiß schwimmen** → *Ich kann Deutsch, ich kann schwimmen.*
+  - *Conoscere* una persona o un luogo è *kennen*, non *wissen*: **\*Ich weiß Anna nicht** → *Ich kenne Anna nicht.*
+  - Forma del presente: **\*ich weisse**, **\*er weißt**, **\*ich weißt** → *ich weiß, er weiß.* Non si dice **\*ich wissen** né **\*du wisst** → *du weißt.*
+  - *Brauchen* si traduce spesso con "dovere" nelle frasi negative, ma senza *nicht/nur/kein* l'infinito non è normale: **\*Du brauchst zu kommen** → *Du musst kommen* oppure *Du brauchst nur zu kommen.*
+  - Diversamente dai modali, *brauchen* vuole *zu* davanti all'infinito (nello scritto): **\*Du brauchst nicht kommen** (accettato solo nel parlato) → nello standard *Du brauchst nicht zu kommen.*
+  - *Aver bisogno di* si dice *brauchen* + accusativo, **senza preposizione**: **\*Ich brauche von Geld** → *Ich brauche Geld.*
+examples:
+  - {de: "Ich weiß die Antwort nicht.", it: "Non so la risposta."}
+  - {de: "Kennst du meine Schwester?", it: "Conosci mia sorella?"}
+  - {de: "Meine Tochter kann schon schwimmen.", it: "Mia figlia sa già nuotare."}
+  - {de: "Wir brauchen mehr Zeit.", it: "Abbiamo bisogno di più tempo."}
+  - {de: "Du brauchst heute nicht zu kochen.", it: "Oggi non devi cucinare."}

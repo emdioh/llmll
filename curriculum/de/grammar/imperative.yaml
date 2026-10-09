@@ -1,0 +1,51 @@
+id: gram:imperative
+title_it: "Imperativo (du, ihr, Sie, wir) e forme sostitutive"
+title_en: "Imperative"
+level: A1
+requires: ["gram:praesens", "gram:personal-pronouns"]
+diagnostic_tags:
+  person: [du, ihr, sie-formal, wir]
+  verb_type: [regular, vowel-change-e-i, vowel-change-e-ie, stem-in-t-d, separable, reflexive, sein]
+  error_type: [pronoun-not-dropped, missing-umlaut-wrongly-added, wrong-sie-form, wrong-vowel-change, wrong-sein-form, separable-prefix-position]
+reference_it: |
+  ## Regola
+  L'**imperativo** ha tre forme per "tu / voi / Lei" (più *wir* per "facciamo…!"). Il verbo sta **al primo posto**.
+
+  | persona | formazione | esempio |
+  |---|---|---|
+  | du | radice del verbo (+ -e facoltativa), **senza** *du* | Komm! / Mach das! |
+  | ihr | come il presente, **senza** *ihr* | Kommt! / Macht das! |
+  | Sie | infinito + **Sie** (obbligatorio) | Kommen Sie! / Machen Sie das! |
+  | wir | infinito + **wir** ("facciamo…") | Gehen wir! |
+
+  - **du**: i verbi con cambio vocale **e → i / ie** lo mantengono: *geben → **gib**, nehmen → **nimm**, sprechen → **sprich**, lesen → **lies**, sehen → **sieh**, helfen → **hilf**.*
+    I verbi con **a → ä** o **au → äu** (*fahren, schlafen, laufen*) **non** hanno l'umlaut: *fahr!, schlaf!, lauf!*
+  - La **-e** è necessaria quando la radice termina in **-t, -d**, o in consonante + **-m / -n** (non dopo *l, r*): *arbeiten → arbeite!, warten → warte!, öffnen → öffne!, atmen → atme!*; ma *lernen → lern!*. I verbi con e → i non hanno la *-e* (*treten → tritt!*). Nei verbi in *-eln / -ern* cade una *e*: *sammeln → sammle!, ändern → ändere!*
+  - **sein**: *du **sei**, ihr **seid**, **seien** Sie, **seien** wir* (*Sei ruhig! Seid leise! Seien Sie bitte pünktlich!*). **werden**: *werde!*
+  - **Verbi separabili**: il prefisso va **in fondo**: *Steh auf! Ruf mich an! Machen Sie bitte das Fenster zu!*
+  - **Riflessivi**: il pronome segue il verbo: *Setz **dich**! Beeilt **euch**! Setzen Sie **sich**!*
+  - **Forme sostitutive** (avvisi, istruzioni): **infinito** (*Bitte anschnallen! Nicht rauchen!*), **participio II** (*Aufgepasst! Stillgestanden!*), **sostantivo / avverbio** (*Vorsicht! Ruhe! Los!*).
+  - Con **bitte** o *doch / mal* l'ordine diventa più cortese: *Komm doch mal her! Hilf mir bitte.*
+
+  ## Esempi
+  - *Lies bitte den Text laut.* — Leggi il testo ad alta voce, per favore.
+  - *Fahr vorsichtig!* — Guida con prudenza!
+  - *Wartet hier auf mich!* — Aspettatemi qui!
+  - *Nehmen Sie bitte Platz.* — Si accomodi, prego.
+  - *Gehen wir doch ins Café!* — Andiamo al bar!
+  - *Rufen Sie mich morgen an.* — Mi chiami domani.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano l'imperativo "tu" ha una forma propria (*parla!*) e il "voi" è uguale al presente. In tedesco **il pronome non si scrive** per *du* e *ihr*:
+    **\*Du komm!** → *Komm!*; ma con *Sie* è **obbligatorio**: **\*Kommen bitte!** → *Kommen Sie bitte!*
+  - L'imperativo di cortesia italiano ("Lei") usa il **congiuntivo** (*venga!*); in tedesco è **infinito + Sie**: *Kommen Sie!* (non c'è congiuntivo).
+  - I verbi forti con e → i / ie cambiano vocale anche nell'imperativo: **\*Nehm!** → *Nimm!*, **\*Gebe!** → *Gib!*, **\*Lese!** → *Lies!*. Ma niente umlaut con a → ä: **\*Fähr!** → *Fahr!*
+  - **sein**: **\*Bist ruhig!** / **\*Sein ruhig!** → *Sei ruhig!* (du), *Seid ruhig!* (ihr), *Seien Sie ruhig!* (Sie).
+  - Verbo separabile: **\*Aufsteh!** → *Steh auf!* Il prefisso va in fondo, come nel presente.
+  - Negazione: *nicht* sta **dopo** il verbo: **\*Nicht komm!** → *Komm nicht!*; per i divieti scritti si usa l'infinito: *Nicht rauchen!*
+examples:
+  - {de: "Lies bitte den Text laut.", it: "Leggi il testo ad alta voce, per favore."}
+  - {de: "Fahr vorsichtig!", it: "Guida con prudenza!"}
+  - {de: "Wartet hier auf mich!", it: "Aspettatemi qui!"}
+  - {de: "Nehmen Sie bitte Platz.", it: "Si accomodi, prego."}
+  - {de: "Gehen wir doch ins Café!", it: "Andiamo al bar!"}

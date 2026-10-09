@@ -1,0 +1,52 @@
+id: gram:impersonal-verbs
+title_it: "Verbi impersonali: es regnet, es gibt, es geht"
+title_en: "Impersonal verbs: es regnet, es gibt, es geht"
+level: B1
+requires: ["gram:praesens", "gram:personal-pronouns", "gram:infinitive-zu"]
+diagnostic_tags:
+  construction: [weather, es-gibt, es-geht, es-fehlt, feeling-verb, es-ist-adjective]
+  error_type: [missing-es, es-gibt-instead-of-sein, wrong-case-of-person, es-gibt-plural-agreement]
+reference_it: |
+  ## Regola
+  Un verbo **impersonale** ha come soggetto un **es** senza significato proprio: il tedesco non lascia mai il soggetto vuoto.
+
+  | tipo | esempi |
+  |---|---|
+  | tempo atmosferico | *es regnet, es schneit, es hagelt, es donnert, es blitzt* |
+  | temperatura, ora | *es ist kalt, es wird dunkel, es ist spät, es ist halb acht* |
+  | esistenza | **es gibt + accusativo** |
+  | stato di salute | **es geht + dativo** (*Wie geht es dir?*) |
+  | mancanza | **es fehlt + dativo (+ an + dativo)** (*Es fehlt mir an Zeit.*) |
+  | sensazioni | *es freut mich, es ärgert mich, es wundert mich, es gefällt mir* |
+  | altre espressioni | *es kommt darauf an* (dipende), *es handelt sich um* (si tratta di) |
+
+  - **Es gibt** è seguito dall'**accusativo** e il verbo resta sempre al **singolare**, anche con un plurale: *Es gibt hier viele Parks.*
+    Al passato: *es gab* (Präteritum), *es hat gegeben* (Perfekt).
+  - Per dire dove si trova qualcosa con luogo preciso si usa **sein**: *Der Bahnhof ist neben dem Park.* Senza luogo preciso: *Ist noch Brot da?*
+  - Con i verbi di stato d'animo la persona che prova il sentimento è all'**accusativo** (*Es freut mich*) o al **dativo** (*Es gefällt mir, es tut mir leid*).
+  - Con le espressioni di freddo o caldo la persona è al **dativo** e *es* può cadere: *Mir ist kalt* = *Es ist mir kalt*.
+  - Se un altro elemento apre la frase, **es** non cade e va dopo il verbo: *Heute regnet es.* (non **\*Heute regnet**).
+  - Il Perfekt di *regnen, schneien* ecc. si forma con *haben*: *Es hat geregnet.* Con *werden*: *Es ist dunkel geworden.*
+
+  ## Esempi
+  - *Es regnet seit dem Morgen.* — Piove dalla mattina.
+  - *In meiner Stadt gibt es einen großen Park.* — Nella mia città c'è un grande parco.
+  - *Wie geht es Ihnen?* — Come sta?
+  - *Es freut mich, dich zu sehen.* — Mi fa piacere vederti.
+  - *Es fehlt mir an Geduld.* — Mi manca la pazienza.
+  - *Es kommt darauf an.* — Dipende.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il soggetto può mancare (*Piove*, *È tardi*): in tedesco **\*Regnet** o **\*Ist spät** sono errori → *Es regnet, es ist spät.*
+  - *C'è / ci sono* non si traduce sempre con *es gibt*. Con luogo preciso si usa *sein*:
+    **\*Es gibt ein Buch auf dem Tisch** (non scorretto, ma innaturale) → *Ein Buch liegt auf dem Tisch* / *Auf dem Tisch ist ein Buch.* *Es gibt* esprime esistenza in generale.
+  - *Es gibt* non si coniuga al plurale: *ci sono molte persone* → **\*Es geben viele Leute** → *Es gibt viele Leute.*
+  - Il sostantivo dopo *es gibt* non è il soggetto, ma un oggetto all'accusativo (*Es gibt einen Park*, non **\*Es gibt ein Park**).
+  - *Mi piace* e *mi fa piacere* in tedesco hanno costruzioni diverse: *Es gefällt mir* (dativo) / *Es freut mich* (accusativo).
+  - Con *Wie geht es dir?* la persona è al dativo: **\*Wie geht es du?** → *dir*.
+examples:
+  - {de: "Es regnet seit dem Morgen.", it: "Piove dalla mattina."}
+  - {de: "In meiner Stadt gibt es einen großen Park.", it: "Nella mia città c'è un grande parco."}
+  - {de: "Wie geht es Ihnen?", it: "Come sta?"}
+  - {de: "Es freut mich, dich zu sehen.", it: "Mi fa piacere vederti."}
+  - {de: "Es fehlt mir an Geduld.", it: "Mi manca la pazienza."}

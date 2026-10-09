@@ -1,0 +1,51 @@
+id: gram:plusquamperfekt
+title_it: "Plusquamperfekt (trapassato): hatte/war + participio II"
+title_en: "Past perfect (Plusquamperfekt)"
+level: B1
+requires: ["gram:perfekt", "gram:praeteritum-regular-irregular"]
+diagnostic_tags:
+  auxiliary: [haben, sein]
+  function: [prior-event, nachdem-clause, narrative-background, unreal-past]
+  error_type: [wrong-auxiliary, perfekt-instead-of-plusquamperfekt, wrong-participle, partizip-not-at-end]
+reference_it: |
+  ## Regola
+  Il **Plusquamperfekt** indica un fatto **già concluso prima** di un altro momento del passato. Si forma come il Perfekt, ma con
+  l'ausiliare al **Präteritum**: **hatte / war + participio II** (in fondo alla frase).
+
+  | | haben | sein |
+  |---|---|---|
+  | ich | hatte gemacht | war gekommen |
+  | du | hattest gemacht | warst gekommen |
+  | er/sie/es | hatte gemacht | war gekommen |
+  | wir | hatten gemacht | waren gekommen |
+  | ihr | hattet gemacht | wart gekommen |
+  | sie/Sie | hatten gemacht | waren gekommen |
+
+  - La **scelta dell'ausiliare** è la stessa del Perfekt: *sein* per moto e cambio di stato (*gehen, fahren, einschlafen, werden*) e per *sein, bleiben*; *haben* per gli altri verbi.
+  - Si usa soprattutto in coppia con un Präteritum o un Perfekt che indica il fatto **successivo**: *Als ich ankam, **war** der Zug schon **abgefahren**.*
+  - Dopo **nachdem** (dopo che) la frase subordinata ha di solito il Plusquamperfekt e la principale il Präteritum o il Perfekt: *Nachdem wir gegessen **hatten**, gingen wir spazieren.*
+  - Anche con **bevor / ehe** la principale può avere il Plusquamperfekt, se si guarda al passato: *Er hatte schon alles gepackt, bevor wir kamen.*
+  - Nella frase subordinata il verbo ausiliare va in fondo, dopo il participio: *…, weil er den Schlüssel **vergessen hatte**.*
+  - Attenzione: *Wenn ich das gewusst hätte, …* (condizione irreale nel passato) è un **Konjunktiv II**, non un Plusquamperfekt.
+
+  ## Esempi
+  - *Ich hatte gerade gegessen, als du angerufen hast.* — Avevo appena mangiato quando hai telefonato.
+  - *Nachdem sie die Tür geöffnet hatte, sah sie den Hund.* — Dopo aver aperto la porta, vide il cane.
+  - *Wir waren schon nach Hause gegangen, bevor es regnete.* — Eravamo già tornati a casa prima che piovesse.
+  - *Er war müde, weil er schlecht geschlafen hatte.* — Era stanco perché aveva dormito male.
+  - *Als ich im Büro ankam, waren die Kollegen schon weg.* — Quando arrivai in ufficio, i colleghi erano già andati via.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano ha un **trapassato prossimo** (*avevo mangiato*) e uno **remoto** (*ebbi mangiato*); in tedesco c'è una sola forma, con *hatte / war*.
+  - **haben / sein**: la scelta segue il tedesco, non l'italiano. I riflessivi italiani vogliono *essere* (*mi ero lavato*), il tedesco *haben*: *Ich hatte mich gewaschen.*
+    **\*Ich hatte gegangen**, **\*Ich war gegessen** sono errati (*war gegangen*, *hatte gegessen*).
+  - Dopo *nachdem* l'italiano usa il trapassato remoto o prossimo ma il tedesco preferisce il Plusquamperfekt nella subordinata per mostrare che il fatto viene prima:
+    **\*Nachdem wir aßen, gingen wir** è poco corretto nello standard → *Nachdem wir gegessen hatten, gingen wir.*
+  - Nel parlato si usa spesso il **Perfekt** per entrambi i fatti, ma il Plusquamperfekt serve a chiarire quale fatto viene prima.
+  - Il participio va **in fondo**, l'ausiliare in seconda posizione (frase principale): *Ich **hatte** den Brief schon **gelesen**.*
+examples:
+  - {de: "Ich hatte gerade gegessen, als du angerufen hast.", it: "Avevo appena mangiato quando hai telefonato."}
+  - {de: "Nachdem sie die Tür geöffnet hatte, sah sie den Hund.", it: "Dopo aver aperto la porta, vide il cane."}
+  - {de: "Wir waren schon nach Hause gegangen, bevor es regnete.", it: "Eravamo già tornati a casa prima che piovesse."}
+  - {de: "Er war müde, weil er schlecht geschlafen hatte.", it: "Era stanco perché aveva dormito male."}
+  - {de: "Als ich im Büro ankam, waren die Kollegen schon weg.", it: "Quando arrivai in ufficio, i colleghi erano già andati via."}

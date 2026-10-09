@@ -1,0 +1,50 @@
+id: gram:connector-adverbs
+title_it: "Avverbi connettori: deshalb, trotzdem, außerdem, sonst, dann…"
+title_en: "Connector adverbs: deshalb, trotzdem, außerdem, sonst, dann…"
+level: B1
+requires: ["gram:inversion-v2", "gram:conjunctions-coordinating"]
+diagnostic_tags:
+  relation: [cause-result, contrast-concession, addition, condition-alternative, sequence-time]
+  error_type: [verb-final-after-adverb, subject-before-verb-after-adverb, adverb-confused-with-conjunction, wrong-connector-meaning, wrong-position-naemlich]
+  connector: [deshalb-deswegen-daher, trotzdem-dennoch, ausserdem, sonst, dann-danach, also, stattdessen, allerdings-jedoch]
+reference_it: |
+  ## Regola
+  Gli **avverbi connettori** collegano una frase alla precedente, ma, a differenza delle congiunzioni, **occupano un posto nella frase**: se stanno al primo posto,
+  il **verbo coniugato** viene subito dopo e il soggetto dopo il verbo (**inversione**). Non cambiano la posizione del verbo come fanno le subordinate (*weil, obwohl*).
+
+  | Relazione | Connettori | Esempio |
+  |---|---|---|
+  | causa → conseguenza | **deshalb, deswegen, daher, darum, also, folglich** | *Es regnet. **Deshalb** bleiben wir zu Hause.* |
+  | contrasto / concessione | **trotzdem, dennoch, jedoch, allerdings, dagegen, stattdessen** | *Er ist krank. **Trotzdem** geht er arbeiten.* |
+  | aggiunta | **außerdem, zudem, ebenfalls** | *Die Wohnung ist günstig. **Außerdem** liegt sie zentral.* |
+  | condizione / alternativa | **sonst, andernfalls** | *Beeil dich, **sonst** verpasst du den Zug.* |
+  | sequenza nel tempo | **dann, danach, später, inzwischen, schließlich** | *Erst esse ich, **dann** gehe ich einkaufen.* |
+
+  - Tre modi di collegare causa ed effetto: *Er bleibt im Bett, **denn** er hat Fieber* (congiunzione, ordine normale) /
+    *Er hat Fieber. **Deshalb** bleibt er im Bett.* (avverbio, inversione) / *Er bleibt im Bett, **weil** er Fieber hat.* (subordinata, verbo in fondo).
+  - L'avverbio può anche stare **dentro la frase**: *Er geht **trotzdem** zur Arbeit.* *Wir bleiben **deshalb** zu Hause.* Allora l'ordine è quello normale.
+  - **zwar … aber …** ("sì, … però"): *Er ist **zwar** jung, **aber** sehr erfahren.* *Zwar* può stare anche all'inizio con inversione: *Zwar ist er jung, aber …*
+  - **nämlich** ("infatti") sta **solo dentro la frase**, mai al primo posto: *Er kommt nicht, er ist **nämlich** krank.*
+  - **also** significa "quindi / dunque", non "anche" come l'inglese *also*: *Es ist spät, **also** gehen wir.*
+
+  ## Esempi
+  - *Ich habe Hunger. Deshalb koche ich jetzt.* — Ho fame. Perciò ora cucino.
+  - *Das Wetter ist schlecht. Trotzdem machen wir einen Spaziergang.* — Il tempo è brutto. Ciononostante facciamo una passeggiata.
+  - *Ich muss lernen. Außerdem muss ich noch einkaufen.* — Devo studiare. Inoltre devo ancora fare la spesa.
+  - *Räum dein Zimmer auf, sonst darfst du nicht ausgehen.* — Metti in ordine la camera, altrimenti non puoi uscire.
+  - *Wir essen zusammen und gehen danach ins Kino.* — Mangiamo insieme e poi andiamo al cinema.
+  - *Er wollte kommen, ist aber stattdessen zu Hause geblieben.* — Voleva venire, ma è invece rimasto a casa.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *perciò, quindi, comunque, tuttavia* non cambiano l'ordine (*Piove. Perciò io resto a casa*). In tedesco dopo l'avverbio al primo posto il verbo viene **subito**:
+    **\*Deshalb ich bleibe zu Hause** → *Deshalb bleibe ich zu Hause.*
+  - Non mettere il verbo in fondo, come dopo *weil*: **\*Trotzdem er geht arbeiten** / **\*Trotzdem er arbeiten geht** → *Trotzdem geht er arbeiten.*
+  - *trotzdem* (avverbio, inversione) non è *obwohl* (subordinata, verbo in fondo): *Obwohl er krank ist, geht er arbeiten.* / *Es regnet. Trotzdem gehen wir spazieren.*
+  - *sonst* introduce una conseguenza se la condizione non si realizza ("altrimenti"); per "inoltre" si usa *außerdem*.
+  - Non confondere *dann* (poi, allora) con *denn* (perché): **\*Ich bleibe, dann ich bin müde** → *…denn ich bin müde.*
+examples:
+  - {de: "Ich habe Hunger. Deshalb koche ich jetzt.", it: "Ho fame. Perciò ora cucino."}
+  - {de: "Das Wetter ist schlecht. Trotzdem machen wir einen Spaziergang.", it: "Il tempo è brutto. Ciononostante facciamo una passeggiata."}
+  - {de: "Ich muss lernen. Außerdem muss ich noch einkaufen.", it: "Devo studiare. Inoltre devo ancora fare la spesa."}
+  - {de: "Räum dein Zimmer auf, sonst darfst du nicht ausgehen.", it: "Metti in ordine la camera, altrimenti non puoi uscire."}
+  - {de: "Es ist spät, also gehen wir nach Hause.", it: "È tardi, quindi andiamo a casa."}

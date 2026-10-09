@@ -1,0 +1,48 @@
+id: gram:conditional-clauses
+title_it: "Subordinate condizionali: wenn, falls, frase senza wenn"
+title_en: "Conditional clauses: wenn, falls, clauses without wenn"
+level: A2
+requires: ["gram:verb-final-subordinate", "gram:conjunctions-subordinating"]
+diagnostic_tags:
+  construction: [wenn-clause, falls-clause, verb-first-condition, es-sei-denn, wenn-nicht]
+  clause_position: [condition-first, condition-second]
+  error_type: [no-inversion-in-main, verb-not-final, wenn-vs-ob, wenn-vs-als, wenn-wann-confusion, wrong-dann-position]
+reference_it: |
+  ## Regola
+  La condizione **reale** (possibile, che può verificarsi) si esprime con **wenn** o **falls** (*nel caso in cui*), verbo **in fondo**.
+  Se la condizione precede, la principale comincia con il verbo; si può riprendere la condizione con **dann** (o *so*), che occupa la posizione 1.
+
+  | forma | esempio |
+  |---|---|
+  | wenn-clause + principale | *Wenn du Zeit hast, **(dann) rufe** ich dich an.* |
+  | principale + wenn-clause | *Ich rufe dich an, wenn ich Zeit habe.* |
+  | falls | *Falls es regnet, bleiben wir zu Hause.* |
+  | **senza wenn**: verbo al primo posto | *Hast du Zeit, (dann) rufe ich dich an.* |
+  | negazione | *Wenn du **nicht** kommst, …* / *Ich komme, **es sei denn**, ich bin krank.* |
+
+  - **wenn** può anche essere temporale (*ogni volta che*, *quando*): il contesto decide. **falls** è solo condizionale e suggerisce che la condizione è meno certa.
+  - Nella frase **senza wenn** il verbo coniugato sta **all'inizio** della condizione; non c'è congiunzione: *Kommst du morgen, dann gehen wir ins Kino.*
+  - **es sei denn (, dass)** = *a meno che*: *Wir gehen spazieren, es sei denn, es regnet.* (con *dass* il verbo va in fondo).
+  - Per le condizioni **irreali** (*se avessi tempo, verrei*) servono forme speciali: vedi il Konjunktiv II; qui si trattano solo le condizioni reali.
+
+  ## Esempi
+  - *Wenn das Wetter schön ist, gehen wir wandern.* — Se il tempo è bello, andiamo a fare un'escursione.
+  - *Ich nehme den Schirm mit, falls es regnet.* — Prendo l'ombrello nel caso piova.
+  - *Hast du Hunger, dann koche ich etwas.* — Se hai fame, cucino qualcosa.
+  - *Wenn du das Paket nicht abholst, schickt man es zurück.* — Se non ritiri il pacco, lo rimandano indietro.
+  - *Ruf mich an, wenn du Hilfe brauchst.* — Chiamami se hai bisogno di aiuto.
+  - *Er kommt mit, es sei denn, er muss arbeiten.* — Viene con noi, a meno che non debba lavorare.
+
+  ## Errori tipici di chi parla italiano
+  - **se** italiano = *wenn* (condizione) oppure *ob* (domanda indiretta): **\*Ich weiß nicht, wenn er kommt** → *ob er kommt*; **\*Ob du Zeit hast, rufe ich dich an** → *Wenn du Zeit hast*.
+  - Dopo *se* l'italiano usa spesso il futuro (*se verrai*): in tedesco **presente** (*Wenn du kommst*).
+  - Quando la condizione apre la frase, la principale **inverte**: **\*Wenn du kommst, ich freue mich** → *Wenn du kommst, freue ich mich*.
+    Con *dann* davanti al verbo vale lo stesso: **\*Dann ich freue mich** → *dann freue ich mich*.
+  - **\*Wenn ich habe Zeit** → *Wenn ich Zeit habe* (verbo in fondo).
+  - Non confondere *wenn* (se/quando) con *wann* (domanda sul tempo): *Wann kommst du?* ≠ *Wenn du kommst*.
+examples:
+  - {de: "Wenn das Wetter schön ist, gehen wir wandern.", it: "Se il tempo è bello, andiamo a fare un'escursione."}
+  - {de: "Ich nehme den Schirm mit, falls es regnet.", it: "Prendo l'ombrello nel caso piova."}
+  - {de: "Hast du Hunger, dann koche ich etwas.", it: "Se hai fame, cucino qualcosa."}
+  - {de: "Wenn du das Paket nicht abholst, schickt man es zurück.", it: "Se non ritiri il pacco, lo rimandano indietro."}
+  - {de: "Er kommt mit, es sei denn, er muss arbeiten.", it: "Viene con noi, a meno che non debba lavorare."}

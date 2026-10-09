@@ -1,0 +1,49 @@
+id: gram:correlative-pronouns
+title_it: "Pronomi correlativi: derjenige, der..., wer..., was... (chi, colui che, ciò che)"
+title_en: "Correlative pronouns: derjenige, der..., wer..., was..."
+level: B2
+requires: ["gram:relative-clauses"]
+diagnostic_tags:
+  pronoun: [derjenige, demonstrative-der, wer-der, was-relative, was-whole-clause, wo-compound]
+  case: [nom, akk, dat, gen]
+  error_type: [wrong-case-of-demonstrative, wrong-case-of-relative, deren-instead-of-derer, was-vs-das, wer-without-der, preposition-fusion-wrong]
+reference_it: |
+  ## Regola
+  Il **pronome correlativo** è un antecedente ("colui", "quello") che non ha un sostantivo e viene **precisato da una frase relativa**. Dopo il pronome c'è una virgola e il verbo della relativa va in fondo. Il pronome e la relativa possono avere **casi diversi**: il caso del pronome dipende dalla frase principale, quello del relativo dalla relativa.
+
+  **derjenige** ("colui che") ha due parti declinate: l'articolo (*der-*) e *-jenige* (desinenze deboli):
+
+  | | m | f | n | pl |
+  |---|---|---|---|---|
+  | Nom. | derjenige | diejenige | dasjenige | diejenigen |
+  | Akk. | denjenigen | diejenige | dasjenige | diejenigen |
+  | Dat. | demjenigen | derjenigen | demjenigen | denjenigen |
+  | Gen. | desjenigen | derjenigen | desjenigen | derjenigen |
+
+  - Al posto di *derjenige* si può usare il dimostrativo **der / die / das** (stesso caso della principale): *Ich spreche mit **dem**, der dort steht.* Al genitivo plurale: **derer** (*die Wünsche derer, die warten*), non *deren*.
+  - **wer** ("chi") introduce una relativa riferita a una persona indeterminata; nella principale può seguire *der / den / dem* (obbligatorio se ha un caso diverso da *wer*):
+    *Wer zu spät kommt, (der) muss warten. Wer hilft, **dem** danke ich.*
+  - **was** ("ciò che") sostituisce il relativo dopo *alles, nichts, etwas, vieles, das Beste, das* e simili: *Alles, was du sagst, stimmt.*
+  - **was** può anche riferirsi a **tutta la frase precedente** ("il che"): *Sie hat gewonnen, was mich freut.*
+  - Se la preposizione appartiene alla **relativa**, *was* forma *wo(r)-* + preposizione: *Das, **worauf** ich warte, ist die Antwort.* Se invece la preposizione appartiene alla **principale**, sta davanti a *das*: *Ich denke an **das**, was du gesagt hast.*
+
+  ## Esempi
+  - *Diejenigen, die mitkommen wollen, sollen sich melden.* — Coloro che vogliono venire con noi si facciano avanti.
+  - *Ich spreche mit dem, der das Auto gekauft hat.* — Parlo con chi ha comprato la macchina.
+  - *Wer Hunger hat, kann sich bedienen.* — Chi ha fame può servirsi.
+  - *Wem das nicht gefällt, der soll es sagen.* — A chi non piace, lo dica.
+  - *Das ist alles, was ich weiß.* — È tutto ciò che so.
+  - *Er hat mir geholfen, worüber ich mich sehr gefreut habe.* — Mi ha aiutato, e ne sono stato molto contento.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano *colui che* ha un solo "che" invariabile; in tedesco i due casi possono essere diversi e vanno **entrambi marcati**: *Ich danke **dem**, **der** mir geholfen hat* (dativo + nominativo). Con una donna: *Ich danke **der**, die mir geholfen hat.* Il pronome segue il genere e il caso richiesti nella principale, il relativo quelli richiesti nella relativa.
+  - Dopo **alles / nichts / etwas / das Beste** il relativo è **was**, non *das*: **\*Alles, das du sagst** → *Alles, was du sagst.*
+  - Il genitivo plurale del dimostrativo usato come correlativo è **derer**: **\*das Leben deren, die arbeiten** → *das Leben derer, die arbeiten.*
+  - In una frase con *wer…* il caso di *wer* dipende dal verbo della relativa, quello del pronome dal verbo della principale: *Wem ich vertraue, **dem** helfe ich auch* (entrambi dativo); *Wen ich mag, **der** darf kommen* (accusativo + nominativo). **\*Wer ich vertraue** → *Wem ich vertraue.*
+  - Dopo preposizione, *was* relativo si fonde con *wo(r)-* (*worauf, womit*), mentre il dimostrativo *das* resta separato.
+examples:
+  - {de: "Diejenigen, die mitkommen wollen, sollen sich melden.", it: "Coloro che vogliono venire con noi si facciano avanti."}
+  - {de: "Ich spreche mit dem, der das Auto gekauft hat.", it: "Parlo con chi ha comprato la macchina."}
+  - {de: "Wer Hunger hat, kann sich bedienen.", it: "Chi ha fame può servirsi."}
+  - {de: "Das ist alles, was ich weiß.", it: "È tutto ciò che so."}
+  - {de: "Er hat mir geholfen, worüber ich mich sehr gefreut habe.", it: "Mi ha aiutato, e ne sono stato molto contento."}

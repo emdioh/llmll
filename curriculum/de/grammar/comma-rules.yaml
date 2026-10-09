@@ -1,0 +1,56 @@
+id: gram:comma-rules
+title_it: "Virgola: le regole tedesche (subordinate, relative, infinitive)"
+title_en: "Comma rules in German"
+level: B1
+requires: ["gram:verb-final-subordinate", "gram:relative-clauses", "gram:infinitive-zu"]
+diagnostic_tags:
+  clause_type: [dass-clause, weil-clause, relative-clause, indirect-question, zu-infinitive, main-clause-pair]
+  position: [start, middle, end]
+  error_type: [missing-comma-before-subordinate, missing-comma-after-embedded, comma-between-subject-verb, comma-before-und-in-list, missing-comma-relative]
+reference_it: |
+  ## Regola
+  In tedesco la virgola segue regole **grammaticali**, non la pausa della voce. La regola più importante: **ogni frase subordinata è separata dalla principale con la virgola**, sempre.
+
+  | Dove | Regola | Esempio |
+  |---|---|---|
+  | Subordinata dopo la principale | virgola **prima** | Ich weiß, **dass** du müde bist. |
+  | Subordinata prima della principale | virgola **dopo** la subordinata | **Weil** es regnet, bleiben wir zu Hause. |
+  | Subordinata inserita | virgola **prima e dopo** | Der Film, **den ich gesehen habe**, war gut. |
+  | Frase relativa | **sempre** con la virgola (anche se restrittiva) | Das ist der Mann, **der** hier wohnt. |
+  | Domanda indiretta | virgola | Sie fragt, **ob** du kommst. / Ich weiß nicht, **wann** er kommt. |
+  | Due principali con **aber, sondern, denn, doch** | virgola davanti | Ich möchte kommen, **aber** ich habe keine Zeit. |
+  | Due principali con **und, oder** | di norma **nessuna** virgola | Er kocht und sie deckt den Tisch. |
+  | Elenco | virgola tra gli elementi, **non davanti a und/oder** | Wir kaufen Brot, Käse und Wein. |
+  | Infinito con zu | vedi sotto | Ich habe keine Lust, **heute zu arbeiten**. |
+
+  - **Infinito con zu**: virgola **obbligatoria** con *um … zu, ohne … zu, statt … zu, anstatt … zu, außer … zu, als … zu* (*Er geht, um Brot zu kaufen.*), quando l'infinito dipende da un **nome** (*Ich habe keine Zeit, ihn anzurufen.*) o da un rafforzativo come *es* / *daran* / *damit* (*Ich denke daran, ihn anzurufen.*). Negli altri casi è **facoltativa** (*Er versucht(,) zu schlafen.*); per chiarezza molti scrivono comunque la virgola.
+  - **Dopo la subordinata che precede la principale**, il verbo della principale viene subito dopo la virgola (inversione): *Wenn du willst, **komme** ich mit.*
+  - **Non si scrive la virgola tra soggetto e verbo**, né tra verbo e complemento: *Mein Bruder wohnt in Berlin.* Se il soggetto è una frase: *Dass er kommt, freut mich.* (virgola dopo la subordinata).
+  - **Incisi, apposizioni, vocativo, interiezioni**: virgola prima e dopo. *Herr Müller, unser Chef, ist krank.* — *Anna, kommst du mit?* — *Ja, gern.*
+  - **Discorso diretto**: *Er sagte: „Ich komme morgen.“* (due punti e virgolette „…“). Se la citazione precede: *„Ich komme morgen“, sagte er.* — la virgola va **dopo** le virgolette di chiusura.
+  - **Lettere**: dopo il saluto la virgola e si continua con la minuscola: *Liebe Anna, ich danke dir …*
+  - **Numeri**: la virgola è il separatore decimale (*3,50 €*), il punto separa le migliaia (*1.000*).
+
+  ## Esempi
+  - *Ich glaube, dass er morgen kommt.* — Credo che domani venga.
+  - *Weil ich krank war, bin ich zu Hause geblieben.* — Siccome ero malato, sono rimasto a casa.
+  - *Die Frau, die neben mir wohnt, ist Ärztin.* — La donna che abita accanto a me è medico.
+  - *Er arbeitet viel, aber er verdient wenig.* — Lavora molto, ma guadagna poco.
+  - *Sie ging nach Hause, ohne sich zu verabschieden.* — Andò a casa senza salutare.
+  - *Ich kaufe Äpfel, Birnen und Bananen.* — Compro mele, pere e banane.
+
+  ## Errori tipici di chi parla italiano
+  - **Virgola omessa prima di dass / weil / ob**: in italiano *penso che venga* si scrive senza virgola. In tedesco è obbligatoria: **\*Ich denke dass er kommt** → *Ich denke, dass er kommt.* Lo stesso vale per *weil, wenn, obwohl, ob, als*.
+  - **Virgola omessa dopo una subordinata inserita**: **\*Der Mann, der dort steht ist mein Onkel** → *Der Mann, der dort steht, ist mein Onkel.* Le virgole sono sempre **due**.
+  - **Relative restrittive senza virgola**: in italiano *l'uomo che abita qui* non ha virgola; in tedesco sì: *der Mann, der hier wohnt*.
+  - **Virgola tra soggetto e verbo** dopo un soggetto lungo: **\*Der Mann mit dem roten Hut, kommt aus Rom** → *Der Mann mit dem roten Hut kommt aus Rom.*
+  - **Virgola davanti a und** in un elenco (stile anglosassone): **\*Brot, Käse, und Wein** → *Brot, Käse und Wein.*
+  - **Virgola davanti all'infinito con um/ohne/statt dimenticata**: **\*Er geht um Brot zu kaufen** → *Er geht, um Brot zu kaufen.*
+  - **Virgolette**: l'italiano usa «…» o “…”; il tedesco „…“ (apertura in basso).
+examples:
+  - {de: "Ich glaube, dass er morgen kommt.", it: "Credo che domani venga."}
+  - {de: "Weil ich krank war, bin ich zu Hause geblieben.", it: "Siccome ero malato, sono rimasto a casa."}
+  - {de: "Die Frau, die neben mir wohnt, ist Ärztin.", it: "La donna che abita accanto a me è medico."}
+  - {de: "Er arbeitet viel, aber er verdient wenig.", it: "Lavora molto, ma guadagna poco."}
+  - {de: "Sie ging nach Hause, ohne sich zu verabschieden.", it: "Andò a casa senza salutare."}
+  - {de: "Ich kaufe Äpfel, Birnen und Bananen.", it: "Compro mele, pere e banane."}

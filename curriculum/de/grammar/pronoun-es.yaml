@@ -1,0 +1,45 @@
+id: gram:pronoun-es
+title_it: "Il pronome es: soggetto impersonale, segnaposto e es gibt"
+title_en: "The pronoun es: impersonal subject, placeholder and es gibt"
+level: A2
+requires: ["gram:personal-pronouns"]
+diagnostic_tags:
+  function: [weather-time, impersonal-expression, es-gibt, correlate-clause, placeholder-first-position]
+  error_type: [missing-es-subject, es-with-wrong-verb-agreement, es-after-verb-needed, es-gibt-wrong-case, es-dropped-in-clause]
+reference_it: |
+  ## Regola
+  In tedesco ogni frase con un verbo coniugato ha un **soggetto espresso**. Quando in italiano il soggetto manca (*piove, è tardi, c'è*), in tedesco compare **es**.
+
+  | Uso | Esempio |
+  |---|---|
+  | tempo atmosferico | *Es regnet. Es ist kalt.* |
+  | ora e data | *Es ist halb drei. Es ist Montag.* |
+  | espressioni impersonali | *Wie geht es dir? Es geht mir gut. Es gibt Probleme.* |
+  | anticipa una frase | *Es freut mich, dass du kommst. Ich finde es schön, hier zu wohnen.* |
+  | segnaposto in prima posizione | *Es kommt ein Gast. Es sind viele Leute da.* |
+
+  - **es gibt** + **accusativo** corrisponde a *c'è / ci sono*; il verbo resta **sempre al singolare**: *Es gibt einen Park. Es gibt viele Parks.* (Non c'è accordo con l'oggetto.)
+  - **Segnaposto**: *es* può aprire la frase quando il vero soggetto viene dopo il verbo; il verbo concorda con il **vero soggetto**: *Es kommt ein Gast / Es kommen zwei Gäste.* Se un altro elemento apre la frase, **es sparisce**: *Heute kommt ein Gast.*
+  - **Anticipo**: *es* può annunciare una subordinata con *dass* o un infinito con *zu*, che segue: *Ich finde es schade, dass du gehst.* Quando la subordinata apre la frase, *es* cade: *Dass du gehst, finde ich schade.*
+  - Quando *es* è il **vero soggetto** (tempo, *es geht*, *es gibt*), non cade mai: *Mir geht **es** gut*, *Hier gibt **es** einen Park*.
+
+  ## Esempi
+  - *Es regnet seit gestern.* — Piove da ieri.
+  - *Wie geht es dir?* — Come stai?
+  - *In unserer Stadt gibt es einen großen Park.* — Nella nostra città c'è un grande parco.
+  - *Es ist schon spät.* — È già tardi.
+  - *Es freut mich, dass du da bist.* — Mi fa piacere che tu sia qui.
+  - *Es kommen heute drei Gäste.* — Oggi arrivano tre ospiti.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano il soggetto impersonale si omette (*Piove*), in tedesco **no**: **\*Regnet heute** → *Es regnet heute.* **\*Ist kalt** → *Es ist kalt.*
+  - *C'è / ci sono* si traduce con **es gibt + accusativo**, non con un verbo che concorda: *Es gibt viele Parks* (mai **\*Es geben viele Parks**); **\*Es gibt ein Park** → *einen Park* (accusativo).
+  - Non omettere *es* come soggetto in una subordinata: **\*Ich weiß, dass regnet** → *Ich weiß, dass es regnet.*
+  - Se un altro elemento apre la frase, il segnaposto *es* **non si ripete**: **\*Heute es kommt ein Gast** → *Heute kommt ein Gast.*
+  - *Stare bene/male* è **es geht** + dativo: *Es geht mir gut* (non **\*Ich gehe gut**).
+examples:
+  - {de: "Es regnet seit gestern.", it: "Piove da ieri."}
+  - {de: "Wie geht es dir?", it: "Come stai?"}
+  - {de: "In unserer Stadt gibt es einen großen Park.", it: "Nella nostra città c'è un grande parco."}
+  - {de: "Es freut mich, dass du da bist.", it: "Mi fa piacere che tu sia qui."}
+  - {de: "Es kommen heute drei Gäste.", it: "Oggi arrivano tre ospiti."}

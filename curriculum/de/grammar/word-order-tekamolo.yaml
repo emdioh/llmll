@@ -1,0 +1,47 @@
+id: gram:word-order-tekamolo
+title_it: "Ordine dei complementi: tempo, causa, modo, luogo (TeKaMoLo)"
+title_en: "Order of adverbials: time, cause, manner, place (TeKaMoLo)"
+level: A2
+requires: ["gram:verbal-bracket"]
+diagnostic_tags:
+  adverbial: [time, cause, manner, place]
+  position: [middle-field, fronted, before-nicht]
+  error_type: [place-before-time, manner-after-place, adverbial-after-participle, wrong-order-multiple-adverbials]
+reference_it: |
+  ## Regola
+  Nel campo centrale della frase (tra il verbo coniugato e la parte finale della parentesi verbale) i complementi circostanziali seguono
+  di solito questo ordine, ricordato come **TeKaMoLo**:
+
+  | **Te**mporale | **Ka**usale | **Mo**dale | **Lo**kale |
+  |---|---|---|---|
+  | quando? | perché? | come? | dove? / verso dove? |
+  | *morgen, am Montag* | *deshalb, aus Angst* | *schnell, mit dem Bus* | *in der Stadt, nach Rom* |
+
+  *Wir fahren **morgen** (Te) **wegen der Arbeit** (Ka) **mit dem Zug** (Mo) **nach München** (Lo).* In pratica è raro avere tutti e quattro: basta rispettare
+  l'ordine relativo di quelli presenti (*Te – Lo*, *Te – Mo*, *Mo – Lo*…).
+
+  - Il **soggetto** e i **pronomi** stanno prima dei complementi: *Ich gehe **heute** mit Anna ins Kino.* *Ich habe **sie** gestern gesehen.*
+  - I complementi stanno **prima della parte finale** della parentesi verbale (participio, infinito, prefisso separabile):
+    *Er ist **gestern mit dem Zug nach Bonn** gefahren. Der Bus fährt **um 8 Uhr vom Bahnhof** ab.*
+  - **nicht**, se nega tutta la frase, sta di norma dopo il tempo e prima della parte finale: *Ich komme heute nicht. Ich fahre morgen nicht nach Rom.*
+  - Un complemento può essere **spostato al primo posto** per metterlo in rilievo; il verbo resta secondo e il soggetto lo segue:
+    *Nach München fahren wir morgen. Morgen fahren wir nach München.* Il resto del campo centrale mantiene l'ordine usuale.
+  - L'ordine TeKaMoLo è una **tendenza**: l'elemento nuovo o più importante tende ad andare verso la fine.
+
+  ## Esempi
+  - *Ich fahre morgen mit dem Bus in die Stadt.* — Domani vado in città in autobus.
+  - *Wir sind letztes Jahr mit dem Auto nach Spanien gefahren.* — L'anno scorso siamo andati in Spagna in macchina.
+  - *Sie arbeitet seit Montag zu Hause.* — Lavora a casa da lunedì.
+  - *Er ist heute aus Angst leise in die Schule gegangen.* — Oggi è andato a scuola in silenzio per la paura.
+  - *Die Kinder spielen am Nachmittag gern im Garten.* — I bambini giocano volentieri in giardino nel pomeriggio.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano l'ordine dei complementi è libero (*vado in città domani* / *domani vado in città* / *in città vado domani*) e spesso si mette il **luogo prima del tempo**.
+    In tedesco il tempo precede di norma il luogo: **\*Ich fahre in die Stadt morgen** → *Ich fahre morgen in die Stadt.*
+  - Anche il **modo** precede il luogo: **\*Wir fahren nach Rom mit dem Zug** → *Wir fahren mit dem Zug nach Rom.*
+  - Di norma i complementi non stanno dopo il participio o l'infinito (come in *ho visto Anna ieri*; qualche posposizione si trova solo in registri particolari): **\*Ich habe Anna gesehen gestern** → *Ich habe Anna gestern gesehen.*
+examples:
+  - {de: "Ich fahre morgen mit dem Bus in die Stadt.", it: "Domani vado in città in autobus."}
+  - {de: "Wir sind letztes Jahr mit dem Auto nach Spanien gefahren.", it: "L'anno scorso siamo andati in Spagna in macchina."}
+  - {de: "Sie arbeitet seit Montag zu Hause.", it: "Lavora a casa da lunedì."}
+  - {de: "Die Kinder spielen am Nachmittag gern im Garten.", it: "I bambini giocano volentieri in giardino nel pomeriggio."}

@@ -1,0 +1,52 @@
+id: gram:indefinite-determiners
+title_it: "Aggettivi indefiniti: jeder, alle, manche, einige, viele, wenige, mehrere, beide"
+title_en: "Indefinite determiners: jeder, alle, manche, einige, viele, wenige, mehrere, beide"
+level: B1
+requires: ["gram:adjective-endings"]
+diagnostic_tags:
+  determiner: [jeder, alle, manche, einige-mehrere, viele-wenige, beide, irgendein, viel-wenig-invariable, ein-paar]
+  number: [singular-only, plural-only, uncountable]
+  error_type: [jeder-with-plural, viel-vs-viele, wrong-adjective-ending, missing-dative-plural-n, alles-vs-alle, invariable-viel-declined]
+reference_it: |
+  ## Regola
+  Gli aggettivi indefiniti precedono il sostantivo e indicano una quantità non precisa.
+
+  | forma | significato | numero | declinazione |
+  |---|---|---|---|
+  | **jeder, jede, jedes** | ogni | solo singolare | come l'articolo determinativo |
+  | **alle** | tutti | solo plurale | come l'articolo determinativo |
+  | **manche** | alcuni, certi | plurale (anche singolare, raro) | come l'articolo determinativo |
+  | **einige, mehrere** | alcuni, parecchi | solo plurale | desinenze forti |
+  | **viele, wenige** | molti, pochi | plurale | desinenze forti |
+  | **beide** | tutti e due | plurale | desinenze forti |
+  | **viel, wenig, mehr** | molto, poco, di più | singolare non numerabile | **invariabili** |
+  | **irgendein / irgendwelche** | un qualche, dei | sing. / plurale | come *ein* / come *welche* |
+
+  - **jeder** ha le desinenze di *der*: *jeder Tag, jede Woche, jedes Jahr, jeden Tag, in jeder Stadt*. Con l'aggettivo: *jeder gute Schüler*.
+  - **alle** (tutti) è plurale: *alle Kinder*, dativo *allen Kindern*. Prima di articolo o possessivo c'è spesso la forma abbreviata **all**: *all die Leute, all meine Freunde*.
+  - Dopo **alle** l'aggettivo segue la declinazione debole (-en): *alle guten Freunde, mit allen guten Freunden*.
+  - Dopo **viele, wenige, einige, mehrere** l'aggettivo ha la stessa desinenza dell'indefinito: *viele gute Freunde*, ma al dativo *mit vielen guten Freunden*.
+  - **viel / wenig / mehr** davanti a nomi non numerabili restano **invariati**: *viel Geld, wenig Zeit, mit viel Geduld, mehr Wasser*. Con i nomi numerabili plurali si usa invece *viele, wenige*: *viele Bücher, wenige Leute*.
+  - **ein paar** ("alcuni, un paio di") è invariabile: *ein paar Freunde, mit ein paar Freunden*.
+  - Al singolare con aggettivi sostantivati: *alles Gute*, *in aller Ruhe*.
+
+  ## Esempi
+  - *Jeder Schüler bekommt ein Buch.* — Ogni studente riceve un libro.
+  - *Alle Kinder spielen im Garten.* — Tutti i bambini giocano in giardino.
+  - *Ich habe viele gute Freunde, aber wenig Zeit.* — Ho molti buoni amici, ma poco tempo.
+  - *Er kennt mehrere Sprachen.* — Conosce diverse lingue.
+  - *Beide Brüder studieren Medizin.* — Tutti e due i fratelli studiano medicina.
+  - *Manche Leute essen kein Fleisch.* — Certe persone non mangiano carne.
+
+  ## Errori tipici di chi parla italiano
+  - *Ogni* è sempre singolare: **\*jede Kinder** → *jedes Kind* (o *alle Kinder*, "tutti i bambini").
+  - **alle** (plurale) e **alles** (singolare, "tutto") non sono intercambiabili: *Alle sind da* (sono presenti tutti), *Alles ist gut* (va tutto bene).
+  - *Molto/molti*: **\*viel Leute** → *viele Leute*; **\*viele Geld** → *viel Geld*. *viel* non prende desinenze davanti a un nome non numerabile: **\*vieles Geld**.
+  - L'aggettivo dopo gli indefiniti plurali cambia secondo il caso: **\*mit viele guten Freunden** → *mit vielen guten Freunden*; il dativo plurale vuole anche la **-n** sul nome.
+  - *Einige* richiede il plurale, anche se in italiano *qualche* vuole il singolare: **\*einige Freund** → *einige Freunde* (plurale!).
+examples:
+  - {de: "Jeder Schüler bekommt ein Buch.", it: "Ogni studente riceve un libro."}
+  - {de: "Alle Kinder spielen im Garten.", it: "Tutti i bambini giocano in giardino."}
+  - {de: "Ich habe viele gute Freunde, aber wenig Zeit.", it: "Ho molti buoni amici, ma poco tempo."}
+  - {de: "Er kennt mehrere Sprachen.", it: "Conosce diverse lingue."}
+  - {de: "Beide Brüder studieren Medizin.", it: "Tutti e due i fratelli studiano medicina."}

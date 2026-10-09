@@ -1,0 +1,43 @@
+id: gram:noun-gender
+title_it: "Genere dei sostantivi (der, die, das) e diminutivi"
+title_en: "Noun gender and diminutives"
+level: A1
+requires: ["gram:articles-nom-akk"]
+diagnostic_tags:
+  gender: [m, f, n]
+  cue: [suffix, natural-sex, category, diminutive, compound]
+  error_type: [wrong-gender-article, italian-gender-transfer, wrong-diminutive-gender, wrong-compound-gender]
+reference_it: |
+  ## Regola
+  Ogni sostantivo tedesco ha un genere: **maschile (der)**, **femminile (die)** o **neutro (das)**. Si scrive sempre con la **maiuscola**. Il genere va imparato **insieme al sostantivo** (*der Tisch*, non solo *Tisch*), ma alcuni indizi aiutano.
+
+  | Genere | Indizi affidabili | Esempi |
+  |---|---|---|
+  | **der** | giorni, mesi, stagioni; nomi di persone di sesso maschile; suffissi *-ling*, *-ismus*, *-ist*; molti nomi in *-er* che indicano chi fa qualcosa | *der Montag, der Juli, der Winter, der Lehrling, der Tourist, der Bäcker* |
+  | **die** | persone di sesso femminile; suffissi *-ung, -heit, -keit, -schaft, -tion, -tät, -ik, -ur, -ei, -ie*; femminile dei mestieri in *-in*; quasi tutti i nomi in *-e* | *die Zeitung, die Freiheit, die Universität, die Bäckerin, die Lampe* |
+  | **das** | i piccoli (diminutivi) in *-chen* e *-lein*; suffissi *-um* e *-ment*; prefisso *Ge-* (collettivi); verbi usati come nomi; colori e molti metalli | *das Mädchen, das Zentrum, das Dokument, das Gebirge, das Essen, das Blau, das Gold* |
+
+  **Diminutivi**: si aggiunge **-chen** (o *-lein*) e, se possibile, l'Umlaut sulla vocale (*a, o, u, au*: *das Häuschen*). Il diminutivo è **sempre neutro**, qualunque sia il genere del nome di partenza:
+  *der Hund → das Hündchen*, *die Katze → das Kätzchen*, *das Buch → das Büchlein*.
+
+  **Parole composte**: il genere è quello dell'**ultimo** elemento: *die Hand + der Schuh = **der** Handschuh*; *der Apfel + der Baum = **der** Apfelbaum*; *das Wasser + die Flasche = **die** Wasserflasche*.
+
+  ## Esempi
+  - *Der Frühling ist schön.* — La primavera è bella.
+  - *Die Wohnung hat zwei Zimmer.* — L'appartamento ha due stanze.
+  - *Das Mädchen spielt im Garten.* — La ragazzina gioca in giardino.
+  - *Das Kätzchen schläft auf dem Sofa.* — Il gattino dorme sul divano.
+  - *Wo ist der Handschuh?* — Dov'è il guanto?
+
+  ## Errori tipici di chi parla italiano
+  - Il tedesco ha **tre** generi, l'italiano due. Il neutro non esiste in italiano: *das Kind*, *das Auto*, *das Mädchen* (neutro, anche se è una ragazza!).
+  - Non si può dedurre il genere dall'italiano: *il sole* è **die** Sonne, *la luna* è **der** Mond; *il latte* è **die** Milch, *il fiore* è **die** Blume. Quando impari una parola, controlla sempre il genere tedesco.
+  - La terminazione in vocale non basta: in italiano *-o* è maschile e *-a* femminile, in tedesco *-e* è spesso femminile (*die Tasche*), ma *der Name*, *der Käse*, *das Ende* sono eccezioni.
+  - Il genere dei nomi composti si perde: **\*die Handschuh** → *der Handschuh* (conta *Schuh*, non *Hand*).
+  - Diminutivi: **\*die Mädchen**, **\*die Kätzchen** → *das Mädchen*, *das Kätzchen*.
+examples:
+  - {de: "Der Frühling ist schön.", it: "La primavera è bella."}
+  - {de: "Die Wohnung hat zwei Zimmer.", it: "L'appartamento ha due stanze."}
+  - {de: "Das Mädchen spielt im Garten.", it: "La ragazzina gioca in giardino."}
+  - {de: "Das Kätzchen schläft auf dem Sofa.", it: "Il gattino dorme sul divano."}
+  - {de: "Wo ist der Handschuh?", it: "Dov'è il guanto?"}

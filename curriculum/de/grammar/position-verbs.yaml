@@ -1,0 +1,52 @@
+id: gram:position-verbs
+title_it: "Verbi di posizione: legen/liegen, stellen/stehen, setzen/sitzen, hängen"
+title_en: "Position verbs: legen/liegen, stellen/stehen, setzen/sitzen, hängen"
+level: B1
+requires: ["gram:prepositions-two-way", "gram:perfekt"]
+diagnostic_tags:
+  verb_pair: [legen-liegen, stellen-stehen, setzen-sitzen, haengen, stecken]
+  error_type: [wrong-verb-for-direction, wrong-case-after-prep, wrong-participle, wrong-auxiliary, generic-sein-instead-of-position-verb]
+reference_it: |
+  ## Regola
+  Il tedesco indica come sta una cosa con verbi **specifici**: la posizione (orizzontale, verticale, seduta, appesa) è già nel verbo.
+  Ogni verbo ha due versioni: una di **movimento** (*wohin?* → **accusativo**) e una di **stato** (*wo?* → **dativo**).
+
+  | posizione | movimento (transitivo, debole) | stato (intransitivo, forte) |
+  |---|---|---|
+  | orizzontale | **legen** – legte – hat gelegt | **liegen** – lag – hat gelegen |
+  | verticale | **stellen** – stellte – hat gestellt | **stehen** – stand – hat gestanden |
+  | seduto | **setzen** – setzte – hat gesetzt | **sitzen** – saß – hat gesessen |
+  | appeso | **hängen** – hängte – hat gehängt | **hängen** – hing – hat gehangen |
+  | infilato | **stecken** – steckte – hat gesteckt | **stecken** – steckte – hat gesteckt |
+
+  - Movimento: ha un **oggetto diretto** (accusativo) e un complemento con preposizione + **accusativo**: *Ich lege das Buch auf den Tisch.*
+  - Stato: **nessun oggetto**, preposizione + **dativo**: *Das Buch liegt auf dem Tisch.*
+  - Per le persone si usa la forma riflessiva: *Ich setze mich auf das Sofa* (movimento, accusativo) – *Ich sitze auf dem Sofa* (stato, dativo).
+    Anche: *sich legen* (sdraiarsi), *sich stellen* (mettersi in piedi).
+  - **Ausiliare del Perfekt.** Con tutti questi verbi (movimento e stato) l'ausiliare standard è **haben**: *Das Buch hat auf dem Tisch gelegen. Wir haben lange gesessen. Er hat im Flur gestanden.* Nel sud della Germania, in Austria e in Svizzera si usa regolarmente **sein** per i verbi di stato (*ist gelegen, ist gesessen, ist gestanden*): è l'uso regionale accettato lì; nello standard e all'esame si usa *haben*.
+  - La colonna dello stato è "forte" salvo *stecken* (stato: *steckte*, regolare).
+  - *liegen* si usa anche per i luoghi: *Verona liegt in Italien.*
+
+  ## Esempi
+  - *Ich lege die Schlüssel auf den Tisch.* — Metto le chiavi sul tavolo.
+  - *Die Schlüssel liegen auf dem Tisch.* — Le chiavi sono sul tavolo.
+  - *Sie stellt die Flasche in den Kühlschrank.* — Mette la bottiglia nel frigorifero.
+  - *Die Flasche steht im Kühlschrank.* — La bottiglia sta nel frigorifero.
+  - *Der Vater hängt das Bild an die Wand.* — Il padre appende il quadro alla parete.
+  - *Wir sitzen schon im Zug.* — Siamo già seduti in treno.
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano usa *mettere* e *essere / stare* per tutto: in tedesco bisogna scegliere il verbo giusto.
+    **\*Ich mache das Buch auf den Tisch** e **\*Das Buch ist auf dem Tisch** (dove si vuole dire come sta) → *Ich lege … / Das Buch liegt …*
+  - Si confondono **movimento** e **stato**: **\*Das Buch legt auf dem Tisch** → *liegt*; **\*Ich liege das Buch auf den Tisch** → *lege*.
+  - Il caso dopo la preposizione segue il verbo, non il luogo: **\*Ich stelle die Tasse auf dem Tisch** → *auf den Tisch* (accusativo, movimento).
+  - Il participio è diverso: *hat gelegt* (movimento) / *hat gelegen* (stato); *hat gestellt* / *hat gestanden*; *hat gehängt* / *hat gehangen*.
+    Errore frequente: **\*Er hat das Bild an die Wand gehangen** → *gehängt* (c'è un oggetto, quindi movimento).
+  - Ausiliare: **\*Ich bin gesessen** non è standard (è regionale, vedi sopra) → *Ich habe gesessen.*
+  - *Stehen* e *sitzen* non significano solo "essere in piedi" o "essere seduto": *Das Wort steht im Text*, *Er sitzt im Büro* (è in ufficio, seduto).
+examples:
+  - {de: "Ich lege die Schlüssel auf den Tisch.", it: "Metto le chiavi sul tavolo."}
+  - {de: "Die Flasche steht im Kühlschrank.", it: "La bottiglia sta nel frigorifero."}
+  - {de: "Der Vater hängt das Bild an die Wand.", it: "Il padre appende il quadro alla parete."}
+  - {de: "Wir sitzen schon im Zug.", it: "Siamo già seduti in treno."}
+  - {de: "Sie hat lange auf dem Sofa gelegen.", it: "È rimasta a lungo sdraiata sul divano."}

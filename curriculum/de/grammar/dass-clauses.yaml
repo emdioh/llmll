@@ -1,0 +1,66 @@
+id: gram:dass-clauses
+title_it: "Frasi con dass: dopo nomi e aggettivi, il correlato es, da(r)- + dass, da e zumal"
+title_en: "dass-clauses in depth: after nouns and adjectives, the es correlate, da(r)- + dass, da and zumal"
+level: B1
+requires: ["gram:conjunctions-subordinating", "gram:pronominal-adverbs", "gram:verb-final-subordinate"]
+diagnostic_tags:
+  trigger: [noun, adjective, verb-plus-es, verb-with-preposition, impersonal-es]
+  position: [dass-clause-first, dass-clause-after-main]
+  error_type: [missing-es-correlate, es-kept-when-dass-first, missing-da-compound, wrong-da-compound, verb-not-final, da-vs-weil, zumal-main-clause-order, dass-vs-relative-pronoun]
+reference_it: |
+  ## Regola
+  La frase con **dass** completa un elemento della frase principale. Oltre che dopo i verbi del dire e del pensare, compare in questi contesti (il verbo coniugato va sempre in fondo, la virgola è obbligatoria).
+
+  | contesto | schema | esempio |
+  |---|---|---|
+  | dopo un **nome** | nome astratto + *dass* | *die Angst, dass...*, *die Hoffnung, dass...*, *der Eindruck, dass...*, *die Tatsache, dass...* |
+  | dopo un **aggettivo** | *sein* + aggettivo + *dass* | *Ich bin froh, dass...* / *Es ist schade, dass...* |
+  | **es** impersonale (soggetto) | *Es ist* + aggettivo/nome + *dass* | *Es ist wichtig, dass du kommst.* |
+  | **es** oggetto | verbo + *es* + aggettivo + *dass* | *Ich finde es schön, dass du kommst.* |
+  | verbo con preposizione | **da(r)-** + *dass* | *Ich freue mich darauf, dass du kommst.* |
+
+  **1. Il correlato *es*.**
+  - Con *Es ist wichtig / klar / schade / möglich, dass...* la frase con *dass* è il vero soggetto e *es* la annuncia.
+  - Se la frase con *dass* viene **prima**, *es* **sparisce**: *Dass du kommst, ist wichtig.*
+  - Dopo verbi come *finden, halten für, mögen, hassen* l'oggetto *es* annuncia la frase con *dass* (con *finden* e *halten für* davanti all'aggettivo): *Ich finde **es** gut, dass...*, *Ich hasse **es**, dass...* Se la frase con *dass* apre il periodo, *es* sparisce: *Dass du kommst, finde ich gut.*
+  - Con verbi come *glauben, wissen, sagen, hoffen* non c'è *es* davanti alla frase con *dass*: *Ich hoffe, dass...*
+
+  **2. Verbo con preposizione: *da(r)-* + *dass*.** Se il verbo (o l'aggettivo) regge una preposizione, questa diventa un avverbio pronominale davanti alla virgola, e *dass* introduce il contenuto:
+  *Ich warte darauf, dass...*, *Sie ist stolz darauf, dass...*, *Er erinnert sich daran, dass...*, *Wir sind davon überzeugt, dass...*
+  La preposizione è quella del verbo: *sich freuen **auf*** (futuro) / ***über*** (presente o passato), quindi *darauf* / *darüber*. Nel parlare *da(r)-* è a volte omesso, nella lingua scritta e curata è meglio metterlo.
+
+  **3. Frasi causali con *da* e *zumal*.**
+
+  | congiunzione | uso | posizione tipica |
+  |---|---|---|
+  | **weil** | risponde a *warum?*, la causa è l'informazione nuova | dopo la principale |
+  | **da** | causa già nota o ovvia (*dato che, visto che*), più formale | di solito **prima** della principale |
+  | **zumal** | ragione aggiuntiva (*tanto più che*) | dopo la principale |
+
+  Sono tutte subordinanti: verbo in fondo. Se la frase con *da* apre il periodo, la principale ha l'inversione (verbo subito dopo la virgola).
+
+  ## Esempi
+  - *Ich habe Angst, dass ich den Zug verpasse.* — Ho paura di perdere il treno.
+  - *Wir sind froh, dass das Wetter hält.* — Siamo contenti che il tempo regga.
+  - *Es ist schade, dass du nicht mitkommst. / Dass du nicht mitkommst, ist schade.* — È un peccato che tu non venga.
+  - *Ich finde es unfair, dass er immer gewinnt.* — Trovo ingiusto che vinca sempre lui.
+  - *Sie freut sich darauf, dass ihre Schwester sie besucht.* — Non vede l'ora che la sorella venga a trovarla.
+  - *Da das Büro heute geschlossen ist, rufe ich morgen an.* — Visto che l'ufficio oggi è chiuso, telefono domani.
+  - *Ich bleibe lieber zu Hause, zumal es draußen stürmt.* — Preferisco restare a casa, tanto più che fuori c'è tempesta.
+
+  ## Errori tipici di chi parla italiano
+  - In italiano dopo un nome o un aggettivo basta *di* + infinito o *che*: *ho paura di perdere il treno*. In tedesco, con soggetto diverso o frase finita, serve *dass* (con lo stesso soggetto spesso anche l'infinito con *zu*, ma questo è un altro punto). Ordine: **\*Ich habe Angst, dass ich verpasse den Zug** → *…, dass ich den Zug verpasse*.
+  - Dimenticare *es*: **\*Ich finde schön, dass du kommst** → *Ich finde **es** schön, dass du kommst.* L'italiano "trovo bello che" non ha un pronome.
+  - Tenere *es* quando *dass* apre la frase: **\*Dass du kommst, finde ich es schön** → *Dass du kommst, finde ich schön.*
+  - Omettere il *da(r)-*: **\*Ich warte, dass er anruft** → *Ich warte **darauf**, dass er anruft* (in italiano "aspetto che chiami").
+  - Usare la preposizione sbagliata o tradurre dall'italiano: **\*Ich freue mich davon, dass...** → *darauf / darüber*.
+  - Usare *da* come *weil* in una risposta a *warum?*: *Warum kommst du nicht? — **Weil** ich krank bin* (naturale), non *\*Da ich krank bin* da solo.
+  - Dopo *da* e *zumal* mettere il verbo in seconda posizione: **\*Zumal es stürmt draußen** → *zumal es draußen stürmt*.
+  - Confondere *dass* con *das* (articolo o pronome relativo): la congiunzione *dass* si scrive con **ss** e porta il verbo in fondo, come *das* relativo: *Das Buch, das ich lese, ...* ma *Ich weiß, dass ich lese*.
+examples:
+  - {de: "Ich habe Angst, dass ich den Zug verpasse.", it: "Ho paura di perdere il treno."}
+  - {de: "Ich finde es unfair, dass er immer gewinnt.", it: "Trovo ingiusto che vinca sempre lui."}
+  - {de: "Dass du nicht mitkommst, ist schade.", it: "Che tu non venga è un peccato."}
+  - {de: "Sie freut sich darauf, dass ihre Schwester sie besucht.", it: "Non vede l'ora che la sorella venga a trovarla."}
+  - {de: "Da das Büro heute geschlossen ist, rufe ich morgen an.", it: "Visto che l'ufficio oggi è chiuso, telefono domani."}
+  - {de: "Ich bleibe lieber zu Hause, zumal es draußen stürmt.", it: "Preferisco restare a casa, tanto più che fuori c'è tempesta."}

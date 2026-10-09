@@ -1,0 +1,55 @@
+id: gram:negation-extras
+title_it: "Negazione: weder...noch, noch nicht, nicht mehr, gar nicht e altre forme"
+title_en: "Negation extras: weder...noch, noch nicht, nicht mehr, gar nicht and more"
+level: B1
+requires: ["gram:negation"]
+diagnostic_tags:
+  construction: [weder-noch, nicht-sondern, noch-nicht, nicht-mehr, auch-nicht, intensifier, negative-adverb]
+  error_type: [double-negation, nicht-vs-kein, wrong-position, noch-nicht-vs-nicht-mehr, ja-vs-doch]
+reference_it: |
+  ## Regola
+  **Coppie e contrasti**
+  - **weder … noch …** (né … né …): la negazione è già nella coppia, **non** si aggiunge *nicht* o *kein*: *Ich habe weder Zeit noch Lust.*
+  - **nicht … sondern …** (non … ma …) e **kein- … sondern …**: *Er ist nicht müde, sondern hungrig. Das ist kein Tee, sondern Kaffee.* Dopo *sondern* c'è la correzione.
+  - **nicht nur … sondern auch …** (non solo … ma anche …): *Sie spricht nicht nur Deutsch, sondern auch Spanisch.*
+
+  **Negazione + avverbio** (nella frase stanno nello stesso posto di *nicht* o *kein-*)
+
+  | forma | significato | esempio |
+  |---|---|---|
+  | **auch nicht / auch kein-** | nemmeno | Ich komme auch nicht. |
+  | **noch nicht / noch kein-** | non ancora | Er ist noch nicht da. Ich habe noch keine Antwort. |
+  | **nicht mehr / kein- … mehr** | non più | Sie arbeitet nicht mehr hier. Wir haben keine Zeit mehr. |
+  | **noch nichts / noch niemand** | non ancora niente / nessuno | Ich habe noch nichts gegessen. |
+  | **nichts mehr / niemand mehr** | niente più / nessuno più | Hier wohnt niemand mehr. |
+
+  - **noch nicht** parla di qualcosa che deve ancora succedere, **nicht mehr** di qualcosa che è finito: *Sie arbeitet noch nicht* (inizierà a lavorare) ≠ *Sie arbeitet nicht mehr* (ha smesso di lavorare).
+
+  **Rafforzare la negazione.** **gar nicht, gar kein-, gar nichts** (affatto), **überhaupt nicht / überhaupt kein-** (per niente, assolutamente): *Das stimmt gar nicht. Ich habe überhaupt keine Zeit.*
+
+  **Altri avverbi negativi.** **nirgends / nirgendwo** (in nessun luogo, Wo?), **nirgendwohin** (Wohin?), **nie / niemals**, **keinesfalls / keineswegs** (in nessun caso / affatto), **kaum** (appena, quasi non): *Ich finde meine Schlüssel nirgendwo. Das ist keineswegs einfach. Er hat kaum geschlafen.*
+
+  **Risposta a una domanda negativa.** *Ja* conferma, *nein* nega, **doch** contraddice una frase negativa: *Hast du keinen Hunger? — Doch, ich habe Hunger! / Nein, ich habe keinen.* Con una domanda positiva: *Kommst du mit? — Ja. / Nein.*
+
+  **Altri modi di negare.** Prefissi (*un-, nicht-*: *unfreundlich, Nichtraucher*), suffissi (*-los, -frei: arbeitslos, koffeinfrei*) e **ohne** (+ *… zu* o *dass*): *Er ging, ohne ein Wort zu sagen.*
+
+  ## Esempi
+  - *Ich mag weder Fisch noch Fleisch.* — Non mi piacciono né il pesce né la carne.
+  - *Das ist nicht mein Mantel, sondern der von meinem Mann.* — Questo non è il mio cappotto, ma quello di mio marito.
+  - *Unser Sohn kann noch nicht lesen.* — Nostro figlio non sa ancora leggere.
+  - *Wir wohnen nicht mehr in Köln.* — Non abitiamo più a Colonia.
+  - *Ich habe heute überhaupt keine Zeit.* — Oggi non ho proprio tempo.
+  - *Du bist kein Kind mehr! — Doch!* — Non sei più un bambino! — Invece sì!
+
+  ## Errori tipici di chi parla italiano
+  - L'italiano accumula negazioni (*non ho né tempo né voglia*, *non l'ho visto da nessuna parte*): in tedesco **weder … noch** e gli avverbi negativi non vogliono un altro *nicht*: **\*Ich habe nicht weder Zeit noch Lust** → *Ich habe weder Zeit noch Lust*; **\*Ich finde ihn nicht nirgends** → *Ich finde ihn nirgends.*
+  - "Non ancora" e "non più" sono entrambi *non* + avverbio: l'ordine è fisso, **noch nicht / nicht mehr**, non **\*nicht noch** / **\*nicht mehr noch**.
+  - "Sì" a una domanda negativa è *doch*, non *ja*: **\*Hast du kein Geld? — Ja, ich habe.**
+  - **kaum** non ha *nicht*: **\*Er hat nicht kaum gegessen** → *Er hat kaum gegessen.*
+examples:
+  - {de: "Ich mag weder Fisch noch Fleisch.", it: "Non mi piacciono né il pesce né la carne."}
+  - {de: "Unser Sohn kann noch nicht lesen.", it: "Nostro figlio non sa ancora leggere."}
+  - {de: "Wir wohnen nicht mehr in Köln.", it: "Non abitiamo più a Colonia."}
+  - {de: "Das ist kein Tee, sondern Kaffee.", it: "Questo non è tè, ma caffè."}
+  - {de: "Ich habe heute überhaupt keine Zeit.", it: "Oggi non ho proprio tempo."}
+  - {de: "Hast du keinen Hunger? — Doch, ich habe Hunger!", it: "Non hai fame? — Sì, ho fame!"}

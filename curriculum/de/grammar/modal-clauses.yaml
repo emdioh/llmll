@@ -1,0 +1,43 @@
+id: gram:modal-clauses
+title_it: "Subordinate modali e strumentali: indem, dadurch dass, wie"
+title_en: "Clauses of means and manner: indem, dadurch dass, wie"
+level: B2
+requires: ["gram:verb-final-subordinate"]
+diagnostic_tags:
+  connector: [indem, dadurch-dass, wie]
+  error_type: [indem-for-simultaneity, waehrend-vs-indem, gerund-translated-literally, verb-not-final, missing-comma, indem-vs-weil]
+reference_it: |
+  ## Regola
+  Una subordinata modale/strumentale risponde a **wie? / wodurch?** ("in che modo?, con quale mezzo?"). Il verbo va in fondo.
+
+  | connettore | senso | esempio |
+  |---|---|---|
+  | **indem** | mezzo o modo con cui si ottiene qualcosa (≈ gerundio italiano) | *Man lernt schwimmen, **indem** man ins Wasser geht.* |
+  | **dadurch, dass** | come *indem*, più formale; *dadurch* può stare nella principale | *Er spart Geld, **dadurch dass** er selbst kocht.* |
+  | **wie** | maniera o paragone con un'azione | *Mach es so, **wie** ich es dir gezeigt habe.* |
+
+  - **indem** esprime che l'azione della subordinata è il **mezzo** per ottenere (o realizzare) quella della principale; le due azioni sono **contemporanee** (stessa fase temporale).
+  - Spesso i soggetti coincidono, ma non è obbligatorio.
+  - **indem** ≠ **während**: *während* dice solo che due cose avvengono insieme (*Während ich koche, hört er Musik*); *indem* dice che la seconda è il modo in cui la prima accade.
+  - **indem** ≠ **weil**: *weil* dà la causa, *indem* il metodo.
+  - Con **mezzo + sostantivo** si usa invece *durch* + accusativo o *mit* + dativo (*durch Training*, *mit Fleiß*): le subordinate sostituiscono questi gruppi nominali.
+
+  ## Esempi
+  - *Sie hält sich fit, indem sie jeden Morgen läuft.* — Si mantiene in forma correndo ogni mattina.
+  - *Er hat mir geholfen, indem er die Koffer trug.* — Mi ha aiutato portando le valigie.
+  - *Dadurch, dass wir früher losfuhren, vermieden wir den Stau.* — Partendo prima abbiamo evitato la coda.
+  - *Man verbessert seine Aussprache, indem man laut liest.* — Si migliora la pronuncia leggendo ad alta voce.
+  - *Koche die Suppe, wie ich es dir erklärt habe.* — Cuoci la zuppa come ti ho spiegato.
+
+  ## Errori tipici di chi parla italiano
+  - Il **gerundio** italiano (*imparo leggendo*) ha molti valori; in tedesco *indem* si usa **solo** per mezzo/modo.
+    **\*Indem ich kochte, hörte ich Musik** (due azioni parallele) → *Während ich kochte, hörte ich Musik.*
+  - Non tradurre il gerundio con un participio presente: **\*Lernend verbessert man sich** suona innaturale → *Man verbessert sich, indem man lernt*.
+  - Verbo in fondo e virgola: **\*Er hilft, indem er trägt die Koffer** → *indem er die Koffer trägt*.
+  - Non usare *weil* per il mezzo: **\*Er lernt viel, weil er täglich liest** esprime una causa; per il mezzo → *indem er täglich liest*.
+examples:
+  - {de: "Sie hält sich fit, indem sie jeden Morgen läuft.", it: "Si mantiene in forma correndo ogni mattina."}
+  - {de: "Er hat mir geholfen, indem er die Koffer trug.", it: "Mi ha aiutato portando le valigie."}
+  - {de: "Dadurch, dass wir früher losfuhren, vermieden wir den Stau.", it: "Partendo prima abbiamo evitato la coda."}
+  - {de: "Man verbessert seine Aussprache, indem man laut liest.", it: "Si migliora la pronuncia leggendo ad alta voce."}
+  - {de: "Koche die Suppe, wie ich es dir erklärt habe.", it: "Cuoci la zuppa come ti ho spiegato."}
