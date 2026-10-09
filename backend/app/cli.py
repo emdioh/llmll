@@ -196,6 +196,10 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
             # the requested provider so no other provider's key is needed.
             update["llm_provider"] = args.provider
             update["llm_model"] = args.model
+        elif grader_override is not None and not args.model:
+            # Same for the provider chosen in Settings for grading.
+            update["llm_provider"] = grader_override.provider
+            update["llm_model"] = grader_override.model
         settings = settings.model_copy(update=update)
         cases = load_cases(Path(args.cases))
         curriculum = load_curriculum(Path(args.curriculum))

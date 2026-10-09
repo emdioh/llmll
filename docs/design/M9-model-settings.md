@@ -126,7 +126,9 @@ the environment configuration.
 - `fake` in `GET` is "no API key at all" (settings-based), so it also holds for an injected client
   on a keyless configuration.
 - `eval-grader` applies only the stored `grade_sentence` override (the eval only grades, and
-  other tasks' overrides would require their providers' keys). `check-llm` applies all of them.
+  other tasks' overrides would require their providers' keys). Without `--provider`/`--model`
+  it also routes the other tasks to the grading override's provider, as `--provider` does, so
+  only that provider's key is needed. `check-llm` applies all of them.
 - Reset in the UI sends its `null` immediately (its own PUT) rather than waiting for "Save";
   the section's save button is labelled "Save models" to tell it from the page's own "Save".
 - The migration directory is `backend/migrations/versions/` (0010), not `alembic/versions`.

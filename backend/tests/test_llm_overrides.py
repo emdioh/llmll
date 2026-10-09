@@ -334,3 +334,34 @@ def test_check_llm_with_an_unmigrated_database_notes_and_continues(
     cli_main(["check-llm"])
     captured = capsys.readouterr()
     assert "anthropic/" in captured.out and "note:" in captured.err
+
+
+def test_eval_grader_uses_the_grading_override_without_the_default_providers_key(
+    monkeypatch: pytest.MonkeyPatch, migrated_settings: Settings, tmp_path: Any
+) -> None:
+    from app.llm import factory
+    from app.llm.factory import LLMConfigError, resolve_routes
+
+    from .test_grader_eval import CURRICULUM, three_cases
+
+    monkeypatch.setenv("LLMLL_DATABASE_URL", migrated_settings.database_url)
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-v1-abc")
+    seed(migrated_settings, {"grade_sentence": {"provider": "openrouter", "model": "v/grader"}})
+    seen: list[Settings] = []
+
+    def capture(settings: Settings, *args: Any, **kwargs: Any) -> Any:
+        seen.append(settings)
+        raise LLMConfigError("stop before any call")
+
+    monkeypatch.setattr(factory, "build_llm_client_with_recorder", capture)
+    get_settings.cache_clear()
+    args = ["eval-grader", "--cases", str(three_cases(tmp_path)), "--curriculum", str(CURRICULUM)]
+    code = cli_main([*args, "--no-languagetool", "--no-save"])
+    get_settings.cache_clear()
+    assert code == 1 and len(seen) == 1
+    routes = resolve_routes(seen[0])
+    assert routes["grade_sentence"].provider == "openrouter"
+    assert routes["grade_sentence"].model == "v/grader"
+    # every task routes to the grading provider, so no Anthropic key is needed
+    assert {str(cfg.provider) for cfg in routes.values()} == {"openrouter"}
