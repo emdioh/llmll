@@ -11,7 +11,7 @@ from app.domain.grading import grade
 from app.domain.mastery import update_mastery, update_tag_counts
 from app.domain.projection import EventData, MemoryState, apply, replay
 from app.domain.scheduling import card_id_for, new_card, retrievability, review
-from app.domain.selection import MemoryView, select_due
+from app.domain.selection import MemoryView, select_ahead, select_due
 
 CFG = ProjectionConfig()
 T0 = datetime(2026, 1, 1, tzinfo=UTC)
@@ -128,6 +128,24 @@ def test_select_due_order() -> None:
     ordered = select_due(items, now, limit=10)
     assert [m.item_id for m in ordered] == ["lex:old", "lex:a", "lex:b", "lex:rare"]
     assert len(select_due(items, now, limit=2)) == 2
+
+
+def test_select_ahead_takes_only_not_yet_due_by_retrievability() -> None:
+    now = T0 + timedelta(days=30)
+
+    def view(item_id: str, days_ago_reviewed: int, due_in: int):
+        card = review(new_card(1), Rating.Good, now - timedelta(days=days_ago_reviewed), 0.85)
+        return MemoryView(item_id, "recognition", now + timedelta(days=due_in), card)
+
+    items = [
+        view("lex:fresh", 0, 5),
+        view("lex:older", 2, 3),  # reviewed longer ago: lower retrievability, comes first
+        view("lex:due", 10, -1),
+        MemoryView("lex:unscheduled", "recognition", None, None),
+    ]
+    ordered = select_ahead(items, now, limit=10)
+    assert [m.item_id for m in ordered] == ["lex:older", "lex:fresh"]
+    assert len(select_ahead(items, now, limit=1)) == 1
 
 
 # --- answers -----------------------------------------------------------------

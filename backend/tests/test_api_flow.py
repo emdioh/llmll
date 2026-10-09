@@ -156,8 +156,12 @@ def test_full_flow_and_replay(
     assert {m["facet"] for m in items["items"][0]["memory"]} == {"recognition", "production"}
     assert client.get("/api/items?status=candidate").json()["total"] == 0  # A2 is unseen
 
-    # Right after: nothing due, and no more candidates.
-    assert client.post("/api/sessions").json()["cards"] == []
+    # Right after: nothing due and no more candidates, so the session practises ahead of
+    # schedule, still one card per item and capped at review_cap.
+    ahead = client.post("/api/sessions").json()["cards"]
+    assert len(ahead) == min(A1_LEMMAS, 15)
+    assert len({c["item_id"] for c in ahead}) == len(ahead)
+    assert {c["type"] for c in ahead} <= {"flashcard_recognition", "flashcard_production"}
 
     # Day 10: everything is due. One card per item (recognition first), capped at review_cap.
     clock.advance(days=10)
@@ -309,7 +313,10 @@ def test_new_lemmas_respect_budget_and_priority(
     session = client.post("/api/sessions").json()
     for card in session["cards"]:
         answer(client, session["session_id"], card)
-    assert client.post("/api/sessions").json()["cards"] == []  # weekly budget used up
+    # Weekly budget used up: no new words, only the three practised ahead of schedule.
+    cards = client.post("/api/sessions").json()["cards"]
+    assert {c["type"] for c in cards} == {"flashcard_recognition"}
+    assert len(cards) == 3
 
 
 def test_exercises_are_persisted(

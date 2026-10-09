@@ -167,7 +167,9 @@ describe("SessionView", () => {
     await userEvent.click(
       screen.getByRole("button", { name: "Start session" }),
     );
-    expect(await screen.findByText(/Nothing is due/)).toBeInTheDocument();
+    expect(
+      await screen.findByText(/Nothing to practise yet/),
+    ).toBeInTheDocument();
   });
 
   it("inserts umlauts at the cursor", async () => {

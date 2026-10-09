@@ -17,7 +17,7 @@ from app.domain.answers import (
     display_form,
 )
 from app.domain.config import ProjectionConfig
-from app.domain.selection import MemoryView, select_due
+from app.domain.selection import MemoryView, select_ahead, select_due
 from app.services import contests, production, queue
 from app.services.common import BuiltCard, SessionError, event_context, mark_introduced
 from app.services.learner import projection_config, settings_of
@@ -224,14 +224,15 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
     cfg = projection_config(settings)
     session_id = uuid.uuid4().hex
 
-    # 1. Due reviews (lemmas only in M1), at most one card per item.
+    # 1. Reviews (lemmas only in M1), at most one card per item: due memories first, then, when
+    # fewer are due than the cap, memories practised ahead of schedule (R§10), so that a session
+    # is never empty just because today's reviews are done.
     rows = db.execute(
         select(ItemMemory, Item)
         .join(Item, Item.id == ItemMemory.item_id)
         .where(
             ItemMemory.learner_id == learner.id,
             ItemMemory.due.is_not(None),
-            ItemMemory.due <= now,
             Item.kind == "lemma",
             ~Item.suspended,
         )
@@ -247,20 +248,20 @@ def build_session(db: Session, learner: Learner, now: datetime) -> tuple[str, li
         )
         for mem, item in rows
     ]
-    ordered = select_due(
-        views,
-        now,
-        limit=len(views),
-        desired_retention=cfg.desired_retention,
-        parameters=cfg.fsrs_parameters,
-    )
-    due_cards: list[tuple[str, str]] = []
-    for view in ordered:
-        if all(view.item_id != i for i, _ in due_cards):
-            due_cards.append((view.item_id, view.facet))
     slots = settings.production_slots
     # Production slots eat into the review cap; with 0 slots sessions are flashcard-only (M1).
-    due_cards = due_cards[: max(settings.review_cap - slots, 0) if slots else settings.review_cap]
+    review_quota = max(settings.review_cap - slots, 0) if slots else settings.review_cap
+    retention, params = cfg.desired_retention, cfg.fsrs_parameters
+    ordered = [
+        *select_due(views, now, len(views), retention, params),
+        *select_ahead(views, now, len(views), retention, params),
+    ]
+    due_cards: list[tuple[str, str]] = []
+    for view in ordered:
+        if len(due_cards) >= review_quota:
+            break
+        if all(view.item_id != i for i, _ in due_cards):
+            due_cards.append((view.item_id, view.facet))
 
     # 2. New lemmas within the budget, from the candidate queue (R§7.4).
     budget, _backlog = queue.weekly_budget(db, learner, now)

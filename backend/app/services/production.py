@@ -191,20 +191,21 @@ def plan_production_slots(
             mem = memories.get(item.id)
             remediation.append(Candidate(item.id, item.kind, mem.mastery if mem else None))
 
-    due_rows = db.execute(
+    memory_rows = db.execute(
         select(ItemMemory, Item)
         .join(Item, Item.id == ItemMemory.item_id)
         .where(
             ItemMemory.learner_id == learner.id,
             ItemMemory.facet == "production",
             ItemMemory.due.is_not(None),
-            ItemMemory.due <= now,
             Item.kind.in_(("grammar", "construction")),
             ~Item.suspended,
         )
     ).all()
+    # Due memories, plus not-yet-due ones to practise ahead when nothing else fills a slot.
     due: list[Candidate] = []
-    for mem, item in due_rows:
+    ahead: list[Candidate] = []
+    for mem, item in memory_rows:
         items_by_id.setdefault(item.id, item)
         card = Card.from_dict(mem.fsrs_card) if mem.fsrs_card else None
         r = (
@@ -212,7 +213,8 @@ def plan_production_slots(
             if card is not None
             else None
         )
-        due.append(Candidate(item.id, item.kind, mem.mastery, r))
+        is_due = mem.due <= now
+        (due if is_due else ahead).append(Candidate(item.id, item.kind, mem.mastery, r))
 
     new_grammar_items = queued_grammar
     for item in new_grammar_items:
@@ -228,6 +230,7 @@ def plan_production_slots(
         [Candidate(i.id, "lemma") for i in lemma_candidates[:lemma_limit]],
         grammar_budget,
         lemma_limit,
+        ahead,
     )
     result: list[tuple[Exercise, BuiltCard]] = []
     for planned in plan:
