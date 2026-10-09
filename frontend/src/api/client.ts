@@ -98,6 +98,14 @@ export const getSettings = () => request<Settings>("GET", "/api/settings");
 export const updateSettings = (body: Schemas["SettingsUpdate"]) =>
   request<Settings>("PUT", "/api/settings", body);
 
+export type LlmSettings = Schemas["LLMSettingsOut"];
+export type LlmTask = Schemas["LLMTaskOut"];
+export type LlmOverride = Schemas["OverrideIn"];
+export const getLlmSettings = () =>
+  request<LlmSettings>("GET", "/api/settings/llm");
+export const updateLlmSettings = (body: Schemas["LLMSettingsUpdate"]) =>
+  request<LlmSettings>("PUT", "/api/settings/llm", body);
+
 export const createSession = () =>
   request<Schemas["SessionOut"]>("POST", "/api/sessions");
 export const prepareExercise = (exerciseId: string) =>

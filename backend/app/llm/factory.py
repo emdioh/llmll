@@ -97,6 +97,20 @@ def resolve_routes(settings: Settings) -> dict[str, TaskConfig]:
     return resolved
 
 
+def validate_routes(settings: Settings) -> dict[str, TaskConfig]:
+    """Everything `build_llm_client_with_recorder` checks about routing, without building SDK
+    clients (used to validate a configuration when no client can be swapped)."""
+    tasks = resolve_routes(settings)
+    _warn_ignored_settings(settings, tasks)
+    return tasks
+
+
+def available_providers(settings: Settings) -> list[str]:
+    """Providers with an API key, in PROVIDERS order (`fake` never)."""
+    keys = _keys(settings)
+    return [p for p in PROVIDERS if p != "fake" and keys.get(p)]
+
+
 def _check_model_matches_provider(task: str, provider: str, model: str, settings: Settings) -> None:
     """Catch the common mix-up of an OpenRouter id (`<vendor>/<model>`) used with another
     provider, before any (paid) call fails with an opaque "model not found"."""

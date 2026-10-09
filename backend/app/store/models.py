@@ -343,3 +343,13 @@ class Placement(Base):
     estimated_level: Mapped[str | None] = mapped_column(String, nullable=True)
     changed: Mapped[bool | None] = mapped_column(nullable=True)
     result: Mapped[dict[str, Any] | None] = mapped_column(JSON, nullable=True)
+
+
+class AppSetting(Base):
+    """App-level configuration (not learner state, so no event). Design: M9 §2."""
+
+    __tablename__ = "app_settings"
+
+    key: Mapped[str] = mapped_column(String, primary_key=True)
+    value: Mapped[Any] = mapped_column(JSON)
+    updated_at: Mapped[datetime] = mapped_column(UTCDateTime())

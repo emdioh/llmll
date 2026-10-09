@@ -68,6 +68,16 @@ task resolves to a provider without a model. With no key at all it runs on a fak
 LLMLL_LLM_TASKS='{"grade_sentence": {"provider": "anthropic", "effort": "high"}, "gloss": {"provider": "openrouter", "model": "<vendor>/<model>"}, "simplify_text": {"provider": "google", "model": "<gemini model id>"}}'
 ```
 
+### From the Settings page
+
+The provider and model of each task (grading and explanations first, the others under "Other
+tasks") can also be chosen in **Settings → LLM models**. The change applies immediately, without
+a restart. Only providers whose API key is set in `.env` are offered; keys are never entered in
+the browser. Precedence, weakest first: built-in defaults, `.env` (`LLMLL_LLM_*`), Settings,
+and finally the CLI flags of a single command (`eval-grader --provider/--model`). "Reset" returns
+a task to its `.env` configuration. `check-llm` and `eval-grader` use the models chosen in Settings
+too (`check-llm` marks them `(Settings)`).
+
 Keep the JSON on one line and in single quotes: that works both in `.env` for docker compose
 and when loading `.env` into a shell. `.env.example` has a commented block per provider.
 

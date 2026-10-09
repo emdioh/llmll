@@ -265,6 +265,66 @@
         }
       }
     },
+    "/api/settings/llm": {
+      "get": {
+        "tags": [
+          "settings"
+        ],
+        "summary": "Get Llm Settings",
+        "operationId": "getLlmSettings",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LLMSettingsOut"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "settings"
+        ],
+        "summary": "Update Llm Settings",
+        "operationId": "updateLlmSettings",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LLMSettingsUpdate"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LLMSettingsOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/sessions": {
       "post": {
         "tags": [
@@ -4587,6 +4647,148 @@
         ],
         "title": "ItemSummary"
       },
+      "LLMSettingsOut": {
+        "properties": {
+          "fake": {
+            "type": "boolean",
+            "title": "Fake"
+          },
+          "live_switch": {
+            "type": "boolean",
+            "title": "Live Switch"
+          },
+          "override_error": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Override Error"
+          },
+          "available_providers": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "title": "Available Providers"
+          },
+          "tasks": {
+            "items": {
+              "$ref": "#/components/schemas/LLMTaskOut"
+            },
+            "type": "array",
+            "title": "Tasks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "fake",
+          "live_switch",
+          "override_error",
+          "available_providers",
+          "tasks"
+        ],
+        "title": "LLMSettingsOut"
+      },
+      "LLMSettingsUpdate": {
+        "properties": {
+          "tasks": {
+            "additionalProperties": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/OverrideIn"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": "object",
+            "title": "Tasks"
+          }
+        },
+        "type": "object",
+        "required": [
+          "tasks"
+        ],
+        "title": "LLMSettingsUpdate",
+        "description": "Partial update: tasks not listed keep their override; `null` clears one."
+      },
+      "LLMTaskOut": {
+        "properties": {
+          "task": {
+            "type": "string",
+            "title": "Task"
+          },
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "structured_output": {
+            "type": "string",
+            "title": "Structured Output"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "override",
+              "config"
+            ],
+            "title": "Source"
+          },
+          "config_provider": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config Provider"
+          },
+          "config_model": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Config Model"
+          },
+          "override": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/OverrideOut"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "type": "object",
+        "required": [
+          "task",
+          "provider",
+          "model",
+          "structured_output",
+          "source",
+          "config_provider",
+          "config_model",
+          "override"
+        ],
+        "title": "LLMTaskOut"
+      },
       "LearnerCreate": {
         "properties": {
           "level": {
@@ -5036,6 +5238,74 @@
           "error"
         ],
         "title": "OutcomeCountsOut"
+      },
+      "OverrideIn": {
+        "properties": {
+          "provider": {
+            "type": "string",
+            "enum": [
+              "anthropic",
+              "openai",
+              "google",
+              "openrouter"
+            ],
+            "title": "Provider"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "structured_output": {
+            "anyOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "native",
+                  "json"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Structured Output"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider",
+          "model"
+        ],
+        "title": "OverrideIn"
+      },
+      "OverrideOut": {
+        "properties": {
+          "provider": {
+            "type": "string",
+            "title": "Provider"
+          },
+          "model": {
+            "type": "string",
+            "title": "Model"
+          },
+          "structured_output": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Structured Output"
+          }
+        },
+        "type": "object",
+        "required": [
+          "provider",
+          "model"
+        ],
+        "title": "OverrideOut"
       },
       "PeriodOut": {
         "properties": {

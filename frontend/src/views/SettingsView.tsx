@@ -10,6 +10,7 @@ import {
 import { useAuth } from "../authContext";
 import { browserTimeZone } from "../timezone";
 import { useLearner } from "../learnerContext";
+import LlmModelsSection from "./LlmModelsSection";
 import StatsSection from "./StatsSection";
 import type { Schemas } from "../api/client";
 
@@ -262,6 +263,7 @@ export default function SettingsView() {
       <Link to="/placement" className="btn">
         Re-run placement test
       </Link>
+      <LlmModelsSection />
       <StatsSection />
       {auth.enabled && (
         <>

@@ -10,6 +10,7 @@ from pathlib import Path
 from typing import Any
 
 from sqlalchemy import select
+from sqlalchemy.orm import sessionmaker
 
 from app.config import Settings, get_settings
 from app.curriculum.importer import import_curriculum
@@ -36,6 +37,34 @@ def _schema_is_current() -> bool:
     if not status.up_to_date:
         print(f"error: {status.message()}", file=sys.stderr)
     return status.up_to_date
+
+
+def _stored_llm_overrides() -> dict[str, Any]:
+    """The overrides saved from the Settings page, so the CLI tests the models the app really
+    uses. When the database cannot be read, print one note and carry on with the environment."""
+    from app.llm.overrides import load_overrides
+
+    settings = get_settings()
+    engine = create_db_engine(settings.database_url)
+    try:
+        status = schema_status(engine)
+        if not status.up_to_date:
+            print(
+                "note: database schema out of date; ignoring the models chosen in Settings",
+                file=sys.stderr,
+            )
+            return {}
+        with sessionmaker(bind=engine)() as session:
+            return dict(load_overrides(session))
+    except Exception as exc:
+        print(
+            f"note: could not read the models chosen in Settings ({type(exc).__name__}); "
+            "using the environment",
+            file=sys.stderr,
+        )
+        return {}
+    finally:
+        engine.dispose()
 
 
 def cmd_import_curriculum(args: argparse.Namespace) -> int:
@@ -141,11 +170,19 @@ def cmd_eval_grader(args: argparse.Namespace) -> int:
         tags_of,
     )
     from app.llm.factory import LLMConfigError, build_llm_client_with_recorder
+    from app.llm.overrides import apply_overrides
     from app.nlp.languagetool import LanguageToolClient
 
     settings = get_settings()
+    # The route chosen in Settings for grading is the base; the flags below go on top of it.
+    grader_override = _stored_llm_overrides().get("grade_sentence")
+    if grader_override is not None:
+        settings = apply_overrides(settings, {"grade_sentence": grader_override})
     try:
         tasks = _load_task_config(args.task_config)
+        if grader_override is not None and "grade_sentence" in settings.llm_tasks:
+            stored_entry = settings.llm_tasks["grade_sentence"]
+            tasks["grade_sentence"] = {**stored_entry, **tasks.get("grade_sentence", {})}
         if args.provider or args.model:
             grader = dict(tasks.get("grade_sentence") or {})
             if args.provider:
@@ -375,9 +412,11 @@ def cmd_check_llm(args: argparse.Namespace) -> int:
     from app.llm.calls import CallRecord
     from app.llm.client import LLMError
     from app.llm.factory import LLMConfigError, build_llm_client_with_recorder, resolve_routes
+    from app.llm.overrides import apply_overrides
     from app.llm.types import GlossRequest
 
-    settings = get_settings()
+    overrides = _stored_llm_overrides()
+    settings = apply_overrides(get_settings(), overrides)
     try:
         routes = resolve_routes(settings)
     except LLMConfigError as exc:
@@ -385,7 +424,8 @@ def cmd_check_llm(args: argparse.Namespace) -> int:
         return 1
     print("task routing:")
     for task, cfg in routes.items():
-        print(f"  {task:<18} {cfg.provider}/{cfg.model}  ({cfg.structured_output} output)")
+        mark = "  (Settings)" if task in overrides else ""
+        print(f"  {task:<18} {cfg.provider}/{cfg.model}  ({cfg.structured_output} output){mark}")
     problems = False
     for provider in sorted({str(cfg.provider) for cfg in routes.values()} - {"fake"}):
         print(f"\n{provider} key:")

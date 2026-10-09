@@ -109,6 +109,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/settings/llm": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get Llm Settings */
+        get: operations["getLlmSettings"];
+        /** Update Llm Settings */
+        put: operations["updateLlmSettings"];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/sessions": {
         parameters: {
             query?: never;
@@ -1545,6 +1563,50 @@ export interface components {
             /** Memory */
             memory: components["schemas"]["MemoryEntry"][];
         };
+        /** LLMSettingsOut */
+        LLMSettingsOut: {
+            /** Fake */
+            fake: boolean;
+            /** Live Switch */
+            live_switch: boolean;
+            /** Override Error */
+            override_error: string | null;
+            /** Available Providers */
+            available_providers: string[];
+            /** Tasks */
+            tasks: components["schemas"]["LLMTaskOut"][];
+        };
+        /**
+         * LLMSettingsUpdate
+         * @description Partial update: tasks not listed keep their override; `null` clears one.
+         */
+        LLMSettingsUpdate: {
+            /** Tasks */
+            tasks: {
+                [key: string]: components["schemas"]["OverrideIn"] | null;
+            };
+        };
+        /** LLMTaskOut */
+        LLMTaskOut: {
+            /** Task */
+            task: string;
+            /** Provider */
+            provider: string;
+            /** Model */
+            model: string;
+            /** Structured Output */
+            structured_output: string;
+            /**
+             * Source
+             * @enum {string}
+             */
+            source: "override" | "config";
+            /** Config Provider */
+            config_provider: string | null;
+            /** Config Model */
+            config_model: string | null;
+            override: components["schemas"]["OverrideOut"] | null;
+        };
         /** LearnerCreate */
         LearnerCreate: {
             /**
@@ -1683,6 +1745,27 @@ export interface components {
             assisted: number;
             /** Error */
             error: number;
+        };
+        /** OverrideIn */
+        OverrideIn: {
+            /**
+             * Provider
+             * @enum {string}
+             */
+            provider: "anthropic" | "openai" | "google" | "openrouter";
+            /** Model */
+            model: string;
+            /** Structured Output */
+            structured_output?: ("native" | "json") | null;
+        };
+        /** OverrideOut */
+        OverrideOut: {
+            /** Provider */
+            provider: string;
+            /** Model */
+            model: string;
+            /** Structured Output */
+            structured_output?: string | null;
         };
         /**
          * PeriodOut
@@ -2504,6 +2587,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SettingsOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    getLlmSettings: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LLMSettingsOut"];
+                };
+            };
+        };
+    };
+    updateLlmSettings: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["LLMSettingsUpdate"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LLMSettingsOut"];
                 };
             };
             /** @description Validation Error */

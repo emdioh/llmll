@@ -121,7 +121,7 @@ describe("SettingsView", () => {
     expect(screen.getByText("Must be a whole number")).toBeInTheDocument();
     expect(
       fetchMock.mock.calls.every(([u]) =>
-        ["/api/health", "/api/stats"].includes(String(u)),
+        ["/api/health", "/api/stats", "/api/settings/llm"].includes(String(u)),
       ),
     ).toBe(true);
   });

@@ -1505,3 +1505,15 @@ button.link {
 .chart > svg {
   max-width: 520px;
 }
+
+.llm-row {
+  border: 1px solid var(--border, #ccc);
+  border-radius: 8px;
+  padding: 0.5rem 0.75rem;
+  margin: 0 0 0.75rem;
+  min-width: 0;
+}
+.llm-row legend {
+  font-weight: 600;
+  padding: 0 0.25rem;
+}

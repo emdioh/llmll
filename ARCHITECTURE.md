@@ -170,6 +170,9 @@ same state. Tests verify this.
 **`llm_calls`**: task, prompt version, model, input, output, tokens, latency, outcome
 (including `stop_reason`). This is the basis for the grader evaluation dataset (R§8).
 
+**`app_settings`** (M9): `key`, `value` (JSON), `updated_at`. App-level operator configuration,
+not learner state (no events). One key so far: `llm_overrides` (§7.1.1).
+
 ## 5. Domain (pure functions)
 
 ### 5.1 Mastery
@@ -357,6 +360,17 @@ per provider on its official SDK: `AnthropicLLMClient` (`anthropic`), `OpenAICom
   `tests/test_llm_schemas.py` checks it.
 - **Caching.** Only Anthropic gets explicit `cache_control`; cached prompt tokens are logged when
   the provider reports them.
+- **Settings overrides (M9).** The provider and model of each task can be chosen from the
+  Settings page. Precedence, weakest first: built-in defaults, environment, Settings overrides
+  (table `app_settings`, key `llm_overrides`; an operator setting, not learner state, so no event),
+  CLI flags of one command. `app/llm/overrides.py` holds the pure merge (`apply_overrides`; when
+  the provider changes, the environment's `effort`/`params`/`structured_output` are dropped) and
+  the load/save. `create_app` keeps a builder in `app.state.llm_builder`; `PUT /api/settings/llm`
+  builds the whole merged client first (422 with the `LLMConfigError` message on failure, nothing
+  stored), saves, then swaps `app.state.llm` atomically. API keys are never sent to or accepted
+  from the browser. A stored override whose key disappeared from `.env` falls back to the
+  environment at startup (`llm_override_error`, shown in Settings). `check-llm` and `eval-grader`
+  apply the stored overrides too. Design: `docs/design/M9-model-settings.md`.
 
 ### 7.1.2 Observability (M7)
 Design: `docs/design/M7-observability.md`.
@@ -509,6 +523,7 @@ All milestones are implemented; designs and deviations are in `docs/design/M*.md
 | **M6** | Multiple LLM providers (Anthropic, OpenAI, Gemini, OpenRouter), per-task routing | Provider choice and comparison |
 | **M7** | LLM observability: per-call timing breakdown, `llm-stats`, live debug pane | Diagnosing slowness |
 | **M8** | Progress review: streaks, activity, levels, item history, lessons taken | Seeing progress |
+| **M9** | LLM provider and model per task chosen from Settings (stored overrides, live switch) | Changing models without restarting |
 
 ## 14. Open decisions
 
