@@ -224,6 +224,8 @@ Proper nouns and transparent compounds with known parts go to `ignore` (or point
 ### 6.1 Review session
 1. `session_builder` chooses the items to cover:
    - due items, ordered by retrievability and importance, up to the cap;
+   - if fewer are due than the cap, not-yet-due items practised ahead of schedule (lowest
+     retrievability first) fill the remaining flashcards and production slots;
    - new items, taken from the candidate queue within the weekly budget.
 2. For each group of items:
    - due lemmas → flashcards;

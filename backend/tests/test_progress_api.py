@@ -159,8 +159,8 @@ def test_summary_streaks_and_placement(
     )
     assert totals["exercises"] == sum(r.type == "production" for r in counted)
     assert totals["readings"] == 1 and totals["items_introduced"] > 0
-    # 20 s + 30 s + 3 s of recorded time on the 6th, 10 minutes of reading on the 9th.
-    assert totals["minutes"] == pytest.approx(0.9 + 10.0, abs=0.11)
+    # 20 s + 30 s + 3 × 3 s + 4 s of recorded time on the 6th, 10 minutes of reading on the 9th.
+    assert totals["minutes"] == pytest.approx(1.1 + 10.0, abs=0.11)
 
     assert summary["this_week"]["study_days"] == 3 and summary["last_week"]["study_days"] == 0
     assert summary["this_week"]["readings"] == 1
@@ -196,7 +196,7 @@ def test_activity_days_and_weekly_accuracy(history_api: TestClient, seeded: dict
     assert [days[d]["active"] for d in days] == [False, False, True, True, False, True, False]
     # The placement day shows no activity at all.
     assert days["2026-10-05"]["reviews"] == 0 and days["2026-10-05"]["exercises"] == 0
-    assert days["2026-10-06"]["exercises"] == 2 and days["2026-10-06"]["minutes"] == 0.9
+    assert days["2026-10-06"]["exercises"] == 2 and days["2026-10-06"]["minutes"] == 1.1
     assert days["2026-10-09"]["readings"] == 1 and days["2026-10-09"]["minutes"] >= 10.0
     assert days["2026-10-06"]["new_items"] > 0
 
@@ -259,7 +259,8 @@ def test_item_lists_and_sorts(history_api: TestClient, seeded: dict) -> None:
 
     # weakest: lowest mastery first, only items with enough evidence (n_eff >= 2) when any.
     weakest = get(history_api, "items", sort="weakest")["items"]
-    assert [i["id"] for i in weakest] == ["gram:cases"]
+    assert weakest[0]["id"] == "gram:cases" and all(i["n_eff"] >= 2 for i in weakest)
+    assert [i["mastery"] for i in weakest] == sorted(i["mastery"] for i in weakest)
     assert weakest[0]["n_eff"] >= 2 and weakest[0]["errors"] == 2 and weakest[0]["answers"] == 3
     assert weakest[0]["error_rate"] == pytest.approx(2 / 3)
     assert weakest[0]["top_tags"] == [{"tag": "m", "count": 2}]
@@ -274,8 +275,12 @@ def test_item_lists_and_sorts(history_api: TestClient, seeded: dict) -> None:
     assert words and [i["mastery"] for i in words] == sorted(i["mastery"] for i in words)
 
     errors = get(history_api, "items", sort="errors")["items"]
-    # The wrong placement answer counts for item state, so it shows up here too.
-    assert [(i["id"], i["errors"]) for i in errors] == [("gram:cases", 2), ("lex:gehen", 1)]
+    # The wrong placement answer (lex:gehen) counts for item state, so it shows up here too;
+    # the other lemmas are the production flashcards answered "falsch" on the 9th.
+    assert [(i["id"], i["errors"]) for i in errors] == [
+        ("gram:cases", 2),
+        *((i, 1) for i in ("lex:apfel", "lex:fahren", "lex:fenster", "lex:gehen", "lex:strasse")),
+    ]
     due = get(history_api, "items", sort="due", limit=200)["items"]
     dues = [i["due"] for i in due]
     assert dues == sorted(dues) and len(dues) == len(due) > 0
@@ -347,13 +352,14 @@ def test_item_detail(history_api: TestClient, migrated_settings: Settings, seede
 
 
 def test_lemma_detail_has_both_facets_and_lookups(history_api: TestClient, seeded: dict) -> None:
-    detail = get(history_api, "items/lex:tisch")
+    detail = get(history_api, "items/lex:fenster")
     assert detail["item"]["kind"] == "lemma"
     facets = {f["facet"]: f for f in detail["facets"]}
     assert set(facets) == {"recognition", "production"}
-    kinds = {p["kind"] for p in facets["recognition"]["trajectory"]}
-    assert "lookup" in kinds  # the reading looked the word up
     assert detail["mastery"] is not None
+    tisch = get(history_api, "items/lex:tisch")
+    kinds = {p["kind"] for f in tisch["facets"] for p in f["trajectory"]}
+    assert "lookup" in kinds  # the reading looked the word up
     assert history_api.get(f"{P}/items/nope").status_code == 404
 
 
@@ -440,9 +446,9 @@ def test_history_list(history_api: TestClient, seeded: dict) -> None:
 
     first = body["items"][-1]
     assert first["id"] == seeded["session1"] and first["title"] is None
-    assert first["cards_answered"] == 4 and first["new_items"] == 5
-    assert first["correct_rate"] == pytest.approx(2 / 3)  # the intro card is not graded
-    assert first["duration_minutes"] == 0.9
+    assert first["cards_answered"] == 6 and first["new_items"] == 5
+    assert first["correct_rate"] == pytest.approx(4 / 5)  # the intro card is not graded
+    assert first["duration_minutes"] == 1.1
 
     page = get(history_api, "history", limit=2, offset=1)
     assert page["total"] == 4 and [r["id"] for r in page["items"]] == ids[1:3]
@@ -455,9 +461,9 @@ def test_session_detail_lists_the_cards_with_their_answers(
     history_api: TestClient, seeded: dict
 ) -> None:
     detail = get(history_api, f"history/session/{seeded['session1']}")
-    assert detail["cards_answered"] == 4 and detail["new_items"] == 5
+    assert detail["cards_answered"] == 6 and detail["new_items"] == 5
     cards = detail["cards"]
-    assert len(cards) == 4
+    assert len(cards) == 6
     stamps = [c["answered_at"] for c in cards]
     assert stamps == sorted(stamps)
     types = [c["type"] for c in cards]

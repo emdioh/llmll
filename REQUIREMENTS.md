@@ -266,7 +266,10 @@ With 1–2 hours a week, used irregularly, the main problem is **backlog**.
 - **Introduction of new items** governed by the weekly limit (§7.4).
 - **Two session types**, chosen by the user:
   - **Review (~10 minutes):** due reviews up to a cap (~15), then 1–2 sentences to
-    produce, then 2–3 new items if time remains.
+    produce, then 2–3 new items if time remains. When fewer reviews are due than the cap
+    (e.g. a second session on the same day), the session is filled up to the cap with items
+    practised ahead of schedule, lowest retrievability first: starting a session never
+    answers "nothing to do" once something has been learned.
   - **Reading (open-ended):** one article, with a short summary or comment at the end.
 - The proportions are tuned through use.
 

@@ -185,7 +185,7 @@ export default function SessionView() {
       <section>
         <h1>Session complete</h1>
         {state.total === 0 ? (
-          <p>Nothing is due right now. Come back later!</p>
+          <p>Nothing to practise yet: add some words or read a text first.</p>
         ) : (
           <dl className="summary">
             <div>

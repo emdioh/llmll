@@ -15,8 +15,8 @@ def lem(item_id: str) -> Candidate:
     return Candidate(item_id, "lemma")
 
 
-def plan(slots=2, remediation=(), due=(), new_grammar=(), new_lemmas=(), gb=2, lb=5):
-    return plan_production(slots, remediation, due, new_grammar, new_lemmas, gb, lb)
+def plan(slots=2, remediation=(), due=(), new_grammar=(), new_lemmas=(), gb=2, lb=5, ahead=()):
+    return plan_production(slots, remediation, due, new_grammar, new_lemmas, gb, lb, ahead)
 
 
 def primaries(exercises):
@@ -35,6 +35,14 @@ def test_priority_remediation_then_due_then_new() -> None:
         slots=4, remediation=[g("gram:r")], due=[g("gram:d", r=0.4)], new_grammar=[g("gram:n")]
     )
     assert primaries(four) == ["gram:r", "gram:d", "gram:n"]
+
+
+def test_ahead_fills_slots_left_after_due_and_new() -> None:
+    ahead = [g("gram:a1", r=0.95), g("gram:a2", r=0.7)]
+    result = plan(slots=3, due=[g("gram:d", r=0.4)], new_grammar=[g("gram:n")], ahead=ahead)
+    assert primaries(result) == ["gram:d", "gram:n", "gram:a2"]
+    assert all(not t.new for t in result[2].targets)
+    assert primaries(plan(slots=2, ahead=ahead)) == ["gram:a2", "gram:a1"]
 
 
 def test_at_most_one_new_grammar_per_exercise_and_budget_respected() -> None:

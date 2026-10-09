@@ -50,12 +50,14 @@ def plan_production(
     new_lemmas: Sequence[Candidate],
     grammar_budget: int,
     lemma_budget: int,
+    ahead: Sequence[Candidate] = (),
 ) -> list[PlannedExercise]:
     """Up to `slots` exercises.
 
     Primary targets (grammar points / constructions) come in priority order: remediation queue,
     due memories (lowest retrievability first), then new items within `grammar_budget` (at most
-    one new grammar item per exercise, as there is one primary target). Secondary targets are
+    one new grammar item per exercise, as there is one primary target), then `ahead` memories
+    (not yet due, practised ahead of schedule; lowest retrievability first). Secondary targets are
     lemmas: remediation lemmas first, then new lemmas within `lemma_budget`. A slot with no
     grammar-like primary falls back to a lemma primary; with nothing to practise it is skipped.
     """
@@ -67,6 +69,7 @@ def plan_production(
     primaries: list[tuple[Candidate, bool]] = [(c, False) for c in remediation if grammar_like(c)]
     primaries += [(c, False) for c in _by_retrievability([c for c in due if grammar_like(c)])]
     primaries += [(c, True) for c in new_grammar[: max(grammar_budget, 0)] if grammar_like(c)]
+    primaries += [(c, False) for c in _by_retrievability([c for c in ahead if grammar_like(c)])]
     remediation_lemmas = [c for c in remediation if not grammar_like(c)]
     lemma_pool = list(new_lemmas)
     lemmas_left = max(lemma_budget, 0)
