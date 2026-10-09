@@ -28,4 +28,9 @@ require() {
   done
 }
 
+# Bring the local database to the schema this code expects (no-op when already current).
+migrate_db() {
+  (cd "$BACKEND" && uv run alembic upgrade head >/dev/null)
+}
+
 step() { printf '\n\033[1m==> %s\033[0m\n' "$*"; }

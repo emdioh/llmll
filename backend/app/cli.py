@@ -19,9 +19,23 @@ from app.evals.results import RESULTS_DIR
 from app.llm.config import PROVIDERS
 from app.main import create_app
 from app.services.learner import projection_config, settings_of
-from app.store.db import create_session_factory
+from app.store.db import create_db_engine, create_session_factory
 from app.store.events import rebuild_projection
 from app.store.models import Learner
+from app.store.schema_version import schema_status
+
+
+def _schema_is_current() -> bool:
+    """Commands that read or write the app database stop with a clear message (instead of a
+    SQL error) when migrations are pending."""
+    engine = create_db_engine(get_settings().database_url)
+    try:
+        status = schema_status(engine)
+    finally:
+        engine.dispose()
+    if not status.up_to_date:
+        print(f"error: {status.message()}", file=sys.stderr)
+    return status.up_to_date
 
 
 def cmd_import_curriculum(args: argparse.Namespace) -> int:
@@ -31,6 +45,8 @@ def cmd_import_curriculum(args: argparse.Namespace) -> int:
         for error in exc.errors:
             print(error, file=sys.stderr)
         print(f"{len(exc.errors)} error(s); nothing imported", file=sys.stderr)
+        return 1
+    if not _schema_is_current():
         return 1
     with create_session_factory(get_settings())() as session:
         report = import_curriculum(session, curriculum, datetime.now(UTC))
@@ -44,6 +60,8 @@ def cmd_import_curriculum(args: argparse.Namespace) -> int:
 
 def cmd_replay(_args: argparse.Namespace) -> int:
     total = 0
+    if not _schema_is_current():
+        return 1
     with create_session_factory(get_settings())() as session:
         for learner in session.scalars(select(Learner)):
             total += rebuild_projection(
@@ -238,6 +256,8 @@ def cmd_eval_compare(args: argparse.Namespace) -> int:
 def cmd_export_contests(args: argparse.Namespace) -> int:
     from app.services.contest_export import export_contests
 
+    if not _schema_is_current():
+        return 1
     with create_session_factory(get_settings())() as session:
         written, skipped = export_contests(session, Path(args.directory))
     print(f"wrote {written} draft case(s) to {args.directory} ({skipped} skipped)")
@@ -263,6 +283,8 @@ def cmd_optimize_fsrs(args: argparse.Namespace) -> int:
     from app.store.events import to_event_data
     from app.store.models import LearningEvent
 
+    if not _schema_is_current():
+        return 1
     with create_session_factory(get_settings())() as session:
         learner = session.get(Learner, 1)
         if learner is None:
@@ -456,6 +478,8 @@ def cmd_llm_stats(args: argparse.Namespace) -> int:
         query = query.where(LLMCall.task == args.task)
     if since is not None:
         query = query.where(LLMCall.ts >= datetime.now(UTC) - since)
+    if not _schema_is_current():
+        return 1
     with create_session_factory(get_settings())() as session:
         calls = [CallStat.of(row) for row in session.scalars(query)]
     scope = f"last {args.last} call(s)" + (f" of task {args.task}" if args.task else "")

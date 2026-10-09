@@ -1,7 +1,9 @@
 """FastAPI application factory."""
 
+import logging
 from collections.abc import Callable
 from datetime import UTC, datetime
+from typing import Any
 
 from fastapi import Depends, FastAPI
 
@@ -33,6 +35,20 @@ from app.nlp.extract import ExtractedText, fetch_article
 from app.nlp.languagetool import LanguageToolClient
 from app.services.contests import ContestResolver, build_resolver
 from app.store.db import create_session_factory
+from app.store.schema_version import schema_status
+
+logger = logging.getLogger(__name__)
+
+
+def _warn_if_schema_outdated(session_factory: Any) -> None:
+    """A server started on a database missing migrations fails on the first query with a
+    confusing SQL error: say what to do as soon as it starts."""
+    try:
+        status = schema_status(session_factory.kw["bind"])
+    except Exception:  # never prevent startup because of the check itself
+        return
+    if not status.up_to_date:
+        logger.error("%s", status.message())
 
 
 def create_app(
@@ -49,6 +65,7 @@ def create_app(
     app.state.settings = settings
     app.state.now = now or (lambda: datetime.now(UTC))
     app.state.session_factory = create_session_factory(settings)
+    _warn_if_schema_outdated(app.state.session_factory)
     # Holds events only when LLMLL_DEBUG=true (they contain full prompts and responses).
     app.state.live = LiveBroadcaster(enabled=settings.debug)
     app.state.llm = llm or build_llm_client(

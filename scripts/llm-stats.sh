@@ -7,4 +7,5 @@
 source "$(dirname "$0")/_lib.sh"
 require uv
 load_env
+migrate_db
 (cd "$BACKEND" && uv run python -m app.cli llm-stats "$@")
