@@ -144,6 +144,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/api/drills": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create Drill
+         * @description A drill on one grammar point or construction: its intro card when it is new, then
+         *     `drill_size` exercises (multiple choice, cloze, then open ones), prepared like any other.
+         */
+        post: operations["createDrill"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/api/exercises/{exercise_id}/prepare": {
         parameters: {
             query?: never;
@@ -821,7 +842,7 @@ export interface components {
              */
             type: "flashcard_intro" | "flashcard_recognition" | "flashcard_production" | "grammar_intro" | "production";
             /** Subtype */
-            subtype: ("translation" | "guided" | "transform" | "summary") | null;
+            subtype: ("translation" | "guided" | "transform" | "summary" | "cloze" | "choice") | null;
             /**
              * Answered At
              * Format: date-time
@@ -1249,6 +1270,11 @@ export interface components {
             upstream_provider: string | null;
             /** Request Chars */
             request_chars: number | null;
+        };
+        /** DrillIn */
+        DrillIn: {
+            /** Item Id */
+            item_id: string;
         };
         /** EvaluationExplainIn */
         EvaluationExplainIn: {
@@ -1876,7 +1902,7 @@ export interface components {
              */
             status: "pending" | "ready" | "answered" | "failed";
             /** Subtype */
-            subtype?: ("translation" | "guided" | "transform" | "summary") | null;
+            subtype?: ("translation" | "guided" | "transform" | "summary" | "cloze" | "choice") | null;
             /** Instructions */
             instructions?: string | null;
             /** Glossary */
@@ -2092,7 +2118,7 @@ export interface components {
              */
             status: "pending" | "ready" | "answered" | "failed";
             /** Subtype */
-            subtype?: ("translation" | "guided" | "transform" | "summary") | null;
+            subtype?: ("translation" | "guided" | "transform" | "summary" | "cloze" | "choice") | null;
             /** Instructions */
             instructions?: string | null;
             /** Glossary */
@@ -2149,6 +2175,8 @@ export interface components {
             new_per_session: number;
             /** Production Slots */
             production_slots: number;
+            /** Drill Size */
+            drill_size: number;
             /** Timezone */
             timezone: string;
         };
@@ -2166,6 +2194,8 @@ export interface components {
             new_per_session?: number | null;
             /** Production Slots */
             production_slots?: number | null;
+            /** Drill Size */
+            drill_size?: number | null;
             /** Timezone */
             timezone?: string | null;
         };
@@ -2701,6 +2731,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SessionOut"];
+                };
+            };
+        };
+    };
+    createDrill: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["DrillIn"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SessionOut"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
                 };
             };
         };

@@ -84,4 +84,29 @@ describe("GrammarDetailView", () => {
       "/api/grammar/gram%3Aarticles",
     );
   });
+
+  it("links to the drill for the entry", async () => {
+    mockApi({
+      "GET /api/grammar/gram%3Aarticles": {
+        id: "gram:articles",
+        title_it: "Articoli",
+        title_en: "Articles",
+        level: "A1",
+        requires: [],
+        diagnostic_tags: {},
+        reference_it: "Regola.",
+        examples: [],
+      },
+    });
+    render(
+      <MemoryRouter initialEntries={["/grammar/gram%3Aarticles"]}>
+        <Routes>
+          <Route path="/grammar/:id" element={<GrammarDetailView />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    expect(
+      await screen.findByRole("link", { name: "Esercitati su questa scheda" }),
+    ).toHaveAttribute("href", "/grammar/gram%3Aarticles/drill");
+  });
 });

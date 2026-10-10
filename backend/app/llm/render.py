@@ -111,6 +111,7 @@ def exercise_vars(req: ExerciseRequest) -> dict[str, str]:
         "language": language_name(req.explanation_language),
         "target_items": render_targets(req.targets),
         "exercise_type": req.exercise_type,
+        "drill": f"Drill position: exercise {req.drill_position}" if req.drill_position else "",
         "target_roles": render_roles(req.targets),
         "known_vocabulary": render_vocab(req.known_vocabulary),
     }

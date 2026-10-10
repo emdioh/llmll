@@ -2,12 +2,15 @@ import { Link } from "react-router";
 import { useEffect, useRef, useState } from "react";
 import {
   ApiError,
+  createDrill,
   createSession,
   prepareExercise,
   submitAnswer,
   type AnswerOut,
   type SessionCard,
 } from "../api/client";
+import ChoiceExerciseCard from "./cards/ChoiceExerciseCard";
+import ClozeExerciseCard from "./cards/ClozeExerciseCard";
 import ProductionCard from "./cards/ProductionCard";
 import RecognitionCard from "./cards/RecognitionCard";
 import IntroCard from "./cards/IntroCard";
@@ -42,7 +45,14 @@ function gradingMessage(err: unknown): string {
 
 const ZERO: Stats = { reviewed: 0, added: 0, errors: 0 };
 
-export default function SessionView() {
+export default function SessionView({
+  drillItemId,
+  title,
+}: {
+  /** Grammar item to drill; without it this is the regular review session. */
+  drillItemId?: string;
+  title?: string;
+}) {
   const [state, setState] = useState<State>({ kind: "idle" });
   const [stats, setStats] = useState<Stats>(ZERO);
   const [result, setResult] = useState<AnswerOut | null>(null);
@@ -62,7 +72,9 @@ export default function SessionView() {
     setStats(ZERO);
     setResult(null);
     try {
-      const s = await createSession();
+      const s = drillItemId
+        ? await createDrill(drillItemId)
+        : await createSession();
       setState({
         kind: "running",
         sessionId: s.session_id,
@@ -123,11 +135,12 @@ export default function SessionView() {
     card: SessionCard,
     payload: { choice?: number; text?: string },
     usedHint: boolean,
+    shown?: string,
   ) {
     if (state.kind !== "running" || busy) return;
     setBusy(true);
     setError(null);
-    setSubmitted(payload.text ?? "");
+    setSubmitted(shown ?? payload.text ?? "");
     try {
       const out = await submitAnswer(state.sessionId, {
         exercise_id: card.exercise_id,
@@ -158,12 +171,26 @@ export default function SessionView() {
     }
   }
 
+  // A drill starts by itself; the ref keeps StrictMode's double mount from creating two.
+  const autoStarted = useRef<string | null>(null);
+  useEffect(() => {
+    if (drillItemId && autoStarted.current !== drillItemId) {
+      autoStarted.current = drillItemId;
+      void start();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [drillItemId]);
+
   if (state.kind === "idle" || state.kind === "loading") {
     return (
       <section>
-        <h1>Session</h1>
-        <p>A short review session: new words and cards that are due.</p>
-        <QueuePanel />
+        <h1>{drillItemId ? `Esercizi: ${title ?? drillItemId}` : "Session"}</h1>
+        {!drillItemId && (
+          <>
+            <p>A short review session: new words and cards that are due.</p>
+            <QueuePanel />
+          </>
+        )}
         {error && <p role="alert">{error}</p>}
         <button
           type="button"
@@ -171,10 +198,20 @@ export default function SessionView() {
           onClick={start}
           disabled={state.kind === "loading"}
         >
-          {state.kind === "loading" ? "Preparing…" : "Start session"}
+          {state.kind === "loading"
+            ? "Preparing…"
+            : drillItemId
+              ? "Start drill"
+              : "Start session"}
         </button>
         <p>
-          <Link to="/reading">Read something</Link>
+          {drillItemId ? (
+            <Link to={`/grammar/${encodeURIComponent(drillItemId)}`}>
+              Back to the grammar sheet
+            </Link>
+          ) : (
+            <Link to="/reading">Read something</Link>
+          )}
         </p>
       </section>
     );
@@ -183,7 +220,7 @@ export default function SessionView() {
   if (state.kind === "summary") {
     return (
       <section>
-        <h1>Session complete</h1>
+        <h1>{drillItemId ? "Drill complete" : "Session complete"}</h1>
         {state.total === 0 ? (
           <p>Nothing to practise yet: add some words or read a text first.</p>
         ) : (
@@ -203,8 +240,15 @@ export default function SessionView() {
           </dl>
         )}
         <button type="button" className="btn primary" onClick={start}>
-          Start another session
+          {drillItemId ? "Another drill" : "Start another session"}
         </button>
+        {drillItemId && (
+          <p>
+            <Link to={`/grammar/${encodeURIComponent(drillItemId)}`}>
+              Back to the grammar sheet
+            </Link>
+          </p>
+        )}
       </section>
     );
   }
@@ -268,14 +312,41 @@ export default function SessionView() {
             </button>
           </>
         )}
-        {card.type === "production" && card.status === "ready" && !result && (
-          <ProductionExerciseCard
-            card={card}
-            busy={busy}
-            error={error}
-            onSubmit={(text) => answer(card, { text }, false)}
-          />
-        )}
+        {card.type === "production" &&
+          card.status === "ready" &&
+          !result &&
+          card.subtype === "choice" && (
+            <ChoiceExerciseCard
+              card={card}
+              busy={busy}
+              onChoose={(choice, option) =>
+                answer(card, { choice, text: option }, false, option)
+              }
+            />
+          )}
+        {card.type === "production" &&
+          card.status === "ready" &&
+          !result &&
+          card.subtype === "cloze" && (
+            <ClozeExerciseCard
+              card={card}
+              busy={busy}
+              error={error}
+              onSubmit={(text) => answer(card, { text }, false)}
+            />
+          )}
+        {card.type === "production" &&
+          card.status === "ready" &&
+          !result &&
+          card.subtype !== "choice" &&
+          card.subtype !== "cloze" && (
+            <ProductionExerciseCard
+              card={card}
+              busy={busy}
+              error={error}
+              onSubmit={(text) => answer(card, { text }, false)}
+            />
+          )}
         {error && card.type !== "production" && <p role="alert">{error}</p>}
         {result && (
           <>

@@ -159,6 +159,7 @@ describe("SettingsView", () => {
       weekly_new_grammar: 2,
       new_per_session: 5,
       production_slots: 3,
+      drill_size: 6,
       review_cap: 15,
       desired_retention: 0.85,
       timezone: "Europe/Rome",

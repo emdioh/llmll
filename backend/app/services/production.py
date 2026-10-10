@@ -1,6 +1,7 @@
 """Production exercises: planning, generation (prepare) and grading (design: M2 §2, §3)."""
 
 import logging
+import random
 import re
 import threading
 import uuid
@@ -14,6 +15,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.curriculum.schema import CEFR_LEVELS
+from app.domain.answers import check_gap, normalize
 from app.domain.config import ReconcileConfig
 from app.domain.production import Candidate, PlannedExercise, plan_production
 from app.domain.reconcile import Evaluation, ItemOutcome, reconcile
@@ -21,10 +23,13 @@ from app.domain.scheduling import retrievability
 from app.llm.calls import last_call_id
 from app.llm.client import LLMClient, LLMError, LLMUnavailable
 from app.llm.types import (
+    CLOSED_SUBTYPES,
+    GAP,
     ExamplePair,
     ExerciseRequest,
     GeneratedExercise,
     GlossEntry,
+    GradeError,
     GradeRequest,
     GradeResult,
     ItemContext,
@@ -60,7 +65,12 @@ TYPE_WEIGHT = {
     "guided": "guided",
     "transform": "guided",
     "summary": "free",
+    "cloze": "cloze",
+    "choice": "choice",
 }
+CLOSED_GRADER = "closed.v1"
+CHOICE_OPTIONS = (3, 4)
+_GAP_RE = re.compile(r"_{3,}")
 RECONCILE_CFG = ReconcileConfig()
 _locks: defaultdict[str, threading.Lock] = defaultdict(threading.Lock)
 
@@ -295,6 +305,7 @@ def production_card(exercise: Exercise) -> BuiltCard:
         instructions=p.get("instructions") if ready else None,
         glossary=p.get("glossary", []) if ready else [],
         item_ids=[t["item_id"] for t in exercise.targets],
+        options=p.get("options", []) if ready else [],
     )
 
 
@@ -361,8 +372,20 @@ def _validate_generated(
     planned = {t["item_id"]: t for t in exercise.targets}
     if not gen.prompt.strip():
         problems.append("empty prompt")
-    if not [s for s in gen.reference_solutions if s.strip()]:
+    references = [s.strip() for s in gen.reference_solutions if s.strip()]
+    if not references:
         problems.append("no reference solution")
+    subtype = exercise.prompt["subtype"]
+    if subtype in CLOSED_SUBTYPES and gen.prompt.count(GAP) != 1:
+        problems.append(f"a {subtype} prompt needs exactly one {GAP} gap")
+    if subtype == "choice":
+        options = [o.strip() for o in gen.options if o.strip()]
+        if not CHOICE_OPTIONS[0] <= len(options) <= CHOICE_OPTIONS[1]:
+            problems.append(f"{len(options)} options (expected 3 or 4)")
+        if len({normalize(o) for o in options}) != len(options):
+            problems.append("duplicate options")
+        if references and references[0] not in options:
+            problems.append("the correct option is not among the options")
     glossed = {g.item_id for g in gen.glossary}
     for t in exercise.targets:
         if t.get("new") and t.get("kind") == "lemma" and t["item_id"] not in glossed:
@@ -403,6 +426,7 @@ def prepare_exercise(
             explanation_language=learner.explanation_language,
             targets=contexts,
             known_vocabulary=known_vocabulary(db, learner, target_ids),
+            drill_position=exercise.prompt.get("drill_position"),
         )
         problems: list[str] = []
         for _attempt in range(MAX_GENERATION_ATTEMPTS):
@@ -413,6 +437,7 @@ def prepare_exercise(
                 problems = [str(exc)]
                 break
             call_id = last_call_id()
+            generated = generated.model_copy(update={"prompt": _GAP_RE.sub(GAP, generated.prompt)})
             targets, problems = _validate_generated(generated, exercise)
             if not problems:
                 _store_generated(db, exercise, generated, targets, call_id)
@@ -438,16 +463,24 @@ def _store_generated(
     call_id: int | None,
 ) -> None:
     call = db.get(LLMCall, call_id) if call_id else None
+    subtype = exercise.prompt["subtype"]
+    references = [s.strip() for s in gen.reference_solutions if s.strip()]
     exercise.prompt = {
-        "subtype": exercise.prompt["subtype"],
+        "subtype": subtype,
         "instructions": gen.instructions,
         "prompt": gen.prompt,
         "glossary": [g.model_dump() for g in gen.glossary if g.de.strip()],
     }
     exercise.solution = {
-        "reference_solutions": [s for s in gen.reference_solutions if s.strip()],
+        "reference_solutions": references,
         "generation_call_id": call_id,
     }
+    if subtype == "choice":
+        # Models tend to list the correct option first: shuffle, reproducibly per exercise.
+        options = [o.strip() for o in gen.options if o.strip()]
+        random.Random(exercise.id).shuffle(options)
+        exercise.prompt["options"] = options
+        exercise.solution["correct_index"] = options.index(references[0])
     exercise.targets = targets
     exercise.generator = f"generate_exercise.{call.prompt_version}" if call else "generate_exercise"
     exercise.status = "ready"
@@ -521,8 +554,15 @@ def submit_production_answer(
     languagetool: LanguageToolClient | None,
 ) -> dict[str, Any]:
     cfg = projection_config(settings_of(learner))
-    text = answer.get("text") or ""
     subtype = exercise.prompt["subtype"]
+    closed = subtype in CLOSED_SUBTYPES
+    choice = answer.get("choice")
+    options = exercise.prompt.get("options", [])
+    if subtype == "choice":
+        if not isinstance(choice, int) or not 0 <= choice < len(options):
+            raise SessionError(422, "Choose one of the options")
+        answer = {**answer, "text": options[choice]}
+    text = answer.get("text") or ""
     contexts = _target_contexts(db, exercise)
     target_ids = [t["item_id"] for t in exercise.targets]
     allowed_tags: dict[str, list[str]] = {}
@@ -532,7 +572,7 @@ def submit_production_answer(
             allowed_tags[item.id] = flat_tags(item)
 
     lt_matches = None
-    if languagetool is not None:
+    if languagetool is not None and not closed:
         lt_matches = languagetool.check(text) if text.strip() else []
     request = GradeRequest(
         exercise_type=subtype,
@@ -547,13 +587,17 @@ def submit_production_answer(
         level=learner.level,
         explanation_language=learner.explanation_language,
     )
-    try:
-        grade = llm.grade_sentence(request)
-    except LLMUnavailable as exc:
-        raise SessionError(503, f"Grading is temporarily unavailable: {exc}") from None
-    except LLMError as exc:
-        raise SessionError(502, f"Grading failed: {exc}") from None
-    call_id = last_call_id()
+    call_id: int | None = None
+    if closed:
+        grade = grade_closed(exercise, text, choice)
+    else:
+        try:
+            grade = llm.grade_sentence(request)
+        except LLMUnavailable as exc:
+            raise SessionError(503, f"Grading is temporarily unavailable: {exc}") from None
+        except LLMError as exc:
+            raise SessionError(502, f"Grading failed: {exc}") from None
+        call_id = last_call_id()
     call = db.get(LLMCall, call_id) if call_id else None
 
     referenced = set(target_ids) | {e.item_id for e in grade.errors if e.item_id}
@@ -580,7 +624,9 @@ def submit_production_answer(
     db.add(attempt)
     db.flush()
     grader_version = "|".join(
-        [
+        [CLOSED_GRADER, evaluation.reconcile_version]
+        if closed
+        else [
             call.prompt_version if call else "unknown",
             call.model if call else "unknown",
             evaluation.reconcile_version,
@@ -628,6 +674,54 @@ def submit_production_answer(
         "evaluation_id": row.id,
         "attempt_id": attempt.id,
     }
+
+
+def grade_closed(exercise: Exercise, text: str, choice: int | None) -> GradeResult:
+    """Deterministic grade of a cloze or choice answer, shaped like an LLM grade.
+
+    An error is attributed to the primary target, tagged with the exercise's focus tags.
+    """
+    references = exercise.solution["reference_solutions"]
+    expected = references[0]
+    corrected = exercise.prompt["prompt"].replace(GAP, expected, 1)
+    target = exercise.targets[0]
+    if exercise.prompt["subtype"] == "choice":
+        outcome = "correct" if choice == exercise.solution["correct_index"] else "error"
+    elif not text.strip():
+        return GradeResult(
+            overall="off_task",
+            corrected_sentence=corrected,
+            feedback=f"Non hai scritto nessuna risposta. La forma corretta è «{expected}».",
+        )
+    else:
+        outcome = check_gap(text, references)
+    if outcome == "correct":
+        return GradeResult(
+            overall="correct",
+            correct_uses=[target["item_id"]],
+            corrected_sentence=corrected,
+            feedback="Corretto!",
+        )
+    minor = outcome == "assisted"
+    explanation = f"Si scrive «{expected}»." if minor else f"La forma corretta è «{expected}»."
+    return GradeResult(
+        overall="minor_errors" if minor else "major_errors",
+        errors=[
+            GradeError(
+                start=0,
+                end=len(text),
+                original=text,
+                correction=expected,
+                item_id=target["item_id"],
+                diagnostic_tags=list(target.get("focus_tags", [])),
+                severity="minor" if minor else "major",
+                confidence=1.0,
+                explanation=explanation,
+            )
+        ],
+        corrected_sentence=corrected,
+        feedback=explanation,
+    )
 
 
 def _emit_events(

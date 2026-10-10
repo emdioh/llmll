@@ -8,6 +8,7 @@ import LlmBanner from "./LlmBanner";
 import TimezoneSync from "./TimezoneSync";
 import DebugView from "./views/DebugView";
 import { useMediaQuery, WIDE_SCREEN } from "./useMediaQuery";
+import DrillView from "./views/DrillView";
 import GrammarDetailView from "./views/GrammarDetailView";
 import GrammarView from "./views/GrammarView";
 import PlacementView from "./views/PlacementView";
@@ -84,6 +85,7 @@ export default function App() {
                 <Route path="/corpus/:id" element={<CorpusItemRedirect />} />
                 <Route path="/grammar" element={<GrammarView />} />
                 <Route path="/grammar/:id" element={<GrammarDetailView />} />
+                <Route path="/grammar/:id/drill" element={<DrillView />} />
                 <Route path="/placement" element={<PlacementView />} />
                 <Route path="/settings" element={<SettingsView />} />
                 <Route path="/debug" element={<DebugView />} />

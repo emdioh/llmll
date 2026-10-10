@@ -37,6 +37,7 @@ class SettingsOut(BaseModel):
     review_cap: int
     new_per_session: int
     production_slots: int
+    drill_size: int
     timezone: str
 
 
@@ -47,6 +48,7 @@ class SettingsUpdate(BaseModel):
     review_cap: int | None = Field(default=None, ge=1, le=500)
     new_per_session: int | None = Field(default=None, ge=0, le=20)
     production_slots: int | None = Field(default=None, ge=0, le=5)
+    drill_size: int | None = Field(default=None, ge=3, le=10)
     timezone: str | None = Field(default=None, max_length=64)
 
     @field_validator("timezone")

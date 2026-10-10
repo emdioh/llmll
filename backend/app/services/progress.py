@@ -21,6 +21,7 @@ from app.domain.selection import MemoryView
 from app.services import corpus, queue, stats
 from app.services.common import PLACEMENT_PREFIX, SessionError
 from app.services.corpus import item_label
+from app.services.drills import DRILL_PREFIX, drill_title
 from app.services.learner import projection_config, settings_of
 from app.store.events import to_event_data
 from app.store.models import (
@@ -1013,7 +1014,7 @@ def history(db: Session, learner: Learner, limit: int, offset: int) -> dict[str,
                     "cards_answered": entry["answered"],
                     "correct_rate": entry["correct_rate"],
                     "new_items": entry["new_items"],
-                    "title": None,
+                    "title": _session_title(db, sid),
                     "words_looked_up": None,
                 }
             )
@@ -1037,6 +1038,21 @@ def history(db: Session, learner: Learner, limit: int, offset: int) -> dict[str,
                 }
             )
     return {"total": total, "limit": limit, "offset": offset, "items": rows}
+
+
+def _session_title(db: Session, session_id: str) -> str | None:
+    """Drills are titled after their grammar point; review sessions have no title."""
+    if not session_id.startswith(DRILL_PREFIX):
+        return None
+    first = db.scalar(
+        select(Exercise)
+        .where(Exercise.session_id == session_id)
+        .order_by(Exercise.created_at, Exercise.id)
+        .limit(1)
+    )
+    if first is None or not first.targets:
+        return None
+    return drill_title(db.get(Item, first.targets[0]["item_id"]))
 
 
 def session_detail(db: Session, learner: Learner, session_id: str) -> dict[str, Any]:

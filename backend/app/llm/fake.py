@@ -8,6 +8,8 @@ from app.llm.calls import CallRecord, CallRecorder, announce_start
 from app.llm.client import LLMError
 from app.llm.config import DEFAULT_TASKS
 from app.llm.types import (
+    CLOSED_SUBTYPES,
+    GAP,
     ExerciseRequest,
     ExplainRequest,
     Explanation,
@@ -31,7 +33,10 @@ INSTRUCTIONS_IT = {
     "translation": "Traduci in tedesco.",
     "guided": "Scrivi una frase in tedesco per dire quanto segue.",
     "transform": "Scrivi in tedesco la frase seguente.",
+    "cloze": "Completa la frase.",
+    "choice": "Scegli la forma che completa la frase.",
 }
+DISTRACTORS = ("der", "die", "das", "den", "dem", "des")
 
 
 def normalize(text: str) -> str:
@@ -93,7 +98,16 @@ class FakeLLMClient:
             for t in req.targets
             if t.item.kind == "lemma" and t.is_new
         ]
-        if source is not None:
+        options: list[str] = []
+        if req.exercise_type in CLOSED_SUBTYPES:
+            # Gap the first word of the example sentence (or of the label).
+            sentence = source.de if source is not None else f"{req.targets[0].item.label} ."
+            word, rest = sentence.split(" ", 1)
+            prompt, solutions = f"{GAP} {rest}", [word]
+            if req.exercise_type == "choice":
+                others = [d for d in DISTRACTORS if d.casefold() != word.casefold()]
+                options = [word, *others[:3]]
+        elif source is not None:
             prompt, solutions = source.it, [source.de]
         else:
             prompt, solutions = req.targets[0].item.label, [req.targets[0].item.label]
@@ -103,6 +117,7 @@ class FakeLLMClient:
             glossary=glossary,
             reference_solutions=solutions,
             targets=[TargetWeight(item_id=t.item.item_id, weight=t.weight) for t in req.targets],
+            options=options,
         )
         self._log("generate_exercise", req, result, started)
         return result

@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 from app.api.deps import get_languagetool, get_llm, get_now, require_learner
 from app.llm.client import LLMClient
 from app.nlp.languagetool import LanguageToolClient
-from app.services import production
+from app.services import drills, production
 from app.services import sessions as service
 from app.store.db import get_session
 from app.store.models import Exercise, Learner
@@ -47,7 +47,8 @@ class CardPrompt(BaseModel):
     translation_en: str | None = None
     example: CardExample | None = None
     interference_note: str | None = None
-    # production exercises: the generated prompt text (null until prepared)
+    # production exercises: the generated prompt text (null until prepared); cloze and choice
+    # prompts hold one `___` gap, and choice exercises list their `options`
     text: str | None = None
     # grammar_intro cards
     title: str | None = None
@@ -75,7 +76,9 @@ class SessionCard(BaseModel):
     prompt: CardPrompt = Field(default_factory=CardPrompt)
     hint: str | None = None
     status: Literal["pending", "ready", "answered", "failed"] = "ready"
-    subtype: Literal["translation", "guided", "transform", "summary"] | None = None
+    subtype: Literal["translation", "guided", "transform", "summary", "cloze", "choice"] | None = (
+        None
+    )
     instructions: str | None = None
     glossary: list[GlossaryEntry] = Field(default_factory=list)
     item_ids: list[str] = Field(default_factory=list)
@@ -168,7 +171,7 @@ def to_card(c: service.BuiltCard) -> SessionCard:
     if isinstance(c.prompt, dict):
         prompt = CardPrompt.model_validate(c.prompt)
     else:
-        prompt = CardPrompt(text=c.prompt)
+        prompt = CardPrompt(text=c.prompt, options=c.options or None)
     return SessionCard(
         exercise_id=c.exercise_id,
         type=c.type,  # type: ignore[arg-type]
@@ -195,6 +198,31 @@ def create_session(
     now: Callable[[], datetime] = Depends(get_now),
 ) -> SessionOut:
     session_id, cards = service.build_session(db, learner, now())
+    return SessionOut(session_id=session_id, cards=[to_card(c) for c in cards])
+
+
+class DrillIn(BaseModel):
+    item_id: str
+
+
+@router.post(
+    "/drills",
+    response_model=SessionOut,
+    status_code=status.HTTP_201_CREATED,
+    operation_id="createDrill",
+)
+def create_drill(
+    body: DrillIn,
+    db: Session = Depends(get_session),
+    learner: Learner = Depends(require_learner),
+    now: Callable[[], datetime] = Depends(get_now),
+) -> SessionOut:
+    """A drill on one grammar point or construction: its intro card when it is new, then
+    `drill_size` exercises (multiple choice, cloze, then open ones), prepared like any other."""
+    try:
+        session_id, cards = drills.build_drill(db, learner, body.item_id, now())
+    except service.SessionError as exc:
+        raise HTTPException(status_code=exc.status_code, detail=exc.detail) from None
     return SessionOut(session_id=session_id, cards=[to_card(c) for c in cards])
 
 

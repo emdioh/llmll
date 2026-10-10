@@ -83,6 +83,14 @@ export default function GrammarDetailView() {
             </Link>
           </p>
           <Markdown>{state.data.reference_it}</Markdown>
+          <p>
+            <Link
+              className="btn primary"
+              to={`/grammar/${encodeURIComponent(id)}/drill`}
+            >
+              Esercitati su questa scheda
+            </Link>
+          </p>
           <AskBox id={id} />
         </>
       )}

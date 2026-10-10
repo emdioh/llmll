@@ -158,6 +158,17 @@ From most to least constrained:
 
 Each exercise declares which items it tests and with what weight.
 
+Two closed formats, less constrained for the learner but quick to answer, are graded
+deterministically (no LLM grading): **cloze** (a German sentence with one gap to fill in) and
+**multiple choice** (the same gap with 3–4 options, exactly one correct). They weigh less as
+evidence than the open formats above.
+
+**Grammar drills.** From a grammar sheet the learner can start a mini-session on that point
+only: the sheet's intro card when the point is new, then a configurable number of exercises
+(default 6), easiest first: multiple choice, cloze, then open formats (translation,
+transformation, guided sentence), each focused on one of the point's sub-cases in turn. Drill
+answers count for memory and mastery like any other, and errors feed the remediation queue.
+
 ### 7.2 Flashcards
 - Lemmas with article, plural and an example sentence.
 - Both directions, scheduled separately.

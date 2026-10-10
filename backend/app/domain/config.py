@@ -11,6 +11,8 @@ def _default_weights() -> tuple[tuple[str, float], ...]:
         ("flashcard_production", 0.8),
         ("guided", 1.0),
         ("translation", 1.0),
+        ("cloze", 0.8),
+        ("choice", 0.5),
         ("free", 1.2),
         ("implicit_reading", 0.2),
         ("implicit_sentence", 0.6),
@@ -51,6 +53,8 @@ class LearnerSettings:
     review_cap: int = 15
     new_per_session: int = 5
     production_slots: int = 2
+    # Exercises of a grammar drill (the "practise this point" mini-session).
+    drill_size: int = 6
     # IANA time zone that defines the learner's calendar days (streaks, activity).
     timezone: str = "UTC"
     # Fitted by `optimize-fsrs --apply`; not editable through the settings API.

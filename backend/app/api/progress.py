@@ -302,7 +302,7 @@ class AnswerCardOut(BaseModel):
         "grammar_intro",
         "production",
     ]
-    subtype: Literal["translation", "guided", "transform", "summary"] | None
+    subtype: Literal["translation", "guided", "transform", "summary", "cloze", "choice"] | None
     answered_at: datetime
     outcome: Outcome | None
     """Null for intro cards."""

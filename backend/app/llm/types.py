@@ -10,7 +10,11 @@ from pydantic import BaseModel, Field
 
 from app.nlp.types import LTMatch
 
-ExerciseSubtype = Literal["translation", "guided", "transform", "summary"]
+ExerciseSubtype = Literal["translation", "guided", "transform", "summary", "cloze", "choice"]
+# Subtypes graded deterministically against the reference solutions (no grading call).
+CLOSED_SUBTYPES = ("cloze", "choice")
+# The gap marker of cloze and choice prompts.
+GAP = "___"
 Overall = Literal["correct", "minor_errors", "major_errors", "off_task"]
 Severity = Literal["minor", "major"]
 
@@ -61,6 +65,8 @@ class ExerciseRequest(BaseModel):
     explanation_language: str
     targets: list[TargetContext]
     known_vocabulary: list[VocabEntry] = Field(default_factory=list)
+    # Drills: "3 of 6", so that parallel requests on the same point produce different exercises.
+    drill_position: str | None = None
 
 
 class GlossEntry(BaseModel):
@@ -80,6 +86,8 @@ class GeneratedExercise(BaseModel):
     glossary: list[GlossEntry]
     reference_solutions: list[str]
     targets: list[TargetWeight]
+    # choice: the answer options, the correct one included (empty for the other types).
+    options: list[str] = Field(default_factory=list)
 
 
 # --- grade_sentence ------------------------------------------------------------------------

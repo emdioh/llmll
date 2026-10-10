@@ -33,6 +33,21 @@ def levenshtein(a: str, b: str) -> int:
     return previous[-1]
 
 
+def check_gap(answer: str, accepted: list[str]) -> str:
+    """Check the filler of a cloze gap: `correct`, `assisted` (umlaut spelled ae/oe/ue) or `error`.
+
+    Case and surrounding punctuation are ignored. There is no typo tolerance: in a grammar gap a
+    one-letter difference is usually the error being tested (den / dem).
+    """
+    given = normalize(answer).strip(" .,;:!?")
+    expected = [normalize(a).strip(" .,;:!?") for a in accepted]
+    if given in expected:
+        return "correct"
+    if given in {e.translate(UMLAUT_ASCII) for e in expected}:
+        return "assisted"
+    return "error"
+
+
 def check_recognition(choice_index: int | None, correct_index: int) -> str:
     return "correct" if choice_index == correct_index else "error"
 

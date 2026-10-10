@@ -23,6 +23,7 @@ class BuiltCard:
     instructions: str | None = None
     glossary: list[dict[str, str]] = field(default_factory=list)
     item_ids: list[str] = field(default_factory=list)
+    options: list[str] = field(default_factory=list)  # choice exercises
 
 
 PLACEMENT_PREFIX = "placement-"

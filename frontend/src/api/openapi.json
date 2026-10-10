@@ -346,6 +346,48 @@
         }
       }
     },
+    "/api/drills": {
+      "post": {
+        "tags": [
+          "sessions"
+        ],
+        "summary": "Create Drill",
+        "description": "A drill on one grammar point or construction: its intro card when it is new, then\n`drill_size` exercises (multiple choice, cloze, then open ones), prepared like any other.",
+        "operationId": "createDrill",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DrillIn"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionOut"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/exercises/{exercise_id}/prepare": {
       "post": {
         "tags": [
@@ -2156,7 +2198,9 @@
                   "translation",
                   "guided",
                   "transform",
-                  "summary"
+                  "summary",
+                  "cloze",
+                  "choice"
                 ]
               },
               {
@@ -3629,6 +3673,19 @@
         ],
         "title": "DebugCallOut",
         "description": "One `llm_calls` row, in full."
+      },
+      "DrillIn": {
+        "properties": {
+          "item_id": {
+            "type": "string",
+            "title": "Item Id"
+          }
+        },
+        "type": "object",
+        "required": [
+          "item_id"
+        ],
+        "title": "DrillIn"
       },
       "EvaluationExplainIn": {
         "properties": {
@@ -5543,7 +5600,9 @@
                   "translation",
                   "guided",
                   "transform",
-                  "summary"
+                  "summary",
+                  "cloze",
+                  "choice"
                 ]
               },
               {
@@ -6200,7 +6259,9 @@
                   "translation",
                   "guided",
                   "transform",
-                  "summary"
+                  "summary",
+                  "cloze",
+                  "choice"
                 ]
               },
               {
@@ -6370,6 +6431,10 @@
             "type": "integer",
             "title": "Production Slots"
           },
+          "drill_size": {
+            "type": "integer",
+            "title": "Drill Size"
+          },
           "timezone": {
             "type": "string",
             "title": "Timezone"
@@ -6383,6 +6448,7 @@
           "review_cap",
           "new_per_session",
           "production_slots",
+          "drill_size",
           "timezone"
         ],
         "title": "SettingsOut"
@@ -6466,6 +6532,19 @@
               }
             ],
             "title": "Production Slots"
+          },
+          "drill_size": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "maximum": 10.0,
+                "minimum": 3.0
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Drill Size"
           },
           "timezone": {
             "anyOf": [

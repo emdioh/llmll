@@ -88,7 +88,7 @@ def http_error(cls: type[anthropic.APIStatusError], status: int) -> anthropic.AP
 )
 def test_prompt_files_load(task: str) -> None:
     system, user, version = load_prompt(task)
-    assert version == f"v{latest_version(task)}" == "v1"
+    assert version == f"v{latest_version(task)}" == ("v2" if task == "generate_exercise" else "v1")
     assert system and len(system) > 500
     assert VARIABLE_MARKER in user.template
 
@@ -161,7 +161,7 @@ def test_every_call_is_logged_with_usage() -> None:
     client, _, records = make_client(response())
     client.generate_exercise(exercise_request())
     (rec,) = records
-    assert rec.task == "generate_exercise" and rec.prompt_version == "v1"
+    assert rec.task == "generate_exercise" and rec.prompt_version == "v2"
     assert rec.model == DEFAULT_MODEL and rec.stop_reason == "end_turn"
     assert (rec.input_tokens, rec.output_tokens) == (11, 7)
     assert (rec.cache_read_tokens, rec.cache_write_tokens) == (5, 3)

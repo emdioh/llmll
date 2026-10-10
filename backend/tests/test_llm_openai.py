@@ -140,7 +140,7 @@ def test_every_call_is_logged_with_provider_and_usage() -> None:
     client.generate_exercise(exercise_request())
     (rec,) = records
     assert rec.provider == "openai" and rec.model == "m-1"
-    assert rec.task == "generate_exercise" and rec.prompt_version == "v1"
+    assert rec.task == "generate_exercise" and rec.prompt_version == "v2"
     assert rec.stop_reason == "stop"
     assert (rec.input_tokens, rec.output_tokens, rec.cache_read_tokens) == (11, 7, 5)
     assert rec.response["prompt"] == "Il tavolo." and rec.error is None

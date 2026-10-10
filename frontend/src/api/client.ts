@@ -108,6 +108,8 @@ export const updateLlmSettings = (body: Schemas["LLMSettingsUpdate"]) =>
 
 export const createSession = () =>
   request<Schemas["SessionOut"]>("POST", "/api/sessions");
+export const createDrill = (itemId: string) =>
+  request<Schemas["SessionOut"]>("POST", "/api/drills", { item_id: itemId });
 export const prepareExercise = (exerciseId: string) =>
   request<PreparedCard>(
     "POST",

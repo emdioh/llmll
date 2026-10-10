@@ -67,6 +67,14 @@ const FIELDS: Field[] = [
     step: "1",
   },
   {
+    key: "drill_size",
+    label: "Exercises per grammar drill",
+    min: 3,
+    max: 10,
+    integer: true,
+    step: "1",
+  },
+  {
     key: "review_cap",
     label: "Reviews per session (cap)",
     min: 1,

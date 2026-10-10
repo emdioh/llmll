@@ -272,6 +272,22 @@ Proper nouns and transparent compounds with known parts go to `ignore` (or point
    diagnostic tag and anchored to the item's reference text (R§9), and 1–2 remedial
    exercises are queued.
 
+**Closed exercises** (`cloze`, `choice`): the prompt is a German sentence with one `___` gap;
+`choice` also has 3–4 `options` (shuffled per exercise, the correct index kept in the
+solution). They are graded without LanguageTool or the LLM: the answer is compared with the
+reference fillers (case and punctuation ignored, `ae/oe/ue` for umlauts → `assisted`, no typo
+tolerance), and the result is shaped as a grade (an error on the primary target, tagged with
+the exercise's focus tags) so that reconciliation, the evaluation row (grader `closed.v1`),
+events, contests and remediation stay the same.
+
+### 6.2.1 Grammar drill
+`POST /api/drills {item_id}` builds a session (`drill-<id>`) on one grammar point or
+construction: a `grammar_intro` card when the point is not known yet, then `drill_size`
+pending production exercises planned by `domain.drills.plan_drill` (about a third `choice`,
+then `cloze`, then `translation`/`transform`/`guided`), each with one focus tag of the point in
+rotation. They are generated lazily by `prepare` like review-session exercises; the request
+carries the drill position ("2 of 6") so that parallel generations differ.
+
 ### 6.3 Reading
 1. **Ingestion:** URL → extraction with `trafilatura`; if that fails, pasted text.
 2. **Analysis:** spaCy (`de_core_news_md` or similar) for lemmas and POS, compound

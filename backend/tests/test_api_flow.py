@@ -79,6 +79,7 @@ def test_learner_setup(curriculum_client: TestClient) -> None:
         "review_cap": 15,
         "new_per_session": 5,
         "production_slots": 2,
+        "drill_size": 6,
         "timezone": "UTC",
     }
     assert client.post("/api/learner", json={"level": "A1"}).status_code == 409
