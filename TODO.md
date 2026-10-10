@@ -28,4 +28,3 @@ Planned work that is not scheduled yet. When an entry is picked up, write its de
       without an error as context).
 - [ ] Combined grammar + constructions list in the Grammar view.
 - [ ] List suspended items somewhere (Progress or Settings).
-- [ ] Decide whether to keep `railway.json` and the README Railway section.
