@@ -10,6 +10,7 @@ from fastapi import Depends, FastAPI
 
 from app.api import (
     auth,
+    backup,
     contests,
     debug,
     explain,
@@ -126,6 +127,7 @@ def create_app(
         progress.router,
         stats.router,
         debug.router,
+        backup.router,
     ):
         app.include_router(router, dependencies=[Depends(require_auth)])
     if settings.frontend_dist is not None and settings.frontend_dist.is_dir():

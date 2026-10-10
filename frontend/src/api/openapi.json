@@ -2055,6 +2055,28 @@
           }
         }
       }
+    },
+    "/api/backup": {
+      "post": {
+        "tags": [
+          "backup"
+        ],
+        "summary": "Create Backup",
+        "description": "Write a consistent copy of the database to `llmll-backup.db` in the data directory.",
+        "operationId": "createBackup",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BackupOut"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2658,6 +2680,30 @@
           "authenticated"
         ],
         "title": "AuthStatus"
+      },
+      "BackupOut": {
+        "properties": {
+          "path": {
+            "type": "string",
+            "title": "Path"
+          },
+          "size_bytes": {
+            "type": "integer",
+            "title": "Size Bytes"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "title": "Created At"
+          }
+        },
+        "type": "object",
+        "required": [
+          "path",
+          "size_bytes",
+          "created_at"
+        ],
+        "title": "BackupOut"
       },
       "BandResult": {
         "properties": {

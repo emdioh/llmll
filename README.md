@@ -213,9 +213,15 @@ The app has no user accounts; on a public server a single shared access token pr
 
    Note that the login throttle keys on the client address seen by the app, which behind a proxy
    is the proxy's: failed logins from anyone count together.
-3. Back up the `llmll-data` volume regularly (it holds the SQLite database, `/data/llmll.db`),
-   e.g. by copying `/data/llmll.db` out of the volume while the app is stopped
-   (`docker compose stop app && docker compose cp app:/data/llmll.db ./backup.db`).
+3. Back up the `llmll-data` volume regularly (it holds the SQLite database, `/data/llmll.db`).
+   `POST /api/backup` (authenticated like the rest of the API) writes a consistent copy,
+   `llmll-backup.db`, next to the database, safely while the app is running; then copy it out:
+   ```bash
+   curl -X POST -H "Authorization: Bearer $LLMLL_ACCESS_TOKEN" http://localhost:8000/api/backup
+   docker compose cp app:/data/llmll-backup.db ./llmll-backup.db
+   ```
+   Each call replaces the previous `llmll-backup.db`. `scripts/backup.sh` does the same in one
+   step, keeping timestamped copies in `backups/`.
 4. Check `GET /api/health`: `"auth": "enabled"` confirms that the token is active.
 
 ## Scripts

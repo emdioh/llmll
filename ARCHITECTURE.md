@@ -504,7 +504,9 @@ Removed ids become `suspended`; they are not deleted.
   - `languagetool`;
   - a volume for SQLite.
 - Configuration via environment variables (`ANTHROPIC_API_KEY`, paths, parameters).
-- Backups: periodic copy of the SQLite file. The curriculum is already in git.
+- Backups: periodic copy of the SQLite file; `POST /api/backup` writes a consistent copy
+  (SQLite online backup API) to `llmll-backup.db` next to the database. The curriculum is
+  already in git.
 - Local or on a small VPS. Installing the PWA on a phone requires HTTPS (e.g. a reverse
   proxy with automatic certificates).
 - Access control: a single access token (`LLMLL_ACCESS_TOKEN`); see the root README's
