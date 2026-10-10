@@ -221,7 +221,8 @@ The app has no user accounts; on a public server a single shared access token pr
    docker compose cp app:/data/llmll-backup.db ./llmll-backup.db
    ```
    Each call replaces the previous `llmll-backup.db`. `scripts/backup.sh` does the same in one
-   step, keeping timestamped copies in `backups/`.
+   step, keeping timestamped copies in `backups/`. With Podman the same works with
+   `podman compose` (or `podman-compose`); `scripts/backup.sh` detects it.
 4. Check `GET /api/health`: `"auth": "enabled"` confirms that the token is active.
 
 ## Scripts
@@ -243,7 +244,7 @@ from; variables already set in your shell take precedence over `.env`.
 | `scripts/eval-grader.sh [args]` | Grader evaluation with LanguageTool; every run is saved to `backend/evals/results/` (`--label` to tag it; costs API credits) |
 | `scripts/llm-stats.sh [--last N] [--task T] [--since 1h]` | Latency, retries and tokens per task and model, from the `llm_calls` log |
 | `scripts/eval-compare.sh [runs]` | Compare saved runs: table of recent runs, or two runs side by side with per-case differences |
-| `scripts/backup.sh [docker\|local]` | Consistent SQLite backup into `backups/` |
+| `scripts/backup.sh [docker\|podman\|local]` | Consistent SQLite backup into `backups/` (Docker or Podman) |
 | `source scripts/env.fish [--force]` | fish shell: load `.env` into the current shell (bash/zsh: `set -a; . ./.env; set +a`) |
 | `scripts/up.sh [logs\|down]` | Full app with Docker Compose on :8000 |
 

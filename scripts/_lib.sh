@@ -44,4 +44,44 @@ curriculum_args() {
   fi
 }
 
+# Sets the global array COMPOSE to the compose command of a container engine (docker|podman).
+# The engine is the argument, else $LLMLL_CONTAINER_ENGINE, else docker. Podman needs either
+# the `podman compose` subcommand or the standalone podman-compose.
+# Use as: compose_cmd [engine]; "${COMPOSE[@]}" exec -T app ...
+compose_cmd() {
+  local engine="${1:-${LLMLL_CONTAINER_ENGINE:-docker}}"
+  case "$engine" in
+    docker)
+      require docker
+      COMPOSE=(docker compose)
+      ;;
+    podman)
+      if command -v podman >/dev/null 2>&1 && podman compose version >/dev/null 2>&1; then
+        COMPOSE=(podman compose)
+      elif command -v podman-compose >/dev/null 2>&1; then
+        COMPOSE=(podman-compose)
+      else
+        echo "error: podman compose or podman-compose is required" >&2
+        exit 1
+      fi
+      ;;
+    *) echo "error: unknown container engine '$engine' (use docker or podman)" >&2; exit 1 ;;
+  esac
+}
+
+# Prints the container engine whose compose project has the app service running: the engine in
+# $LLMLL_CONTAINER_ENGINE if set, else docker, then podman (only installed ones are tried).
+# Prints nothing when none is running. Probes with `exec`, because podman-compose has no
+# `ps --status/--services`.
+detect_engine() {
+  local engine
+  for engine in ${LLMLL_CONTAINER_ENGINE:-docker podman}; do
+    command -v "$engine" >/dev/null 2>&1 || continue
+    (compose_cmd "$engine" && cd "$ROOT" && "${COMPOSE[@]}" exec -T app true) >/dev/null 2>&1 || continue
+    echo "$engine"
+    return 0
+  done
+  return 0
+}
+
 step() { printf '\n\033[1m==> %s\033[0m\n' "$*"; }

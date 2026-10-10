@@ -1,19 +1,18 @@
 #!/usr/bin/env bash
 # Consistent online backup of the SQLite database into backups/ (uses SQLite's backup API,
-# safe while the app is running). Usage: scripts/backup.sh [docker|local]
-#   docker (default if the compose app is running): the database in the llmll-data volume
+# safe while the app is running). Usage: scripts/backup.sh [docker|podman|local]
+#   docker / podman: the database in the llmll-data volume, via the compose app container
 #   local: backend/data/llmll.db (or LLMLL_DATABASE_URL)
+#   no argument: the engine in LLMLL_CONTAINER_ENGINE if its app is running, else the first of
+#   docker, podman whose app is running, else local
 source "$(dirname "$0")/_lib.sh"
 load_env
 mkdir -p "$ROOT/backups"
 stamp="$(date +%Y%m%d-%H%M%S)"
 mode="${1:-}"
 if [[ -z "$mode" ]]; then
-  if command -v docker >/dev/null 2>&1 && (cd "$ROOT" && docker compose ps --status running --services 2>/dev/null | grep -qx app); then
-    mode=docker
-  else
-    mode=local
-  fi
+  mode="$(detect_engine)"
+  mode="${mode:-local}"
 fi
 
 backup_py='import sqlite3, sys
@@ -22,11 +21,18 @@ with dst: src.backup(dst)
 dst.close(); src.close()'
 
 case "$mode" in
-  docker)
-    require docker
-    (cd "$ROOT" && docker compose exec -T app python -c "$backup_py" /data/llmll.db /data/backup.db \
-      && docker compose cp app:/data/backup.db "$ROOT/backups/llmll-$stamp.db" \
-      && docker compose exec -T app rm -f /data/backup.db)
+  docker|podman)
+    compose_cmd "$mode"
+    out="$ROOT/backups/llmll-$stamp.db"
+    tmp="$out.part"
+    trap 'rm -f "$tmp"' EXIT
+    cd "$ROOT"
+    "${COMPOSE[@]}" exec -T app python -c "$backup_py" /data/llmll.db /data/backup.db
+    # `exec cat` instead of `compose cp`, which podman-compose does not have.
+    "${COMPOSE[@]}" exec -T app cat /data/backup.db > "$tmp"
+    [[ -s "$tmp" ]] || { echo "error: backup copy is empty" >&2; exit 1; }
+    mv "$tmp" "$out"
+    "${COMPOSE[@]}" exec -T app rm -f /data/backup.db
     ;;
   local)
     require uv
@@ -36,6 +42,6 @@ case "$mode" in
     [[ -f "$db" ]] || { echo "error: database not found: $db" >&2; exit 1; }
     (cd "$BACKEND" && uv run python -c "$backup_py" "$db" "$ROOT/backups/llmll-$stamp.db")
     ;;
-  *) echo "usage: $0 [docker|local]" >&2; exit 1 ;;
+  *) echo "usage: $0 [docker|podman|local]" >&2; exit 1 ;;
 esac
 echo "backup: backups/llmll-$stamp.db"
