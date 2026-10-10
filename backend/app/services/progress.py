@@ -539,6 +539,35 @@ def list_items(
     }
 
 
+def grammar_progress(db: Session, learner: Learner) -> dict[str, dict[str, Any]]:
+    """Learner status of every grammar item, keyed by item id (one pass, no per-item queries)."""
+    rows = {
+        row.item_id: row
+        for row in db.execute(
+            select(LearnerItem.item_id, LearnerItem.status, LearnerItem.introduced_at).where(
+                LearnerItem.learner_id == learner.id
+            )
+        )
+    }
+    memories = _facet_memories(db, learner)
+    events = _event_stats(db, learner)
+    result: dict[str, dict[str, Any]] = {}
+    for (item_id,) in db.execute(select(Item.id).where(Item.kind == "grammar", ~Item.suspended)):
+        facets = memories.get(item_id, [])
+        row = rows.get(item_id)
+        status = row.status if row else None
+        dues = [f.due for f in facets if f.due is not None]
+        result[item_id] = {
+            "status": status,
+            "state": domain.item_state(facets, status),
+            "mastery": domain.item_mastery(facets),
+            "introduced_at": row.introduced_at if row else None,
+            "last_practiced": events.get(item_id, {}).get("last_practiced"),
+            "due": min(dues) if dues else None,
+        }
+    return result
+
+
 def _sorted(rows: list[dict[str, Any]], sort: str) -> list[dict[str, Any]]:
     far = datetime.max.replace(tzinfo=UTC)
     if sort in ("weakest", "strongest"):

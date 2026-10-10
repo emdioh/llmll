@@ -1,13 +1,17 @@
 """Grammar reference endpoints."""
 
+from datetime import datetime
+from typing import Literal
+
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.services import corpus
+from app.services import corpus, progress
+from app.services.learner import LEARNER_ID
 from app.store.db import get_session
-from app.store.models import Item, ItemPrerequisite
+from app.store.models import Item, ItemPrerequisite, Learner
 
 router = APIRouter(prefix="/api", tags=["grammar"])
 
@@ -16,6 +20,13 @@ class GrammarSummary(BaseModel):
     id: str
     title_it: str
     level: str
+    # Learner fields: all null when no learner exists yet.
+    status: Literal["unseen", "candidate", "introduced", "presumed_known"] | None = None
+    state: Literal["new", "learning", "young", "mature", "presumed_known"] | None = None
+    mastery: float | None = None
+    introduced_at: datetime | None = None
+    last_practiced: datetime | None = None
+    due: datetime | None = None
 
 
 class GrammarExample(BaseModel):
@@ -36,8 +47,12 @@ class GrammarDetail(BaseModel):
 
 @router.get("/grammar", response_model=list[GrammarSummary], operation_id="listGrammar")
 def list_grammar(session: Session = Depends(get_session)) -> list[GrammarSummary]:
+    learner = session.get(Learner, LEARNER_ID)
+    learned = progress.grammar_progress(session, learner) if learner else {}
     return [
-        GrammarSummary(id=i.id, title_it=i.payload["title_it"], level=i.cefr_level)
+        GrammarSummary(
+            id=i.id, title_it=i.payload["title_it"], level=i.cefr_level, **learned.get(i.id, {})
+        )
         for i in corpus.list_grammar(session)
     ]
 

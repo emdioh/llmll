@@ -1468,6 +1468,18 @@ export interface components {
             title_it: string;
             /** Level */
             level: string;
+            /** Status */
+            status?: ("unseen" | "candidate" | "introduced" | "presumed_known") | null;
+            /** State */
+            state?: ("new" | "learning" | "young" | "mature" | "presumed_known") | null;
+            /** Mastery */
+            mastery?: number | null;
+            /** Introduced At */
+            introduced_at?: string | null;
+            /** Last Practiced */
+            last_practiced?: string | null;
+            /** Due */
+            due?: string | null;
         };
         /** HTTPValidationError */
         HTTPValidationError: {
